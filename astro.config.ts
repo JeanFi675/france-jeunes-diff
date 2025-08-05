@@ -26,9 +26,9 @@ export default defineConfig({
   site: 'https://jeanfi675.github.io',
   base: '/france-jeunes-diff/',
   trailingSlash: 'always',
-  
+
   build: {
-    assets: 'assets'
+    assets: 'assets',
   },
 
   integrations: [
