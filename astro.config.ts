@@ -88,6 +88,7 @@ export default defineConfig({
   },
 
   vite: {
+    base: '/france-jeunes-diff/',
     resolve: {
       alias: {
         '~': path.resolve(__dirname, './src'),
