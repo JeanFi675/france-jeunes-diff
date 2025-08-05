@@ -29,6 +29,7 @@ export default defineConfig({
 
   build: {
     assets: 'assets',
+    assetsPrefix: '/france-jeunes-diff/',
   },
 
   integrations: [
@@ -88,7 +89,6 @@ export default defineConfig({
   },
 
   vite: {
-    base: '/france-jeunes-diff/',
     resolve: {
       alias: {
         '~': path.resolve(__dirname, './src'),
