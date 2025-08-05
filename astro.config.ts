@@ -24,7 +24,12 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
 export default defineConfig({
   output: 'static',
   site: 'https://jeanfi675.github.io',
-  base: '/france-jeunes-diff',
+  base: '/france-jeunes-diff/',
+  trailingSlash: 'always',
+  
+  build: {
+    assets: 'assets'
+  },
 
   integrations: [
     tailwind({
