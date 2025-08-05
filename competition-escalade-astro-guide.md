@@ -3,6 +3,7 @@
 ## 📋 Vue d'ensemble du projet
 
 ### Objectifs
+
 - **Landing page moderne** pour une compétition d'escalade avec effet "wow"
 - **Blog intégré** pour articles hebdomadaires sur l'organisation
 - **Système de newsletter** pour 100-500 abonnés
@@ -11,6 +12,7 @@
 - **Backend** via NocoDB et n8n uniquement
 
 ### Stack technique
+
 - **Framework** : Astro (moderne, rapide, SEO-friendly)
 - **Style** : Tailwind CSS
 - **CMS** : Decap CMS (ex-Netlify CMS)
@@ -19,11 +21,13 @@
 - **Domaine** : xxxx.caflarochebonneville.fr
 
 ### Coût total : 0€
+
 Toutes les solutions choisies sont gratuites pour votre volume d'utilisation.
 
 ## 🚀 Installation pas à pas
 
 ### Prérequis
+
 - Compte GitHub
 - Node.js installé (version 18 ou supérieure)
 - Git installé
@@ -69,7 +73,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -78,7 +82,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: false
 
 jobs:
@@ -87,7 +91,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        
+
       - name: Detect package manager
         id: detect-package-manager
         run: |
@@ -105,20 +109,20 @@ jobs:
             echo "Unable to determine package manager"
             exit 1
           fi
-          
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: '20'
           cache: ${{ steps.detect-package-manager.outputs.manager }}
-          
+
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
-        
+
       - name: Build with Astro
         run: |
           ${{ steps.detect-package-manager.outputs.runner }} astro build
-          
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -144,11 +148,13 @@ jobs:
 ### Étape 4 : Configurer le domaine personnalisé (30 minutes)
 
 1. Créez le fichier `public/CNAME` :
+
 ```
 xxxx.caflarochebonneville.fr
 ```
 
 2. Dans votre zone DNS (chez votre registrar) :
+
    - Créez un enregistrement CNAME
    - De : `xxxx`
    - Vers : `VOTRE-USERNAME.github.io`
@@ -189,47 +195,53 @@ backend:
   auth_endpoint: auth
   cms_label_prefix: decap-cms/
 
-media_folder: "public/images/uploads"
-public_folder: "/images/uploads"
+media_folder: 'public/images/uploads'
+public_folder: '/images/uploads'
 
 locale: 'fr'
 
 collections:
-  - name: "blog"
-    label: "Articles"
-    folder: "src/content/blog"
+  - name: 'blog'
+    label: 'Articles'
+    folder: 'src/content/blog'
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
     fields:
-      - {label: "Titre", name: "title", widget: "string"}
-      - {label: "Description", name: "description", widget: "text"}
-      - {label: "Date de publication", name: "pubDate", widget: "datetime"}
-      - {label: "Image principale", name: "image", widget: "image", required: false}
-      - {label: "Catégorie", name: "category", widget: "select", options: ["Organisation", "Bénévoles", "Compétition", "Sponsors"]}
-      - {label: "Contenu", name: "body", widget: "markdown"}
+      - { label: 'Titre', name: 'title', widget: 'string' }
+      - { label: 'Description', name: 'description', widget: 'text' }
+      - { label: 'Date de publication', name: 'pubDate', widget: 'datetime' }
+      - { label: 'Image principale', name: 'image', widget: 'image', required: false }
+      - {
+          label: 'Catégorie',
+          name: 'category',
+          widget: 'select',
+          options: ['Organisation', 'Bénévoles', 'Compétition', 'Sponsors'],
+        }
+      - { label: 'Contenu', name: 'body', widget: 'markdown' }
 
-  - name: "pages"
-    label: "Pages"
+  - name: 'pages'
+    label: 'Pages'
     files:
       - label: "Page d'accueil"
-        name: "home"
-        file: "src/data/homepage.json"
+        name: 'home'
+        file: 'src/data/homepage.json'
         fields:
-          - {label: "Titre principal", name: "hero_title", widget: "string"}
-          - {label: "Sous-titre", name: "hero_subtitle", widget: "string"}
-          - {label: "Texte du bouton", name: "hero_cta", widget: "string"}
-          - {label: "Date de l'événement", name: "event_date", widget: "datetime"}
-          - label: "Sections"
-            name: "sections"
-            widget: "list"
+          - { label: 'Titre principal', name: 'hero_title', widget: 'string' }
+          - { label: 'Sous-titre', name: 'hero_subtitle', widget: 'string' }
+          - { label: 'Texte du bouton', name: 'hero_cta', widget: 'string' }
+          - { label: "Date de l'événement", name: 'event_date', widget: 'datetime' }
+          - label: 'Sections'
+            name: 'sections'
+            widget: 'list'
             fields:
-              - {label: "Titre", name: "title", widget: "string"}
-              - {label: "Contenu", name: "content", widget: "markdown"}
+              - { label: 'Titre', name: 'title', widget: 'string' }
+              - { label: 'Contenu', name: 'content', widget: 'markdown' }
 ```
 
 ### Configuration OAuth GitHub
 
 1. Créez une OAuth App sur GitHub :
+
    - Settings → Developer settings → OAuth Apps → New OAuth App
    - Application name : `CMS Competition Escalade`
    - Homepage URL : `https://xxxx.caflarochebonneville.fr`
@@ -379,20 +391,15 @@ Créez `src/components/Newsletter.astro` :
 
 ```astro
 ---
-const webhookUrl = import.meta.env.PUBLIC_N8N_WEBHOOK_URL || 'https://VOTRE-INSTANCE.n8n.io/webhook/inscription-newsletter';
+const webhookUrl =
+  import.meta.env.PUBLIC_N8N_WEBHOOK_URL || 'https://VOTRE-INSTANCE.n8n.io/webhook/inscription-newsletter';
 ---
 
 <section class="bg-gray-900 py-16">
   <div class="max-w-4xl mx-auto px-4">
-    <h2 class="text-3xl font-bold text-white mb-8 text-center">
-      Restez informé de la compétition
-    </h2>
-    
-    <form 
-      id="newsletter-form" 
-      class="max-w-md mx-auto"
-      data-webhook-url={webhookUrl}
-    >
+    <h2 class="text-3xl font-bold text-white mb-8 text-center">Restez informé de la compétition</h2>
+
+    <form id="newsletter-form" class="max-w-md mx-auto" data-webhook-url={webhookUrl}>
       <div class="mb-4">
         <input
           type="email"
@@ -402,7 +409,7 @@ const webhookUrl = import.meta.env.PUBLIC_N8N_WEBHOOK_URL || 'https://VOTRE-INST
           class="w-full px-4 py-3 rounded-lg bg-gray-800 text-white border border-gray-700 focus:border-orange-500 focus:outline-none"
         />
       </div>
-      
+
       <div class="grid grid-cols-2 gap-4 mb-4">
         <input
           type="text"
@@ -417,14 +424,14 @@ const webhookUrl = import.meta.env.PUBLIC_N8N_WEBHOOK_URL || 'https://VOTRE-INST
           class="px-4 py-3 rounded-lg bg-gray-800 text-white border border-gray-700 focus:border-orange-500 focus:outline-none"
         />
       </div>
-      
+
       <button
         type="submit"
         class="w-full bg-orange-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-orange-600 transition duration-300"
       >
         S'inscrire à la newsletter
       </button>
-      
+
       <div id="newsletter-message" class="mt-4 text-center hidden"></div>
     </form>
   </div>
@@ -433,13 +440,13 @@ const webhookUrl = import.meta.env.PUBLIC_N8N_WEBHOOK_URL || 'https://VOTRE-INST
 <script>
   const form = document.getElementById('newsletter-form') as HTMLFormElement;
   const message = document.getElementById('newsletter-message');
-  
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
+
     const formData = new FormData(form);
     const data = Object.fromEntries(formData);
-    
+
     try {
       const response = await fetch(form.dataset.webhookUrl, {
         method: 'POST',
@@ -448,19 +455,19 @@ const webhookUrl = import.meta.env.PUBLIC_N8N_WEBHOOK_URL || 'https://VOTRE-INST
         },
         body: JSON.stringify(data),
       });
-      
+
       if (response.ok) {
         message.textContent = 'Inscription réussie ! Vérifiez votre boîte mail.';
         message.className = 'mt-4 text-center text-green-400';
         form.reset();
       } else {
-        throw new Error('Erreur lors de l\'inscription');
+        throw new Error("Erreur lors de l'inscription");
       }
     } catch (error) {
       message.textContent = 'Une erreur est survenue. Veuillez réessayer.';
       message.className = 'mt-4 text-center text-red-400';
     }
-    
+
     message.classList.remove('hidden');
   });
 </script>
@@ -507,23 +514,15 @@ const eventDate = new Date('2025-06-15T09:00:00');
 <section class="relative h-screen flex items-center justify-center overflow-hidden">
   <!-- Image de fond -->
   <div class="absolute inset-0 z-0">
-    <Image 
-      src={heroImage} 
-      alt="Compétition d'escalade" 
-      class="w-full h-full object-cover"
-    />
+    <Image src={heroImage} alt="Compétition d'escalade" class="w-full h-full object-cover" />
     <div class="absolute inset-0 bg-black bg-opacity-50"></div>
   </div>
-  
+
   <!-- Contenu -->
   <div class="relative z-10 text-center text-white px-4">
-    <h1 class="text-5xl md:text-7xl font-bold mb-4 animate-fade-in-up">
-      Compétition d'Escalade 2025
-    </h1>
-    <p class="text-xl md:text-2xl mb-8 animate-fade-in-up animation-delay-200">
-      15-16 Juin • La Roche-sur-Foron
-    </p>
-    
+    <h1 class="text-5xl md:text-7xl font-bold mb-4 animate-fade-in-up">Compétition d'Escalade 2025</h1>
+    <p class="text-xl md:text-2xl mb-8 animate-fade-in-up animation-delay-200">15-16 Juin • La Roche-sur-Foron</p>
+
     <!-- Compte à rebours -->
     <div id="countdown" class="flex justify-center gap-4 mb-8">
       <div class="bg-orange-500 rounded-lg p-4 animate-fade-in-up animation-delay-400">
@@ -539,18 +538,24 @@ const eventDate = new Date('2025-06-15T09:00:00');
         <div class="text-sm">Minutes</div>
       </div>
     </div>
-    
+
     <!-- CTAs -->
     <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up animation-delay-700">
-      <a href="/inscriptions" class="bg-orange-500 text-white px-8 py-4 rounded-full font-bold hover:bg-orange-600 transition-all hover:scale-105">
+      <a
+        href="/inscriptions"
+        class="bg-orange-500 text-white px-8 py-4 rounded-full font-bold hover:bg-orange-600 transition-all hover:scale-105"
+      >
         S'inscrire à la compétition
       </a>
-      <a href="/benevoles" class="border-2 border-white text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:text-black transition-all">
+      <a
+        href="/benevoles"
+        class="border-2 border-white text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:text-black transition-all"
+      >
         Devenir bénévole
       </a>
     </div>
   </div>
-  
+
   <!-- Indicateur de scroll -->
   <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -570,32 +575,42 @@ const eventDate = new Date('2025-06-15T09:00:00');
       transform: translateY(0);
     }
   }
-  
+
   .animate-fade-in-up {
     animation: fade-in-up 0.8s ease-out forwards;
   }
-  
-  .animation-delay-200 { animation-delay: 0.2s; }
-  .animation-delay-400 { animation-delay: 0.4s; }
-  .animation-delay-500 { animation-delay: 0.5s; }
-  .animation-delay-600 { animation-delay: 0.6s; }
-  .animation-delay-700 { animation-delay: 0.7s; }
+
+  .animation-delay-200 {
+    animation-delay: 0.2s;
+  }
+  .animation-delay-400 {
+    animation-delay: 0.4s;
+  }
+  .animation-delay-500 {
+    animation-delay: 0.5s;
+  }
+  .animation-delay-600 {
+    animation-delay: 0.6s;
+  }
+  .animation-delay-700 {
+    animation-delay: 0.7s;
+  }
 </style>
 
 <script define:vars={{ eventDate }}>
   function updateCountdown() {
     const now = new Date().getTime();
     const distance = new Date(eventDate).getTime() - now;
-    
+
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    
+
     document.getElementById('days').textContent = days.toString().padStart(2, '0');
     document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
     document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
   }
-  
+
   updateCountdown();
   setInterval(updateCountdown, 60000); // Update every minute
 </script>
@@ -675,15 +690,18 @@ npm run astro check
 ## 📈 Évolution future
 
 ### Si la newsletter dépasse 500 abonnés
+
 1. Passer à Brevo Lite (19€/mois pour 20k emails)
 2. Ou migrer vers n8n self-hosted (10€/mois VPS)
 
 ### Si le site devient plus complexe
+
 1. Ajouter Astro DB pour données dynamiques
 2. Intégrer Stripe pour paiements inscriptions
 3. Ajouter authentification pour espace compétiteur
 
 ### Pour plus d'animations
+
 1. Installer GSAP : `npm i gsap`
 2. Ou Framer Motion avec React : `npm i @astrojs/react framer-motion`
 
@@ -710,4 +728,4 @@ npm run astro check
 
 ---
 
-*Dernière mise à jour : Août 2025*
+_Dernière mise à jour : Août 2025_

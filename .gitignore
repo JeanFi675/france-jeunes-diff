@@ -34,4 +34,4 @@ pnpm-debug.log*
 
 pnpm-lock.yaml
 
-.astro
+.astro.env.local

@@ -1,9 +1,11 @@
 # CLAUDE.md - Competition Escalade Project
 
 ## Project Overview
+
 Site web pour une compétition d'escalade avec Astro, GitHub Pages, et gestion de contenu simplifiée.
 
 ### Tech Stack
+
 - **Framework**: Astro v5.7.3 avec template AstroWind
 - **Styling**: Tailwind CSS
 - **CMS**: Decap CMS (pour gestion de contenu sans code)
@@ -12,6 +14,7 @@ Site web pour une compétition d'escalade avec Astro, GitHub Pages, et gestion d
 - **Domain**: À configurer sur xxxx.caflarochebonneville.fr
 
 ## Project Structure
+
 ```
 /
 ├── src/
@@ -26,6 +29,7 @@ Site web pour une compétition d'escalade avec Astro, GitHub Pages, et gestion d
 ```
 
 ## Commands
+
 ```bash
 npm run dev       # Serveur de développement
 npm run build     # Build de production
@@ -37,21 +41,25 @@ npm run format    # Formater le code
 ## Development Guidelines
 
 ### Git Workflow
+
 - Branch principale: `main`
 - Déploiement automatique via GitHub Actions
 - Commits réguliers avec messages descriptifs
 
 ### Content Management
+
 - Articles de blog dans `src/content/blog/`
 - Configuration Decap CMS dans `public/admin/`
 - Images dans `src/assets/images/`
 
 ### Styling
+
 - Utiliser Tailwind CSS classes
 - Composants dans `src/components/`
 - Respecter le design system AstroWind
 
 ## TODO
+
 - [ ] Configurer le domaine personnalisé
 - [ ] Personnaliser le design pour l'escalade
 - [ ] Configurer Decap CMS avec OAuth GitHub
@@ -61,10 +69,12 @@ npm run format    # Formater le code
 - [ ] Intégrer les premiers articles de blog
 
 ## Deployment
+
 Le site se déploie automatiquement sur GitHub Pages à chaque push sur `main`.
-URL temporaire: https://JeanFi675.github.io/competition-escalade
+URL temporaire: https://JeanFi675.github.io/france-jeunes-diff
 
 ## Resources
+
 - [Guide original](./competition-escalade-astro-guide.md)
 - [Astro Docs](https://docs.astro.build)
 - [AstroWind Theme](https://github.com/onwidget/astrowind)
