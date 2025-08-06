@@ -1,0 +1,33 @@
+---
+import InfoSection from '../atoms/InfoSection.astro';
+import BrutalButton from '../atoms/BrutalButton.astro';
+import competitionData from '../../data/competition-data.js';
+
+// Fusionner les données pratiques (DRY - utilise les données centralisées)
+const practicalCards = [
+  ...competitionData.accommodation,
+  ...competitionData.transport,
+  ...competitionData.food
+];
+---
+
+<InfoSection
+  title="INFOS PRATIQUES"
+  subtitle="Hébergement • Transport • Restauration"
+  icon="📍"
+  background="white"
+  cards={practicalCards}
+  columns={3}
+>
+  <!-- Bouton CTA en bas de section (slot pour contenu additionnel) -->
+  <div style="text-align: center; margin-top: 3rem;">
+    <BrutalButton href="#venue" variant="primary" rotation={-1}>
+      🗺️ VOIR LE PLAN D'ACCÈS
+    </BrutalButton>
+  </div>
+</InfoSection>
+
+<style>
+  /* Pas de styles spécifiques nécessaires - tout est géré par InfoSection (KISS) */
+  /* Le responsive est déjà géré par le composant parent (DRY) */
+</style>

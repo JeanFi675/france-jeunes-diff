@@ -1,0 +1,54 @@
+---
+export interface Props {
+  variant?: 'mint' | 'black' | 'white';
+  animated?: boolean;
+  rotation?: number;
+  class?: string;
+}
+
+const { 
+  variant = 'mint', 
+  animated = false, 
+  rotation = Math.random() * 6 - 3, // -3 à 3deg
+  class: className = '' 
+} = Astro.props;
+
+const classes = `brutal-badge brutal-badge--${variant} ${animated ? 'brutal-badge--animated' : ''} ${className}`.trim();
+---
+
+<span 
+  class={classes}
+  style={`transform: rotate(${rotation}deg)`}
+>
+  <slot />
+</span>
+
+<style>
+  .brutal-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: var(--brutal-mint);
+    color: var(--brutal-black);
+    border: 4px solid var(--brutal-black);
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  
+  .brutal-badge--black {
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    box-shadow: 4px 4px 0 var(--brutal-mint);
+  }
+  
+  .brutal-badge--white {
+    background: var(--brutal-white);
+    color: var(--brutal-black);
+  }
+  
+  .brutal-badge--animated {
+    animation: pulse-brutal 3s ease-in-out infinite;
+  }
+</style>

@@ -1,0 +1,48 @@
+---
+export interface Props {
+  level?: 1 | 2 | 3 | 4;
+  shadow?: boolean;
+  glitch?: boolean;
+  rotation?: number;
+  class?: string;
+}
+
+const { 
+  level = 1, 
+  shadow = false, 
+  glitch = false, 
+  rotation = -1,
+  class: className = '' 
+} = Astro.props;
+
+const Tag = `h${level}` as const;
+const baseClass = 'brutal-heading';
+const shadowClass = shadow ? 'brutal-title' : '';
+const glitchClass = glitch ? 'brutal-glitch' : '';
+const classes = `${baseClass} ${shadowClass} ${glitchClass} ${className}`.trim();
+---
+
+<Tag 
+  class={classes}
+  style={`transform: rotate(${rotation}deg)`}
+>
+  <slot />
+</Tag>
+
+<style>
+  .brutal-heading {
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 0.9;
+  }
+  
+  .brutal-glitch {
+    animation: glitch 3s infinite;
+  }
+  
+  .brutal-glitch:hover {
+    animation-duration: 0.3s;
+  }
+</style>

@@ -1,0 +1,61 @@
+---
+import BrutalHeading from '../atoms/BrutalHeading.astro';
+import BrutalBadge from '../atoms/BrutalBadge.astro';
+import BrutalButton from '../atoms/BrutalButton.astro';
+---
+
+<section class="brutal-section" style="background: var(--brutal-black); color: var(--brutal-white); position: relative; overflow: hidden;">
+  <!-- Pattern background -->
+  <div 
+    class="brutal-pattern-diagonal" 
+    style="position: absolute; inset: 0; pointer-events: none;"
+  ></div>
+  
+  <!-- Accent blocks -->
+  <div style="position: absolute; top: 10%; right: -10%; width: 300px; height: 300px; background: var(--brutal-mint); opacity: 0.1; transform: rotate(45deg);"></div>
+  <div style="position: absolute; bottom: -10%; left: -5%; width: 200px; height: 200px; background: var(--brutal-mint); opacity: 0.1; transform: rotate(-30deg);"></div>
+  
+  <div class="brutal-container" style="position: relative; z-index: 10; text-align: center; padding: 6rem 2rem;">
+    <!-- Badge entrée gratuite -->
+    <div style="margin-bottom: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <BrutalBadge variant="mint" rotation={-2}>
+        🏔️ ÉVÉNEMENT FFME OFFICIEL
+      </BrutalBadge>
+      <BrutalBadge variant="mint" rotation={3}>
+        🎫 ENTRÉE 100% GRATUITE
+      </BrutalBadge>
+    </div>
+    
+    <!-- Titre principal -->
+    <BrutalHeading level={1} shadow={true} class="brutal-title" rotation={0}>
+      CHAMPIONNATS<br>
+      DE <span style="color: var(--brutal-mint);">FRANCE</span><br>
+      JEUNES DIFFICULTÉ
+    </BrutalHeading>
+    
+    <!-- Sous-titre -->
+    <div style="margin: 3rem 0;">
+      <BrutalHeading level={2} class="brutal-subtitle" rotation={1}>
+        16-17 MAI 2026 • SAINT-PIERRE-EN-FAUCIGNY
+      </BrutalHeading>
+    </div>
+    
+    <!-- Description plus vendeuse -->
+    <p style="font-size: 1.25rem; font-weight: 700; margin: 2rem auto; max-width: 700px; color: var(--brutal-white);">
+      🎪 SPECTACLE GRATUIT • 🏆 ÉLITE FRANÇAISE • 👨‍👩‍👧‍👦 TOUT PUBLIC BIENVENU
+    </p>
+    
+    <!-- Actions améliorées -->
+    <div class="brutal-flex" style="justify-content: center; margin-top: 3rem; flex-wrap: wrap;">
+      <BrutalButton href="#programme" variant="primary" rotation={-1}>
+        📅 PROGRAMME
+      </BrutalButton>
+      <BrutalButton href="#experience" variant="outline" rotation={2}>
+        🤩 DÉCOUVRIR L'AMBIANCE
+      </BrutalButton>
+      <BrutalButton href="mailto:j.duheron@caflarochebonneville.fr" variant="secondary" rotation={-2}>
+        ✉️ CONTACT ORGA
+      </BrutalButton>
+    </div>
+  </div>
+</section>

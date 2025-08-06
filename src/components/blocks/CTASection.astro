@@ -1,0 +1,95 @@
+---
+import BrutalHeading from '../atoms/BrutalHeading.astro';
+import BrutalButton from '../atoms/BrutalButton.astro';
+
+// Année dynamique au build
+const currentYear = new Date().getFullYear();
+---
+
+<section class="brutal-section" style="background: var(--brutal-black); color: var(--brutal-white); position: relative;">
+  <!-- ASCII Art brutal -->
+  <div style="position: absolute; inset: 0; z-index: 1; pointer-events: none; font-family: 'Space Mono', monospace; font-size: 2rem; opacity: 0.1;">
+    <pre style="position: absolute; top: 10%; left: 5%; transform: rotate(-15deg);">
+███████╗███████╗███╗   ███╗███████╗
+██╔════╝██╔════╝████╗ ████║██╔════╝
+█████╗  █████╗  ██╔████╔██║█████╗  
+██╔══╝  ██╔══╝  ██║╚██╔╝██║██╔══╝  
+██║     ██║     ██║ ╚═╝ ██║███████╗
+╚═╝     ╚═╝     ╚═╝     ╚═╝╚══════╝
+    </pre>
+  </div>
+  
+  <div class="brutal-container" style="position: relative; z-index: 10; text-align: center; padding: 6rem 2rem;">
+    <!-- Titre avec vibration -->
+    <div style="margin-bottom: 4rem;">
+      <BrutalHeading 
+        level={1} 
+        class="cta-title brutal-title brutal-title--white"
+        rotation={0}
+      >
+        PRÊT À<br>
+        <span style="color: var(--brutal-mint);">GRIMPER ?</span>
+      </BrutalHeading>
+    </div>
+    
+    <!-- Actions -->
+    <div class="brutal-flex" style="justify-content: center; margin-bottom: 4rem; flex-wrap: wrap;">
+      <BrutalButton 
+        href="mailto:j.duheron@caflarochebonneville.fr" 
+        variant="primary" 
+        rotation={-2}
+        class="mega-btn"
+      >
+        📧 CONTACT ORGANISATION
+      </BrutalButton>
+      
+      <BrutalButton 
+        href="#programme" 
+        variant="outline" 
+        rotation={1}
+        class="mega-btn"
+      >
+        📋 INFOS PRATIQUES
+      </BrutalButton>
+    </div>
+    
+    <!-- Footer brutal -->
+    <footer style="border-top: 4px solid var(--brutal-mint); padding-top: 2rem; transform: rotate(-1deg);">
+      <div style="font-family: 'Space Mono', monospace; font-size: 0.875rem; color: var(--brutal-mint);">
+        © {currentYear} CAF LA ROCHE BONNEVILLE • FFME
+      </div>
+      <div style="margin-top: 1rem; font-size: 0.75rem; color: var(--brutal-white);">
+        110 RUE DES ALPES • 74800 SAINT-PIERRE-EN-FAUCIGNY
+      </div>
+    </footer>
+  </div>
+</section>
+
+<style>
+  .cta-title {
+    animation: vibrate 0.3s ease-in-out infinite;
+    animation-play-state: paused;
+  }
+  
+  .cta-title:hover {
+    animation-play-state: running;
+  }
+  
+  @keyframes vibrate {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    75% { transform: translateX(2px); }
+  }
+  
+  .mega-btn {
+    padding: 1.5rem 3rem !important;
+    font-size: 1.25rem !important;
+  }
+  
+  @media (max-width: 768px) {
+    .mega-btn {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+  }
+</style>

@@ -1,0 +1,28 @@
+---
+export interface Props {
+  href: string;
+  variant?: 'primary' | 'secondary' | 'outline';
+  rotation?: number;
+  class?: string;
+}
+
+const { 
+  href, 
+  variant = 'primary', 
+  rotation = Math.random() * 4 - 2, // Rotation aléatoire -2 à 2deg
+  class: className = '' 
+} = Astro.props;
+
+const isExternal = href.startsWith('http');
+const classes = `brutal-btn brutal-btn--${variant} ${className}`;
+---
+
+<a 
+  href={href}
+  class={classes}
+  style={`transform: rotate(${rotation}deg)`}
+  target={isExternal ? '_blank' : undefined}
+  rel={isExternal ? 'noopener noreferrer' : undefined}
+>
+  <slot />
+</a>

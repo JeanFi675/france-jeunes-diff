@@ -1,0 +1,41 @@
+---
+import BrutalBadge from '../atoms/BrutalBadge.astro';
+
+// Calculé AU BUILD TIME - Pas de JS client
+const eventDate = new Date('2026-05-16');
+const today = new Date();
+const daysLeft = Math.floor((eventDate - today) / (1000 * 60 * 60 * 24));
+const isEventSoon = daysLeft < 30;
+---
+
+<section class="brutal-section" style="background: var(--brutal-mint); text-align: center;">
+  <div class="brutal-container">
+    <div 
+      class={`brutal-card ${isEventSoon ? 'brutal-card--urgent' : ''}`}
+      style="display: inline-block; transform: rotate(-2deg) scale(1.2); margin: 2rem 0;"
+    >
+      <div style="font-family: 'Inter', sans-serif; font-weight: 800; font-size: clamp(4rem, 12vw, 8rem); line-height: 0.8; color: var(--brutal-black);">
+        J-{daysLeft}
+      </div>
+      <div style="font-family: 'Space Mono', monospace; font-weight: 700; font-size: 1rem; text-transform: uppercase; margin-top: 1rem; color: var(--brutal-black);">
+        AVANT LA COMPÉTITION
+      </div>
+    </div>
+    
+    {isEventSoon && (
+      <div style="margin-top: 2rem;">
+        <BrutalBadge variant="black" animated={true}>
+          🚨 ÉVÉNEMENT IMMINENT !
+        </BrutalBadge>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .brutal-card--urgent {
+    animation: shake 1s ease-in-out infinite;
+    border-color: var(--brutal-black) !important;
+    box-shadow: 16px 16px 0 var(--brutal-black) !important;
+  }
+</style>

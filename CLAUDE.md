@@ -1,81 +1,204 @@
-# CLAUDE.md - Competition Escalade Project
+# CLAUDE.md - Championnats de France Escalade 2026
 
-## Project Overview
+## 🎯 Vue d'ensemble du projet
 
-Site web pour une compétition d'escalade avec Astro, GitHub Pages, et gestion de contenu simplifiée.
+Landing page **100% statique** pour les Championnats de France Jeunes Difficulté 2026 à Saint-Pierre-en-Faucigny.
 
-### Tech Stack
+**Philosophie du projet** : ZÉRO JavaScript client, architecture ultra-minimaliste, style néo-brutaliste inspiré de l'affiche officielle.
 
-- **Framework**: Astro v5.7.3 avec template AstroWind
-- **Styling**: Tailwind CSS
-- **CMS**: Decap CMS (pour gestion de contenu sans code)
-- **Newsletter**: n8n + NocoDB + Brevo (à configurer)
-- **Hosting**: GitHub Pages
-- **Domain**: À configurer sur xxxx.caflarochebonneville.fr
+## 🛠️ Stack technique
 
-## Project Structure
+**Framework** : Astro v5.7.3 (SSG uniquement)  
+**Styling** : CSS pur avec variables custom  
+**Fonts** : Impact, Space Grotesk, Space Mono (Google Fonts)  
+**Hosting** : GitHub Pages  
+**Build** : GitHub Actions avec rebuild quotidien  
+**Performance** : Time to Interactive = 0ms (pas de JS)
 
-```
-/
-├── src/
-│   ├── pages/           # Pages du site
-│   ├── components/      # Composants réutilisables
-│   ├── content/         # Contenu du blog
-│   ├── layouts/         # Layouts de page
-│   └── assets/          # Images et styles
-├── public/              # Fichiers statiques
-│   └── admin/           # Interface Decap CMS
-└── .github/workflows/   # CI/CD avec GitHub Actions
+## 🎨 Design System Néo-Brutaliste
+
+### Palette de couleurs (affiche Saint-Étienne)
+```css
+--brutal-black: #000000;
+--brutal-mint: #7FE5B0;    /* Vert menthe signature */
+--brutal-white: #FFFFFF;
+--brutal-gray: #1A1A1A;    /* Textes secondaires */
 ```
 
-## Commands
+### Typographie
+```css
+--font-heading: 'Impact', 'Arial Black', sans-serif;      /* Titres écrasés */
+--font-body: 'Space Grotesk', sans-serif;                 /* Corps */
+--font-mono: 'Space Mono', monospace;                     /* Accents */
+```
+
+### Effets signature
+- **Rotations** : -3deg à +3deg aléatoires
+- **Ombres** : box-shadow dures SANS blur
+- **Bordures** : 4px minimum
+- **Hover** : translate(-4px, -4px) + shadow agrandie
+- **Animations** : @keyframes CSS uniquement
+
+## 📁 Architecture du code
+
+```
+src/
+├── components/
+│   ├── atoms/              # Composants de base réutilisables
+│   │   ├── BrutalButton.astro     # Boutons avec effets
+│   │   ├── BrutalHeading.astro    # Titres Impact
+│   │   └── BrutalBadge.astro      # Badges rotatés
+│   ├── blocks/             # Sections de la landing page
+│   │   ├── HeroSection.astro      # Hero avec titre géant
+│   │   ├── EventDateSection.astro # J-XXX calculé au build
+│   │   ├── ProgramSection.astro   # 2 cartes overlap
+│   │   ├── VenueSection.astro     # Lieu + carte statique
+│   │   ├── StatsSection.astro     # Chiffres outline
+│   │   └── CTASection.astro       # Boutons + footer
+│   └── layout/
+│       └── BaseLayout.astro       # Layout unique
+├── pages/
+│   └── index.astro         # Page finale assemblée
+└── styles/
+    └── brutal.css          # CSS néo-brutaliste global
+```
+
+## 🔧 Commandes
 
 ```bash
-npm run dev       # Serveur de développement
-npm run build     # Build de production
-npm run preview   # Prévisualiser le build
-npm run lint      # Linter le code
-npm run format    # Formater le code
+npm run dev      # Serveur développement
+npm run build    # Build statique pour GitHub Pages
+npm run preview  # Prévisualisation locale du build
 ```
 
-## Development Guidelines
+## 🎨 Composants disponibles
 
-### Git Workflow
+### BrutalButton
+```astro
+<BrutalButton href="/contact" variant="primary" rotation={-2}>
+  Contact
+</BrutalButton>
+```
+**Variants** : `primary`, `secondary`, `outline`
 
-- Branch principale: `main`
-- Déploiement automatique via GitHub Actions
-- Commits réguliers avec messages descriptifs
+### BrutalHeading  
+```astro
+<BrutalHeading level={1} shadow={true} glitch={false} rotation={-1}>
+  Titre Impact
+</BrutalHeading>
+```
 
-### Content Management
+### BrutalBadge
+```astro
+<BrutalBadge variant="mint" animated={true} rotation={2}>
+  FFME OFFICIEL
+</BrutalBadge>
+```
 
-- Articles de blog dans `src/content/blog/`
-- Configuration Decap CMS dans `public/admin/`
-- Images dans `src/assets/images/`
+## 📋 Contenus et données
 
-### Styling
+### Événement
+- **Dates** : 16-17 mai 2026
+- **Lieu** : Complexe sportif du Pays Rochois, Saint-Pierre-en-Faucigny (74)
+- **Participants** : ~300 jeunes grimpeurs
+- **Catégories** : U15, U17, U19 (filles/garçons)
 
-- Utiliser Tailwind CSS classes
-- Composants dans `src/components/`
-- Respecter le design system AstroWind
+### Contact organisation
+**Email** : j.duheron@caflarochebonneville.fr  
+**Club** : CAF La Roche Bonneville  
+**Adresse** : 110 rue des Alpes, 74800 Saint-Pierre-en-Faucigny
 
-## TODO
+### Programme
+**Samedi 16 mai** : Qualifications toutes catégories  
+**Dimanche 17 mai** : Finales + remise des prix + live streaming
 
-- [ ] Configurer le domaine personnalisé
-- [ ] Personnaliser le design pour l'escalade
-- [ ] Configurer Decap CMS avec OAuth GitHub
-- [ ] Implémenter le système de newsletter
-- [ ] Créer les pages spécifiques (programme, bénévoles, inscriptions)
-- [ ] Ajouter le composant Hero avec compte à rebours
-- [ ] Intégrer les premiers articles de blog
+## 🚀 Déploiement GitHub Pages
 
-## Deployment
+### Configuration
+- **Repo** : `JeanFi675/france-jeunes-diff`
+- **URL** : `https://JeanFi675.github.io/france-jeunes-diff`
+- **Branch de déploiement** : `gh-pages` (automatique)
 
-Le site se déploie automatiquement sur GitHub Pages à chaque push sur `main`.
-URL temporaire: https://JeanFi675.github.io/france-jeunes-diff
+### GitHub Actions
+```yaml
+# Rebuild quotidien à 5h pour mettre à jour J-XXX
+- cron: '0 5 * * *'
+# Build à chaque push sur main
+```
 
-## Resources
+## 🎯 Principes de développement
 
-- [Guide original](./competition-escalade-astro-guide.md)
-- [Astro Docs](https://docs.astro.build)
-- [AstroWind Theme](https://github.com/onwidget/astrowind)
-- [Tailwind CSS](https://tailwindcss.com)
+### DRY (Don't Repeat Yourself)
+- CSS custom properties pour toutes les valeurs
+- Composants atomiques réutilisables
+- Props pour variations au build time
+
+### KISS (Keep It Simple Stupid)  
+- **ZÉRO JavaScript client**
+- Une seule page HTML finale
+- CSS vanilla sans preprocesseur
+- Architecture plate (max 2 niveaux)
+
+### SOLID (adapté au statique)
+- **Single Responsibility** : 1 composant = 1 bloc HTML
+- **Open/Closed** : Props pour variations au build
+- **Interface Segregation** : Slots Astro pour contenu flexible
+
+## ⚡ Performance garantie
+
+- **TTI** : 0ms (pas de JS à exécuter)
+- **Lighthouse** : 100/100 Performance
+- **Taille** : ~50KB HTML+CSS (gzipped)
+- **Compatible** : JavaScript désactivé
+
+## 🔍 Maintenance
+
+### Mise à jour du countdown
+- **Automatique** : Rebuild quotidien via GitHub Actions
+- **Manuel** : Push sur main déclenche rebuild
+- **Calcul** : Au build time dans `EventDateSection.astro`
+
+### Modification de contenu
+- **Textes** : Directement dans les composants `.astro`
+- **Couleurs** : Variables CSS dans `brutal.css`  
+- **Fonts** : Import Google Fonts dans `BaseLayout.astro`
+
+### Debug build
+```bash
+npm run build    # Vérifier erreurs de build
+npm run preview  # Tester en local avant push
+```
+
+## 🎨 Conventions de code
+
+### Nommage
+- **Composants** : PascalCase (ex: `BrutalButton`)
+- **Props** : camelCase (ex: `rotation`, `isAnimated`)
+- **CSS** : kebab-case (ex: `brutal-section`, `brutal-btn`)
+- **Variables** : kebab-case (ex: `--brutal-mint`)
+
+### CSS
+- **Pas de preprocesseur** : CSS vanilla uniquement
+- **Custom properties** : Préfixées `--brutal-*`
+- **Classes** : Préfixées `.brutal-*`
+- **Animations** : Nommées `@keyframes brutal-*`
+
+### Structure fichiers
+- **1 composant** = 1 fichier `.astro`
+- **Imports relatifs** : `../atoms/`, `../blocks/`
+- **Props TypeScript** : Interface exportée en haut
+- **Styles scoped** : `<style>` dans composant si nécessaire
+
+## 🎯 Objectifs qualité
+
+- **Accessibilité** : HTML sémantique, contrastes respectés
+- **SEO** : Meta tags, titre descriptif, description
+- **Mobile** : CSS responsive mobile-first
+- **Navigateurs** : Compatible tous navigateurs modernes
+
+## 📚 Ressources
+
+- **Specs complètes** : `LANDING_PAGE_SPECS.md`
+- **Astro docs** : https://docs.astro.build
+- **Google Fonts** : Impact, Space Grotesk, Space Mono
+- **Affiche référence** : `AFFICHE-CHPT-FRANCE-2025-ST-ETIENNE-J-1-283x400.jpg`

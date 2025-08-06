@@ -1,0 +1,56 @@
+---
+import BrutalBadge from './BrutalBadge.astro';
+
+export interface Props {
+  title: string;
+  content: string;
+  icon?: string;
+  badge?: string;
+  variant?: 'default' | 'mint' | 'black';
+  rotation?: number;
+}
+
+const { 
+  title, 
+  content, 
+  icon = '', 
+  badge, 
+  variant = 'default',
+  rotation = 0 
+} = Astro.props;
+
+const cardClass = variant === 'default' 
+  ? 'brutal-card' 
+  : `brutal-card brutal-card--${variant}`;
+const style = `transform: rotate(${rotation}deg)`;
+---
+
+<div class={cardClass} style={style}>
+  {icon && <span class="card-icon">{icon}</span>}
+  <h3>{title}</h3>
+  <p>{content}</p>
+  {badge && <BrutalBadge>{badge}</BrutalBadge>}
+</div>
+
+<style>
+  .card-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 1rem;
+  }
+  
+  h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  
+  p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    opacity: 0.9;
+  }
+</style>

@@ -1,0 +1,323 @@
+/* NÉO-BRUTALISME - PALETTE AFFICHE SAINT-ÉTIENNE */
+:root {
+  --brutal-black: #000000;
+  --brutal-mint: #7FE5B0;
+  --brutal-white: #FFFFFF;
+  --brutal-gray: #1A1A1A;
+}
+
+/* FONTS - Police moderne pour cohérence avec affiche */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Space+Grotesk:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap');
+
+/* RESET BRUTAL */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background: var(--brutal-white);
+  color: var(--brutal-black);
+  line-height: 1.2;
+  overflow-x: hidden;
+}
+
+/* TYPOGRAPHY - Inter moderne avec effets brutalistes */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 0.9;
+}
+
+/* ANIMATIONS BRUTALES */
+@keyframes shake {
+  0%, 100% { transform: rotate(-1deg); }
+  50% { transform: rotate(1deg); }
+}
+
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+}
+
+@keyframes pulse-brutal {
+  0%, 100% { 
+    transform: scale(1) rotate(-1deg);
+    box-shadow: 8px 8px 0 var(--brutal-black);
+  }
+  50% { 
+    transform: scale(1.05) rotate(1deg);
+    box-shadow: 12px 12px 0 var(--brutal-mint);
+  }
+}
+
+@keyframes slide-brutal {
+  0% { 
+    opacity: 0;
+    transform: translateX(-100px) rotate(-5deg);
+  }
+  100% { 
+    opacity: 1;
+    transform: translateX(0) rotate(-2deg);
+  }
+}
+
+/* UTILITY CLASSES */
+.brutal-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.brutal-section {
+  padding: 4rem 0;
+  border-bottom: 8px solid var(--brutal-black);
+}
+
+.brutal-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.brutal-flex {
+  display: flex;
+  gap: 1rem;
+}
+
+/* BOUTONS BRUTAUX */
+.brutal-btn {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: var(--brutal-mint);
+  color: var(--brutal-black);
+  border: 4px solid var(--brutal-black);
+  box-shadow: 8px 8px 0 var(--brutal-black);
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 1.125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transform: rotate(-1deg);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.brutal-btn:hover {
+  transform: translate(-4px, -4px) rotate(0deg);
+  box-shadow: 12px 12px 0 var(--brutal-black);
+}
+
+.brutal-btn:active {
+  transform: translate(2px, 2px) rotate(-1deg);
+  box-shadow: 4px 4px 0 var(--brutal-black);
+}
+
+.brutal-btn--secondary {
+  background: var(--brutal-white);
+  color: var(--brutal-black);
+}
+
+.brutal-btn--outline {
+  background: transparent;
+  color: var(--brutal-white);
+  border-color: var(--brutal-white);
+}
+
+/* CARDS BRUTALES */
+.brutal-card {
+  background: var(--brutal-white);
+  border: 4px solid var(--brutal-black);
+  box-shadow: 8px 8px 0 var(--brutal-black);
+  padding: 2rem;
+  transform: rotate(-1deg);
+  transition: all 0.2s ease;
+}
+
+.brutal-card:hover {
+  transform: translate(-4px, -4px) rotate(1deg);
+  box-shadow: 16px 16px 0 var(--brutal-black);
+}
+
+.brutal-card--mint {
+  background: var(--brutal-mint);
+}
+
+.brutal-card--black {
+  background: var(--brutal-black);
+  color: var(--brutal-white);
+  box-shadow: 8px 8px 0 var(--brutal-mint);
+}
+
+/* BADGES BRUTAUX */
+.brutal-badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: var(--brutal-mint);
+  color: var(--brutal-black);
+  border: 4px solid var(--brutal-black);
+  font-weight: 900;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transform: rotate(2deg);
+}
+
+.brutal-badge--black {
+  background: var(--brutal-black);
+  color: var(--brutal-white);
+  box-shadow: 4px 4px 0 var(--brutal-mint);
+}
+
+/* TEXTE BRUTAL - sans ombre par défaut */
+.brutal-title {
+  font-size: clamp(3rem, 8vw, 7rem);
+  line-height: 0.85;
+  animation: shake 8s ease-in-out infinite;
+}
+
+/* OMBRES CONDITIONNELLES - spécifiques par contexte */
+.brutal-title:not(.brutal-title--white) {
+  text-shadow: 4px 4px 0 var(--brutal-mint);
+}
+
+.brutal-title--white {
+  text-shadow: 4px 4px 0 var(--brutal-mint);
+}
+
+/* SPANS VERTS - ombre blanche uniquement, annule l'héritage */
+.brutal-title span[style*="color: var(--brutal-mint)"] {
+  text-shadow: 4px 4px 0 var(--brutal-white) !important;
+}
+
+.brutal-subtitle {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--brutal-mint);
+}
+
+.brutal-text-outline {
+  -webkit-text-stroke: 3px var(--brutal-black);
+  -webkit-text-fill-color: transparent;
+}
+
+/* PATTERNS */
+.brutal-pattern-dots {
+  background-image: radial-gradient(circle, var(--brutal-black) 2px, transparent 2px);
+  background-size: 20px 20px;
+}
+
+.brutal-pattern-diagonal {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    var(--brutal-black) 10px,
+    var(--brutal-black) 20px
+  );
+  opacity: 0.1;
+}
+
+/* === PATTERNS RÉUTILISABLES (DRY) === */
+
+/* Pattern Grid responsive (KISS) */
+.brutal-grid-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+/* Pattern Card Info (DRY) */
+.info-card-base {
+  padding: 2rem;
+  border: 4px solid var(--brutal-black);
+  box-shadow: 8px 8px 0 var(--brutal-black);
+  transition: all 0.2s ease;
+}
+
+.info-card-base:hover {
+  transform: translate(-4px, -4px) rotate(2deg);
+  box-shadow: 12px 12px 0 var(--brutal-mint);
+}
+
+/* Pattern Section Header (DRY) */
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-header h2 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+/* Pattern Badge List (DRY) */
+.badge-list {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+
+/* Pattern Two Columns (KISS) */
+.two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+/* Pattern Testimonial (DRY) */
+.testimonial-card {
+  position: relative;
+  background: var(--brutal-mint);
+  padding: 2rem;
+  border: 4px solid var(--brutal-black);
+  margin-bottom: 2rem;
+}
+
+.testimonial-card::before {
+  content: "❝";
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  font-size: 4rem;
+  color: var(--brutal-black);
+  opacity: 0.2;
+}
+
+/* Animation simple (KISS) */
+@keyframes simple-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.pulse-on-hover:hover {
+  animation: simple-pulse 0.5s ease;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .brutal-container {
+    padding: 0 1rem;
+  }
+  
+  .brutal-section {
+    padding: 2rem 0;
+  }
+  
+  .brutal-btn {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .two-columns {
+    grid-template-columns: 1fr;
+  }
+}
