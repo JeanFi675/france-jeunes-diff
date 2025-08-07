@@ -15,6 +15,7 @@ export interface Props {
     variant?: 'default' | 'mint' | 'black';
   }>;
   columns?: 1 | 2 | 3 | 4;
+  id?: string;
 }
 
 const { 
@@ -23,7 +24,8 @@ const {
   icon = '',
   background = 'white', 
   cards, 
-  columns = 3 
+  columns = 3,
+  id
 } = Astro.props;
 
 const bgColor = background === 'white' ? 'var(--brutal-white)' 
@@ -34,7 +36,7 @@ const sectionStyle = `background: ${bgColor}; ${background === 'black' ? 'color:
 const gridStyle = `grid-template-columns: repeat(${columns}, 1fr);`;
 ---
 
-<section class="brutal-section" style={sectionStyle}>
+<section class="brutal-section" style={sectionStyle} id={id}>
   <div class="brutal-container">
     <div style="text-align: center; margin-bottom: 3rem;">
       <BrutalHeading 

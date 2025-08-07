@@ -1,0 +1,102 @@
+---
+import BrutalHeading from '../atoms/BrutalHeading.astro';
+import competitionData from '../../data/competition-data.js';
+
+const { testimonials } = competitionData;
+
+// Images placeholder pour la galerie (à remplacer par vraies images plus tard)
+const galleryImages = [
+  { src: '/images/ambiance-1.jpg', alt: 'Grimpeur en action' },
+  { src: '/images/ambiance-2.jpg', alt: 'Public enthousiaste' },
+  { src: '/images/ambiance-3.jpg', alt: 'Podium victoire' },
+  { src: '/images/ambiance-4.jpg', alt: 'Vue de la salle' }
+];
+---
+
+<section id="experience" class="brutal-section" style="background: var(--brutal-black); color: var(--brutal-white);">
+  <div class="brutal-container">
+    <div class="section-header">
+      <BrutalHeading level={2} rotation={1} class="brutal-title--white">
+        📸 L'AMBIANCE DU CHAMPIONNAT
+      </BrutalHeading>
+      <p style="color: var(--brutal-mint); font-size: 1.25rem;">
+        Découvrez pourquoi 2000+ spectateurs viennent chaque année !
+      </p>
+    </div>
+    
+    <!-- Galerie simple (KISS) - utilise brutal-grid-auto existant -->
+    <div class="gallery-grid brutal-grid-auto" style="margin-bottom: 4rem;">
+      {galleryImages.map((img, index) => (
+        <div 
+          class="gallery-item brutal-card pulse-on-hover" 
+          style={`transform: rotate(${index % 2 === 0 ? -1 : 2}deg)`}
+        >
+          <!-- Placeholder en attendant les vraies images -->
+          <div class="image-placeholder" role="img" aria-label={img.alt}>
+            <span aria-hidden="true">{img.alt}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <!-- Témoignages - utilise testimonial-card pattern -->
+    <div>
+      <h3 style="text-align: center; color: var(--brutal-mint); margin-bottom: 2rem;">
+        CE QU'ILS EN DISENT
+      </h3>
+      <div class="brutal-grid-auto">
+        {testimonials.map((testimonial, index) => (
+          <div 
+            class="testimonial-card" 
+            style={`transform: rotate(${index === 1 ? 1 : -1}deg)`}
+          >
+            <p style="font-style: italic; margin-bottom: 1rem;">
+              "{testimonial.text}"
+            </p>
+            <p style="font-weight: 700; text-align: right;">
+              — {testimonial.author}
+            </p>
+            <div style="margin-top: 0.5rem;">
+              {'⭐'.repeat(testimonial.rating)}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Utilise les patterns existants et ajoute seulement le nécessaire (DRY) */
+  .gallery-item {
+    overflow: hidden;
+    padding: 0 !important;
+    height: 200px;
+  }
+  
+  /* Placeholder temporaire en attendant les vraies images */
+  .image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--brutal-mint) 0%, var(--brutal-black) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    color: var(--brutal-white);
+    transition: transform 0.3s ease;
+  }
+  
+  .gallery-item:hover .image-placeholder {
+    transform: scale(1.1);
+  }
+  
+  h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+  }
+</style>

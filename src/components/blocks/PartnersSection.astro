@@ -1,0 +1,79 @@
+---
+import PartnerLogo from '../atoms/PartnerLogo.astro';
+---
+
+<section class="partners-section" style="background: var(--brutal-black); padding: 2rem 0; border-bottom: 4px solid var(--brutal-white);">
+  <div class="brutal-container" style="text-align: center;">
+    <!-- Titre section partenaires -->
+    <div style="margin-bottom: 1.5rem;">
+      <span style="
+        font-family: 'Inter', Arial, sans-serif;
+        font-size: clamp(0.875rem, 2vw, 1rem);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--brutal-mint);
+        background: var(--brutal-black);
+        padding: 0.5rem 1rem;
+        border: 2px solid var(--brutal-mint);
+        display: inline-block;
+        transform: rotate(-1deg);
+      ">
+        🤝 ORGANISÉ PAR
+      </span>
+    </div>
+    
+    <!-- Logos des partenaires -->
+    <div class="partners-grid" style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      max-width: 600px;
+      margin: 0 auto;
+    ">
+      <!-- Logo Club Alpin -->
+      <PartnerLogo 
+        src="club-alpin-roche-bonneville.svg"
+        alt="Club Alpin de La Roche Bonneville"
+        name="CLUB ALPIN"
+        backgroundColor="white"
+        rotation={-2}
+        width="140px"
+      />
+      
+      <!-- Logo FFME -->
+      <PartnerLogo 
+        src="logo-ffme.svg" 
+        alt="Fédération Française de Montagne et d'Escalade"
+        name="FFME"
+        backgroundColor="mint"
+        rotation={1}
+        width="80px"
+      />
+    </div>
+    
+    <!-- Mention légale -->
+    <div style="margin-top: 1.5rem;">
+      <p style="
+        font-size: 0.75rem;
+        color: var(--brutal-white);
+        opacity: 0.8;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      ">
+        ÉVÉNEMENT OFFICIEL FFME • SAINT-PIERRE-EN-FAUCIGNY
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+@media (max-width: 768px) {
+  .partners-grid {
+    gap: 1rem !important;
+  }
+}
+</style>

@@ -1,36 +1,48 @@
 ---
 import BaseLayout from '../components/layout/BaseLayout.astro';
 
-// Import tous les blocs selon LANDING_PAGE_SPECS.md
+// Import tous les blocs selon TODO_OPTIMIZED_DEV_JUNIOR.md (DRY)
 import HeroSection from '../components/blocks/HeroSection.astro';
 import EventDateSection from '../components/blocks/EventDateSection.astro';
+import PublicWelcomeSection from '../components/blocks/PublicWelcomeSection.astro';
 import ProgramSection from '../components/blocks/ProgramSection.astro';
+import PracticalInfoSection from '../components/blocks/PracticalInfoSection.astro';
 import VenueSection from '../components/blocks/VenueSection.astro';
 import StatsSection from '../components/blocks/StatsSection.astro';
+import ExperienceSection from '../components/blocks/ExperienceSection.astro';
 import CTASection from '../components/blocks/CTASection.astro';
 
 const metadata = {
-  title: 'Championnats de France Jeunes Difficulté 2026',
-  description: 'Championnats de France Jeunes Difficulté d\'escalade - 16-17 mai 2026 • Saint-Pierre-en-Faucigny'
+  title: 'Championnats de France Jeunes de Difficulté 2026',
+  description: 'Championnats de France Jeunes de Difficulté d\'escalade - 16-17 mai 2026 • Saint-Pierre-en-Faucigny • ENTRÉE GRATUITE • Spectacle familial'
 };
 ---
 
 <BaseLayout title={metadata.title} description={metadata.description}>
-  <!-- BLOC 1: Hero Section -->
+  <!-- HERO: Accroche vendeuse avec entrée gratuite -->
   <HeroSection />
   
-  <!-- BLOC 2: Date de l'événement (pas de countdown) -->
+  <!-- DATE: Compte à rebours statique -->
   <EventDateSection />
   
-  <!-- BLOC 3: Programme -->
+  <!-- PUBLIC: Info public + compétiteurs + météo -->
+  <PublicWelcomeSection />
+  
+  <!-- PROGRAMME: Horaires des 2 jours -->
   <ProgramSection />
   
-  <!-- BLOC 4: Lieu & Accès -->
-  <VenueSection />
+  <!-- PRATIQUE: Hébergement + Transport + Restauration (fusion DRY) -->
+  <PracticalInfoSection />
   
-  <!-- BLOC 5: Stats Impact -->
+  <!-- VENUE: Lieu avec carte iframe (id="venue" pour navigation) -->
+  <VenueSection id="venue" />
+  
+  <!-- STATS: Chiffres d'impact -->
   <StatsSection />
   
-  <!-- BLOC 6: CTA Final -->
+  <!-- EXPERIENCE: Galerie + Témoignages (id="experience" pour navigation) -->
+  <ExperienceSection />
+  
+  <!-- CTA: Appel à l'action final -->
   <CTASection />
 </BaseLayout>

@@ -1,0 +1,84 @@
+---
+import BrutalHeading from '../atoms/BrutalHeading.astro';
+import BrutalBadge from '../atoms/BrutalBadge.astro';
+import competitionData from '../../data/competition-data.js';
+
+const { publicInfo, competitorsInfo, weatherTips } = competitionData;
+---
+
+<section class="brutal-section" style="background: var(--brutal-mint);">
+  <div class="brutal-container">
+    <div class="section-header">
+      <BrutalHeading level={2} rotation={-1}>
+        {publicInfo.title}
+      </BrutalHeading>
+    </div>
+    
+    <div class="two-columns">
+      <!-- Colonne PUBLIC -->
+      <div class="brutal-card">
+        <h3>👨‍👩‍👧‍👦 POUR LE PUBLIC</h3>
+        <ul class="benefit-list">
+          {publicInfo.points.map(point => (
+            <li>{point}</li>
+          ))}
+        </ul>
+        <p style="font-weight: 700; margin-top: 2rem;">
+          {publicInfo.callToAction}
+        </p>
+        <BrutalBadge variant="black">ACCESSIBLE PMR</BrutalBadge>
+      </div>
+      
+      <!-- Colonne COMPÉTITEURS -->
+      <div class="brutal-card brutal-card--black">
+        <h3 style="color: var(--brutal-mint);">{competitorsInfo.title}</h3>
+        <ul class="benefit-list" style="color: var(--brutal-white);">
+          {competitorsInfo.points.map(point => (
+            <li>{point}</li>
+          ))}
+        </ul>
+        <p style="color: var(--brutal-mint); font-weight: 700; margin-top: 2rem;">
+          ⚠️ {competitorsInfo.important}
+        </p>
+      </div>
+    </div>
+    
+    <!-- Section Météo/Conseils -->
+    <div class="brutal-card" style="margin-top: 3rem; text-align: center;">
+      <h3>🌤️ MÉTÉO & CONSEILS</h3>
+      <p>{weatherTips.outside}</p>
+      <p>{weatherTips.inside}</p>
+      <div class="badge-list" style="justify-content: center; margin-top: 1rem;">
+        {weatherTips.accessories.map(tip => (
+          <span style="display: block;">{tip}</span>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Utilise les patterns CSS existants (DRY) */
+  .benefit-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+  }
+  
+  .benefit-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+  
+  .benefit-list li:last-child {
+    border-bottom: none;
+  }
+  
+  h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+</style>

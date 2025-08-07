@@ -2,7 +2,7 @@
 export const competitionData = {
   // Informations générales
   event: {
-    name: "Championnats de France Jeunes Difficulté",
+    name: "Championnats de France Jeunes de Difficulté",
     dates: "16-17 mai 2026",
     location: "Saint-Pierre-en-Faucigny",
     venue: "Complexe Sportif du Pays Rochois",
