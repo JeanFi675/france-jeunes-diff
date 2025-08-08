@@ -25,13 +25,14 @@ const separatorColor = colorMap[color];
 <div 
   class="brutal-separator"
   style={`
+    --base-rotation: -0.5deg;
     width: ${width};
     height: ${height};
     background: ${separatorColor};
     margin: ${margin};
     border: none;
     display: block;
-    transform: rotate(-0.5deg);
+    transform: rotate(var(--base-rotation));
   `}
 ></div>
 
@@ -41,7 +42,7 @@ const separatorColor = colorMap[color];
 }
 
 .brutal-separator:hover {
-  transform: rotate(0deg) scale(1.02);
+  transform: rotate(var(--base-rotation)) scale(1.02);
 }
 
 @media (max-width: 768px) {

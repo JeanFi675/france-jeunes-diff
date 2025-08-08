@@ -85,28 +85,28 @@ export const competitionData = {
   
   // Section Public
   publicInfo: {
-    title: "🎪 SPECTACLE GRATUIT POUR TOUS",
+    title: "UN WEEK-END D'ESCALADE INTENSE",
+    subtitle: "👥 SPECTATEURS",
     points: [
-      "✅ Entrée 100% gratuite",
-      "✅ Spectacle impressionnant garanti",
-      "✅ Animations enfants 14h-16h",
-      "✅ Accessible PMR",
-      "✅ Buvette et restauration sur place"
+      "🎫 Entrée 100% gratuite",
+      "✨ Spectacle impressionnant garanti",
+      "🍽️ Buvette et restauration sur place"
     ],
-    callToAction: "Venez découvrir l'élite de l'escalade française !"
+    callToAction: "Venez vibrer avec nous !"
   },
   
   // Section Compétiteurs
   competitorsInfo: {
-    title: "🏆 INFOS COMPÉTITEURS",
+    title: "UN WEEK-END D'ESCALADE INTENSE",
+    subtitle: "🏆 COMPÉTITEURS",
     points: [
       "⏰ Accueil dès 7h30",
-      "🔥 Salle d'échauffement chauffée",
-      "👕 Vestiaires spacieux",
-      "📶 WiFi gratuit",
-      "☕ Machine à café / snacks"
+      "🧳 Consigne",
+      "👕 Vestiaires et douches disponibles",
+      "🍽️ Buvette et restauration sur place"
     ],
-    important: "Prévoir licence FFME et certificat médical"
+    important: "",
+    callToAction: "Donnez tout sur le mur !"
   },
   
   // Témoignages

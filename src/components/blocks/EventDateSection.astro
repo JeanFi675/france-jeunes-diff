@@ -8,10 +8,10 @@ const daysLeft = Math.floor((eventDate - today) / (1000 * 60 * 60 * 24));
 const isEventSoon = daysLeft < 30;
 ---
 
-<section class="brutal-section" style="background: var(--brutal-mint); text-align: center;">
+<section class="brutal-section brutal-section--mint" style="text-align: center;">
   <div class="brutal-container">
     <div 
-      class={`brutal-card ${isEventSoon ? 'brutal-card--urgent' : ''}`}
+      class={`brutal-card countdown-card ${isEventSoon ? 'brutal-card--urgent' : ''}`}
       style="display: inline-block; transform: rotate(-2deg) scale(1.2); margin: 2rem 0;"
     >
       <div style="font-family: 'Inter', sans-serif; font-weight: 800; font-size: clamp(4rem, 12vw, 8rem); line-height: 0.8; color: var(--brutal-black);">
@@ -33,9 +33,19 @@ const isEventSoon = daysLeft < 30;
 </section>
 
 <style>
+  .countdown-card:hover {
+    transform: rotate(-1deg) scale(1.25) !important;
+    box-shadow: 20px 20px 0 var(--brutal-black) !important;
+  }
+  
   .brutal-card--urgent {
     animation: shake 1s ease-in-out infinite;
     border-color: var(--brutal-black) !important;
     box-shadow: 16px 16px 0 var(--brutal-black) !important;
+  }
+  
+  .brutal-card--urgent:hover {
+    transform: rotate(0deg) scale(1.3) !important;
+    box-shadow: 24px 24px 0 var(--brutal-black) !important;
   }
 </style>

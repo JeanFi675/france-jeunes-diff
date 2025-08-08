@@ -78,8 +78,30 @@ h1, h2, h3, h4, h5, h6 {
 
 .brutal-section {
   padding: 4rem 0;
-  border-bottom: 8px solid var(--brutal-black);
 }
+
+/* Section Background Utilities - Architecture cohérente */
+.brutal-section--white {
+  background: var(--brutal-white);
+  color: var(--brutal-black);
+}
+
+.brutal-section--black {
+  background: var(--brutal-black);
+  color: var(--brutal-white);
+}
+
+.brutal-section--black .brutal-card:not(.brutal-card--mint):not(.brutal-card--black) {
+  background: var(--brutal-white);
+  color: var(--brutal-black);
+}
+
+.brutal-section--mint {
+  background: var(--brutal-mint);
+  color: var(--brutal-black);
+}
+
+/* Séparateurs supprimés - sections sans bordures */
 
 .brutal-grid {
   display: grid;
@@ -130,69 +152,177 @@ h1, h2, h3, h4, h5, h6 {
   border-color: var(--brutal-white);
 }
 
-/* CARDS BRUTALES */
+/* CARDS BRUTALES - Base */
 .brutal-card {
   background: var(--brutal-white);
-  border: 4px solid var(--brutal-black);
-  box-shadow: 8px 8px 0 var(--brutal-black);
+  color: var(--brutal-black);
   padding: 2rem;
   transform: rotate(-1deg);
   transition: all 0.2s ease;
 }
 
-.brutal-card:hover {
-  transform: translate(-4px, -4px) rotate(1deg);
-  box-shadow: 16px 16px 0 var(--brutal-black);
-}
-
 .brutal-card--mint {
   background: var(--brutal-mint);
+  color: var(--brutal-black);
 }
 
 .brutal-card--black {
   background: var(--brutal-black);
   color: var(--brutal-white);
+}
+
+/* RÈGLES CARDS selon BACKGROUND de SECTION - ombre + entourage même couleur */
+
+/* Section fond BLANC */
+.brutal-section--white .brutal-card:not(.brutal-card--mint):not(.brutal-card--black) {
+  /* Card blanche → ombre + entourage NOIR (pour fond blanc) */
+  border: 4px solid var(--brutal-black);
+  box-shadow: 8px 8px 0 var(--brutal-black);
+}
+
+.brutal-section--white .brutal-card--mint {
+  /* Card menthe → ombre + entourage NOIR (pour fond blanc) */
+  border: 4px solid var(--brutal-black);
+  box-shadow: 8px 8px 0 var(--brutal-black);
+}
+
+.brutal-section--white .brutal-card--black {
+  /* Card noire → ombre + entourage MENTHE (pour fond blanc) */
+  border: 4px solid var(--brutal-mint);
   box-shadow: 8px 8px 0 var(--brutal-mint);
 }
 
-/* BADGES BRUTAUX */
-.brutal-badge {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  background: var(--brutal-mint);
-  color: var(--brutal-black);
+/* Section fond NOIR */
+.brutal-section--black .brutal-card:not(.brutal-card--mint):not(.brutal-card--black) {
+  /* Card blanche → ombre + entourage MENTHE (pour fond noir) */
+  border: 4px solid var(--brutal-mint);
+  box-shadow: 8px 8px 0 var(--brutal-mint);
+}
+
+.brutal-section--black .brutal-card--mint {
+  /* Card menthe → ombre + entourage BLANC (pour fond noir) */
+  border: 4px solid var(--brutal-white);
+  box-shadow: 8px 8px 0 var(--brutal-white);
+}
+
+.brutal-section--black .brutal-card--black {
+  /* Card noire → ombre + entourage BLANC (pour fond noir) */
+  border: 4px solid var(--brutal-white);
+  box-shadow: 8px 8px 0 var(--brutal-white);
+}
+
+/* Section fond MENTHE */
+.brutal-section--mint .brutal-card:not(.brutal-card--mint):not(.brutal-card--black) {
+  /* Card blanche → ombre + entourage NOIR (pour fond menthe) */
   border: 4px solid var(--brutal-black);
-  font-weight: 900;
-  font-size: 0.875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  transform: rotate(2deg);
+  box-shadow: 8px 8px 0 var(--brutal-black);
 }
 
-.brutal-badge--black {
-  background: var(--brutal-black);
-  color: var(--brutal-white);
-  box-shadow: 4px 4px 0 var(--brutal-mint);
+.brutal-section--mint .brutal-card--mint {
+  /* Card menthe → ombre + entourage BLANC (pour fond menthe) */
+  border: 4px solid var(--brutal-white);
+  box-shadow: 8px 8px 0 var(--brutal-white);
 }
 
-/* TEXTE BRUTAL - sans ombre par défaut */
+.brutal-section--mint .brutal-card--black {
+  /* Card noire → ombre + entourage BLANC (pour fond menthe) */
+  border: 4px solid var(--brutal-white);
+  box-shadow: 8px 8px 0 var(--brutal-white);
+}
+
+/* Hovers avec rotation RELATIVE et écartement d'ombre */
+
+/* Cartes avec rotation positive (ex: +1deg) → +4deg final */
+.brutal-card--rot-positive:hover {
+  transform: rotate(4deg) !important;
+}
+
+/* Cartes avec rotation négative (ex: -1deg) → +2deg final */  
+.brutal-card--rot-negative:hover {
+  transform: rotate(2deg) !important;
+}
+
+/* Cartes avec rotation zéro → +3deg final */
+.brutal-card--rot-zero:hover {
+  transform: rotate(3deg) !important;
+}
+
+/* Ombres spécifiques par section et variant - couleurs préservées */
+.brutal-section--white .brutal-card--mint:hover {
+  box-shadow: 16px 16px 0 var(--brutal-black) !important;
+}
+
+.brutal-section--white .brutal-card--black:hover {
+  box-shadow: 16px 16px 0 var(--brutal-mint) !important;
+}
+
+.brutal-section--black .brutal-card:not(.brutal-card--mint):not(.brutal-card--black):hover {
+  box-shadow: 16px 16px 0 var(--brutal-mint) !important;
+}
+
+.brutal-section--black .brutal-card--mint:hover {
+  box-shadow: 16px 16px 0 var(--brutal-white) !important;
+}
+
+/* Pas d'override nécessaire - toutes les cards ont leurs ombres */
+
+/* Titres des cartes - couleurs automatiques selon le fond */
+.brutal-card h1, .brutal-card h2, .brutal-card h3, .brutal-card h4, .brutal-card h5, .brutal-card h6 {
+  color: inherit; /* hérite de la couleur de la carte */
+}
+
+.brutal-card .brutal-heading {
+  color: inherit; /* hérite de la couleur de la carte */
+}
+
+/* BADGES BRUTAUX - Gérés par le composant BrutalBadge.astro */
+
+/* TEXTE BRUTAL - Base sans ombre */
 .brutal-title {
   font-size: clamp(3rem, 8vw, 7rem);
   line-height: 0.85;
   animation: shake 8s ease-in-out infinite;
 }
 
-/* OMBRES CONDITIONNELLES - spécifiques par contexte */
-.brutal-title:not(.brutal-title--white) {
+/* CORRECTION spécificité - .section-header .brutal-title doit garder la même taille */
+.section-header .brutal-title {
+  font-size: clamp(3rem, 8vw, 7rem) !important;
+}
+
+/* COULEURS ET OMBRES TITRES selon BACKGROUND de SECTION - Règles strictes */
+
+/* Section fond BLANC - texte NOIR + ombre VERTE */
+.brutal-section--white .brutal-title,
+.brutal-section .brutal-title {
+  color: var(--brutal-black);
   text-shadow: 4px 4px 0 var(--brutal-mint);
 }
 
-.brutal-title--white {
-  text-shadow: 4px 4px 0 var(--brutal-mint);
+/* Section fond NOIR - texte VERT + ombre BLANCHE */  
+.brutal-section--black .brutal-title,
+.brutal-section--black .brutal-heading {
+  color: var(--brutal-mint);
+  text-shadow: 4px 4px 0 var(--brutal-white);
 }
 
-/* SPANS VERTS - ombre blanche uniquement, annule l'héritage */
-.brutal-title span[style*="color: var(--brutal-mint)"] {
+/* Section fond VERT - texte NOIR + ombre BLANCHE */
+.brutal-section--mint .brutal-title,
+.brutal-section--mint .brutal-heading {
+  color: var(--brutal-black);
+  text-shadow: 4px 4px 0 var(--brutal-white);
+}
+
+/* SPANS VERTS - ombre adaptée selon background */
+.brutal-section--white .brutal-title span[style*="color: var(--brutal-mint)"],
+.brutal-section .brutal-title span[style*="color: var(--brutal-mint)"] {
+  text-shadow: 4px 4px 0 var(--brutal-white) !important;
+}
+
+.brutal-section--black .brutal-title span[style*="color: var(--brutal-mint)"] {
+  text-shadow: 4px 4px 0 var(--brutal-black) !important;
+}
+
+.brutal-section--mint .brutal-title span[style*="color: var(--brutal-mint)"] {
   text-shadow: 4px 4px 0 var(--brutal-white) !important;
 }
 
@@ -301,6 +431,7 @@ h1, h2, h3, h4, h5, h6 {
 .pulse-on-hover:hover {
   animation: simple-pulse 0.5s ease;
 }
+
 
 /* RESPONSIVE */
 @media (max-width: 768px) {

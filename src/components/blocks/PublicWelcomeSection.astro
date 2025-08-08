@@ -1,58 +1,55 @@
 ---
 import BrutalHeading from '../atoms/BrutalHeading.astro';
 import BrutalBadge from '../atoms/BrutalBadge.astro';
+import BrutalCard from '../atoms/BrutalCard.astro';
 import competitionData from '../../data/competition-data.js';
 
 const { publicInfo, competitorsInfo, weatherTips } = competitionData;
 ---
 
-<section class="brutal-section" style="background: var(--brutal-mint);">
+<section class="brutal-section brutal-section--white">
   <div class="brutal-container">
     <div class="section-header">
-      <BrutalHeading level={2} rotation={-1}>
-        {publicInfo.title}
+      <BrutalHeading level={2} rotation={-1} shadow={true} class="brutal-title">
+        UN WEEK-END<br>D'ESCALADE INTENSE
       </BrutalHeading>
     </div>
     
     <div class="two-columns">
       <!-- Colonne PUBLIC -->
-      <div class="brutal-card">
-        <h3>👨‍👩‍👧‍👦 POUR LE PUBLIC</h3>
+      <BrutalCard variant="mint" rotation={1}>
+        <BrutalHeading level={3} rotation={1}>
+          {publicInfo.subtitle}
+        </BrutalHeading>
         <ul class="benefit-list">
           {publicInfo.points.map(point => (
             <li>{point}</li>
           ))}
         </ul>
-        <p style="font-weight: 700; margin-top: 2rem;">
+        <div class="brutal-cta-box">
           {publicInfo.callToAction}
-        </p>
-        <BrutalBadge variant="black">ACCESSIBLE PMR</BrutalBadge>
-      </div>
+        </div>
+      </BrutalCard>
       
       <!-- Colonne COMPÉTITEURS -->
-      <div class="brutal-card brutal-card--black">
-        <h3 style="color: var(--brutal-mint);">{competitorsInfo.title}</h3>
-        <ul class="benefit-list" style="color: var(--brutal-white);">
+      <BrutalCard variant="black" rotation={-1}>
+        <BrutalHeading level={3} rotation={-1}>
+          {competitorsInfo.subtitle}
+        </BrutalHeading>
+        <ul class="benefit-list">
           {competitorsInfo.points.map(point => (
             <li>{point}</li>
           ))}
         </ul>
-        <p style="color: var(--brutal-mint); font-weight: 700; margin-top: 2rem;">
-          ⚠️ {competitorsInfo.important}
-        </p>
-      </div>
-    </div>
-    
-    <!-- Section Météo/Conseils -->
-    <div class="brutal-card" style="margin-top: 3rem; text-align: center;">
-      <h3>🌤️ MÉTÉO & CONSEILS</h3>
-      <p>{weatherTips.outside}</p>
-      <p>{weatherTips.inside}</p>
-      <div class="badge-list" style="justify-content: center; margin-top: 1rem;">
-        {weatherTips.accessories.map(tip => (
-          <span style="display: block;">{tip}</span>
-        ))}
-      </div>
+        <div class="brutal-cta-box brutal-cta-box--mint">
+          {competitorsInfo.callToAction}
+        </div>
+        {competitorsInfo.important && (
+          <p style="color: var(--brutal-mint); font-weight: 700; margin-top: 2rem;">
+            {competitorsInfo.important}
+          </p>
+        )}
+      </BrutalCard>
     </div>
   </div>
 </section>
@@ -74,11 +71,48 @@ const { publicInfo, competitorsInfo, weatherTips } = competitionData;
     border-bottom: none;
   }
   
-  h3 {
-    font-family: 'Inter', sans-serif;
-    font-weight: 800;
-    font-size: 1.5rem;
+  /* Styles h3 supprimés - gérés par BrutalHeading */
+  
+  /* Style bouton pour le CTA */
+  .brutal-cta-box {
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    font-weight: 900;
+    padding: 1rem 1.5rem;
+    margin-top: 2rem;
+    border: 4px solid var(--brutal-black);
+    text-align: center;
+    font-size: 1rem;
     text-transform: uppercase;
-    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+  
+  .brutal-cta-box:hover {
+    background: var(--brutal-white);
+    color: var(--brutal-black);
+    transform: translate(-2px, -2px);
+  }
+  
+  /* Styles spécifiques pour benefit-list dans les cartes */
+  .brutal-card--mint .benefit-list li {
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+  }
+  
+  .brutal-card--black .benefit-list li {
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+  }
+  
+  /* Bouton CTA version mint pour compétiteurs */
+  .brutal-cta-box--mint {
+    background: var(--brutal-mint);
+    color: var(--brutal-black);
+    border: 4px solid var(--brutal-mint);
+  }
+  
+  .brutal-cta-box--mint:hover {
+    background: var(--brutal-black);
+    color: var(--brutal-mint);
+    border-color: var(--brutal-mint);
   }
 </style>

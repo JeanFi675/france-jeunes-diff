@@ -6,7 +6,7 @@ import BrutalButton from '../atoms/BrutalButton.astro';
 const currentYear = new Date().getFullYear();
 ---
 
-<section class="brutal-section" style="background: var(--brutal-black); color: var(--brutal-white); position: relative;">
+<section class="brutal-section brutal-section--black" style="position: relative;">
   <!-- ASCII Art brutal -->
   <div style="position: absolute; inset: 0; z-index: 1; pointer-events: none; font-family: 'Space Mono', monospace; font-size: 2rem; opacity: 0.1;">
     <pre style="position: absolute; top: 10%; left: 5%; transform: rotate(-15deg);">
@@ -23,9 +23,10 @@ const currentYear = new Date().getFullYear();
     <!-- Titre avec vibration -->
     <div style="margin-bottom: 4rem;">
       <BrutalHeading 
-        level={1} 
-        class="cta-title brutal-title brutal-title--white"
-        rotation={0}
+        level={2} 
+        shadow={true}
+        class="brutal-title"
+        rotation={-1}
       >
         PRÊT À<br>
         <span style="color: var(--brutal-mint);">GRIMPER ?</span>

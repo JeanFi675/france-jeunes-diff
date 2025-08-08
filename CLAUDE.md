@@ -189,6 +189,43 @@ npm run preview  # Tester en local avant push
 - **Props TypeScript** : Interface exportée en haut
 - **Styles scoped** : `<style>` dans composant si nécessaire
 
+## ⚠️ PIÈGES CSS Astro à éviter
+
+### Problème spécificité CSS scoped
+**RÈGLE CRITIQUE** : Dans Astro, les styles scoped (`<style>` dans les composants) viennent TOUJOURS en dernier dans l'ordre d'apparence, peu importe le `!important`.
+
+**Problème** : 
+```css
+/* ProgramSection.astro - NE MARCHE PAS */
+.live-streaming-large {
+  font-size: 5rem !important; /* Écrasé par les styles scoped */
+}
+```
+
+**Solution** : Utiliser des props pour les variations
+```astro
+<!-- BrutalBadge.astro - Interface -->
+export interface Props {
+  size?: 'normal' | 'large';
+}
+
+<!-- Styles scoped dans le même composant -->
+<style>
+.brutal-badge--large {
+  font-size: 5rem; /* Fonctionne car même composant */
+}
+</style>
+
+<!-- Utilisation -->
+<BrutalBadge size="large">Content</BrutalBadge>
+```
+
+**Ordre de priorité CSS Astro** :
+1. Styles scoped du composant (priorité MAX)
+2. CSS global (`brutal.css`)
+3. Styles inline avec `!important`
+4. Classes externes avec `!important`
+
 ## 🎯 Objectifs qualité
 
 - **Accessibilité** : HTML sémantique, contrastes respectés

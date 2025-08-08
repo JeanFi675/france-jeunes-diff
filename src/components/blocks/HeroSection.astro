@@ -6,7 +6,7 @@ import BrutalSeparator from '../atoms/BrutalSeparator.astro';
 import PartnerLogo from '../atoms/PartnerLogo.astro';
 ---
 
-<section class="brutal-section" style="background: var(--brutal-black); color: var(--brutal-white); position: relative; overflow: hidden;">
+<section class="brutal-section brutal-section--black" style="position: relative; overflow: hidden;">
   <!-- Pattern background -->
   <div 
     class="brutal-pattern-diagonal" 
@@ -51,7 +51,7 @@ import PartnerLogo from '../atoms/PartnerLogo.astro';
     <!-- 5. Date et lieu (blanc) -->
     <div style="margin: 2rem 0;">
       <BrutalHeading level={2} rotation={0}>
-        <span style="color: var(--brutal-white); font-size: clamp(1.25rem, 3vw, 2rem); font-weight: 700;">
+        <span style="color: var(--brutal-white); font-size: clamp(1.25rem, 3vw, 2rem); font-weight: 700; text-shadow: none;">
           16-17 MAI 2026 • SAINT-PIERRE-EN-FAUCIGNY
         </span>
       </BrutalHeading>

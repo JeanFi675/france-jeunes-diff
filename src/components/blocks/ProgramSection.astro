@@ -1,22 +1,38 @@
 ---
 import BrutalHeading from '../atoms/BrutalHeading.astro';
 import BrutalBadge from '../atoms/BrutalBadge.astro';
+import BrutalCard from '../atoms/BrutalCard.astro';
+
+export interface Props {
+  background?: 'white' | 'black' | 'mint';
+}
+
+const { background = 'black' } = Astro.props;
 ---
 
-<section class="brutal-section" id="programme" style="background: var(--brutal-white);">
+<section class={`brutal-section brutal-section--${background}`} id="programme">
   <div class="brutal-container">
     <div style="text-align: center; margin-bottom: 4rem;">
-      <BrutalHeading level={2} rotation={1}>
+      <BrutalHeading 
+        level={2} 
+        rotation={-1}
+        shadow={true}
+        class="brutal-title"
+      >
         PROGRAMME DES 2 JOURS
       </BrutalHeading>
     </div>
     
-    <div class="brutal-grid" style="grid-template-columns: 1fr 1fr; align-items: start;">
+    <!-- LIVE STREAMING - ÉNORME et centré -->
+    <div style="text-align: center; margin-bottom: 4rem;">
+      <BrutalBadge variant="mint" animated={true} size="large">
+        🔴 LIVE STREAMING
+      </BrutalBadge>
+    </div>
+    
+    <div class="brutal-grid" style="grid-template-columns: 1fr 1fr; align-items: start; gap: 3rem;">
       <!-- SAMEDI -->
-      <div 
-        class="brutal-card" 
-        style="margin-right: -20px; z-index: 2; transform: rotate(-1deg);"
-      >
+      <BrutalCard variant="default" rotation={-1} zIndex={2}>
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
           <BrutalHeading level={3} rotation={0}>
             SAMEDI 16 MAI
@@ -26,56 +42,45 @@ import BrutalBadge from '../atoms/BrutalBadge.astro';
         
         <div style="space-y: 1rem;">
           <div style="border-left: 4px solid var(--brutal-mint); padding-left: 1rem; margin-bottom: 1rem;">
-            <strong>08h00</strong> - Accueil équipes
+            <strong>7h00</strong> - Ouverture de la salle d'échauffement
           </div>
           <div style="border-left: 4px solid var(--brutal-black); padding-left: 1rem; margin-bottom: 1rem;">
-            <strong>09h00</strong> - Début qualifs U15
-          </div>
-          <div style="border-left: 4px solid var(--brutal-mint); padding-left: 1rem; margin-bottom: 1rem;">
-            <strong>11h00</strong> - Début qualifs U17
-          </div>
-          <div style="border-left: 4px solid var(--brutal-black); padding-left: 1rem; margin-bottom: 1rem;">
-            <strong>14h00</strong> - Début qualifs U19
+            <strong>8h00</strong> - Qualifications voies 1 et 2 pour les U15 filles, U17 filles et U17 garçons
           </div>
           <div style="border-left: 4px solid var(--brutal-mint); padding-left: 1rem;">
-            <strong>17h00</strong> - Fin de journée
+            <strong>14h00</strong> - Qualifications voies 1 et 2 pour les U15 garçons, U19 filles et U19 garçons
           </div>
         </div>
-      </div>
+      </BrutalCard>
       
       <!-- DIMANCHE -->
-      <div 
-        class="brutal-card brutal-card--mint" 
-        style="z-index: 1; transform: rotate(2deg);"
-      >
+      <BrutalCard variant="mint" rotation={1} zIndex={1}>
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-          <BrutalHeading level={3} rotation={0}>
+          <BrutalHeading level={3} rotation={0} style="color: white; text-shadow: none;">
             DIMANCHE 17 MAI
           </BrutalHeading>
-          <BrutalBadge variant="black" animated={true}>
-            🔴 LIVE STREAMING
+          <BrutalBadge variant="finales">
+            FINALES
           </BrutalBadge>
         </div>
         
         <div style="space-y: 1rem;">
           <div style="border-left: 4px solid var(--brutal-black); padding-left: 1rem; margin-bottom: 1rem;">
-            <strong>09h00</strong> - Finales U15
+            <strong>9h30</strong> - Finales U15
           </div>
           <div style="border-left: 4px solid var(--brutal-white); padding-left: 1rem; margin-bottom: 1rem;">
             <strong>11h00</strong> - Finales U17
           </div>
           <div style="border-left: 4px solid var(--brutal-black); padding-left: 1rem; margin-bottom: 1rem;">
-            <strong>14h00</strong> - Finales U19
+            <strong>12h45</strong> - Finales U19
           </div>
-          <div style="border-left: 4px solid var(--brutal-white); padding-left: 1rem; margin-bottom: 1rem;">
-            <strong>16h00</strong> - Remise des prix
-          </div>
-          <div style="border-left: 4px solid var(--brutal-black); padding-left: 1rem;">
-            <strong>17h00</strong> - Clôture
+          <div style="border-left: 4px solid var(--brutal-white); padding-left: 1rem;">
+            <strong>14h15</strong> - Remise des prix
           </div>
         </div>
-      </div>
+      </BrutalCard>
     </div>
+    
   </div>
 </section>
 

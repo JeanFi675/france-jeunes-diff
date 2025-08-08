@@ -1,8 +1,9 @@
 ---
 export interface Props {
-  variant?: 'mint' | 'black' | 'white';
+  variant?: 'mint' | 'black' | 'white' | 'finales';
   animated?: boolean;
   rotation?: number;
+  size?: 'normal' | 'large';
   class?: string;
 }
 
@@ -10,10 +11,11 @@ const {
   variant = 'mint', 
   animated = false, 
   rotation = Math.random() * 6 - 3, // -3 à 3deg
+  size = 'normal',
   class: className = '' 
 } = Astro.props;
 
-const classes = `brutal-badge brutal-badge--${variant} ${animated ? 'brutal-badge--animated' : ''} ${className}`.trim();
+const classes = `brutal-badge brutal-badge--${variant} ${size === 'large' ? 'brutal-badge--large' : ''} ${animated ? 'brutal-badge--animated' : ''} ${className}`.trim();
 ---
 
 <span 
@@ -46,6 +48,18 @@ const classes = `brutal-badge brutal-badge--${variant} ${animated ? 'brutal-badg
   .brutal-badge--white {
     background: var(--brutal-white);
     color: var(--brutal-black);
+  }
+  
+  .brutal-badge--finales {
+    background: var(--brutal-black);
+    color: var(--brutal-mint);
+    border: 4px solid var(--brutal-white);
+  }
+  
+  .brutal-badge--large {
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+    font-weight: 900;
   }
   
   .brutal-badge--animated {
