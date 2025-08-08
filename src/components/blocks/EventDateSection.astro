@@ -14,7 +14,7 @@ const isEventSoon = daysLeft < 30;
       class={`brutal-card countdown-card ${isEventSoon ? 'brutal-card--urgent' : ''}`}
       style="display: inline-block; transform: rotate(-2deg) scale(1.2); margin: 2rem 0;"
     >
-      <div style="font-family: 'Inter', sans-serif; font-weight: 800; font-size: clamp(4rem, 12vw, 8rem); line-height: 0.8; color: var(--brutal-black);">
+      <div style="font-family: 'Inter', sans-serif; font-weight: 800; font-size: var(--size-l1); line-height: 0.8; color: var(--brutal-black);">
         J-{daysLeft}
       </div>
       <div style="font-family: 'Space Mono', monospace; font-weight: 700; font-size: 1rem; text-transform: uppercase; margin-top: 1rem; color: var(--brutal-black);">

@@ -6,16 +6,16 @@ import BrutalSeparator from '../atoms/BrutalSeparator.astro';
 import PartnerLogo from '../atoms/PartnerLogo.astro';
 ---
 
-<section class="brutal-section brutal-section--black" style="position: relative; overflow: hidden;">
+<section class="brutal-section brutal-section--black" style="position: relative; overflow-x: hidden;">
   <!-- Pattern background -->
   <div 
     class="brutal-pattern-diagonal" 
     style="position: absolute; inset: 0; pointer-events: none;"
   ></div>
   
-  <!-- Accent blocks -->
-  <div style="position: absolute; top: 10%; right: -10%; width: 300px; height: 300px; background: var(--brutal-mint); opacity: 0.1; transform: rotate(45deg);"></div>
-  <div style="position: absolute; bottom: -10%; left: -5%; width: 200px; height: 200px; background: var(--brutal-mint); opacity: 0.1; transform: rotate(-30deg);"></div>
+  <!-- Accent blocks - Mobile safe positioning -->
+  <div style="position: absolute; top: 10%; right: -5%; width: 250px; height: 250px; background: var(--brutal-mint); opacity: 0.1; transform: rotate(45deg);"></div>
+  <div style="position: absolute; bottom: -10%; left: -3%; width: 180px; height: 180px; background: var(--brutal-mint); opacity: 0.1; transform: rotate(-30deg);"></div>
   
   <div class="brutal-container" style="position: relative; z-index: 10; text-align: center; padding: 6rem 2rem;">
     
@@ -31,14 +31,14 @@ import PartnerLogo from '../atoms/PartnerLogo.astro';
       <img 
         src={`${import.meta.env.BASE_URL}/logo-championnat-france-2026.svg`}
         alt="Championnat de France 2026" 
-        style="max-width: 100%; height: auto; width: clamp(400px, 80vw, 900px); margin: 0 auto; display: block; filter: brightness(0) invert(1);"
+        style="max-width: 100%; height: auto; width: clamp(280px, 80vw, 900px); margin: 0 auto; display: block; filter: brightness(0) invert(1);"
       />
     </div>
     
     <!-- 3. Sous-titre jeunes de difficulté (vert, plus petit) -->
     <div style="margin: 1rem 0;">
       <BrutalHeading level={2} shadow={false} rotation={0}>
-        <span style="color: var(--brutal-mint); text-shadow: none; -webkit-text-stroke: 0; font-size: clamp(2rem, 5vw, 4rem); line-height: 0.9;">
+        <span style="color: var(--brutal-mint); text-shadow: none; -webkit-text-stroke: 0; font-size: var(--size-l4); line-height: 0.9;">
           JEUNES<br>
           DE DIFFICULTÉ
         </span>
@@ -51,7 +51,7 @@ import PartnerLogo from '../atoms/PartnerLogo.astro';
     <!-- 5. Date et lieu (blanc) -->
     <div style="margin: 2rem 0;">
       <BrutalHeading level={2} rotation={0}>
-        <span style="color: var(--brutal-white); font-size: clamp(1.25rem, 3vw, 2rem); font-weight: 700; text-shadow: none;">
+        <span style="color: var(--brutal-white); font-size: var(--size-l5); font-weight: 700; text-shadow: none;">
           16-17 MAI 2026 • SAINT-PIERRE-EN-FAUCIGNY
         </span>
       </BrutalHeading>
@@ -78,7 +78,7 @@ import PartnerLogo from '../atoms/PartnerLogo.astro';
         </span>
         
         <!-- Logos -->
-        <div style="display: flex; align-items: center; gap: 1.5rem;">
+        <div class="partner-logos-container">
           <PartnerLogo 
             src="club-alpin-roche-bonneville.svg"
             alt="Club Alpin de La Roche Bonneville"
@@ -137,10 +137,29 @@ import PartnerLogo from '../atoms/PartnerLogo.astro';
 </section>
 
 <style>
+.partner-logos-container {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 @media (max-width: 768px) {
   .hero-navigation {
     grid-template-columns: 1fr !important;
     gap: 1rem !important;
+  }
+  
+  .partner-logos-container {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .partner-logos-container {
+    flex-direction: column;
+    gap: 0.5rem;
   }
 }
 </style>

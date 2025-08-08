@@ -9,7 +9,7 @@ const stats = [
 ];
 ---
 
-<section class="brutal-section brutal-section--mint" style="position: relative; overflow: hidden;">
+<section class="brutal-section brutal-section--mint" style="position: relative; overflow-x: hidden;">
   <!-- ASCII Art background -->
   <div style="position: absolute; inset: 0; font-family: 'Space Mono', monospace; font-size: 8rem; line-height: 0.8; opacity: 0.03; z-index: 1; pointer-events: none;">
     <pre style="position: absolute; top: 10%; left: 10%; transform: rotate(-10deg);">⛰️</pre>
@@ -19,7 +19,7 @@ const stats = [
   
   <div class="brutal-container" style="position: relative; z-index: 10; text-align: center;">
     <div style="margin-bottom: 4rem;">
-      <BrutalHeading level={2} rotation={-1} shadow={true} class="brutal-title">
+      <BrutalHeading level={2} rotation={-1} shadow={true} class="brutal-title text-l2">
         EN CHIFFRES
       </BrutalHeading>
     </div>
@@ -47,7 +47,7 @@ const stats = [
             style="
               font-family: 'Inter', sans-serif;
               font-weight: 800;
-              font-size: clamp(4rem, 10vw, 8rem);
+              font-size: var(--size-l3);
               line-height: 0.8;
               -webkit-text-stroke: 3px var(--brutal-black);
               -webkit-text-fill-color: transparent;
