@@ -3,7 +3,6 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
 
 // Import tous les blocs selon TODO_OPTIMIZED_DEV_JUNIOR.md (DRY)
 import HeroSection from '../components/blocks/HeroSection.astro';
-import EventDateSection from '../components/blocks/EventDateSection.astro';
 import PublicWelcomeSection from '../components/blocks/PublicWelcomeSection.astro';
 import ProgramSection from '../components/blocks/ProgramSection.astro';
 import PracticalInfoSection from '../components/blocks/PracticalInfoSection.astro';
@@ -19,11 +18,8 @@ const metadata = {
 ---
 
 <BaseLayout title={metadata.title} description={metadata.description}>
-  <!-- HERO: Accroche vendeuse avec entrée gratuite -->
+  <!-- HERO: Accroche vendeuse avec countdown intégré (FUSION UX 2025) -->
   <HeroSection />
-  
-  <!-- DATE: Compte à rebours statique -->
-  <EventDateSection />
   
   <!-- PUBLIC: Info public + compétiteurs + météo -->
   <PublicWelcomeSection />
@@ -34,11 +30,11 @@ const metadata = {
   <!-- PRATIQUE: Hébergement + Transport + Restauration (fusion DRY) -->
   <PracticalInfoSection />
   
+  <!-- STATS: Chiffres d'impact (REPOSITIONNÉ pour respiration cognitive) -->
+  <StatsSection />
+  
   <!-- VENUE: Lieu avec carte iframe (id="venue" pour navigation) -->
   <VenueSection id="venue" />
-  
-  <!-- STATS: Chiffres d'impact -->
-  <StatsSection />
   
   <!-- EXPERIENCE: Galerie + Témoignages (id="experience" pour navigation) -->
   <ExperienceSection />

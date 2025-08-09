@@ -4,9 +4,15 @@ import BrutalBadge from '../atoms/BrutalBadge.astro';
 import BrutalButton from '../atoms/BrutalButton.astro';
 import BrutalSeparator from '../atoms/BrutalSeparator.astro';
 import PartnerLogo from '../atoms/PartnerLogo.astro';
+
+// 🎯 FUSION COUNTDOWN - Calculé AU BUILD TIME pour éliminer friction cognitive
+const eventDate = new Date('2026-05-16');
+const today = new Date();
+const daysLeft = Math.floor((eventDate - today) / (1000 * 60 * 60 * 24));
+const isEventSoon = daysLeft < 30;
 ---
 
-<section class="brutal-section brutal-section--black" style="position: relative; overflow-x: hidden;">
+<section class="brutal-section brutal-section--black" style="position: relative; overflow: hidden;">
   <!-- Pattern background -->
   <div 
     class="brutal-pattern-diagonal" 
@@ -15,15 +21,21 @@ import PartnerLogo from '../atoms/PartnerLogo.astro';
   
   <!-- Accent blocks - Mobile safe positioning -->
   <div style="position: absolute; top: 10%; right: -5%; width: 250px; height: 250px; background: var(--brutal-mint); opacity: 0.1; transform: rotate(45deg);"></div>
-  <div style="position: absolute; bottom: -10%; left: -3%; width: 180px; height: 180px; background: var(--brutal-mint); opacity: 0.1; transform: rotate(-30deg);"></div>
+  <div style="position: absolute; bottom: -5%; left: -3%; width: 180px; height: 180px; background: var(--brutal-mint); opacity: 0.1; transform: rotate(-30deg);"></div>
   
   <div class="brutal-container" style="position: relative; z-index: 10; text-align: center; padding: 6rem 2rem;">
     
-    <!-- 1. Badge entrée gratuite (petit, discret) -->
-    <div style="margin-bottom: 1.5rem;">
-      <BrutalBadge variant="mint" rotation={2}>
-        🎫 ENTRÉE 100% GRATUITE
-      </BrutalBadge>
+    <!-- 1. Badge dynamique entrée gratuite + countdown (FUSION UX 2025) -->
+    <div style="margin-bottom: 2rem;">
+      {isEventSoon ? (
+        <BrutalBadge variant="mint" size="large" animated={true} rotation={2}>
+          ⏰ J-{daysLeft} • ENTRÉE GRATUITE
+        </BrutalBadge>
+      ) : (
+        <BrutalBadge variant="mint" size="large" animated={true} rotation={2}>
+          🎫 ENTRÉE 100% GRATUITE
+        </BrutalBadge>
+      )}
     </div>
     
     <!-- 2. Logo Championnat France 2026 (dominant) -->
@@ -48,13 +60,16 @@ import PartnerLogo from '../atoms/PartnerLogo.astro';
     <!-- 4. Trait mint -->
     <BrutalSeparator color="mint" width="60%" margin="2rem auto" />
     
-    <!-- 5. Date et lieu (blanc) -->
-    <div style="margin: 2rem 0;">
-      <BrutalHeading level={2} rotation={0}>
-        <span style="color: var(--brutal-white); font-size: var(--size-l5); font-weight: 700; text-shadow: none;">
-          16-17 MAI 2026 • SAINT-PIERRE-EN-FAUCIGNY
-        </span>
-      </BrutalHeading>
+    <!-- 5. Date et lieu OPTIMISÉ (séparation + lisibilité) -->
+    <div class="event-info" style="margin: 2.5rem 0;">
+      <div style="color: var(--brutal-white); font-size: var(--size-l4); font-weight: 800; text-shadow: none; line-height: 1.2;">
+        <div style="margin-bottom: 0.5rem;">
+          📅 <strong>16-17 MAI 2026</strong>
+        </div>
+        <div style="font-size: var(--size-l5); font-weight: 700; opacity: 0.9;">
+          📍 SAINT-PIERRE-EN-FAUCIGNY (74)
+        </div>
+      </div>
     </div>
     
     <!-- 6. Organisé par + logos (layout horizontal) -->
@@ -84,8 +99,8 @@ import PartnerLogo from '../atoms/PartnerLogo.astro';
             alt="Club Alpin de La Roche Bonneville"
             backgroundColor="white"
             rotation={-1}
-            width="180px"
-            height="110px"
+            width="207px"
+            height="127px"
           />
           
           <PartnerLogo 
@@ -93,8 +108,8 @@ import PartnerLogo from '../atoms/PartnerLogo.astro';
             alt="Fédération Française de Montagne et d'Escalade"
             backgroundColor="white"
             rotation={1}
-            width="180px"
-            height="110px"
+            width="207px"
+            height="127px"
           />
         </div>
       </div>
@@ -103,23 +118,28 @@ import PartnerLogo from '../atoms/PartnerLogo.astro';
     <!-- 7. Trait blanc -->
     <BrutalSeparator color="white" width="60%" margin="2rem auto" />
     
-    <!-- 8. Description spectacle (vert) -->
-    <p style="font-size: 1.25rem; font-weight: 700; margin: 2rem auto; max-width: 700px; color: var(--brutal-mint);">
-      🎪 SPECTACLE GRATUIT • 🏆 ÉLITE FRANÇAISE • 👨‍👩‍👧‍👦 TOUT PUBLIC BIENVENU
-    </p>
     
-    <!-- 9. Navigation optimisée UX (4 boutons stratégiques) -->
+    <!-- 9. Navigation HIÉRARCHISÉE (PROGRAMME prioritaire) -->
     <div class="hero-navigation" style="
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 1.5rem 2rem;
       max-width: 900px;
       margin: 3rem auto 0;
     ">
-      <!-- Ligne 1: Découverte -->
-      <BrutalButton href="#programme" variant="primary" rotation={-1} ariaLabel="Consulter le programme détaillé des 2 jours de compétition">
-        📅 PROGRAMME
+      <!-- PROGRAMME - Bouton principal LARGE (2 colonnes) -->
+      <BrutalButton 
+        href="#programme" 
+        variant="primary" 
+        rotation={-1} 
+        class="hero-cta-primary"
+        ariaLabel="Consulter le programme détaillé des 2 jours de compétition"
+      >
+        📅 PROGRAMME COMPLET
       </BrutalButton>
+      
+      <!-- AMBIANCE - Bouton secondaire -->
       <BrutalButton href="#experience" variant="secondary" rotation={1} ariaLabel="Découvrir les témoignages et photos de l'ambiance du championnat">
         🤩 DÉCOUVRIR L'AMBIANCE
       </BrutalButton>
@@ -133,10 +153,26 @@ import PartnerLogo from '../atoms/PartnerLogo.astro';
       </BrutalButton>
     </div>
     
+    <!-- SCROLL INDICATOR - Incite à découvrir le reste -->
+    <div class="scroll-indicator" aria-label="Faire défiler pour découvrir plus de contenu">
+      <div class="scroll-chevron">
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    
   </div>
 </section>
 
 <style>
+/* HIÉRARCHIE CTA - Programme prioritaire */
+.hero-cta-primary {
+  grid-column: 1 / -1; /* S'étend sur toute la largeur */
+  font-size: 1.125rem;
+  font-weight: 900;
+  padding: 1.25rem 2rem;
+}
+
 .partner-logos-container {
   display: flex;
   align-items: center;
@@ -160,6 +196,95 @@ import PartnerLogo from '../atoms/PartnerLogo.astro';
   .partner-logos-container {
     flex-direction: column;
     gap: 0.5rem;
+  }
+}
+
+/* SCROLL INDICATOR - CSS-only avec animation optimisée */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-indicator:hover {
+  opacity: 1;
+}
+
+.scroll-chevron {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  animation: bounce-down 2s ease-in-out infinite;
+}
+
+.scroll-chevron span {
+  position: absolute;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  border-right: 3px solid var(--brutal-mint);
+  border-bottom: 3px solid var(--brutal-mint);
+  transform: translateX(-50%) rotate(45deg);
+  animation-fill-mode: both;
+}
+
+.scroll-chevron span:first-child {
+  top: 8px;
+  animation: chevron-1 2s ease-in-out infinite;
+}
+
+.scroll-chevron span:nth-child(2) {
+  top: 16px;
+  animation: chevron-2 2s ease-in-out infinite;
+}
+
+/* Animation hardware-accelerated <500ms par cycle */
+@keyframes bounce-down {
+  0%, 100% { 
+    transform: translateY(0);
+  }
+  50% { 
+    transform: translateY(6px);
+  }
+}
+
+@keyframes chevron-1 {
+  0%, 100% { 
+    opacity: 0.4;
+    transform: translateX(-50%) rotate(45deg);
+  }
+  50% { 
+    opacity: 1;
+    transform: translateX(-50%) rotate(45deg) scale(1.1);
+  }
+}
+
+@keyframes chevron-2 {
+  0%, 100% { 
+    opacity: 0.7;
+    transform: translateX(-50%) rotate(45deg);
+  }
+  50% { 
+    opacity: 1;
+    transform: translateX(-50%) rotate(45deg) scale(1.1);
+  }
+}
+
+/* Accessibilité - Respect prefer-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-indicator,
+  .scroll-chevron,
+  .scroll-chevron span {
+    animation: none !important;
+  }
+  
+  .scroll-indicator {
+    opacity: 0.6;
   }
 }
 </style>

@@ -15,6 +15,63 @@ const { publicInfo, competitorsInfo, weatherTips } = competitionData;
       </BrutalHeading>
     </div>
     
+    <!-- 🔥 CADRE 1 : L'ÉVÉNEMENT -->
+    <div class="competition-fact" style="
+      background: var(--brutal-black);
+      color: var(--brutal-mint);
+      border: 4px solid var(--brutal-mint);
+      box-shadow: 8px 8px 0 var(--brutal-mint);
+      padding: 2rem;
+      margin: 3rem 0 2rem;
+      transform: rotate(-1deg);
+      font-size: 1.25rem;
+      line-height: 1.6;
+      text-align: center;
+      font-weight: 700;
+      width: 100%;
+    ">
+      <p style="margin: 0;">
+        🔥 Plus de 
+        <span style="
+          background: var(--brutal-mint);
+          color: var(--brutal-black);
+          padding: 0.1rem 0.4rem;
+          display: inline-block;
+          font-family: 'Space Mono', monospace;
+          font-size: 1rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.02em;
+          transform: rotate(-0.5deg);
+        ">300 jeunes grimpeurs</span>, 
+        <span style="
+          background: var(--brutal-mint);
+          color: var(--brutal-black);
+          padding: 0.1rem 0.4rem;
+          display: inline-block;
+          font-family: 'Space Mono', monospace;
+          font-size: 1rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.02em;
+          transform: rotate(0.5deg);
+        ">6 catégories</span>, 
+        un seul objectif : décrocher le titre de 
+        <span style="
+          background: var(--brutal-mint);
+          color: var(--brutal-black);
+          padding: 0.1rem 0.4rem;
+          display: inline-block;
+          font-family: 'Space Mono', monospace;
+          font-size: 1rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.02em;
+          transform: rotate(-0.5deg);
+        ">Champion de France</span>
+      </p>
+    </div>
+    
     <div class="two-columns">
       <!-- Colonne PUBLIC -->
       <BrutalCard variant="mint" rotation={1}>
@@ -50,6 +107,65 @@ const { publicInfo, competitorsInfo, weatherTips } = competitionData;
           </p>
         )}
       </BrutalCard>
+    </div>
+    
+    <!-- 💥 CADRE 2 : L'EXPÉRIENCE -->
+    <div class="competition-emotion" style="
+      background: var(--brutal-mint);
+      color: var(--brutal-black);
+      border: 4px solid var(--brutal-black);
+      box-shadow: 8px 8px 0 var(--brutal-black);
+      padding: 2rem;
+      margin: 2rem 0 0;
+      transform: rotate(1deg);
+      font-size: 1.25rem;
+      line-height: 1.6;
+      text-align: center;
+      font-weight: 700;
+      width: 100%;
+    ">
+      <p style="margin: 0;">
+        💥 Vibrez au rythme des 
+        <span style="
+          background: var(--brutal-black);
+          color: var(--brutal-white);
+          padding: 0.1rem 0.4rem;
+          display: inline-block;
+          font-family: 'Space Mono', monospace;
+          font-size: 1rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.02em;
+          transform: rotate(0.5deg);
+        ">qualifications</span>, 
+        tremblez pendant les 
+        <span style="
+          background: var(--brutal-black);
+          color: var(--brutal-white);
+          padding: 0.1rem 0.4rem;
+          display: inline-block;
+          font-family: 'Space Mono', monospace;
+          font-size: 1rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.02em;
+          transform: rotate(-0.5deg);
+        ">finales</span>… 
+        et assistez à la naissance des 
+        <span style="
+          background: var(--brutal-black);
+          color: var(--brutal-white);
+          padding: 0.1rem 0.4rem;
+          display: inline-block;
+          font-family: 'Space Mono', monospace;
+          font-size: 1rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.02em;
+          transform: rotate(0.5deg);
+        ">futures stars</span> 
+        de l'escalade !
+      </p>
     </div>
   </div>
 </section>
@@ -114,5 +230,35 @@ const { publicInfo, competitorsInfo, weatherTips } = competitionData;
     background: var(--brutal-black);
     color: var(--brutal-mint);
     border-color: var(--brutal-mint);
+  }
+  
+  /* Animations hover pour les cadres */
+  .competition-fact,
+  .competition-emotion {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .competition-fact:hover {
+    transform: rotate(0deg) scale(1.02) !important;
+    box-shadow: 12px 12px 0 var(--brutal-mint) !important;
+  }
+  
+  .competition-emotion:hover {
+    transform: rotate(0deg) scale(1.02) !important;
+    box-shadow: 12px 12px 0 var(--brutal-black) !important;
+  }
+  
+  /* Responsive pour les cadres */
+  @media (max-width: 768px) {
+    .competition-fact,
+    .competition-emotion {
+      transform: rotate(0deg) !important;
+      font-size: 1rem;
+    }
+    
+    .competition-fact span,
+    .competition-emotion span {
+      font-size: 1.25rem !important;
+    }
   }
 </style>

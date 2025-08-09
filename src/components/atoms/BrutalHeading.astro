@@ -4,6 +4,8 @@ export interface Props {
   shadow?: boolean;
   glitch?: boolean;
   rotation?: number;
+  noShadow?: boolean;
+  textColor?: 'white' | 'black' | 'mint';
   class?: string;
   style?: string;
 }
@@ -13,6 +15,8 @@ const {
   shadow = false, 
   glitch = false, 
   rotation = -1,
+  noShadow = false,
+  textColor,
   class: className = '',
   style: customStyle = ''
 } = Astro.props;
@@ -21,7 +25,9 @@ const Tag = `h${level}` as const;
 const baseClass = 'brutal-heading';
 const shadowClass = shadow ? 'brutal-title' : '';
 const glitchClass = glitch ? 'brutal-glitch' : '';
-const classes = `${baseClass} ${shadowClass} ${glitchClass} ${className}`.trim();
+const noShadowClass = noShadow ? 'no-text-shadow' : '';
+const colorClass = textColor ? `text-color-${textColor}` : '';
+const classes = `${baseClass} ${shadowClass} ${glitchClass} ${noShadowClass} ${colorClass} ${className}`.trim();
 ---
 
 <Tag 
@@ -46,5 +52,21 @@ const classes = `${baseClass} ${shadowClass} ${glitchClass} ${className}`.trim()
   
   .brutal-glitch:hover {
     animation-duration: 0.3s;
+  }
+
+  .no-text-shadow {
+    text-shadow: none !important;
+  }
+
+  .text-color-white {
+    color: var(--brutal-white);
+  }
+
+  .text-color-black {
+    color: var(--brutal-black);
+  }
+
+  .text-color-mint {
+    color: var(--brutal-mint);
   }
 </style>

@@ -63,6 +63,7 @@ h1, h2, h3, h4, h5, h6 {
   80% { transform: translate(2px, -2px); }
 }
 
+/* ANIMATIONS HARDWARE-ACCELERATED avec will-change optimisé */
 @keyframes pulse-brutal {
   0%, 100% { 
     transform: scale(1) rotate(-1deg);
@@ -72,6 +73,19 @@ h1, h2, h3, h4, h5, h6 {
     transform: scale(1.05) rotate(1deg);
     box-shadow: 12px 12px 0 var(--brutal-mint);
   }
+}
+
+/* Animation hover micro-feedback */
+@keyframes hover-bounce {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+  100% { transform: translateY(0); }
+}
+
+/* Animation focus ring */
+@keyframes focus-ring {
+  0%, 100% { outline-offset: 2px; }
+  50% { outline-offset: 6px; }
 }
 
 @keyframes slide-brutal {
@@ -143,8 +157,12 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   transform: rotate(-1deg);
-  transition: all 0.2s ease;
+  /* MICRO-INTERACTIONS OPTIMISÉES */
+  transition: transform 0.15s cubic-bezier(0.4, 0.0, 0.2, 1), box-shadow 0.15s cubic-bezier(0.4, 0.0, 0.2, 1), opacity 0.1s ease;
   cursor: pointer;
+  will-change: transform, box-shadow;
+  outline: 0;
+  position: relative;
 }
 
 .brutal-btn:hover {
@@ -155,6 +173,28 @@ h1, h2, h3, h4, h5, h6 {
 .brutal-btn:active {
   transform: translate(2px, 2px) rotate(-1deg);
   box-shadow: 4px 4px 0 var(--brutal-black);
+  transition-duration: 0.05s;
+}
+
+/* FOCUS ACCESSIBLE - Outline brutal pour navigation clavier */
+.brutal-btn:focus-visible {
+  outline: 3px solid var(--brutal-mint);
+  outline-offset: 4px;
+  transform: translate(-2px, -2px) rotate(0deg);
+  box-shadow: 10px 10px 0 var(--brutal-black);
+}
+
+/* LOADING STATE - Animation feedback */
+.brutal-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: rotate(-1deg);
+  animation: pulse-loading 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-loading {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0.8; }
 }
 
 .brutal-btn--secondary {
@@ -166,6 +206,20 @@ h1, h2, h3, h4, h5, h6 {
   background: transparent;
   color: var(--brutal-white);
   border-color: var(--brutal-white);
+  box-shadow: 8px 8px 0 var(--brutal-white);
+}
+
+.brutal-btn--outline:hover {
+  box-shadow: 12px 12px 0 var(--brutal-white);
+}
+
+.brutal-btn--outline:active {
+  box-shadow: 4px 4px 0 var(--brutal-white);
+}
+
+.brutal-btn--outline:focus-visible {
+  outline-color: var(--brutal-white);
+  box-shadow: 10px 10px 0 var(--brutal-white);
 }
 
 /* CARDS BRUTALES - Base */
@@ -174,7 +228,17 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--brutal-black);
   padding: 2rem;
   transform: rotate(-1deg);
-  transition: all 0.2s ease;
+  /* MICRO-INTERACTIONS OPTIMISÉES */
+  transition: transform 0.2s cubic-bezier(0.4, 0.0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+  will-change: transform, box-shadow;
+  cursor: pointer;
+}
+
+/* FOCUS ACCESSIBLE pour cartes interactives */
+.brutal-card:focus-visible {
+  outline: 3px solid var(--brutal-mint);
+  outline-offset: 2px;
+  transform: rotate(1deg) scale(1.02);
 }
 
 .brutal-card--mint {
@@ -291,7 +355,26 @@ h1, h2, h3, h4, h5, h6 {
   color: inherit; /* hérite de la couleur de la carte */
 }
 
-/* BADGES BRUTAUX - Gérés par le composant BrutalBadge.astro */
+/* BADGES BRUTAUX - Micro-interactions optimisées */
+.brutal-badge {
+  transition: transform 0.15s cubic-bezier(0.4, 0.0, 0.2, 1), box-shadow 0.15s ease;
+  will-change: transform;
+  cursor: default;
+}
+
+.brutal-badge:hover {
+  transform: rotate(0deg) scale(1.05) !important;
+}
+
+.brutal-badge--animated {
+  will-change: transform, box-shadow;
+}
+
+/* Focus pour badges interactifs */
+.brutal-badge[role="button"]:focus-visible {
+  outline: 2px solid var(--brutal-white);
+  outline-offset: 3px;
+}
 
 /* TEXTE BRUTAL - Base sans ombre - Utilise le système harmonique */
 .brutal-title {
@@ -463,6 +546,72 @@ h1, h2, h3, h4, h5, h6 {
   animation: simple-pulse 0.5s ease;
 }
 
+/* === MICRO-INTERACTIONS GLOBALES === */
+
+/* Links avec hover subtil */
+a:not(.brutal-btn) {
+  transition: color 0.15s ease, text-shadow 0.15s ease;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+a:not(.brutal-btn):hover {
+  animation: hover-bounce 0.3s ease;
+}
+
+a:not(.brutal-btn):focus-visible {
+  outline: 2px solid var(--brutal-mint);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Inputs et formulaires brutaux */
+input, textarea, select {
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  will-change: border-color, box-shadow;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: 0;
+  border-color: var(--brutal-mint);
+  box-shadow: 4px 4px 0 var(--brutal-mint);
+  animation: focus-ring 2s ease infinite;
+}
+
+/* Images avec hover subtle */
+img {
+  transition: transform 0.2s ease, filter 0.2s ease;
+  will-change: transform;
+}
+
+img:hover {
+  transform: scale(1.02);
+  filter: contrast(1.1);
+}
+
+/* Sections avec scroll-trigger */
+.brutal-section {
+  transition: opacity 0.3s ease;
+}
+
+/* Optimisation scroll performance */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
@@ -477,9 +626,34 @@ h1, h2, h3, h4, h5, h6 {
   .brutal-btn {
     width: 100%;
     text-align: center;
+    /* Réduction des effets sur mobile pour performance */
+    transition-duration: 0.1s;
+  }
+  
+  .brutal-btn:hover {
+    /* Hover moins prononcé sur mobile */
+    transform: translate(-2px, -2px) rotate(0deg);
+    box-shadow: 8px 8px 0 var(--brutal-black);
   }
   
   .two-columns {
     grid-template-columns: 1fr;
+  }
+  
+  /* Touch targets optimisés */
+  .brutal-btn, .brutal-card {
+    min-height: 44px;
+  }
+}
+
+/* PERFORMANCE OPTIMIZATIONS */
+@media (min-width: 1200px) {
+  /* Animations plus fluides sur desktop */
+  .brutal-btn {
+    transition-duration: 0.2s;
+  }
+  
+  .brutal-card:hover {
+    transition-duration: 0.15s;
   }
 }

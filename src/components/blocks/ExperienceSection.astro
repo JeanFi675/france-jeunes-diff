@@ -1,5 +1,6 @@
 ---
 import BrutalHeading from '../atoms/BrutalHeading.astro';
+import BrutalButton from '../atoms/BrutalButton.astro';
 import competitionData from '../../data/competition-data.js';
 
 const { testimonials } = competitionData;
@@ -62,6 +63,24 @@ const galleryImages = [
           </div>
         ))}
       </div>
+    </div>
+    
+    <!-- 🚀 MICRO-CTA - Bridge émotionnel vers action finale (UX 2025) -->
+    <div style="text-align: center; margin-top: 3rem; padding: 2rem 0;">
+      <div style="margin-bottom: 1rem;">
+        <p style="color: var(--brutal-mint); font-size: 1.125rem; font-weight: 700;">
+          💫 Rejoignez cette expérience unique !
+        </p>
+      </div>
+      <BrutalButton 
+        href="#contact" 
+        variant="secondary" 
+        rotation={-1} 
+        class="experience-cta"
+        ariaLabel="Rejoindre l'aventure des Championnats de France"
+      >
+        🚀 REJOIGNEZ L'AVENTURE
+      </BrutalButton>
     </div>
   </div>
 </section>

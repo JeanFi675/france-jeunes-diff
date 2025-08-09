@@ -13,24 +13,24 @@ export const competitionData = {
   // Section Hébergement
   accommodation: [
     {
-      title: "Hôtel Alp'Azur",
-      content: "5 min de la salle • 65€/nuit • Petit-déj inclus",
+      title: "Office Tourisme La Roche",
+      content: "larochesurforon.com • +33 4 50 03 36 68 • Hôtels, gîtes, chambres d'hôtes",
       icon: "🏨",
-      badge: "🅿️ PARKING",
-      variant: "default"
-    },
-    {
-      title: "Ibis Budget Cluses",
-      content: "15 min • 45€/nuit • Proche gare",
-      icon: "🏢",
-      badge: "ÉCONOMIQUE",
+      badge: "RÉSERVATIONS",
       variant: "mint"
     },
     {
-      title: "Camping Municipal",
-      content: "10 min • 15€/emplacement • Sanitaires chauffés",
-      icon: "⛺",
-      badge: "NATURE",
+      title: "Office Tourisme Bonneville", 
+      content: "tourism.tourisme-faucigny-glieres.fr • +33 4 50 97 38 37 • Tous hébergements",
+      icon: "🏢",
+      badge: "CONSEIL EXPERT",
+      variant: "default"
+    },
+    {
+      title: "Partenaires Hébergement",
+      content: "Partenaires officiels à venir • Tarifs préférentiels négociés • Info bientôt disponible",
+      icon: "🤝",
+      badge: "BIENTÔT",
       variant: "default"
     }
   ],
@@ -39,20 +39,28 @@ export const competitionData = {
   transport: [
     {
       title: "EN VOITURE",
-      content: "A40 sortie 18 • Parking 500 places gratuit • GPS: 46.0644, 6.3698",
+      content: "A40 • Parking 70 places gratuit à la gare • Covoiturage organisé (lien à venir)",
       icon: "🚗",
+      badge: "PARKING GRATUIT",
       variant: "default"
     },
     {
       title: "EN TRAIN",
-      content: "Gare de Cluses (15 min) • Navette gratuite samedi/dimanche • Départ toutes les heures",
+      content: "Gare Saint-Pierre-en-Faucigny • TER vers Genève/Annecy • 8min depuis Bonneville",
       icon: "🚂",
-      badge: "NAVETTE",
+      badge: "GARE SUR PLACE",
       variant: "mint"
     },
     {
+      title: "EN BUS",
+      content: "Proxim'iTi transport à la demande • Lignes vers Bonneville/Cluses • Réservation requise",
+      icon: "🚌",
+      badge: "À LA DEMANDE",
+      variant: "default"
+    },
+    {
       title: "EN AVION",
-      content: "Genève 45 min • Lyon 2h • Location voiture sur place",
+      content: "Genève 45min • Lyon 2h • Location voiture recommandée",
       icon: "✈️",
       variant: "default"
     }
@@ -61,24 +69,24 @@ export const competitionData = {
   // Section Restauration
   food: [
     {
-      title: "La Table Savoyarde",
-      content: "5 min à pied • Spécialités locales • Menu 15-25€",
-      icon: "🍽️",
-      badge: "TERROIR",
+      title: "Supermarchés",
+      content: "BI1 (59 place Arcades) • Netto La Roche • Intermarché • Courses et pique-niques",
+      icon: "🏪",
+      badge: "COURSES",
       variant: "default"
     },
     {
-      title: "Food Truck Festival",
-      content: "Sur place • Samedi & dimanche • Burgers, crêpes, végé",
-      icon: "🚚",
-      badge: "SUR PLACE",
+      title: "Restaurants sur place",
+      content: "La Piccola Sicilia (pizzas) • Anatole Alpes (turc) • À St-Pierre et villes proches",
+      icon: "🍽️",
+      badge: "PROCHE",
       variant: "mint"
     },
     {
-      title: "Boulangerie du Centre",
-      content: "2 min • Petit-déj dès 6h30 • Sandwichs à emporter",
+      title: "Petit-déjeuner",
+      content: "Boulangerie La Panière • Ouverture tôt • Sandwichs pour la journée",
       icon: "🥐",
-      badge: "PETIT-DÉJ",
+      badge: "DÈS 6H30",
       variant: "default"
     }
   ],

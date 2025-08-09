@@ -40,15 +40,19 @@ const { background = 'black' } = Astro.props;
           <BrutalBadge variant="mint">QUALIFICATIONS</BrutalBadge>
         </div>
         
-        <div style="space-y: 1rem;">
-          <div style="border-left: 4px solid var(--brutal-mint); padding-left: 1rem; margin-bottom: 1rem;">
-            <strong>7h00</strong> - Ouverture de la salle d'échauffement
+        <!-- PROGRAMME CONDENSÉ - Progressive disclosure UX 2025 -->
+        <div class="program-schedule">
+          <!-- HEURES PRINCIPALES - Visibilité immédiate -->
+          <div class="primary-schedule" style="margin-bottom: 2rem;">
+            <div style="background: var(--brutal-mint); color: var(--brutal-black); padding: 1rem; font-weight: 900; font-size: 1.25rem; text-align: center; transform: rotate(-1deg);">
+              8H00 → 18H00
+            </div>
           </div>
-          <div style="border-left: 4px solid var(--brutal-black); padding-left: 1rem; margin-bottom: 1rem;">
-            <strong>8h00</strong> - Qualifications voies 1 et 2 pour les U15 filles, U17 filles et U17 garçons
-          </div>
-          <div style="border-left: 4px solid var(--brutal-mint); padding-left: 1rem;">
-            <strong>14h00</strong> - Qualifications voies 1 et 2 pour les U15 garçons, U19 filles et U19 garçons
+          
+          <!-- DÉTAILS SECONDAIRES - Style allégé -->
+          <div class="secondary-details" style="opacity: 0.8; font-size: 0.9rem;">
+            <div style="margin-bottom: 0.75rem;">• <strong>8h00</strong> Qualifications matin</div>
+            <div>• <strong>14h00</strong> Qualifications après-midi</div>
           </div>
         </div>
       </BrutalCard>
@@ -64,18 +68,19 @@ const { background = 'black' } = Astro.props;
           </BrutalBadge>
         </div>
         
-        <div style="space-y: 1rem;">
-          <div style="border-left: 4px solid var(--brutal-black); padding-left: 1rem; margin-bottom: 1rem;">
-            <strong>9h30</strong> - Finales U15
+        <!-- PROGRAMME CONDENSÉ - Progressive disclosure UX 2025 -->
+        <div class="program-schedule">
+          <!-- HEURES PRINCIPALES - Visibilité immédiate -->
+          <div class="primary-schedule" style="margin-bottom: 2rem;">
+            <div style="background: var(--brutal-black); color: var(--brutal-white); padding: 1rem; font-weight: 900; font-size: 1.25rem; text-align: center; transform: rotate(1deg);">
+              9H30 → 15H00
+            </div>
           </div>
-          <div style="border-left: 4px solid var(--brutal-white); padding-left: 1rem; margin-bottom: 1rem;">
-            <strong>11h00</strong> - Finales U17
-          </div>
-          <div style="border-left: 4px solid var(--brutal-black); padding-left: 1rem; margin-bottom: 1rem;">
-            <strong>12h45</strong> - Finales U19
-          </div>
-          <div style="border-left: 4px solid var(--brutal-white); padding-left: 1rem;">
-            <strong>14h15</strong> - Remise des prix
+          
+          <!-- DÉTAILS SECONDAIRES - Style allégé -->
+          <div class="secondary-details" style="opacity: 0.9; font-size: 0.9rem; color: var(--brutal-black);">
+            <div style="margin-bottom: 0.75rem;">• <strong>9h30-12h45</strong> Finales U15/U17/U19</div>
+            <div>• <strong>14h15</strong> Remise des prix</div>
           </div>
         </div>
       </BrutalCard>
