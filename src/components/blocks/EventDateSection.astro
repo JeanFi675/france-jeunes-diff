@@ -12,7 +12,7 @@ const isEventSoon = daysLeft < 30;
   <div class="brutal-container">
     <div 
       class={`brutal-card countdown-card ${isEventSoon ? 'brutal-card--urgent' : ''}`}
-      style="display: inline-block; transform: rotate(-2deg) scale(1.2); margin: 2rem 0;"
+      style="display: inline-block; margin: 2rem 0;"
     >
       <div style="font-family: 'Inter', sans-serif; font-weight: 800; font-size: var(--size-l1); line-height: 0.8; color: var(--brutal-black);">
         J-{daysLeft}
@@ -33,19 +33,26 @@ const isEventSoon = daysLeft < 30;
 </section>
 
 <style>
+  .countdown-card {
+    transform: rotate(-2deg) scale(1.2);
+    border: 4px solid var(--brutal-black);
+    box-shadow: 8px 8px 0 var(--brutal-black);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
   .countdown-card:hover {
-    transform: rotate(-1deg) scale(1.25) !important;
-    box-shadow: 20px 20px 0 var(--brutal-black) !important;
+    transform: rotate(-1deg) scale(1.25);
+    box-shadow: 20px 20px 0 var(--brutal-black);
   }
   
   .brutal-card--urgent {
     animation: shake 1s ease-in-out infinite;
-    border-color: var(--brutal-black) !important;
-    box-shadow: 16px 16px 0 var(--brutal-black) !important;
+    border-color: var(--brutal-black);
+    box-shadow: 16px 16px 0 var(--brutal-black);
   }
   
   .brutal-card--urgent:hover {
-    transform: rotate(0deg) scale(1.3) !important;
-    box-shadow: 24px 24px 0 var(--brutal-black) !important;
+    transform: rotate(0deg) scale(1.3);
+    box-shadow: 24px 24px 0 var(--brutal-black);
   }
 </style>

@@ -31,11 +31,13 @@ const rotationClass = rotation > 0 ? 'brutal-card--rot-positive'
 const allClasses = `${cardClass} ${rotationClass} ${className}`.trim();
 
 // Construction du style unifié
-let style = `transform: rotate(${rotation}deg);`;
-if (zIndex !== undefined) style += ` z-index: ${zIndex};`;
-if (marginRight) style += ` margin-right: ${marginRight};`;
-if (marginBottom) style += ` margin-bottom: ${marginBottom};`;
-if (textAlign !== 'left') style += ` text-align: ${textAlign};`;
+let style = '';
+// N'ajouter transform que si rotation n'est pas 0 pour éviter conflits avec animations
+if (rotation !== 0) style += `transform: rotate(${rotation}deg); `;
+if (zIndex !== undefined) style += `z-index: ${zIndex}; `;
+if (marginRight) style += `margin-right: ${marginRight}; `;
+if (marginBottom) style += `margin-bottom: ${marginBottom}; `;
+if (textAlign !== 'left') style += `text-align: ${textAlign}; `;
 ---
 
 <div class={allClasses} style={style}>

@@ -1,0 +1,52 @@
+---
+export interface Props {
+  variant?: 'default' | 'mint' | 'black';
+  className?: string;
+}
+
+const { 
+  variant = 'default',
+  className = ''
+} = Astro.props;
+
+const cardClass = variant === 'default' 
+  ? 'brutal-card-info' 
+  : `brutal-card-info brutal-card-info--${variant}`;
+
+const allClasses = `${cardClass} ${className}`.trim();
+---
+
+<div class={allClasses}>
+  <slot />
+</div>
+
+<style>
+.brutal-card-info {
+  background: var(--brutal-white);
+  color: var(--brutal-black);
+  border: none;
+  border-radius: 0;
+  padding: 2rem;
+  box-shadow: none;
+  transition: transform 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.brutal-card-info--mint {
+  background: var(--brutal-mint);
+  color: var(--brutal-black);
+}
+
+.brutal-card-info--black {
+  background: var(--brutal-black);
+  color: var(--brutal-white);
+}
+
+/* Animation zoom sur hover pour INFOS PRATIQUES */
+.brutal-card-info:hover {
+  transform: scale(1.1);
+}
+
+/* Animation glitch supprimée - remplacée par zoom */
+</style>
