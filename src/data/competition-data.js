@@ -38,31 +38,25 @@ export const competitionData = {
   // Section Transport
   transport: [
     {
-      title: "EN VOITURE",
-      content: "A40 • Parking 70 places gratuit à la gare • Covoiturage organisé (lien à venir)",
-      icon: "🚗",
-      badge: "PARKING GRATUIT",
-      variant: "default"
+      title: "EN AVION",
+      content: "Aéroport de Genève\n\n• Train : 2h total (plusieurs correspondances : Aéroport → Genève → St-Pierre)\n• Voiture : 30min\n• Location recommandée",
+      icon: "✈️",
+      variant: "mint",
+      link: "https://www.gva.ch/fr/Site/Passagers/Acces-Transports/Transports-publics-aeroport"
     },
     {
       title: "EN TRAIN",
-      content: "Gare Saint-Pierre-en-Faucigny • TER vers Genève/Annecy • 8min depuis Bonneville",
+      content: "🚶 20min à pied\n\n• Gare Saint-Pierre-en-Faucigny\n• Annecy : 1h\n• Genève : 1h15",
       icon: "🚂",
-      badge: "GARE SUR PLACE",
-      variant: "mint"
+      variant: "default",
+      link: "https://www.ter.sncf.com/auvergne-rhone-alpes/se-deplacer/gares/saint-pierre-en-faucigny-87746313"
     },
     {
       title: "EN BUS",
-      content: "Proxim'iTi transport à la demande • Lignes vers Bonneville/Cluses • Réservation requise",
+      content: "Détours possibles sur réservation\n\n• Lignes 360/380 : La Roche, Bonneville, Marignier\n• Ligne 460 : St-Jean-de-Sixt\n\n⚠️ PAS DE SERVICE LE DIMANCHE",
       icon: "🚌",
-      badge: "À LA DEMANDE",
-      variant: "default"
-    },
-    {
-      title: "EN AVION",
-      content: "Genève 45min • Lyon 2h • Location voiture recommandée",
-      icon: "✈️",
-      variant: "default"
+      variant: "mint",
+      link: "https://www.proximiti.fr/"
     }
   ],
   

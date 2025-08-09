@@ -14,6 +14,7 @@ export interface Props {
     icon?: string;
     badge?: string;
     variant?: 'default' | 'mint' | 'black';
+    link?: string;
   }>;
   accommodationCards: Array<{
     title: string;
@@ -70,7 +71,7 @@ const cardRotations = [
     <!-- Bloc Transport -->
     <BrutalCard variant="default" rotation={0} className="transport-block category-card-hover chaos-rotation-transport" marginBottom="4rem">
       <div class="category-title">
-        🚗 COMMENT VENIR
+        🚌 TRANSPORT EN COMMUN
       </div>
       <div class="category-grid transport-grid">
         {transportCards.map((card, index) => (
@@ -84,6 +85,11 @@ const cardRotations = [
             </BrutalHeading>
             <p class="card-content">{card.content}</p>
             {card.badge && <BrutalBadge>{card.badge}</BrutalBadge>}
+            {card.link && (
+              <a href={card.link} target="_blank" rel="noopener noreferrer" class="card-link">
+                → Plus d'infos
+              </a>
+            )}
           </BrutalCardInfo>
         ))}
       </div>
@@ -243,6 +249,36 @@ const cardRotations = [
     line-height: 1.4;
     opacity: 0.9;
     margin: 1rem 0;
+    white-space: pre-line;
+  }
+
+  .card-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    color: inherit;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: transform 0.2s ease;
+  }
+
+  .card-link:hover {
+    transform: translateX(4px);
+    text-decoration: underline;
+  }
+
+  /* Couleur des liens selon la carte */
+  :global(.transport-card-0) .card-link,
+  :global(.transport-card-2) .card-link,
+  :global(.food-card-0) .card-link,
+  :global(.food-card-2) .card-link {
+    color: var(--brutal-mint);
+  }
+
+  :global(.transport-card-1) .card-link,
+  :global(.transport-card-3) .card-link,
+  :global(.food-card-1) .card-link {
+    color: var(--brutal-black);
   }
 
   .cta-section {
