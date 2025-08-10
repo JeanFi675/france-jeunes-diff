@@ -10,23 +10,21 @@ export const competitionData = {
     eventDate: new Date('2026-05-16'),
   },
   
-  // Section Hébergement & Restauration fusionnée
-  accommodation: [
-    {
-      title: "OFFICE LA ROCHE-SUR-FORON",
-      content: "Hébergements & restaurants\n\n• Hôtels, gîtes, chambres d'hôtes\n• Restaurants traditionnels et rapides\n• 04 50 03 36 68",
-      icon: "🏨",
-      variant: "mint",
-      link: "http://www.larochesurforon.com/hebergement/centrale-de-disponibilites.htm"
-    },
-    {
-      title: "OFFICE BONNEVILLE FAUCIGNY-GLIÈRES", 
-      content: "Territoire complet\n\n• Zone Genève-Annecy-Chamonix\n• Hébergements & restauration\n• 04 50 97 38 37",
-      icon: "🏔️",
-      variant: "default",
-      link: "https://www.tourisme-faucigny-glieres.fr/"
-    }
-  ],
+  // Section Hébergement & Restauration avec format spécial
+  accommodation: {
+    title: "🏨 HÉBERGEMENT & RESTAURATION",
+    description: "Les offices de tourisme de La Roche-sur-Foron et Bonneville peuvent vous accompagner pour organiser votre séjour : hébergements, restaurants.",
+    offices: [
+      {
+        title: "LA ROCHE-SUR-FORON",
+        link: "http://www.larochesurforon.com/hebergement/centrale-de-disponibilites.htm"
+      },
+      {
+        title: "BONNEVILLE FAUCIGNY-GLIÈRES", 
+        link: "https://www.tourisme-faucigny-glieres.fr/"
+      }
+    ]
+  },
   
   // Section Transport
   transport: [

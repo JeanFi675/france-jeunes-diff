@@ -16,14 +16,14 @@ export interface Props {
     variant?: 'default' | 'mint' | 'black';
     link?: string;
   }>;
-  accommodationCards: Array<{
+  accommodationCards: {
     title: string;
-    content: string;
-    icon?: string;
-    badge?: string;
-    variant?: 'default' | 'mint' | 'black';
-    link?: string;
-  }>;
+    description: string;
+    offices: Array<{
+      title: string;
+      link: string;
+    }>;
+  } | Array<any>;
   foodCards: Array<{
     title: string;
     content: string;
@@ -96,32 +96,52 @@ const cardRotations = [
       </div>
     </BrutalCard>
     
-    {/* Bloc Hébergement & Restauration - affiché seulement si des cartes */}
-    {accommodationCards.length > 0 && (
+    {/* Bloc Hébergement & Restauration - format spécial */}
+    {(accommodationCards.title || accommodationCards.length > 0) && (
       <BrutalCard variant="black" rotation={0} className="accommodation-block category-card-hover chaos-rotation-accommodation" marginBottom="4rem">
         <div class="category-title">
-          🏨 HÉBERGEMENT & RESTAURATION
+          {accommodationCards.title || "🏨 HÉBERGEMENT & RESTAURATION"}
         </div>
-        <div class="category-grid accommodation-grid">
-          {accommodationCards.map((card, index) => (
-            <BrutalCardInfo 
-              variant={index % 2 === 0 ? 'default' : 'mint'} 
-              className={`accommodation-card-${index}`}
-            >
-              {card.icon && <span class="card-icon">{card.icon}</span>}
-              <BrutalHeading level={4} rotation={0} noShadow={true} textColor="black" class="card-heading">
-                {card.title}
-              </BrutalHeading>
-              <p class="card-content">{card.content}</p>
-              {card.badge && <BrutalBadge>{card.badge}</BrutalBadge>}
-              {card.link && (
-                <a href={card.link} target="_blank" rel="noopener noreferrer" class="card-link">
-                  → S'y rendre
-                </a>
-              )}
-            </BrutalCardInfo>
-          ))}
-        </div>
+        
+        {accommodationCards.description && (
+          <p class="hebergement-description">
+            Les <span class="highlight-tag">offices de tourisme</span> de La Roche-sur-Foron et Bonneville peuvent vous accompagner pour organiser votre séjour : <span class="highlight-tag">hébergements</span>, <span class="highlight-tag">restaurants</span>.
+          </p>
+        )}
+        
+        {accommodationCards.offices && (
+          <div class="buttons-grid">
+            {accommodationCards.offices.map((office) => (
+              <a href={office.link} target="_blank" rel="noopener noreferrer" class="brutal-office-btn">
+                <span class="btn-emoji">🔗</span> {office.title}
+              </a>
+            ))}
+          </div>
+        )}
+        
+        {/* Fallback pour ancien format */}
+        {accommodationCards.length > 0 && (
+          <div class="category-grid accommodation-grid">
+            {accommodationCards.map((card, index) => (
+              <BrutalCardInfo 
+                variant={index % 2 === 0 ? 'default' : 'mint'} 
+                className={`accommodation-card-${index}`}
+              >
+                {card.icon && <span class="card-icon">{card.icon}</span>}
+                <BrutalHeading level={4} rotation={0} noShadow={true} textColor="black" class="card-heading">
+                  {card.title}
+                </BrutalHeading>
+                <p class="card-content">{card.content}</p>
+                {card.badge && <BrutalBadge>{card.badge}</BrutalBadge>}
+                {card.link && (
+                  <a href={card.link} target="_blank" rel="noopener noreferrer" class="card-link">
+                    → Plus d'infos
+                  </a>
+                )}
+              </BrutalCardInfo>
+            ))}
+          </div>
+        )}
       </BrutalCard>
     )}
     
@@ -297,6 +317,72 @@ const cardRotations = [
   /* Cartes blanches/default -> liens menthe */
   :global(.brutal-card-info--default) .card-link {
     color: var(--brutal-mint) !important;
+  }
+
+  /* Styles pour la section hébergement spéciale */
+  .hebergement-description {
+    color: var(--brutal-mint);
+    font-size: 1.25rem;
+    line-height: 1.5;
+    margin: 2rem auto 3rem auto;
+    max-width: 600px;
+    text-align: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+  }
+
+  .highlight-tag {
+    background: var(--brutal-mint);
+    color: var(--brutal-black);
+    padding: 0.1rem 0.4rem;
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    transform: rotate(-0.5deg);
+  }
+
+  .buttons-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .brutal-office-btn {
+    background: var(--brutal-white);
+    color: var(--brutal-black);
+    border: 4px solid var(--brutal-mint);
+    padding: 1.5rem 2rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    box-shadow: 8px 8px 0px var(--brutal-mint);
+    transition: all 0.2s ease;
+    display: block;
+    transform: rotate(-2deg);
+  }
+
+  .brutal-office-btn:nth-child(2) {
+    transform: rotate(2deg);
+  }
+
+  .brutal-office-btn:hover {
+    transform: rotate(0deg) translate(-4px, -4px) scale(1.05);
+    box-shadow: 12px 12px 0px var(--brutal-white);
+    background: var(--brutal-mint);
+    border: 4px solid var(--brutal-white);
+  }
+
+  .btn-emoji {
+    font-size: 1.5em;
+    margin-right: 0.5rem;
   }
 
   .cta-section {
