@@ -53,8 +53,30 @@ export const competitionData = {
     }
   ],
   
-  // Section Restauration supprimée - fusionnée avec hébergement
-  food: [],
+  // Section Commerces de proximité
+  food: [
+    {
+      title: "SUPERMARCHÉ BI1",
+      content: "59 place des Arcades\n\n• Lun-Sam: 8h-20h\n• Dimanche: 8h30-12h30\n• Parking gratuit disponible",
+      icon: "🛒",
+      variant: "mint",
+      link: "https://maps.google.com/maps?q=Bi1+59+place+des+Arcades+74800+Saint-Pierre-en-Faucigny"
+    },
+    {
+      title: "PHARMACIE DE LA GARE",
+      content: "20 place des Arcades\n\n• Lun-Ven: 8h15-12h15 / 14h-19h15\n• Sam: 8h15-12h15 / 14h-18h45\n• Dim: Fermé",
+      icon: "💊",
+      variant: "black",
+      link: "https://maps.google.com/maps?q=Pharmacie+de+la+Gare+20+place+des+Arcades+74800+Saint-Pierre-en-Faucigny"
+    },
+    {
+      title: "CRÉDIT AGRICOLE + DAB",
+      content: "81 place des Arcades\n\n• DAB disponible 24h/7j\n• Agence: Mar-Ven 9h-12h / 14h-18h\n• Samedi: 9h-12h",
+      icon: "💳",
+      variant: "mint",
+      link: "https://maps.google.com/maps?q=Crédit+Agricole+81+place+des+Arcades+74800+Saint-Pierre-en-Faucigny"
+    }
+  ],
   
   // Section Public
   publicInfo: {

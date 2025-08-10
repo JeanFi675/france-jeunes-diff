@@ -116,7 +116,36 @@ const cardRotations = [
               {card.badge && <BrutalBadge>{card.badge}</BrutalBadge>}
               {card.link && (
                 <a href={card.link} target="_blank" rel="noopener noreferrer" class="card-link">
-                  → Plus d'infos
+                  → S'y rendre
+                </a>
+              )}
+            </BrutalCardInfo>
+          ))}
+        </div>
+      </BrutalCard>
+    )}
+    
+    {/* Bloc Commerces de proximité - affiché seulement si des cartes */}
+    {foodCards.length > 0 && (
+      <BrutalCard variant="default" rotation={0} className="food-block category-card-hover chaos-rotation-food" marginBottom="4rem">
+        <div class="category-title">
+          🏪 COMMERCES DE PROXIMITÉ
+        </div>
+        <div class="category-grid food-grid">
+          {foodCards.map((card, index) => (
+            <BrutalCardInfo 
+              variant={card.variant || (index % 2 === 0 ? 'mint' : 'black')} 
+              className={`food-card-${index}`}
+            >
+              {card.icon && <span class="card-icon">{card.icon}</span>}
+              <BrutalHeading level={4} rotation={0} noShadow={true} textColor={card.variant === 'black' ? 'white' : 'black'} class="card-heading">
+                {card.title}
+              </BrutalHeading>
+              <p class="card-content">{card.content}</p>
+              {card.badge && <BrutalBadge>{card.badge}</BrutalBadge>}
+              {card.link && (
+                <a href={card.link} target="_blank" rel="noopener noreferrer" class="card-link">
+                  → S'y rendre
                 </a>
               )}
             </BrutalCardInfo>
@@ -254,18 +283,20 @@ const cardRotations = [
     text-decoration: underline;
   }
 
-  /* Couleur des liens selon la carte */
-  :global(.transport-card-0) .card-link,
-  :global(.transport-card-2) .card-link,
-  :global(.food-card-0) .card-link,
-  :global(.food-card-2) .card-link {
-    color: var(--brutal-mint);
+  /* Couleur des liens selon le variant de la carte */
+  /* Cartes noires -> liens menthe */
+  :global(.brutal-card-info--black) .card-link {
+    color: var(--brutal-mint) !important;
   }
-
-  :global(.transport-card-1) .card-link,
-  :global(.transport-card-3) .card-link,
-  :global(.food-card-1) .card-link {
-    color: var(--brutal-black);
+  
+  /* Cartes menthe -> liens noirs */
+  :global(.brutal-card-info--mint) .card-link {
+    color: var(--brutal-black) !important;
+  }
+  
+  /* Cartes blanches/default -> liens menthe */
+  :global(.brutal-card-info--default) .card-link {
+    color: var(--brutal-mint) !important;
   }
 
   .cta-section {
