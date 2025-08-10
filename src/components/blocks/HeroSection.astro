@@ -12,16 +12,16 @@ const daysLeft = Math.floor((eventDate - today) / (1000 * 60 * 60 * 24));
 const isEventSoon = daysLeft < 30;
 ---
 
-<section class="brutal-section brutal-section--black" style="position: relative; overflow-x: hidden;">
+<section class="brutal-section brutal-section--black" style="position: relative; overflow: hidden;">
   <!-- Pattern background -->
   <div 
     class="brutal-pattern-diagonal" 
     style="position: absolute; inset: 0; pointer-events: none;"
   ></div>
   
-  <!-- Accent blocks - Mobile safe positioning -->
-  <div style="position: absolute; top: 10%; right: -5%; width: 250px; height: 250px; background: var(--brutal-mint); opacity: 0.1; transform: rotate(45deg);"></div>
-  <div style="position: absolute; bottom: -5%; left: -3%; width: 180px; height: 180px; background: var(--brutal-mint); opacity: 0.1; transform: rotate(-30deg);"></div>
+  <!-- Accent blocks - Contained positioning -->
+  <div style="position: absolute; top: 10%; right: 0%; width: 200px; height: 200px; background: var(--brutal-mint); opacity: 0.1; transform: rotate(45deg);"></div>
+  <div style="position: absolute; bottom: 0%; left: 0%; width: 150px; height: 150px; background: var(--brutal-mint); opacity: 0.1; transform: rotate(-30deg);"></div>
   
   <div class="brutal-container" style="position: relative; z-index: 10; text-align: center; padding: 6rem 2rem;">
     
@@ -122,13 +122,12 @@ const isEventSoon = daysLeft < 30;
     <!-- 9. Navigation HIÉRARCHISÉE (PROGRAMME prioritaire) -->
     <div class="hero-navigation" style="
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-columns: 1fr 1fr;
       grid-template-rows: auto auto;
-      gap: 1.5rem 2rem;
-      max-width: 900px;
+      gap: 2rem 1.5rem;
+      max-width: 800px;
       margin: 3rem auto 0;
-      padding: 0 1rem;
-      overflow: visible;
+      padding: 1rem;
     ">
       <!-- PROGRAMME - Bouton principal LARGE (2 colonnes) -->
       <BrutalButton 
@@ -155,13 +154,6 @@ const isEventSoon = daysLeft < 30;
       </BrutalButton>
     </div>
     
-    <!-- SCROLL INDICATOR - Incite à découvrir le reste -->
-    <div class="scroll-indicator" aria-label="Faire défiler pour découvrir plus de contenu">
-      <div class="scroll-chevron">
-        <span></span>
-        <span></span>
-      </div>
-    </div>
     
   </div>
 </section>
@@ -175,6 +167,12 @@ const isEventSoon = daysLeft < 30;
   padding: 1.25rem 2rem;
 }
 
+/* Permettre les rotations des boutons */
+.hero-navigation :global(.brutal-button) {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
 .partner-logos-container {
   display: flex;
   align-items: center;
@@ -185,18 +183,20 @@ const isEventSoon = daysLeft < 30;
 
 @media (max-width: 768px) {
   .hero-navigation {
-    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-columns: 1fr !important;
     gap: 1rem !important;
-    padding: 1rem !important;
-    margin-bottom: 2rem;
-    overflow: visible !important;
+    padding: 0 1rem !important;
+    margin: 3rem auto 2rem !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
   }
 
   /* Assurer que tous les boutons sont visibles sur mobile */
   .hero-navigation > * {
     width: 100%;
     margin: 0;
-    max-width: 100%;
+    max-width: calc(100vw - 4rem);
+    box-sizing: border-box;
   }
 
   /* Supprimer les rotations sur mobile pour éviter débordement */
@@ -216,92 +216,4 @@ const isEventSoon = daysLeft < 30;
   }
 }
 
-/* SCROLL INDICATOR - CSS-only avec animation optimisée */
-.scroll-indicator {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 20;
-  cursor: pointer;
-  opacity: 0.8;
-  transition: opacity 0.3s ease;
-}
-
-.scroll-indicator:hover {
-  opacity: 1;
-}
-
-.scroll-chevron {
-  position: relative;
-  width: 40px;
-  height: 40px;
-  animation: bounce-down 2s ease-in-out infinite;
-}
-
-.scroll-chevron span {
-  position: absolute;
-  left: 50%;
-  width: 12px;
-  height: 12px;
-  border-right: 3px solid var(--brutal-mint);
-  border-bottom: 3px solid var(--brutal-mint);
-  transform: translateX(-50%) rotate(45deg);
-  animation-fill-mode: both;
-}
-
-.scroll-chevron span:first-child {
-  top: 8px;
-  animation: chevron-1 2s ease-in-out infinite;
-}
-
-.scroll-chevron span:nth-child(2) {
-  top: 16px;
-  animation: chevron-2 2s ease-in-out infinite;
-}
-
-/* Animation hardware-accelerated <500ms par cycle */
-@keyframes bounce-down {
-  0%, 100% { 
-    transform: translateY(0);
-  }
-  50% { 
-    transform: translateY(6px);
-  }
-}
-
-@keyframes chevron-1 {
-  0%, 100% { 
-    opacity: 0.4;
-    transform: translateX(-50%) rotate(45deg);
-  }
-  50% { 
-    opacity: 1;
-    transform: translateX(-50%) rotate(45deg) scale(1.1);
-  }
-}
-
-@keyframes chevron-2 {
-  0%, 100% { 
-    opacity: 0.7;
-    transform: translateX(-50%) rotate(45deg);
-  }
-  50% { 
-    opacity: 1;
-    transform: translateX(-50%) rotate(45deg) scale(1.1);
-  }
-}
-
-/* Accessibilité - Respect prefer-reduced-motion */
-@media (prefers-reduced-motion: reduce) {
-  .scroll-indicator,
-  .scroll-chevron,
-  .scroll-chevron span {
-    animation: none !important;
-  }
-  
-  .scroll-indicator {
-    opacity: 0.6;
-  }
-}
 </style>

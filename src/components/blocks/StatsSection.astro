@@ -9,7 +9,7 @@ const stats = [
 ];
 ---
 
-<section class="brutal-section brutal-section--white" style="position: relative; overflow-x: hidden; background: var(--brutal-white); border-bottom: 4px solid var(--brutal-black);">
+<section class="brutal-section brutal-section--black" style="position: relative; overflow-x: hidden; background: var(--brutal-black); border-bottom: 4px solid var(--brutal-white);">
   <!-- ASCII Art background -->
   <div style="position: absolute; inset: 0; font-family: 'Space Mono', monospace; font-size: 8rem; line-height: 0.8; opacity: 0.03; z-index: 1; pointer-events: none;">
     <pre style="position: absolute; top: 10%; left: 10%; transform: rotate(-10deg);">⛰️</pre>
@@ -49,7 +49,7 @@ const stats = [
               font-weight: 800;
               font-size: 8rem;
               line-height: 0.8;
-              -webkit-text-stroke: 4px var(--brutal-black);
+              -webkit-text-stroke: 4px var(--brutal-white);
               -webkit-text-fill-color: var(--brutal-mint);
               margin-bottom: 1rem;
             "
@@ -63,7 +63,7 @@ const stats = [
               font-size: 1rem;
               text-transform: uppercase;
               letter-spacing: 0.1em;
-              color: var(--brutal-black);
+              color: var(--brutal-white);
             "
           >
             {stat.label}
@@ -82,7 +82,7 @@ const stats = [
   
   .stat-number:hover {
     animation: glitch 0.5s ease-in-out;
-    -webkit-text-fill-color: var(--brutal-black);
+    -webkit-text-fill-color: var(--brutal-white);
     -webkit-text-stroke: 4px var(--brutal-mint);
   }
   

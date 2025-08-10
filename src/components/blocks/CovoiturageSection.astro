@@ -1,0 +1,35 @@
+---
+import BrutalHeading from '../atoms/BrutalHeading.astro';
+
+export interface Props {
+  id?: string;
+}
+
+const { id } = Astro.props;
+---
+
+<section class="brutal-section brutal-section--mint" id={id}>
+  <div class="brutal-container">
+    
+    <div style="margin-bottom: 4rem; text-align: center;">
+      <BrutalHeading level={2} rotation={-2} shadow={true} class="brutal-title text-l2">
+        🚗 VENIR EN VOITURE
+      </BrutalHeading>
+    </div>
+    
+  </div>
+</section>
+
+<style>
+  .brutal-section {
+    background: var(--brutal-mint);
+    padding: 4rem 2rem;
+    position: relative;
+  }
+
+  @media (max-width: 768px) {
+    .brutal-section {
+      padding: 3rem 1rem;
+    }
+  }
+</style>

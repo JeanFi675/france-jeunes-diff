@@ -53,7 +53,7 @@ const cardRotations = [
 ];
 ---
 
-<section class="categorized-section brutal-section--mint" id={id}>
+<section class="categorized-section brutal-section--white" id={id}>
   <div class="brutal-container">
     <!-- Titre principal -->
     <div class="section-header">
@@ -70,14 +70,14 @@ const cardRotations = [
     </div>
     
     <!-- Bloc Transport -->
-    <BrutalCard variant="default" rotation={0} className="transport-block category-card-hover chaos-rotation-transport" marginBottom="4rem">
+    <BrutalCard variant="mint" rotation={0} className="transport-block category-card-hover chaos-rotation-transport" marginBottom="4rem">
       <div class="category-title">
         🚌 TRANSPORT EN COMMUN
       </div>
       <div class="category-grid transport-grid">
         {transportCards.map((card, index) => (
           <BrutalCardInfo 
-            variant={index % 2 === 0 ? 'black' : 'mint'} 
+            variant={index % 2 === 0 ? 'black' : 'default'} 
             className={`transport-card-${index}`}
           >
             {card.icon && <span class="card-icon">{card.icon}</span>}
@@ -87,7 +87,13 @@ const cardRotations = [
             <p class="card-content">{card.content}</p>
             {card.badge && <BrutalBadge>{card.badge}</BrutalBadge>}
             {card.link && (
-              <a href={card.link} target="_blank" rel="noopener noreferrer" class="card-link">
+              <a 
+                href={card.link} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="card-link"
+                style={index % 2 === 0 ? "color: var(--brutal-mint) !important;" : "color: var(--brutal-mint) !important;"}
+              >
                 → Plus d'infos
               </a>
             )}
@@ -134,7 +140,13 @@ const cardRotations = [
                 <p class="card-content">{card.content}</p>
                 {card.badge && <BrutalBadge>{card.badge}</BrutalBadge>}
                 {card.link && (
-                  <a href={card.link} target="_blank" rel="noopener noreferrer" class="card-link">
+                  <a 
+                    href={card.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="card-link"
+                    style={index % 2 === 0 ? "color: var(--brutal-mint) !important;" : "color: var(--brutal-mint) !important;"}
+                  >
                     → Plus d'infos
                   </a>
                 )}
@@ -147,14 +159,14 @@ const cardRotations = [
     
     {/* Bloc Commerces de proximité - affiché seulement si des cartes */}
     {foodCards.length > 0 && (
-      <BrutalCard variant="default" rotation={0} className="food-block category-card-hover chaos-rotation-food" marginBottom="4rem">
+      <BrutalCard variant="mint" rotation={0} className="food-block category-card-hover chaos-rotation-food" marginBottom="4rem">
         <div class="category-title">
           🏪 COMMERCES DE PROXIMITÉ
         </div>
         <div class="category-grid food-grid">
           {foodCards.map((card, index) => (
             <BrutalCardInfo 
-              variant={card.variant || (index % 2 === 0 ? 'mint' : 'black')} 
+              variant={card.variant || (index % 2 === 0 ? 'default' : 'black')} 
               className={`food-card-${index}`}
             >
               {card.icon && <span class="card-icon">{card.icon}</span>}
@@ -164,7 +176,13 @@ const cardRotations = [
               <p class="card-content">{card.content}</p>
               {card.badge && <BrutalBadge>{card.badge}</BrutalBadge>}
               {card.link && (
-                <a href={card.link} target="_blank" rel="noopener noreferrer" class="card-link">
+                <a 
+                  href={card.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="card-link"
+                  style={card.variant === 'black' ? "color: var(--brutal-mint) !important;" : "color: var(--brutal-mint) !important;"}
+                >
                   → S'y rendre
                 </a>
               )}
@@ -184,7 +202,7 @@ const cardRotations = [
 
 <style>
   .categorized-section {
-    background: var(--brutal-mint);
+    background: var(--brutal-white);
     padding: 4rem 2rem;
     position: relative;
   }
@@ -201,7 +219,7 @@ const cardRotations = [
   .section-subtitle {
     font-size: 1.25rem;
     margin-top: 1rem;
-    color: var(--brutal-mint);
+    color: var(--brutal-black);
     font-weight: 600;
   }
 
@@ -212,9 +230,9 @@ const cardRotations = [
     /* Force styles inline à prendre priorité */
   }
 
-  /* Transport: Blanc avec contour et ombre noir */
+  /* Transport: Menthe avec contour et ombre noir */
   .transport-block {
-    background: var(--brutal-white);
+    background: var(--brutal-mint);
     border: 4px solid var(--brutal-black);
     box-shadow: 12px 12px 0px var(--brutal-black);
     padding: 2rem;
@@ -228,16 +246,16 @@ const cardRotations = [
     padding: 2rem;
   }
 
-  /* Restauration: Blanc avec contour et ombre noir */
+  /* Commerces: Menthe avec contour et ombre noir */
   .food-block {
-    background: var(--brutal-white);
+    background: var(--brutal-mint);
     border: 4px solid var(--brutal-black);
     box-shadow: 12px 12px 0px var(--brutal-black);
     padding: 2rem;
   }
 
   .category-title {
-    background: var(--brutal-mint);
+    background: var(--brutal-white);
     color: var(--brutal-black);
     font-family: 'Space Mono', monospace;
     font-size: 1.5rem;
@@ -252,6 +270,12 @@ const cardRotations = [
     position: relative;
     left: 50%;
     transform: translateX(-50%);
+  }
+
+  /* Titre spécial pour hébergement sur fond noir */
+  .accommodation-block .category-title {
+    background: var(--brutal-white);
+    color: var(--brutal-black);
   }
 
   .category-grid {
@@ -305,17 +329,23 @@ const cardRotations = [
 
   /* Couleur des liens selon le variant de la carte */
   /* Cartes noires -> liens menthe */
-  :global(.brutal-card-info--black) .card-link {
+  :global(.brutal-card-info--black) .card-link,
+  :global(.brutal-card-info--black) a.card-link,
+  :global(.brutal-card-info--black) a[class*="card-link"] {
     color: var(--brutal-mint) !important;
   }
   
   /* Cartes menthe -> liens noirs */
-  :global(.brutal-card-info--mint) .card-link {
+  :global(.brutal-card-info--mint) .card-link,
+  :global(.brutal-card-info--mint) a.card-link,
+  :global(.brutal-card-info--mint) a[class*="card-link"] {
     color: var(--brutal-black) !important;
   }
   
   /* Cartes blanches/default -> liens menthe */
-  :global(.brutal-card-info--default) .card-link {
+  :global(.brutal-card-info--default) .card-link,
+  :global(.brutal-card-info--default) a.card-link,
+  :global(.brutal-card-info--default) a[class*="card-link"] {
     color: var(--brutal-mint) !important;
   }
 

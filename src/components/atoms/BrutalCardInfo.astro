@@ -48,5 +48,19 @@ const allClasses = `${cardClass} ${className}`.trim();
   transform: scale(1.1);
 }
 
-/* Animation glitch supprimée - remplacée par zoom */
+/* Couleurs des liens selon le variant */
+.brutal-card-info a,
+.brutal-card-info .card-link {
+  color: var(--brutal-mint) !important;
+}
+
+.brutal-card-info--black a,
+.brutal-card-info--black .card-link {
+  color: var(--brutal-mint) !important;
+}
+
+.brutal-card-info--mint a,
+.brutal-card-info--mint .card-link {
+  color: var(--brutal-black) !important;
+}
 </style>

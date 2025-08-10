@@ -57,7 +57,7 @@ export const competitionData = {
       title: "SUPERMARCHÉ BI1",
       content: "59 place des Arcades\n\n• Lun-Sam: 8h-20h\n• Dimanche: 8h30-12h30\n• Parking gratuit disponible",
       icon: "🛒",
-      variant: "mint",
+      variant: "default",
       link: "https://maps.google.com/maps?q=Bi1+59+place+des+Arcades+74800+Saint-Pierre-en-Faucigny"
     },
     {
@@ -71,7 +71,7 @@ export const competitionData = {
       title: "CRÉDIT AGRICOLE + DAB",
       content: "81 place des Arcades\n\n• DAB disponible 24h/7j\n• Agence: Mar-Ven 9h-12h / 14h-18h\n• Samedi: 9h-12h",
       icon: "💳",
-      variant: "mint",
+      variant: "default",
       link: "https://maps.google.com/maps?q=Crédit+Agricole+81+place+des+Arcades+74800+Saint-Pierre-en-Faucigny"
     }
   ],
