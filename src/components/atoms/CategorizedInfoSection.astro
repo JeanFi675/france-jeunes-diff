@@ -22,6 +22,7 @@ export interface Props {
     icon?: string;
     badge?: string;
     variant?: 'default' | 'mint' | 'black';
+    link?: string;
   }>;
   foodCards: Array<{
     title: string;
@@ -95,49 +96,35 @@ const cardRotations = [
       </div>
     </BrutalCard>
     
-    <!-- Bloc Hébergement -->
-    <BrutalCard variant="black" rotation={0} className="accommodation-block category-card-hover chaos-rotation-accommodation" marginBottom="4rem">
-      <div class="category-title">
-        🏨 OÙ S'HÉBERGER
-      </div>
-      <div class="category-grid accommodation-grid">
-        {accommodationCards.map((card, index) => (
-          <BrutalCardInfo 
-            variant={index % 2 === 0 ? 'default' : 'mint'} 
-            className={`accommodation-card-${index}`}
-          >
-            {card.icon && <span class="card-icon">{card.icon}</span>}
-            <BrutalHeading level={4} rotation={0} noShadow={true} textColor="black" class="card-heading">
-              {card.title}
-            </BrutalHeading>
-            <p class="card-content">{card.content}</p>
-            {card.badge && <BrutalBadge>{card.badge}</BrutalBadge>}
-          </BrutalCardInfo>
-        ))}
-      </div>
-    </BrutalCard>
+    {/* Bloc Hébergement & Restauration - affiché seulement si des cartes */}
+    {accommodationCards.length > 0 && (
+      <BrutalCard variant="black" rotation={0} className="accommodation-block category-card-hover chaos-rotation-accommodation" marginBottom="4rem">
+        <div class="category-title">
+          🏨 HÉBERGEMENT & RESTAURATION
+        </div>
+        <div class="category-grid accommodation-grid">
+          {accommodationCards.map((card, index) => (
+            <BrutalCardInfo 
+              variant={index % 2 === 0 ? 'default' : 'mint'} 
+              className={`accommodation-card-${index}`}
+            >
+              {card.icon && <span class="card-icon">{card.icon}</span>}
+              <BrutalHeading level={4} rotation={0} noShadow={true} textColor="black" class="card-heading">
+                {card.title}
+              </BrutalHeading>
+              <p class="card-content">{card.content}</p>
+              {card.badge && <BrutalBadge>{card.badge}</BrutalBadge>}
+              {card.link && (
+                <a href={card.link} target="_blank" rel="noopener noreferrer" class="card-link">
+                  → Plus d'infos
+                </a>
+              )}
+            </BrutalCardInfo>
+          ))}
+        </div>
+      </BrutalCard>
+    )}
     
-    <!-- Bloc Restauration -->
-    <BrutalCard variant="default" rotation={0} className="food-block category-card-hover chaos-rotation-food" marginBottom="2rem">
-      <div class="category-title">
-        🍽️ SE RESTAURER
-      </div>
-      <div class="category-grid food-grid">
-        {foodCards.map((card, index) => (
-          <BrutalCardInfo 
-            variant={index % 2 === 0 ? 'black' : 'mint'} 
-            className={`food-card-${index}`}
-          >
-            {card.icon && <span class="card-icon">{card.icon}</span>}
-            <BrutalHeading level={4} rotation={0} noShadow={true} textColor={index % 2 === 0 ? 'white' : 'black'} class="card-heading">
-              {card.title}
-            </BrutalHeading>
-            <p class="card-content">{card.content}</p>
-            {card.badge && <BrutalBadge>{card.badge}</BrutalBadge>}
-          </BrutalCardInfo>
-        ))}
-      </div>
-    </BrutalCard>
     
     <!-- Slot pour contenu additionnel (CTA button) -->
     <div class="cta-section">

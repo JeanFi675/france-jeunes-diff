@@ -1,0 +1,178 @@
+---
+export interface Props {
+  id?: string;
+}
+
+const { id } = Astro.props;
+---
+
+<section class="brutal-section brutal-section--mint" id={id}>
+  <div class="brutal-container">
+    
+    <div class="brutal-card hebergement-block" style="background: var(--brutal-black); border: 4px solid var(--brutal-white); box-shadow: 12px 12px 0px var(--brutal-white); padding: 2rem; transform: rotate(2deg); position: relative; z-index: 10; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+      
+      <div class="category-title">
+        🏨 HÉBERGEMENT & RESTAURATION
+      </div>
+      
+      <p class="hebergement-description">
+        Les <span style="
+          background: var(--brutal-mint);
+          color: var(--brutal-black);
+          padding: 0.1rem 0.4rem;
+          display: inline-block;
+          font-family: 'Space Mono', monospace;
+          font-size: 1rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.02em;
+          transform: rotate(-0.5deg);
+        ">offices de tourisme</span> de La Roche-sur-Foron et Bonneville peuvent vous accompagner pour organiser votre séjour : <span style="
+          background: var(--brutal-mint);
+          color: var(--brutal-black);
+          padding: 0.1rem 0.4rem;
+          display: inline-block;
+          font-family: 'Space Mono', monospace;
+          font-size: 1rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.02em;
+          transform: rotate(0.5deg);
+        ">hébergements</span>, <span style="
+          background: var(--brutal-mint);
+          color: var(--brutal-black);
+          padding: 0.1rem 0.4rem;
+          display: inline-block;
+          font-family: 'Space Mono', monospace;
+          font-size: 1rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.02em;
+          transform: rotate(-0.5deg);
+        ">restaurants</span>.
+      </p>
+      
+      <div class="buttons-grid">
+        <a href="http://www.larochesurforon.com/hebergement/centrale-de-disponibilites.htm" target="_blank" rel="noopener noreferrer" class="brutal-office-btn brutal-office-btn--roche">
+          <span class="btn-emoji">🔗</span> LA ROCHE-SUR-FORON
+        </a>
+        
+        <a href="https://www.tourisme-faucigny-glieres.fr/" target="_blank" rel="noopener noreferrer" class="brutal-office-btn brutal-office-btn--bonneville">
+          <span class="btn-emoji">🔗</span> BONNEVILLE FAUCIGNY-GLIÈRES
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<style>
+  .brutal-section {
+    background: var(--brutal-mint);
+    padding: 4rem 2rem;
+    position: relative;
+  }
+
+  /* Effet zoom hover pour la BrutalCard comme transport */
+  .hebergement-block:hover {
+    transform: rotate(2deg) scale(1.03) !important;
+    box-shadow: 16px 16px 0px var(--brutal-white) !important;
+  }
+
+  /* Emoji plus gros dans les boutons */
+  .btn-emoji {
+    font-size: 1.5em;
+    margin-right: 0.5rem;
+  }
+
+  .category-title {
+    background: var(--brutal-mint);
+    color: var(--brutal-black);
+    font-family: 'Space Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: none;
+    padding: 1rem 2rem;
+    margin: 2rem auto;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .hebergement-description {
+    color: var(--brutal-mint);
+    font-size: 1.25rem;
+    line-height: 1.5;
+    margin: 2rem auto 3rem auto;
+    max-width: 600px;
+    text-align: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+  }
+
+  .buttons-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* Boutons offices avec effet brutal */
+  .brutal-office-btn {
+    background: var(--brutal-white);
+    color: var(--brutal-black);
+    border: 4px solid var(--brutal-mint);
+    padding: 1.5rem 2rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    box-shadow: 8px 8px 0px var(--brutal-mint);
+    transition: all 0.2s ease;
+    display: block;
+  }
+
+  .brutal-office-btn--roche {
+    transform: rotate(-2deg);
+  }
+
+  .brutal-office-btn--bonneville {
+    transform: rotate(2deg);
+  }
+
+  /* Effet qui claque au hover */
+  .brutal-office-btn:hover {
+    transform: rotate(0deg) translate(-4px, -4px) scale(1.05);
+    box-shadow: 12px 12px 0px var(--brutal-white);
+    background: var(--brutal-mint);
+    border: 4px solid var(--brutal-white);
+  }
+
+  @media (max-width: 768px) {
+    .brutal-section {
+      padding: 3rem 1rem;
+    }
+    
+    .buttons-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    
+    .hebergement-description {
+      font-size: 1rem;
+      margin: 1.5rem auto 2rem auto;
+    }
+    
+    .category-title {
+      font-size: 1.3rem;
+      padding: 1rem 1.5rem;
+    }
+  }
+</style>

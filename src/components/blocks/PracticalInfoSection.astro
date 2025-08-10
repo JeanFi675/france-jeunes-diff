@@ -6,17 +6,13 @@ import competitionData from '../../data/competition-data.js';
 
 <CategorizedInfoSection
   title="INFOS PRATIQUES"
-  subtitle="Hébergement • Transport • Restauration"
+  subtitle="Transport en commun"
   icon="📍"
   transportCards={competitionData.transport}
-  accommodationCards={competitionData.accommodation}
-  foodCards={competitionData.food}
+  accommodationCards={[]}
+  foodCards={[]}
   id="pratique"
 >
-  <!-- Bouton CTA en bas de section (slot pour contenu additionnel) -->
-  <BrutalButton href="#venue" variant="primary" rotation={-1}>
-    🗺️ VOIR LE PLAN D'ACCÈS
-  </BrutalButton>
 </CategorizedInfoSection>
 
 <style>

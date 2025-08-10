@@ -6,6 +6,7 @@ import HeroSection from '../components/blocks/HeroSection.astro';
 import PublicWelcomeSection from '../components/blocks/PublicWelcomeSection.astro';
 import ProgramSection from '../components/blocks/ProgramSection.astro';
 import PracticalInfoSection from '../components/blocks/PracticalInfoSection.astro';
+import HebergementSection from '../components/blocks/HebergementSection.astro';
 import VenueSection from '../components/blocks/VenueSection.astro';
 import StatsSection from '../components/blocks/StatsSection.astro';
 import ExperienceSection from '../components/blocks/ExperienceSection.astro';
@@ -27,8 +28,11 @@ const metadata = {
   <!-- PROGRAMME: Horaires des 2 jours -->
   <ProgramSection background="black" />
   
-  <!-- PRATIQUE: Hébergement + Transport + Restauration (fusion DRY) -->
+  <!-- PRATIQUE: Transport en commun -->
   <PracticalInfoSection />
+  
+  <!-- HÉBERGEMENT: Fusion hébergement + restauration avec offices tourisme -->
+  <HebergementSection />
   
   <!-- STATS: Chiffres d'impact (REPOSITIONNÉ pour respiration cognitive) -->
   <StatsSection />

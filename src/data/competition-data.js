@@ -10,28 +10,21 @@ export const competitionData = {
     eventDate: new Date('2026-05-16'),
   },
   
-  // Section Hébergement
+  // Section Hébergement & Restauration fusionnée
   accommodation: [
     {
-      title: "Office Tourisme La Roche",
-      content: "larochesurforon.com • +33 4 50 03 36 68 • Hôtels, gîtes, chambres d'hôtes",
+      title: "OFFICE LA ROCHE-SUR-FORON",
+      content: "Hébergements & restaurants\n\n• Hôtels, gîtes, chambres d'hôtes\n• Restaurants traditionnels et rapides\n• 04 50 03 36 68",
       icon: "🏨",
-      badge: "RÉSERVATIONS",
-      variant: "mint"
+      variant: "mint",
+      link: "http://www.larochesurforon.com/hebergement/centrale-de-disponibilites.htm"
     },
     {
-      title: "Office Tourisme Bonneville", 
-      content: "tourism.tourisme-faucigny-glieres.fr • +33 4 50 97 38 37 • Tous hébergements",
-      icon: "🏢",
-      badge: "CONSEIL EXPERT",
-      variant: "default"
-    },
-    {
-      title: "Partenaires Hébergement",
-      content: "Partenaires officiels à venir • Tarifs préférentiels négociés • Info bientôt disponible",
-      icon: "🤝",
-      badge: "BIENTÔT",
-      variant: "default"
+      title: "OFFICE BONNEVILLE FAUCIGNY-GLIÈRES", 
+      content: "Territoire complet\n\n• Zone Genève-Annecy-Chamonix\n• Hébergements & restauration\n• 04 50 97 38 37",
+      icon: "🏔️",
+      variant: "default",
+      link: "https://www.tourisme-faucigny-glieres.fr/"
     }
   ],
   
@@ -60,30 +53,8 @@ export const competitionData = {
     }
   ],
   
-  // Section Restauration
-  food: [
-    {
-      title: "Supermarchés",
-      content: "BI1 (59 place Arcades) • Netto La Roche • Intermarché • Courses et pique-niques",
-      icon: "🏪",
-      badge: "COURSES",
-      variant: "default"
-    },
-    {
-      title: "Restaurants sur place",
-      content: "La Piccola Sicilia (pizzas) • Anatole Alpes (turc) • À St-Pierre et villes proches",
-      icon: "🍽️",
-      badge: "PROCHE",
-      variant: "mint"
-    },
-    {
-      title: "Petit-déjeuner",
-      content: "Boulangerie La Panière • Ouverture tôt • Sandwichs pour la journée",
-      icon: "🥐",
-      badge: "DÈS 6H30",
-      variant: "default"
-    }
-  ],
+  // Section Restauration supprimée - fusionnée avec hébergement
+  food: [],
   
   // Section Public
   publicInfo: {

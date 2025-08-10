@@ -12,7 +12,7 @@ const daysLeft = Math.floor((eventDate - today) / (1000 * 60 * 60 * 24));
 const isEventSoon = daysLeft < 30;
 ---
 
-<section class="brutal-section brutal-section--black" style="position: relative; overflow: hidden;">
+<section class="brutal-section brutal-section--black" style="position: relative; overflow-x: hidden;">
   <!-- Pattern background -->
   <div 
     class="brutal-pattern-diagonal" 
@@ -122,11 +122,13 @@ const isEventSoon = daysLeft < 30;
     <!-- 9. Navigation HIÉRARCHISÉE (PROGRAMME prioritaire) -->
     <div class="hero-navigation" style="
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       grid-template-rows: auto auto;
       gap: 1.5rem 2rem;
       max-width: 900px;
       margin: 3rem auto 0;
+      padding: 0 1rem;
+      overflow: visible;
     ">
       <!-- PROGRAMME - Bouton principal LARGE (2 colonnes) -->
       <BrutalButton 
@@ -183,8 +185,23 @@ const isEventSoon = daysLeft < 30;
 
 @media (max-width: 768px) {
   .hero-navigation {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 1rem !important;
+    padding: 1rem !important;
+    margin-bottom: 2rem;
+    overflow: visible !important;
+  }
+
+  /* Assurer que tous les boutons sont visibles sur mobile */
+  .hero-navigation > * {
+    width: 100%;
+    margin: 0;
+    max-width: 100%;
+  }
+
+  /* Supprimer les rotations sur mobile pour éviter débordement */
+  .hero-navigation :global(.brutal-button) {
+    transform: rotate(0deg) !important;
   }
   
   .partner-logos-container {
