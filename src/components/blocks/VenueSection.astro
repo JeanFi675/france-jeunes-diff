@@ -9,117 +9,117 @@ export interface Props {
 const { id } = Astro.props;
 ---
 
-<section id={id} class="brutal-section" style="position: relative; overflow-x: hidden; background: var(--brutal-mint);">
+<section id={id} class="brutal-section brutal-arena-section">
   
-  <div class="brutal-container" style="position: relative; z-index: 10;">
-    <div style="text-align: center; margin-bottom: 4rem;">
-      <BrutalHeading level={2} shadow={true} class="brutal-title text-l2" rotation={-1} style="color: var(--brutal-black); text-shadow: 4px 4px 0 var(--brutal-white);">
+  <div class="brutal-container">
+    <div class="brutal-arena-header">
+      <BrutalHeading level={2} shadow={true} class="brutal-title brutal-arena-title text-l2" rotation={-1}>
         L'ARÈNE DES CHAMPIONS
       </BrutalHeading>
     </div>
     
     <!-- Statistiques -->
-    <div class="brutal-grid" style="grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 4rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+    <div class="brutal-stats-grid">
       <!-- Stat 1 -->
       <BrutalCard variant="white" rotation={-2} textAlign="center">
-        <div style="font-family: 'Inter', sans-serif; font-weight: 800; font-size: var(--size-l4); line-height: 1; color: var(--brutal-black); margin-bottom: 0.5rem;">
+        <div class="brutal-stat-number">
           14,5M
         </div>
-        <div style="font-weight: 700; font-size: 0.875rem; text-transform: uppercase; color: var(--brutal-black);">
+        <div class="brutal-stat-label">
           HAUTEUR
         </div>
       </BrutalCard>
       
       <!-- Stat 2 -->
       <BrutalCard variant="default" rotation={1} textAlign="center">
-        <div style="font-family: 'Inter', sans-serif; font-weight: 800; font-size: var(--size-l4); line-height: 1; color: var(--brutal-black); margin-bottom: 0.5rem;">
+        <div class="brutal-stat-number">
           705M²
         </div>
-        <div style="font-weight: 700; font-size: 0.875rem; text-transform: uppercase; color: var(--brutal-black);">
+        <div class="brutal-stat-label">
           SURFACE GRIMPABLE
         </div>
       </BrutalCard>
       
       <!-- Stat 3 -->
       <BrutalCard variant="white" rotation={-1} textAlign="center">
-        <div style="font-family: 'Inter', sans-serif; font-weight: 800; font-size: var(--size-l4); line-height: 1; color: var(--brutal-black); margin-bottom: 0.5rem;">
+        <div class="brutal-stat-number">
           8M
         </div>
-        <div style="font-weight: 700; font-size: 0.875rem; text-transform: uppercase; color: var(--brutal-black);">
+        <div class="brutal-stat-label">
           AVANCÉE
         </div>
       </BrutalCard>
     </div>
     
     <!-- Galerie photos du mur -->
-    <div class="photo-gallery" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; max-width: 1200px; margin: 0 auto;">
+    <div class="brutal-gallery">
       <!-- Photo 1 -->
-      <div class="gallery-item" data-image="0" style="cursor: pointer; position: relative;">
-        <div style="transform: rotate(-1deg); border: 6px solid var(--brutal-black); box-shadow: 8px 8px 0 var(--brutal-white); overflow: hidden; height: 280px;">
+      <div class="brutal-gallery-item" data-image="0">
+        <div class="brutal-photo-frame brutal-photo-frame--tilt-left">
           <img 
+            class="brutal-photo"
             src="/france-jeunes-diff/IMG_4364_opt.jpg" 
             alt="Mur d'escalade principal du complexe sportif"
-            style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;"
             loading="lazy"
           />
         </div>
-        <div class="photo-overlay" style="position: absolute; top: 0; right: 0; background: var(--brutal-black); color: var(--brutal-white); padding: 0.5rem; transform: rotate(10deg); font-size: 0.75rem; font-weight: 700;">
+        <div class="brutal-photo-badge">
           📸 1/3
         </div>
       </div>
       
       <!-- Photo 2 -->
-      <div class="gallery-item" data-image="1" style="cursor: pointer; position: relative;">
-        <div style="transform: rotate(1deg); border: 6px solid var(--brutal-black); box-shadow: 8px 8px 0 var(--brutal-white); overflow: hidden; height: 280px;">
+      <div class="brutal-gallery-item" data-image="1">
+        <div class="brutal-photo-frame brutal-photo-frame--tilt-right">
           <img 
+            class="brutal-photo"
             src="/france-jeunes-diff/IMG_4355_opt.jpg" 
             alt="Vue détaillée du mur d'escalade"
-            style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;"
             loading="lazy"
           />
         </div>
-        <div class="photo-overlay" style="position: absolute; top: 0; right: 0; background: var(--brutal-black); color: var(--brutal-white); padding: 0.5rem; transform: rotate(10deg); font-size: 0.75rem; font-weight: 700;">
+        <div class="brutal-photo-badge">
           📸 2/3
         </div>
       </div>
       
       <!-- Photo 3 -->
-      <div class="gallery-item" data-image="2" style="cursor: pointer; position: relative;">
-        <div style="transform: rotate(-0.5deg); border: 6px solid var(--brutal-black); box-shadow: 8px 8px 0 var(--brutal-white); overflow: hidden; height: 280px;">
+      <div class="brutal-gallery-item" data-image="2">
+        <div class="brutal-photo-frame brutal-photo-frame--tilt-slight">
           <img 
+            class="brutal-photo"
             src="/france-jeunes-diff/coupe-deurope-escalade-jeunes--2565jpg_53013559053_o.jpg" 
             alt="Compétition d'escalade en action"
-            style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;"
             loading="lazy"
           />
         </div>
-        <div class="photo-overlay" style="position: absolute; top: 0; right: 0; background: var(--brutal-black); color: var(--brutal-white); padding: 0.5rem; transform: rotate(10deg); font-size: 0.75rem; font-weight: 700;">
+        <div class="brutal-photo-badge">
           📸 3/3
         </div>
       </div>
     </div>
     
     <!-- Modal Gallery -->
-    <div id="photo-modal" class="photo-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; cursor: pointer;">
-      <div class="modal-content" style="position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
-        <img id="modal-image" src="" alt="" style="max-width: 90%; max-height: 90%; object-fit: contain; border: 8px solid var(--brutal-white); box-shadow: 12px 12px 0 var(--brutal-mint);" />
+    <div id="photo-modal" class="brutal-modal">
+      <div class="brutal-modal-content">
+        <img id="modal-image" class="brutal-modal-image" src="" alt="" />
         
         <!-- Bouton fermeture -->
-        <button id="close-modal" style="position: absolute; top: 2rem; right: 2rem; background: var(--brutal-white); border: 4px solid var(--brutal-black); color: var(--brutal-black); font-size: 2rem; font-weight: 900; padding: 0.5rem 1rem; cursor: pointer; transform: rotate(-2deg);">
+        <button id="close-modal" class="brutal-modal-close">
           ✕
         </button>
         
         <!-- Navigation -->
-        <button id="prev-photo" style="position: absolute; left: 2rem; top: 50%; transform: translateY(-50%) rotate(-2deg); background: var(--brutal-mint); border: 4px solid var(--brutal-black); color: var(--brutal-black); font-size: 1.5rem; font-weight: 900; padding: 1rem; cursor: pointer;">
+        <button id="prev-photo" class="brutal-modal-nav brutal-modal-nav--prev">
           ←
         </button>
         
-        <button id="next-photo" style="position: absolute; right: 2rem; top: 50%; transform: translateY(-50%) rotate(2deg); background: var(--brutal-mint); border: 4px solid var(--brutal-black); color: var(--brutal-black); font-size: 1.5rem; font-weight: 900; padding: 1rem; cursor: pointer;">
+        <button id="next-photo" class="brutal-modal-nav brutal-modal-nav--next">
           →
         </button>
         
         <!-- Compteur -->
-        <div id="photo-counter" style="position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%) rotate(-1deg); background: var(--brutal-white); border: 4px solid var(--brutal-black); color: var(--brutal-black); font-family: 'Space Mono', monospace; font-weight: 700; padding: 0.5rem 1rem;">
+        <div id="photo-counter" class="brutal-modal-counter">
           1 / 3
         </div>
       </div>
@@ -128,75 +128,254 @@ const { id } = Astro.props;
 </section>
 
 <style>
-  .photo-gallery {
+  /* Section principale */
+  .brutal-arena-section {
+    position: relative;
+    overflow-x: hidden;
+    background: var(--brutal-mint);
+  }
+
+  .brutal-arena-section .brutal-container {
+    position: relative;
+    z-index: 10;
+  }
+
+  .brutal-arena-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .brutal-arena-title {
+    color: var(--brutal-black);
+    text-shadow: 4px 4px 0 var(--brutal-white);
+  }
+
+  /* Grille de statistiques */
+  .brutal-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 4rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .brutal-stat-number {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: var(--size-l4);
+    line-height: 1;
+    color: var(--brutal-black);
+    margin-bottom: 0.5rem;
+  }
+
+  .brutal-stat-label {
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    color: var(--brutal-black);
+  }
+
+  /* Galerie photos */
+  .brutal-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
     animation: slide-brutal 1s ease-out forwards;
   }
-  
-  .gallery-item:hover img {
-    transform: scale(1.05);
+
+  .brutal-gallery-item {
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s ease;
   }
-  
-  .gallery-item:hover {
+
+  .brutal-gallery-item:hover {
     transform: translateY(-4px);
   }
-  
-  .photo-overlay {
+
+  .brutal-photo-frame {
+    border: 6px solid var(--brutal-black);
+    box-shadow: 8px 8px 0 var(--brutal-white);
+    overflow: hidden;
+    height: 280px;
+  }
+
+  .brutal-photo-frame--tilt-left {
+    transform: rotate(-1deg);
+  }
+
+  .brutal-photo-frame--tilt-right {
+    transform: rotate(1deg);
+  }
+
+  .brutal-photo-frame--tilt-slight {
+    transform: rotate(-0.5deg);
+  }
+
+  .brutal-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .brutal-gallery-item:hover .brutal-photo {
+    transform: scale(1.05);
+  }
+
+  .brutal-photo-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    padding: 0.5rem;
+    transform: rotate(10deg);
+    font-size: 0.75rem;
+    font-weight: 700;
     opacity: 0.9;
     transition: opacity 0.3s ease;
   }
-  
-  .gallery-item:hover .photo-overlay {
+
+  .brutal-gallery-item:hover .brutal-photo-badge {
     opacity: 1;
   }
-  
-  /* Modal Styles */
-  .photo-modal {
+
+  /* Modal */
+  .brutal-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    cursor: pointer;
     animation: fadeIn 0.3s ease-out;
   }
-  
+
+  .brutal-modal-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .brutal-modal-image {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border: 8px solid var(--brutal-white);
+    box-shadow: 12px 12px 0 var(--brutal-mint);
+    animation: zoomIn 0.3s ease-out;
+  }
+
+  .brutal-modal-close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    background: var(--brutal-white);
+    border: 4px solid var(--brutal-black);
+    color: var(--brutal-black);
+    font-size: 2rem;
+    font-weight: 900;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transform: rotate(-2deg);
+    transition: transform 0.2s ease;
+  }
+
+  .brutal-modal-close:hover {
+    transform: rotate(-2deg) scale(1.1);
+  }
+
+  .brutal-modal-nav {
+    position: absolute;
+    top: 50%;
+    background: var(--brutal-mint);
+    border: 4px solid var(--brutal-black);
+    color: var(--brutal-black);
+    font-size: 1.5rem;
+    font-weight: 900;
+    padding: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  .brutal-modal-nav--prev {
+    left: 2rem;
+    transform: translateY(-50%) rotate(-2deg);
+  }
+
+  .brutal-modal-nav--next {
+    right: 2rem;
+    transform: translateY(-50%) rotate(2deg);
+  }
+
+  .brutal-modal-nav:hover {
+    transform: translateY(-50%) rotate(0deg) scale(1.1);
+  }
+
+  .brutal-modal-counter {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) rotate(-1deg);
+    background: var(--brutal-white);
+    border: 4px solid var(--brutal-black);
+    color: var(--brutal-black);
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+  }
+
+  /* Animations */
   @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
   }
-  
-  #modal-image {
-    animation: zoomIn 0.3s ease-out;
-  }
-  
+
   @keyframes zoomIn {
     from { transform: scale(0.8); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
   }
-  
+
   /* Responsive */
   @media (max-width: 768px) {
-    .brutal-grid {
+    .brutal-stats-grid {
       grid-template-columns: 1fr;
     }
     
-    .photo-gallery {
+    .brutal-gallery {
       grid-template-columns: 1fr;
       gap: 2rem;
     }
     
-    .photo-gallery .gallery-item > div {
-      height: 200px !important;
+    .brutal-photo-frame {
+      height: 200px;
     }
     
-    #prev-photo, #next-photo {
-      font-size: 1rem !important;
-      padding: 0.5rem !important;
+    .brutal-modal-nav {
+      font-size: 1rem;
+      padding: 0.5rem;
     }
     
-    #close-modal {
-      font-size: 1.5rem !important;
-      padding: 0.25rem 0.5rem !important;
+    .brutal-modal-close {
+      font-size: 1.5rem;
+      padding: 0.25rem 0.5rem;
     }
   }
   
   @media (max-width: 480px) {
-    .photo-gallery .gallery-item > div {
-      height: 180px !important;
+    .brutal-photo-frame {
+      height: 180px;
     }
   }
 </style>
@@ -220,7 +399,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const nextBtn = document.getElementById('next-photo');
   
   // Ouvrir modal
-  document.querySelectorAll('.gallery-item').forEach((item, index) => {
+  document.querySelectorAll('.brutal-gallery-item').forEach((item, index) => {
     item.addEventListener('click', () => {
       currentImageIndex = index;
       showModal();
