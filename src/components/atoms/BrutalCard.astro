@@ -7,6 +7,8 @@ export interface Props {
   marginRight?: string;
   marginBottom?: string;
   textAlign?: 'left' | 'center' | 'right';
+  customBorder?: string;
+  customShadow?: string;
 }
 
 const { 
@@ -16,7 +18,9 @@ const {
   zIndex,
   marginRight,
   marginBottom,
-  textAlign = 'left'
+  textAlign = 'left',
+  customBorder,
+  customShadow
 } = Astro.props;
 
 const cardClass = variant === 'default' 
@@ -38,6 +42,8 @@ if (zIndex !== undefined) style += `z-index: ${zIndex}; `;
 if (marginRight) style += `margin-right: ${marginRight}; `;
 if (marginBottom) style += `margin-bottom: ${marginBottom}; `;
 if (textAlign !== 'left') style += `text-align: ${textAlign}; `;
+if (customBorder) style += `border: ${customBorder} !important; `;
+if (customShadow) style += `box-shadow: ${customShadow} !important; `;
 ---
 
 <div class={allClasses} style={style}>
