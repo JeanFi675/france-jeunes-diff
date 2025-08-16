@@ -57,10 +57,13 @@ const rotationClass = rotation > 0 ? 'brutal-card--rot-positive'
 <style>
   .champion-card {
     position: relative;
-    height: 280px; /* Réduit pour moins d'espace vide */
+    height: 280px;
     perspective: 1000px;
     cursor: pointer;
     transition: transform 0.2s ease;
+    z-index: 1;
+    box-sizing: border-box !important;
+    /* Suppression margin pour compatibilité avec nouvelle logique grid */
   }
 
   .card-front, .card-back {
@@ -184,6 +187,28 @@ const rotationClass = rotation > 0 ? 'brutal-card--rot-positive'
     font-size: 0.875rem;
   }
 
+  /* Tablet : optimisation pour largeur réduite */
+  @media (max-width: 1024px) and (min-width: 769px) {
+    .champion-card {
+      height: 260px; /* Légèrement réduit */
+    }
+    
+    .champion-photo {
+      width: 90px;
+      height: 90px;
+      margin-bottom: 0.5rem;
+    }
+    
+    .champion-name {
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+    }
+    
+    .st-pierre-victory {
+      font-size: 0.75rem;
+    }
+  }
+
   /* Mobile: tap to expand */
   @media (max-width: 768px) {
     .champion-card:active .card-front {
@@ -207,6 +232,7 @@ const rotationClass = rotation > 0 ? 'brutal-card--rot-positive'
   /* Hover micro-interactions */
   .champion-card:hover {
     transform: rotate(0deg) scale(1.02);
+    z-index: 10; /* Priorité au hover pour éviter chevauchement */
   }
 
   .champion-photo {
