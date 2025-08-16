@@ -1,0 +1,960 @@
+---
+import BrutalHeading from '../atoms/BrutalHeading.astro';
+import BrutalCard from '../atoms/BrutalCard.astro';
+import BrutalBadge from '../atoms/BrutalBadge.astro';
+import ChampionCard from '../atoms/ChampionCard.astro';
+import ChampionsGrid from '../atoms/ChampionsGrid.astro';
+import VideosGrid from '../atoms/VideosGrid.astro';
+import HistoryCard from '../atoms/HistoryCard.astro';
+
+// Photos du mur à intégrer dans les données techniques
+const wallPhotos = [
+  { src: `${import.meta.env.BASE_URL}/IMG_4355_opt.jpg`, alt: "Mur d'escalade principal du complexe sportif" },
+  { src: `${import.meta.env.BASE_URL}/IMG_4364_opt.jpg`, alt: "Vue détaillée du mur d'escalade" },
+  { src: `${import.meta.env.BASE_URL}/coupe-deurope-escalade-jeunes--2565jpg_53013559053_o.jpg`, alt: "Compétition d'escalade en action" }
+];
+
+// Palmarès organisationnel
+const historyEvents = [
+  {
+    year: "2019 & 2023",
+    title: "2 Coupes d'Europe jeunes",
+    description: "200 grimpeurs européens à chaque fois. Les French ont tout explosé !",
+    rotation: -2
+  },
+  {
+    year: "2021",
+    title: "Championnat de France U12-U14",
+    description: "220 jeunes grimpeurs, le seul championnat national de l'année COVID.",
+    rotation: 1
+  },
+  {
+    year: "2022",
+    title: "Championnat régional Auvergne-Rhône-Alpes",
+    description: "La région la plus forte de France en escalade.",
+    rotation: -1
+  },
+  {
+    year: "Depuis 2006",
+    title: "14 R'batte",
+    description: "Notre compét' locale qui cartonne depuis toujours.",
+    rotation: 2
+  }
+];
+
+// Champions qui ont grimpé ici
+const champions = [
+  {
+    name: "Alberto GINÉS LÓPEZ",
+    stPierreVictory: "🥉 Bronze Youth A - Coupe d'Europe 2019",
+    achievements: [
+      "CHAMPION OLYMPIQUE 2021 (1er titre escalade JO)",
+      "Champion d'Europe senior 2019"
+    ],
+    photoUrl: "https://www.ifsc-climbing.org/_next/image?url=https%3A%2F%2Fd1n1qj9geboqnb.cloudfront.net%2Fifsc%2Fpublic%2Fmo6typrlxpapfeghys0tfqq76v06&w=1920&q=75",
+    rotation: -1
+  },
+  {
+    name: "Oriane BERTONE",
+    stPierreVictory: "🏆 Or U16 - Coupe d'Europe 2019",
+    achievements: [
+      "N°1 MONDIALE 2025 (1ère française depuis 2007)",
+      "Vice-championne du monde 2023",
+      "Finaliste JO Paris 2024"
+    ],
+    photoUrl: "https://www.ifsc-climbing.org/_next/image?url=https%3A%2F%2Fd1n1qj9geboqnb.cloudfront.net%2Fifsc%2Fpublic%2Famnere1bc35p9o3slgolzq0eoahp&w=1920&q=75",
+    rotation: 2
+  },
+  {
+    name: "Mejdi SCHALCK",
+    stPierreVictory: "🥈 Argent U16 - Coupe d'Europe 2019",
+    achievements: [
+      "N°2 MONDIAL 2025 (4 145 points)",
+      "Vice-champion du monde 2023"
+    ],
+    photoUrl: "https://www.ifsc-climbing.org/_next/image?url=https%3A%2F%2Fd1n1qj9geboqnb.cloudfront.net%2Fifsc%2Fpublic%2Fs1hp3hca9sgnilgndzsqx0xglr0u&w=1920&q=75",
+    rotation: -2
+  },
+  {
+    name: "Paul JENFT",
+    stPierreVictory: "🏆 Or U18 - Coupe d'Europe 2019",
+    achievements: [
+      "Finaliste JO Paris 2024 (8e place)",
+      "Champion d'Europe 2017, 2018, 2019",
+      "Bronze Coupe du monde 2023 (Hachioji)"
+    ],
+    photoUrl: "https://www.ifsc-climbing.org/_next/image?url=https%3A%2F%2Fd1n1qj9geboqnb.cloudfront.net%2Fifsc%2Fpublic%2F84js5tt7ogsd2xnow56v5bchwo86&w=1920&q=75",
+    rotation: 1
+  },
+  {
+    name: "Sam AVEZOU",
+    stPierreVictory: "🏆 Or U20 - Coupe d'Europe 2019",
+    achievements: [
+      "Demi-finaliste JO Paris 2024",
+      "3 médailles européennes 2024 (2 or + 1 argent)",
+      "Bronze JOJ 2018 (1er français médaillé JOJ)"
+    ],
+    photoUrl: "https://www.ifsc-climbing.org/_next/image?url=https%3A%2F%2Fd1n1qj9geboqnb.cloudfront.net%2Fifsc%2Fpublic%2Fhtxm4ch4wps6rim6us1iozkc2tsk&w=1920&q=75",
+    rotation: -1
+  },
+  {
+    name: "Max BERTONE",
+    stPierreVictory: "🏆 Or U18 - Coupe d'Europe 2023",
+    achievements: [
+      "Champion du monde U16 difficulté 2022",
+      "Champion de France senior 2025 (18 ans)",
+      "2e Coupe du monde 2025 (Bali)"
+    ],
+    photoUrl: "https://www.ifsc-climbing.org/_next/image?url=%2Fassets%2Fplaceholder-athlete-ifsc.webp&w=1920&q=75",
+    rotation: 2
+  },
+  {
+    name: "Louise PUECH YAZID",
+    stPierreVictory: "🏆 Championne France U14 2021",
+    achievements: [
+      "Bronze championne du monde jeunes 2025 (difficulté, 3 août)",
+      "Or Coupe d'Europe jeunes 2024",
+      "Équipe de France jeunes"
+    ],
+    photoUrl: "https://www.ifsc-climbing.org/_next/image?url=%2Fassets%2Fplaceholder-athlete-ifsc.webp&w=1920&q=75",
+    rotation: -2
+  }
+];
+
+// Vidéos de nos compétitions
+const videos = [
+  { title: "Coupe d'Europe 2023", rotation: -2 },
+  { title: "Championnat de France U12-U14 2021", rotation: 1 },
+  { title: "Coupe d'Europe 2019", rotation: -1 },
+  { title: "R'batte 2018", rotation: 2 },
+  { title: "R'batte 2017", rotation: -2 }
+];
+---
+
+<section class="brutal-section brutal-section--mint">
+  <div class="brutal-container">
+    
+    <!-- TITRE PRINCIPAL -->
+    <div style="margin-bottom: 3rem; text-align: center;">
+      <BrutalHeading level={2} rotation={-2} shadow={true} class="brutal-title text-l2">
+        🏆 L'ARÈNE DES CHAMPIONS
+      </BrutalHeading>
+    </div>
+    
+    <!-- 1. DONNÉES TECHNIQUES DU MUR (fond blanc) -->
+    <BrutalCard variant="white" rotation={-1}>
+      <div style="padding: 2rem;">
+        <!-- Titre de la carte -->
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <div style="background: var(--brutal-mint); padding: 0.5rem 1.5rem; display: inline-block;">
+            <h3 style="color: var(--brutal-black); font-size: 1.75rem; margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; text-transform: uppercase;">
+              NOTRE MUR D'ESCALADE
+            </h3>
+          </div>
+        </div>
+        
+        <!-- Données techniques avec cadre noir -->
+        <div class="technical-data">
+          <div class="data-item data-item--black">
+            <div class="data-value">14,5M</div>
+            <div class="data-label">HAUTEUR</div>
+          </div>
+          <div class="data-item data-item--black">
+            <div class="data-value">705M²</div>
+            <div class="data-label">SURFACE GRIMPABLE</div>
+          </div>
+          <div class="data-item data-item--black">
+            <div class="data-value">8M</div>
+            <div class="data-label">AVANCÉE</div>
+          </div>
+        </div>
+        
+        <!-- Galerie photos du mur -->
+        <div class="brutal-gallery">
+          {wallPhotos.map((photo, index) => (
+            <div class="brutal-gallery-item" data-image={index}>
+              <div class={`brutal-photo-frame brutal-photo-frame--tilt-${index === 0 ? 'left' : index === 1 ? 'right' : 'slight'}`}>
+                <img 
+                  class="brutal-photo"
+                  src={photo.src} 
+                  alt={photo.alt}
+                  loading="lazy"
+                />
+              </div>
+              <div class="brutal-photo-badge">
+                📸 {index + 1}/3
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </BrutalCard>
+    
+    <!-- 2. TEXTE 20 ANS -->
+    <div class="competition-fact" style="
+      background: var(--brutal-black);
+      color: var(--brutal-white);
+      border: 4px solid var(--brutal-white);
+      box-shadow: 8px 8px 0 var(--brutal-white);
+      padding: 2rem;
+      margin: 3rem 0;
+      transform: rotate(-1deg);
+      font-size: 1.25rem;
+      line-height: 1.8;
+      text-align: center;
+      font-weight: 700;
+      width: 100%;
+    ">
+      <p style="margin: 0;">
+        Le mur de Saint-Pierre fêtera ses 
+        <span style="
+          background: var(--brutal-mint);
+          color: var(--brutal-black);
+          padding: 0.1rem 0.4rem;
+          display: inline-block;
+          font-family: 'Space Mono', monospace;
+          font-size: 1rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.02em;
+          transform: rotate(-0.5deg);
+        ">20 ans</span> !<br>
+        Depuis 
+        <span style="
+          background: var(--brutal-mint);
+          color: var(--brutal-black);
+          padding: 0.1rem 0.4rem;
+          display: inline-block;
+          font-family: 'Space Mono', monospace;
+          font-size: 1rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.02em;
+          transform: rotate(0.5deg);
+        ">2006</span>, 
+        ce mur de 
+        <span style="
+          background: var(--brutal-mint);
+          color: var(--brutal-black);
+          padding: 0.1rem 0.4rem;
+          display: inline-block;
+          font-family: 'Space Mono', monospace;
+          font-size: 1rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.02em;
+          transform: rotate(-0.5deg);
+        ">14,5 mètres</span> 
+        accueille les futures stars de l'escalade.
+        <span style="
+          background: var(--brutal-mint);
+          color: var(--brutal-black);
+          padding: 0.1rem 0.4rem;
+          display: inline-block;
+          font-family: 'Space Mono', monospace;
+          font-size: 1rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.02em;
+          transform: rotate(0.5deg);
+        ">2026 = 20 ans pile !</span>
+      </p>
+    </div>
+    
+    <!-- 3. PALMARÈS ORGANISATIONNEL (fond blanc) -->
+    <BrutalCard variant="white" rotation={1}>
+      <div style="padding: 2rem;">
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <div style="background: var(--brutal-mint); padding: 0.5rem 1.5rem; display: inline-block;">
+            <h3 style="color: var(--brutal-black); font-size: 1.75rem; margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; text-transform: uppercase;">
+              Notre palmarès organisationnel
+            </h3>
+          </div>
+        </div>
+        
+        <div class="history-events">
+          {historyEvents.map(event => (
+            <div class="event-item">
+              <div class="event-header">
+                <span class="event-year-tag" style="
+                  background: var(--brutal-black);
+                  color: var(--brutal-mint);
+                  padding: 0.3rem 0.8rem;
+                  font-family: 'Space Mono', monospace;
+                  font-weight: 700;
+                  font-size: 0.875rem;
+                  text-transform: uppercase;
+                  letter-spacing: 0.05em;
+                  border: 2px solid var(--brutal-white);
+                  box-shadow: 3px 3px 0 var(--brutal-white);
+                  transform: rotate(-2deg);
+                  display: inline-block;
+                ">{event.year}</span>
+              </div>
+              <h4 class="event-title">{event.title}</h4>
+              <p class="event-description">{event.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </BrutalCard>
+    
+    <!-- 4. CHAMPIONS QUI ONT GRIMPÉ ICI (fond noir) -->
+    <div style="margin-top: 3rem;">
+      <BrutalCard variant="black" rotation={-2}>
+        <div style="padding: 2rem;">
+          <div style="text-align: center; margin-bottom: 2rem;">
+            <div style="background: var(--brutal-mint); padding: 0.5rem 1.5rem; display: inline-block;">
+              <h3 style="color: var(--brutal-black); font-size: 1.75rem; margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; text-transform: uppercase;">
+                Quelques champions qui ont grimpé ici
+              </h3>
+            </div>
+          </div>
+          
+          <ChampionsGrid champions={champions} />
+        </div>
+      </BrutalCard>
+    </div>
+    
+    <!-- 5. VIDÉOS (fond blanc) -->
+    <div style="margin-top: 3rem;">
+      <BrutalCard variant="white" rotation={2}>
+        <div style="padding: 2rem;">
+          <div style="text-align: center; margin-bottom: 2rem;">
+            <div style="background: var(--brutal-mint); padding: 0.5rem 1.5rem; display: inline-block;">
+              <h3 style="color: var(--brutal-black); font-size: 1.75rem; margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; text-transform: uppercase;">
+                Un aperçu de l'ambiance qui vous attend
+              </h3>
+            </div>
+          </div>
+          
+          <h4 style="text-align: center; color: var(--brutal-black); margin-bottom: 2rem;">
+            Vidéos de nos compétitions
+          </h4>
+          
+          <VideosGrid videos={videos} />
+        </div>
+      </BrutalCard>
+    </div>
+    
+    <!-- 6. PHRASE FINALE -->
+    <div style="margin: 4rem 0 2rem; text-align: center;">
+      <div style="display: inline-block; background: var(--brutal-black); padding: 1.5rem 2rem; transform: rotate(-1deg); border: 4px solid var(--brutal-white); box-shadow: 8px 8px 0 var(--brutal-white);">
+        <h3 style="color: var(--brutal-white); font-size: var(--size-l4); margin: 0; font-weight: 800; text-transform: uppercase; line-height: 1.2;">
+          16-17 mai 2026 : <span style="color: var(--brutal-mint);">Qui marquera cette édition anniversaire ?</span>
+        </h3>
+      </div>
+    </div>
+    
+  </div>
+  
+  <!-- Modal Gallery -->
+  <div id="photo-modal" class="brutal-modal">
+    <div class="brutal-modal-content">
+      <img id="modal-image" class="brutal-modal-image" src="" alt="" />
+      
+      <!-- Bouton fermeture -->
+      <button id="close-modal" class="brutal-modal-close">
+        ✕
+      </button>
+      
+      <!-- Navigation -->
+      <button id="prev-photo" class="brutal-modal-nav brutal-modal-nav--prev">
+        ←
+      </button>
+      
+      <button id="next-photo" class="brutal-modal-nav brutal-modal-nav--next">
+        →
+      </button>
+      
+      <!-- Compteur -->
+      <div id="photo-counter" class="brutal-modal-counter">
+        1 / 3
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal Vidéos -->
+  <div id="video-modal" class="brutal-modal">
+    <div class="brutal-modal-content">
+      <div id="video-content" class="video-modal-content">
+        <!-- Le contenu vidéo sera inséré ici -->
+      </div>
+      
+      <!-- Bouton fermeture -->
+      <button id="close-video-modal" class="brutal-modal-close">
+        ✕
+      </button>
+      
+      <!-- Navigation -->
+      <button id="prev-video" class="brutal-modal-nav brutal-modal-nav--prev">
+        ←
+      </button>
+      
+      <button id="next-video" class="brutal-modal-nav brutal-modal-nav--next">
+        →
+      </button>
+      
+      <!-- Compteur et titre -->
+      <div id="video-counter" class="brutal-modal-counter">
+        <div class="video-counter-text">1 / 5</div>
+        <div class="video-title-modal"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .brutal-section {
+    background: var(--brutal-mint);
+    padding: 4rem 2rem;
+    position: relative;
+  }
+  
+  /* Données techniques */
+  .technical-data {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .data-item {
+    text-align: center;
+  }
+  
+  .data-item--black {
+    background: var(--brutal-black);
+    padding: 1.5rem 1rem;
+    border: 4px solid var(--brutal-black);
+    box-shadow: 8px 8px 0 var(--brutal-mint);
+    transform: rotate(-1deg);
+    transition: all 0.3s ease;
+  }
+  
+  .data-item--black:nth-child(2) {
+    transform: rotate(1deg);
+  }
+  
+  .data-item--black:nth-child(3) {
+    transform: rotate(-2deg);
+  }
+  
+  .data-item--black:hover {
+    transform: rotate(0deg) scale(1.05) translate(-4px, -4px);
+    box-shadow: 12px 12px 0 var(--brutal-mint);
+  }
+  
+  .data-item--black .data-value {
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: var(--size-l3);
+    color: var(--brutal-white);
+    margin-bottom: 0.5rem;
+    line-height: 1;
+  }
+  
+  .data-item--black .data-label {
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--brutal-mint);
+  }
+  
+  /* Galerie photos */
+  .brutal-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto 0;
+    animation: slide-brutal 1s ease-out forwards;
+  }
+
+  .brutal-gallery-item {
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+
+  .brutal-gallery-item:hover {
+    transform: translateY(-4px);
+  }
+
+  .brutal-photo-frame {
+    background: var(--brutal-white);
+    padding: 10px;
+    border: 4px solid var(--brutal-black);
+    box-shadow: 8px 8px 0 var(--brutal-black);
+    height: 250px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .brutal-photo-frame--tilt-left {
+    transform: rotate(-2deg);
+  }
+
+  .brutal-photo-frame--tilt-right {
+    transform: rotate(2deg);
+  }
+
+  .brutal-photo-frame--tilt-slight {
+    transform: rotate(-1deg);
+  }
+
+  .brutal-gallery-item:hover .brutal-photo-frame {
+    transform: rotate(0) translate(-4px, -4px);
+    box-shadow: 12px 12px 0 var(--brutal-black);
+  }
+
+  .brutal-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .brutal-photo-badge {
+    position: absolute;
+    bottom: -10px;
+    right: 10px;
+    background: var(--brutal-mint);
+    color: var(--brutal-black);
+    padding: 0.5rem 1rem;
+    font-weight: 800;
+    font-size: 0.875rem;
+    transform: rotate(2deg);
+    box-shadow: 4px 4px 0 var(--brutal-black);
+  }
+
+  @keyframes slide-brutal {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Modal Gallery (copié de VenueSection) */
+  .brutal-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .brutal-modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+  }
+  
+  .brutal-modal-image {
+    width: 100%;
+    height: auto;
+    max-height: 85vh;
+    object-fit: contain;
+    border: 4px solid var(--brutal-white);
+    box-shadow: 0 0 50px rgba(127, 229, 176, 0.3);
+  }
+  
+  .brutal-modal-close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    background: var(--brutal-mint);
+    color: var(--brutal-black);
+    font-size: 2rem;
+    font-weight: 900;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .brutal-modal-close:hover {
+    background: var(--brutal-white);
+    transform: scale(1.1);
+  }
+  
+  .brutal-modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--brutal-mint);
+    color: var(--brutal-black);
+    font-size: 2rem;
+    font-weight: 900;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .brutal-modal-nav--prev {
+    left: 20px;
+  }
+  
+  .brutal-modal-nav--next {
+    right: 20px;
+  }
+  
+  .brutal-modal-nav:hover {
+    background: var(--brutal-white);
+    transform: translateY(-50%) scale(1.1);
+  }
+  
+  .brutal-modal-counter {
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    padding: 0.75rem 1.5rem;
+    font-weight: 700;
+    font-size: 1rem;
+    border: 2px solid var(--brutal-white);
+  }
+  
+  /* Modal vidéo spécifique */
+  .video-modal-content {
+    width: 100%;
+    max-width: 800px;
+    aspect-ratio: 16/9;
+    background: var(--brutal-black);
+    border: 4px solid var(--brutal-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--brutal-white);
+    font-size: 1.5rem;
+  }
+  
+  .video-counter-text {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .video-title-modal {
+    font-size: 0.875rem;
+    text-align: center;
+    opacity: 0.8;
+  }
+  
+  /* Palmarès organisationnel */
+  .history-events {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  
+  .event-item {
+    padding: 1.5rem;
+    background: var(--brutal-mint);
+    color: var(--brutal-black);
+    border: 3px solid var(--brutal-black);
+    box-shadow: 6px 6px 0 var(--brutal-black);
+    transform: rotate(-1deg);
+    transition: all 0.3s ease;
+  }
+  
+  .event-item:nth-child(even) {
+    transform: rotate(1deg);
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    border: 3px solid var(--brutal-mint);
+    box-shadow: 6px 6px 0 var(--brutal-mint);
+  }
+  
+  .event-item:nth-child(even) .event-year-tag {
+    background: var(--brutal-white) !important;
+    color: var(--brutal-black) !important;
+    border-color: var(--brutal-mint) !important;
+    box-shadow: 3px 3px 0 var(--brutal-mint) !important;
+  }
+  
+  .event-item:hover {
+    transform: rotate(0deg) scale(1.05) translate(-3px, -3px);
+    box-shadow: 9px 9px 0 var(--brutal-black);
+  }
+  
+  .event-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .event-icon {
+    font-size: 1.5rem;
+  }
+  
+  .event-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    text-transform: uppercase;
+    margin: 0.5rem 0;
+    color: inherit;
+  }
+  
+  .event-description {
+    font-size: 0.875rem;
+    line-height: 1.4;
+    margin: 0.5rem 0;
+    color: inherit;
+  }
+  
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .brutal-section {
+      padding: 3rem 1rem;
+    }
+    
+    .technical-data {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    
+    .data-item--black {
+      transform: rotate(0deg) !important;
+    }
+    
+    .data-item--black .data-value {
+      font-size: var(--size-l4);
+    }
+    
+    .brutal-gallery {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    
+    .brutal-photo-frame {
+      height: 200px;
+    }
+    
+    .brutal-modal-nav {
+      font-size: 1.5rem;
+      padding: 0.75rem;
+    }
+    
+    .brutal-modal-nav--prev {
+      left: 10px;
+    }
+    
+    .brutal-modal-nav--next {
+      right: 10px;
+    }
+    
+    .brutal-modal-close {
+      font-size: 1.5rem;
+      padding: 0.25rem 0.5rem;
+      top: -40px;
+    }
+    
+    .brutal-modal-counter {
+      bottom: -40px;
+      font-size: 0.875rem;
+      padding: 0.5rem 1rem;
+    }
+    
+    .history-events {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    
+    .event-item {
+      transform: rotate(0deg) !important;
+    }
+    
+  }
+</style>
+
+<script>
+// Gallery Modal Logic (copié exactement de VenueSection)
+document.addEventListener('DOMContentLoaded', function() {
+  const images = [
+    { src: `${import.meta.env.BASE_URL}/IMG_4355_opt.jpg`, alt: "Mur d'escalade principal du complexe sportif" },
+    { src: `${import.meta.env.BASE_URL}/IMG_4364_opt.jpg`, alt: "Vue détaillée du mur d'escalade" },
+    { src: `${import.meta.env.BASE_URL}/coupe-deurope-escalade-jeunes--2565jpg_53013559053_o.jpg`, alt: "Compétition d'escalade en action" }
+  ];
+  
+  let currentImageIndex = 0;
+  
+  const modal = document.getElementById('photo-modal');
+  const modalImage = document.getElementById('modal-image');
+  const counter = document.getElementById('photo-counter');
+  const closeBtn = document.getElementById('close-modal');
+  const prevBtn = document.getElementById('prev-photo');
+  const nextBtn = document.getElementById('next-photo');
+  
+  // Ouvrir modal
+  document.querySelectorAll('.brutal-gallery-item').forEach((item, index) => {
+    item.addEventListener('click', () => {
+      currentImageIndex = index;
+      showModal();
+    });
+  });
+  
+  // Fermer modal
+  closeBtn.addEventListener('click', hideModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) hideModal();
+  });
+  
+  // Navigation
+  prevBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+    updateModal();
+  });
+  
+  nextBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    currentImageIndex = (currentImageIndex + 1) % images.length;
+    updateModal();
+  });
+  
+  // Clavier
+  document.addEventListener('keydown', (e) => {
+    if (modal.style.display === 'flex') {
+      switch(e.key) {
+        case 'Escape': hideModal(); break;
+        case 'ArrowLeft': prevBtn.click(); break;
+        case 'ArrowRight': nextBtn.click(); break;
+      }
+    }
+  });
+  
+  function showModal() {
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    updateModal();
+  }
+  
+  function hideModal() {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  
+  function updateModal() {
+    modalImage.src = images[currentImageIndex].src;
+    modalImage.alt = images[currentImageIndex].alt;
+    counter.textContent = `${currentImageIndex + 1} / ${images.length}`;
+  }
+});
+
+// Video Modal Logic
+document.addEventListener('DOMContentLoaded', function() {
+  const videoTitles = [
+    "Coupe d'Europe 2023",
+    "Championnat de France U12-U14 2021", 
+    "Coupe d'Europe 2019",
+    "R'batte 2018",
+    "R'batte 2017"
+  ];
+  
+  let currentVideoIndex = 0;
+  
+  const videoModal = document.getElementById('video-modal');
+  const videoContent = document.getElementById('video-content');
+  const videoCounter = document.querySelector('#video-counter .video-counter-text');
+  const videoTitleModal = document.querySelector('#video-counter .video-title-modal');
+  const closeVideoBtn = document.getElementById('close-video-modal');
+  const prevVideoBtn = document.getElementById('prev-video');
+  const nextVideoBtn = document.getElementById('next-video');
+  
+  // Ouvrir modal vidéo
+  document.querySelectorAll('.video-tile').forEach((item, index) => {
+    item.addEventListener('click', () => {
+      currentVideoIndex = index;
+      showVideoModal();
+    });
+  });
+  
+  // Fermer modal
+  if (closeVideoBtn) {
+    closeVideoBtn.addEventListener('click', hideVideoModal);
+  }
+  
+  if (videoModal) {
+    videoModal.addEventListener('click', (e) => {
+      if (e.target === videoModal) hideVideoModal();
+    });
+  }
+  
+  // Navigation
+  if (prevVideoBtn) {
+    prevVideoBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentVideoIndex = (currentVideoIndex - 1 + videoTitles.length) % videoTitles.length;
+      updateVideoModal();
+    });
+  }
+  
+  if (nextVideoBtn) {
+    nextVideoBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentVideoIndex = (currentVideoIndex + 1) % videoTitles.length;
+      updateVideoModal();
+    });
+  }
+  
+  // Clavier
+  document.addEventListener('keydown', (e) => {
+    if (videoModal && videoModal.style.display === 'flex') {
+      switch(e.key) {
+        case 'Escape': hideVideoModal(); break;
+        case 'ArrowLeft': if (prevVideoBtn) prevVideoBtn.click(); break;
+        case 'ArrowRight': if (nextVideoBtn) nextVideoBtn.click(); break;
+      }
+    }
+  });
+  
+  function showVideoModal() {
+    if (videoModal) {
+      videoModal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      updateVideoModal();
+    }
+  }
+  
+  function hideVideoModal() {
+    if (videoModal) {
+      videoModal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  }
+  
+  function updateVideoModal() {
+    if (videoContent && videoCounter && videoTitleModal) {
+      // Pour l'instant, afficher un placeholder en attendant les vraies vidéos
+      videoContent.innerHTML = `
+        <div style="text-align: center; color: var(--brutal-mint);">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">📹</div>
+          <div>Vidéo : ${videoTitles[currentVideoIndex]}</div>
+          <div style="font-size: 0.875rem; margin-top: 1rem; opacity: 0.7;">
+            (Vidéo à venir)
+          </div>
+        </div>
+      `;
+      videoCounter.textContent = `${currentVideoIndex + 1} / ${videoTitles.length}`;
+      videoTitleModal.textContent = videoTitles[currentVideoIndex];
+    }
+  }
+});
+</script>

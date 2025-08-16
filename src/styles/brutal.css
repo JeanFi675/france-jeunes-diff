@@ -1,3 +1,6 @@
+/* FONTS - Police moderne pour cohérence avec affiche */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Space+Grotesk:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap');
+
 /* NÉO-BRUTALISME - PALETTE AFFICHE SAINT-ÉTIENNE */
 :root {
   --brutal-black: #000000;
@@ -21,9 +24,6 @@
   --space-large: 4rem;    /* 4× */
   --space-xl: 8rem;       /* 8× */
 }
-
-/* FONTS - Police moderne pour cohérence avec affiche */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Space+Grotesk:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap');
 
 /* RESET BRUTAL */
 * {

@@ -1,0 +1,100 @@
+---
+import ChampionCard from './ChampionCard.astro';
+
+export interface Props {
+  champions: Array<{
+    name: string;
+    stPierreVictory: string;
+    achievements: string[];
+    photoUrl?: string;
+    rotation?: number;
+  }>;
+}
+
+const { champions } = Astro.props;
+---
+
+<div class="champions-grid-container">
+  <!-- Première ligne : 4 champions -->
+  <div class="champions-row champions-row--four">
+    {champions.slice(0, 4).map(champion => (
+      <ChampionCard
+        name={champion.name}
+        stPierreVictory={champion.stPierreVictory}
+        achievements={champion.achievements}
+        photoUrl={champion.photoUrl}
+        rotation={champion.rotation}
+        variant="mint"
+      />
+    ))}
+  </div>
+  
+  <!-- Deuxième ligne : 3 champions centrés -->
+  {champions.length > 4 && (
+    <div class="champions-row champions-row--three">
+      {champions.slice(4, 7).map(champion => (
+        <ChampionCard
+          name={champion.name}
+          stPierreVictory={champion.stPierreVictory}
+          achievements={champion.achievements}
+          photoUrl={champion.photoUrl}
+          rotation={champion.rotation}
+          variant="mint"
+        />
+      ))}
+    </div>
+  )}
+</div>
+
+<style is:global>
+  .champions-grid-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .champions-row {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: nowrap;
+  }
+  
+  .champions-row--four {
+    justify-content: space-between;
+  }
+  
+  .champions-row--four > .champion-card {
+    flex: 1;
+    max-width: calc(25% - 1.125rem);
+    min-width: 200px;
+  }
+  
+  .champions-row--three {
+    justify-content: center;
+    gap: 2rem;
+  }
+  
+  .champions-row--three > .champion-card {
+    flex: 0 0 auto;
+    width: calc(25% - 1.125rem);
+    min-width: 200px;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .champions-row {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .champions-row--three {
+      gap: 1rem;
+    }
+    
+    .champions-row--four > .champion-card,
+    .champions-row--three > .champion-card {
+      max-width: none;
+      width: 100%;
+    }
+  }
+</style>

@@ -36,3 +36,9 @@ pnpm-lock.yaml
 
 .astro
 .env.local
+
+# Fichiers de travail markdown
+ARENE_DES_CHAMPIONS_EXTENSION.md
+ARENE_DES_CHAMPIONS_CLEAN.md
+ARENE_DES_CHAMPIONS_INTEGREE.md
+PLAN_ARENE_CHAMPIONS_DETAILLE.md
