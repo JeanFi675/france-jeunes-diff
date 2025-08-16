@@ -121,13 +121,38 @@ const champions = [
   }
 ];
 
-// Vidéos de nos compétitions
+// Vidéos de nos compétitions avec URLs réelles et vignettes
 const videos = [
-  { title: "Coupe d'Europe 2023", rotation: -2 },
-  { title: "Championnat de France U12-U14 2021", rotation: 1 },
-  { title: "Coupe d'Europe 2019", rotation: -1 },
-  { title: "R'batte 2018", rotation: 2 },
-  { title: "R'batte 2017", rotation: -2 }
+  { 
+    title: "Coupe d'Europe 2023", 
+    rotation: -2,
+    videoUrl: `${import.meta.env.BASE_URL}/videos/coupe-europe-2023.mp4`,
+    thumbnail: `${import.meta.env.BASE_URL}/videos/coupe-europe-2023-thumb.jpg`
+  },
+  { 
+    title: "Championnat de France U12-U14 2021", 
+    rotation: 1,
+    videoUrl: `${import.meta.env.BASE_URL}/videos/championnats-france-u12-u14-2021.mp4`,
+    thumbnail: `${import.meta.env.BASE_URL}/videos/championnats-france-u12-u14-2021-thumb.jpg`
+  },
+  { 
+    title: "Coupe d'Europe 2019", 
+    rotation: -1,
+    videoUrl: `${import.meta.env.BASE_URL}/videos/coupe-europe-2019.mp4`,
+    thumbnail: `${import.meta.env.BASE_URL}/videos/coupe-europe-2019-thumb.jpg`
+  },
+  { 
+    title: "R'batte 2018", 
+    rotation: 2,
+    videoUrl: `${import.meta.env.BASE_URL}/videos/rbatte-2018.mp4`,
+    thumbnail: `${import.meta.env.BASE_URL}/videos/rbatte-2018-thumb.jpg`
+  },
+  { 
+    title: "R'batte 2017", 
+    rotation: -2,
+    videoUrl: `${import.meta.env.BASE_URL}/videos/rbatte-2017.mp4`,
+    thumbnail: `${import.meta.env.BASE_URL}/videos/rbatte-2017-thumb.jpg`
+  }
 ];
 ---
 
@@ -858,14 +883,30 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// Video Modal Logic
+// Video Modal Logic avec vraies vidéos et BASE_URL correct
 document.addEventListener('DOMContentLoaded', function() {
-  const videoTitles = [
-    "Coupe d'Europe 2023",
-    "Championnat de France U12-U14 2021", 
-    "Coupe d'Europe 2019",
-    "R'batte 2018",
-    "R'batte 2017"
+  const baseUrl = `${import.meta.env.BASE_URL}`;
+  const videosData = [
+    {
+      title: "Coupe d'Europe 2023",
+      url: baseUrl + "/videos/coupe-europe-2023.mp4"
+    },
+    {
+      title: "Championnat de France U12-U14 2021", 
+      url: baseUrl + "/videos/championnats-france-u12-u14-2021.mp4"
+    },
+    {
+      title: "Coupe d'Europe 2019",
+      url: baseUrl + "/videos/coupe-europe-2019.mp4"
+    },
+    {
+      title: "R'batte 2018",
+      url: baseUrl + "/videos/rbatte-2018.mp4"
+    },
+    {
+      title: "R'batte 2017",
+      url: baseUrl + "/videos/rbatte-2017.mp4"
+    }
   ];
   
   let currentVideoIndex = 0;
@@ -901,7 +942,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (prevVideoBtn) {
     prevVideoBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      currentVideoIndex = (currentVideoIndex - 1 + videoTitles.length) % videoTitles.length;
+      currentVideoIndex = (currentVideoIndex - 1 + videosData.length) % videosData.length;
       updateVideoModal();
     });
   }
@@ -909,7 +950,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (nextVideoBtn) {
     nextVideoBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      currentVideoIndex = (currentVideoIndex + 1) % videoTitles.length;
+      currentVideoIndex = (currentVideoIndex + 1) % videosData.length;
       updateVideoModal();
     });
   }
@@ -937,23 +978,39 @@ document.addEventListener('DOMContentLoaded', function() {
     if (videoModal) {
       videoModal.style.display = 'none';
       document.body.style.overflow = '';
+      // Arrêter toutes les vidéos
+      const videos = videoContent.querySelectorAll('video');
+      videos.forEach(video => {
+        video.pause();
+        video.currentTime = 0;
+      });
     }
   }
   
   function updateVideoModal() {
     if (videoContent && videoCounter && videoTitleModal) {
-      // Pour l'instant, afficher un placeholder en attendant les vraies vidéos
+      const currentVideo = videosData[currentVideoIndex];
+      
+      // Créer et insérer la vraie vidéo
       videoContent.innerHTML = `
-        <div style="text-align: center; color: var(--brutal-mint);">
-          <div style="font-size: 3rem; margin-bottom: 1rem;">📹</div>
-          <div>Vidéo : ${videoTitles[currentVideoIndex]}</div>
-          <div style="font-size: 0.875rem; margin-top: 1rem; opacity: 0.7;">
-            (Vidéo à venir)
-          </div>
-        </div>
+        <video 
+          controls 
+          autoplay 
+          style="
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain;
+            background: var(--brutal-black);
+          "
+          preload="metadata"
+        >
+          <source src="${currentVideo.url}" type="video/mp4" />
+          Votre navigateur ne supporte pas la lecture vidéo.
+        </video>
       `;
-      videoCounter.textContent = `${currentVideoIndex + 1} / ${videoTitles.length}`;
-      videoTitleModal.textContent = videoTitles[currentVideoIndex];
+      
+      videoCounter.textContent = `${currentVideoIndex + 1} / ${videosData.length}`;
+      videoTitleModal.textContent = currentVideo.title;
     }
   }
 });
