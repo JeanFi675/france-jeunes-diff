@@ -123,7 +123,11 @@ const isEventSoon = daysLeft < 30;
     <div class="hero-navigation" style="
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto auto;
+      grid-template-rows: auto auto auto;
+      grid-template-areas: 
+        'programme programme'
+        'voiture pratique' 
+        'arena arena';
       gap: 2rem 1.5rem;
       max-width: 800px;
       margin: 3rem auto 0;
@@ -140,17 +144,20 @@ const isEventSoon = daysLeft < 30;
         📅 PROGRAMME COMPLET
       </BrutalButton>
       
-      <!-- AMBIANCE - Bouton secondaire -->
-      <BrutalButton href="#experience" variant="secondary" rotation={1} ariaLabel="Découvrir les témoignages et photos de l'ambiance du championnat">
-        🤩 DÉCOUVRIR L'AMBIANCE
+      <!-- COVOITURAGE - Bouton logistique -->
+      <BrutalButton href="#covoiturage" variant="secondary" rotation={1} ariaLabel="Informations pour venir en voiture et covoiturage">
+        🚗 VENIR EN VOITURE
       </BrutalButton>
       
-      <!-- Ligne 2: Logistique -->
-      <BrutalButton href="#pratique" variant="outline" rotation={2} ariaLabel="Informations pratiques : hébergement, transport et restauration">
+      <!-- INFOS PRATIQUES - Bouton logistique -->
+      <BrutalButton href="#covoiturage" variant="outline" rotation={2} ariaLabel="Informations pratiques : hébergement, transport et restauration">
         🏨 INFOS PRATIQUES
       </BrutalButton>
-      <BrutalButton href="#venue" variant="outline" rotation={-2} ariaLabel="Localisation exacte et informations d'accès au complexe sportif">
-        📍 LIEU & ACCÈS
+      
+      <!-- ARENA CHAMPIONS - Bouton découverte LARGE (2 colonnes) -->
+      <BrutalButton href="#arena" variant="outline" rotation={-2} class="hero-cta-secondary" ariaLabel="Découvrir 20 ans de compétitions et les champions qui ont grimpé ici">
+        <span class="desktop-text">🏆 DÉCOUVREZ NOS 20 ANS DE COMPET'</span>
+        <span class="mobile-text">🏆 20 ANS DE COMPET'</span>
       </BrutalButton>
     </div>
     
@@ -161,16 +168,42 @@ const isEventSoon = daysLeft < 30;
 <style>
 /* HIÉRARCHIE CTA - Programme prioritaire */
 .hero-cta-primary {
-  grid-column: 1 / -1; /* S'étend sur toute la largeur */
+  grid-area: programme;
   font-size: 1.125rem;
   font-weight: 900;
   padding: 1.25rem 2rem;
+}
+
+/* Arena Champions - Bouton découverte large */
+.hero-cta-secondary {
+  grid-area: arena;
+  font-size: 1rem;
+  font-weight: 800;
+  padding: 1rem 1.5rem;
+}
+
+/* Boutons logistique */
+.hero-navigation :global(.brutal-button[href="#covoiturage"]) {
+  grid-area: voiture;
+}
+
+.hero-navigation :global(.brutal-button[aria-label*="pratiques"]) {
+  grid-area: pratique;
 }
 
 /* Permettre les rotations des boutons */
 .hero-navigation :global(.brutal-button) {
   max-width: 100%;
   box-sizing: border-box;
+}
+
+/* Textes responsive */
+.desktop-text {
+  display: inline;
+}
+
+.mobile-text {
+  display: none;
 }
 
 .partner-logos-container {
@@ -184,6 +217,11 @@ const isEventSoon = daysLeft < 30;
 @media (max-width: 768px) {
   .hero-navigation {
     grid-template-columns: 1fr !important;
+    grid-template-areas: 
+      'programme'
+      'voiture' 
+      'pratique'
+      'arena' !important;
     gap: 1rem !important;
     padding: 0 1rem !important;
     margin: 3rem auto 2rem !important;
@@ -202,6 +240,15 @@ const isEventSoon = daysLeft < 30;
   /* Supprimer les rotations sur mobile pour éviter débordement */
   .hero-navigation :global(.brutal-button) {
     transform: rotate(0deg) !important;
+  }
+  
+  /* Texte raccourci pour Arena sur mobile */
+  .hero-cta-secondary .mobile-text {
+    display: inline;
+  }
+  
+  .hero-cta-secondary .desktop-text {
+    display: none;
   }
   
   .partner-logos-container {
