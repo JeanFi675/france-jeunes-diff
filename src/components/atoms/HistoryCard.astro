@@ -1,0 +1,106 @@
+---
+export interface Props {
+  year: string;
+  title: string;
+  description: string;
+  highlight?: string;
+  icon?: string;
+  rotation?: number;
+}
+
+const { 
+  year,
+  title,
+  description,
+  highlight,
+  icon,
+  rotation = Math.random() * 4 - 2 // -2 à 2deg
+} = Astro.props;
+
+// Classe pour rotation hover basée sur la rotation de base
+const rotationClass = rotation > 0 ? 'brutal-card--rot-positive' 
+  : rotation < 0 ? 'brutal-card--rot-negative' 
+  : 'brutal-card--rot-zero';
+---
+
+<div class={`history-card brutal-card ${rotationClass}`} style={`transform: rotate(${rotation}deg)`}>
+  <div class="history-year">
+    {icon && <span class="history-icon">{icon}</span>}
+    {year}
+  </div>
+  <h4 class="history-title">{title}</h4>
+  <p class="history-description">{description}</p>
+  {highlight && <div class="history-highlight">{highlight}</div>}
+</div>
+
+<style>
+  .history-card {
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.2s ease;
+  }
+
+  .history-year {
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: var(--size-l5);
+    color: inherit;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .history-icon {
+    font-size: 1.5rem;
+  }
+
+  .history-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: var(--size-l5);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+    color: inherit;
+  }
+
+  .history-description {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: inherit;
+    line-height: 1.4;
+  }
+
+  .history-highlight {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    font-size: 0.875rem;
+    color: inherit;
+    background: var(--brutal-ice);
+    color: var(--brutal-black);
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--brutal-black);
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .history-card {
+      padding: 1.5rem;
+    }
+
+    .history-title {
+      font-size: var(--size-l6);
+    }
+
+    .history-description {
+      font-size: 0.875rem;
+    }
+  }
+</style>

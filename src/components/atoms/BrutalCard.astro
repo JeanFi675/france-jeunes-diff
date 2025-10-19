@@ -1,0 +1,51 @@
+---
+export interface Props {
+  variant?: 'default' | 'mint' | 'black';
+  rotation?: number;
+  className?: string;
+  zIndex?: number;
+  marginRight?: string;
+  marginBottom?: string;
+  textAlign?: 'left' | 'center' | 'right';
+  customBorder?: string;
+  customShadow?: string;
+}
+
+const { 
+  variant = 'default',
+  rotation = 0,
+  className = '',
+  zIndex,
+  marginRight,
+  marginBottom,
+  textAlign = 'left',
+  customBorder,
+  customShadow
+} = Astro.props;
+
+const cardClass = variant === 'default' 
+  ? 'brutal-card' 
+  : `brutal-card brutal-card--${variant}`;
+
+// Classe pour rotation hover basée sur la rotation de base
+const rotationClass = rotation > 0 ? 'brutal-card--rot-positive' 
+  : rotation < 0 ? 'brutal-card--rot-negative' 
+  : 'brutal-card--rot-zero';
+
+const allClasses = `${cardClass} ${rotationClass} ${className}`.trim();
+
+// Construction du style unifié
+let style = '';
+// N'ajouter transform que si rotation n'est pas 0 pour éviter conflits avec animations
+if (rotation !== 0) style += `transform: rotate(${rotation}deg); `;
+if (zIndex !== undefined) style += `z-index: ${zIndex}; `;
+if (marginRight) style += `margin-right: ${marginRight}; `;
+if (marginBottom) style += `margin-bottom: ${marginBottom}; `;
+if (textAlign !== 'left') style += `text-align: ${textAlign}; `;
+if (customBorder) style += `border: ${customBorder} !important; `;
+if (customShadow) style += `box-shadow: ${customShadow} !important; `;
+---
+
+<div class={allClasses} style={style}>
+  <slot />
+</div>

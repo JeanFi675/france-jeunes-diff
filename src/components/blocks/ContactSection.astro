@@ -1,0 +1,414 @@
+---
+import BrutalHeading from '../atoms/BrutalHeading.astro';
+import BrutalCard from '../atoms/BrutalCard.astro';
+
+export interface Props {
+  id?: string;
+}
+
+const { id } = Astro.props;
+---
+
+<section id={id} class="brutal-section brutal-contact-section">
+  <div class="brutal-container">
+    
+    <!-- TITRE PRINCIPAL -->
+    <div style="margin-bottom: 3rem; text-align: center;">
+      <BrutalHeading level={2} rotation={-2} shadow={true} class="brutal-title text-l2">
+        📧 NOUS CONTACTER
+      </BrutalHeading>
+    </div>
+    
+    <!-- FORMULAIRE DE CONTACT -->
+    <BrutalCard variant="white" rotation={1}>
+      <div style="padding: 3rem;">
+        
+        <!-- Titre de la carte -->
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <div style="background: var(--brutal-ice); padding: 0.5rem 1.5rem; display: inline-block;">
+            <h3 style="color: var(--brutal-black); font-size: 1.75rem; margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; text-transform: uppercase;">
+              Une question ? Contactez-nous !
+            </h3>
+          </div>
+        </div>
+        
+        <!-- Formulaire -->
+        <form id="contact-form" class="brutal-contact-form" action="https://n8n.jpcloudkit.fr/webhook/49006622-c75d-49cc-8f4e-79016e9e7d1c" method="POST">
+          <!-- Sujet personnalisé -->
+          <input type="hidden" name="subject" value="Nouveau message depuis le site Championnats de France Escalade 2026">
+          
+          <!-- Protection anti-spam -->
+          <input type="checkbox" name="botcheck" id="" style="display: none;">
+          
+          <!-- Ligne 1: Nom et Prénom -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nom" class="brutal-label">Nom *</label>
+              <input 
+                type="text" 
+                id="nom" 
+                name="nom" 
+                class="brutal-input" 
+                required 
+                placeholder="Votre nom"
+              >
+            </div>
+            <div class="form-group">
+              <label for="prenom" class="brutal-label">Prénom *</label>
+              <input 
+                type="text" 
+                id="prenom" 
+                name="prenom" 
+                class="brutal-input" 
+                required 
+                placeholder="Votre prénom"
+              >
+            </div>
+          </div>
+          
+          <!-- Ligne 2: Email -->
+          <div class="form-group">
+            <label for="email" class="brutal-label">Email *</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              class="brutal-input" 
+              required 
+              placeholder="votre@email.fr"
+              pattern=".+@.+\..+"
+              title="Veuillez saisir une adresse email valide (ex: nom@domaine.fr)"
+            >
+            <div id="email-validation" class="email-validation"></div>
+          </div>
+          
+          <!-- Ligne 3: Sujet -->
+          <div class="form-group">
+            <label for="sujet" class="brutal-label">Sujet *</label>
+            <select id="sujet" name="sujet" class="brutal-select" required>
+              <option value="">Choisissez un sujet</option>
+              <option value="Inscription / Participation">Inscription / Participation</option>
+              <option value="Informations pratiques">Informations pratiques</option>
+              <option value="Hébergement / Transport">Hébergement / Transport</option>
+              <option value="Bénévolat">Bénévolat</option>
+              <option value="Partenariat / Sponsoring">Partenariat / Sponsoring</option>
+              <option value="Presse / Média">Presse / Média</option>
+              <option value="Autre">Autre</option>
+            </select>
+          </div>
+          
+          <!-- Ligne 4: Message -->
+          <div class="form-group">
+            <label for="message" class="brutal-label">Message *</label>
+            <textarea 
+              id="message" 
+              name="message" 
+              class="brutal-textarea" 
+              required 
+              placeholder="Décrivez votre demande en détail..."
+              rows="6"
+            ></textarea>
+          </div>
+          
+          <!-- Bouton d'envoi -->
+          <div style="text-align: center; margin-top: 2rem;">
+            <button type="submit" class="brutal-submit-btn">
+              ENVOYER LE MESSAGE
+            </button>
+          </div>
+          
+          <!-- Zone de résultat -->
+          <div id="form-result" class="form-result"></div>
+        </form>
+        
+        
+      </div>
+    </BrutalCard>
+    
+  </div>
+</section>
+
+<style>
+  /* Section principale */
+  .brutal-contact-section {
+    background: var(--brutal-white);
+    padding: 4rem 2rem;
+    position: relative;
+  }
+  
+  /* Formulaire */
+  .brutal-contact-form {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .brutal-label {
+    display: block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--brutal-black);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+  
+  .brutal-input,
+  .brutal-select,
+  .brutal-textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 4px solid var(--brutal-black);
+    background: var(--brutal-white);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    color: var(--brutal-black);
+    box-shadow: 4px 4px 0 var(--brutal-ice);
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+  }
+  
+  .brutal-input:focus,
+  .brutal-select:focus,
+  .brutal-textarea:focus {
+    outline: none;
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--brutal-ice);
+    border-color: var(--brutal-ice);
+  }
+  
+  .brutal-input::placeholder,
+  .brutal-textarea::placeholder {
+    color: var(--brutal-gray);
+    opacity: 0.7;
+  }
+  
+  .brutal-select {
+    cursor: pointer;
+  }
+  
+  .brutal-textarea {
+    resize: vertical;
+    min-height: 120px;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  
+  /* Bouton d'envoi */
+  .brutal-submit-btn {
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    border: 4px solid var(--brutal-black);
+    padding: 1rem 2rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transform: rotate(-1deg);
+    transition: all 0.3s ease;
+    box-shadow: 6px 6px 0 var(--brutal-ice);
+  }
+  
+  .brutal-submit-btn:hover {
+    transform: rotate(0deg) translate(-2px, -2px);
+    box-shadow: 8px 8px 0 var(--brutal-ice);
+    background: var(--brutal-ice);
+    color: var(--brutal-black);
+    border-color: var(--brutal-black);
+  }
+  
+  .brutal-submit-btn:active {
+    transform: rotate(0deg) translate(0px, 0px);
+    box-shadow: 4px 4px 0 var(--brutal-ice);
+  }
+  
+  /* Zone de résultat */
+  .form-result {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    text-align: center;
+    font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
+    display: none;
+  }
+  
+  .form-result.success {
+    background: var(--brutal-ice);
+    color: var(--brutal-black);
+    border: 4px solid var(--brutal-black);
+    box-shadow: 4px 4px 0 var(--brutal-black);
+  }
+  
+  .form-result.error {
+    background: #ff4444;
+    color: var(--brutal-white);
+    border: 4px solid var(--brutal-black);
+    box-shadow: 4px 4px 0 var(--brutal-black);
+  }
+  
+  /* Validation email */
+  .email-validation {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    display: none;
+  }
+  
+  .email-validation.valid {
+    color: #00aa00;
+    display: block;
+  }
+  
+  .email-validation.invalid {
+    color: #ff4444;
+    display: block;
+  }
+  
+  .brutal-input.email-valid {
+    border-color: #00aa00;
+    box-shadow: 4px 4px 0 #00aa00;
+  }
+  
+  .brutal-input.email-invalid {
+    border-color: #ff4444;
+    box-shadow: 4px 4px 0 #ff4444;
+  }
+  
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .brutal-contact-section {
+      padding: 3rem 1rem;
+    }
+    
+    .form-row {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    
+    .brutal-input,
+    .brutal-select,
+    .brutal-textarea {
+      font-size: 0.9rem;
+    }
+    
+  }
+</style>
+
+<script>
+// Formulaire de contact avec n8n webhook
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('contact-form');
+  const result = document.getElementById('form-result');
+  const emailInput = document.getElementById('email');
+  const emailValidation = document.getElementById('email-validation');
+  
+  if (!form || !result) return;
+  
+  // Validation email simple (@ et .xxx)
+  function validateEmail(email) {
+    const re = /^.+@.+\..+$/;
+    return re.test(email);
+  }
+  
+  emailInput.addEventListener('input', function() {
+    const email = this.value.trim();
+    
+    if (email === '') {
+      emailValidation.style.display = 'none';
+      emailInput.classList.remove('email-valid', 'email-invalid');
+      return;
+    }
+    
+    if (!validateEmail(email)) {
+      emailValidation.className = 'email-validation invalid';
+      emailValidation.textContent = '❌ Format d\'email invalide (ex: nom@domaine.fr)';
+      emailInput.classList.remove('email-valid');
+      emailInput.classList.add('email-invalid');
+    } else {
+      emailValidation.className = 'email-validation valid';
+      emailValidation.textContent = '✅ Email valide';
+      emailInput.classList.remove('email-invalid');
+      emailInput.classList.add('email-valid');
+    }
+  });
+  
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Vérifier l'email avant envoi
+    const email = emailInput.value.trim();
+    if (!validateEmail(email)) {
+      emailValidation.className = 'email-validation invalid';
+      emailValidation.textContent = '❌ Veuillez corriger l\'adresse email avant d\'envoyer';
+      return;
+    }
+    
+    // Afficher le message de chargement
+    result.style.display = 'block';
+    result.className = 'form-result';
+    result.innerHTML = '⏳ Envoi en cours...';
+    
+    // Désactiver le bouton pendant l'envoi
+    const submitBtn = form.querySelector('.brutal-submit-btn');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '⏳ ENVOI...';
+    
+    // Préparer les données
+    const formData = new FormData(form);
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+    
+    // Envoyer via n8n webhook
+    fetch('https://n8n.jpcloudkit.fr/webhook/49006622-c75d-49cc-8f4e-79016e9e7d1c', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: json
+    })
+    .then(async (response) => {
+      let json = await response.json();
+      if (response.status === 200) {
+        // Succès
+        result.className = 'form-result success';
+        result.innerHTML = '✅ Message envoyé avec succès ! Nous vous répondrons rapidement.';
+        form.reset();
+      } else {
+        // Erreur
+        console.log(response);
+        result.className = 'form-result error';
+        result.innerHTML = '❌ Erreur lors de l\'envoi : ' + json.message;
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      result.className = 'form-result error';
+      result.innerHTML = '❌ Erreur de connexion. Veuillez réessayer plus tard.';
+    })
+    .finally(() => {
+      // Réactiver le bouton
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = 'ENVOYER LE MESSAGE';
+      
+      // Masquer le message après 5 secondes
+      setTimeout(() => {
+        result.style.display = 'none';
+      }, 5000);
+    });
+  });
+});
+</script>

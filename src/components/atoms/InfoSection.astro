@@ -1,0 +1,94 @@
+---
+import BrutalHeading from './BrutalHeading.astro';
+import BrutalCard from './BrutalCard.astro';
+import BrutalBadge from './BrutalBadge.astro';
+
+export interface Props {
+  title: string;
+  subtitle?: string;
+  icon?: string;
+  background?: 'white' | 'black' | 'mint';
+  cards: Array<{
+    title: string;
+    content: string;
+    icon?: string;
+    badge?: string;
+    variant?: 'default' | 'mint' | 'black';
+  }>;
+  columns?: 1 | 2 | 3 | 4;
+  id?: string;
+}
+
+const { 
+  title, 
+  subtitle,
+  icon = '',
+  background = 'white', 
+  cards, 
+  columns = 3,
+  id
+} = Astro.props;
+
+const bgColor = background === 'white' ? 'var(--brutal-white)' 
+  : background === 'black' ? 'var(--brutal-black)'
+  : 'var(--brutal-ice)';
+
+const sectionStyle = `background: ${bgColor}; ${background === 'black' ? 'color: var(--brutal-white);' : ''}`;
+const gridStyle = `grid-template-columns: repeat(${columns}, 1fr);`;
+---
+
+<section class="brutal-section" style={sectionStyle} id={id}>
+  <div class="brutal-container">
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <BrutalHeading 
+        level={2} 
+        rotation={-1}
+        shadow={true}
+        class="brutal-title text-l2"
+      >
+        {icon && <span style="margin-right: 0.5rem;">{icon}</span>}
+        {title}
+      </BrutalHeading>
+      {subtitle && <p class="section-subtitle">{subtitle}</p>}
+    </div>
+    
+    <div class="brutal-grid" style={gridStyle}>
+      {cards.map((card, index) => (
+        <BrutalCard 
+          variant={card.variant || 'default'} 
+          rotation={index % 2 === 0 ? -1 : 1}
+        >
+          {card.icon && <span style="font-size: 2rem; display: block; margin-bottom: 1rem;">{card.icon}</span>}
+          <BrutalHeading level={3} rotation={0}>
+            {card.title}
+          </BrutalHeading>
+          <p style="font-size: 0.95rem; line-height: 1.4; opacity: 0.9;">{card.content}</p>
+          {card.badge && <BrutalBadge>{card.badge}</BrutalBadge>}
+        </BrutalCard>
+      ))}
+    </div>
+    
+    <!-- Slot pour contenu additionnel -->
+    <slot />
+  </div>
+</section>
+
+<style>
+  .section-subtitle {
+    font-size: 1.25rem;
+    margin-top: 1rem;
+    color: var(--brutal-ice);
+    font-weight: 600;
+  }
+  
+  .brutal-grid {
+    display: grid;
+    gap: 2rem;
+  }
+  
+  @media (max-width: 768px) {
+    .brutal-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,259 @@
+---
+import BrutalHeading from '../atoms/BrutalHeading.astro';
+import BrutalBadge from '../atoms/BrutalBadge.astro';
+import BrutalButton from '../atoms/BrutalButton.astro';
+import BrutalSeparator from '../atoms/BrutalSeparator.astro';
+import PartnerLogo from '../atoms/PartnerLogo.astro';
+
+// 🎯 FUSION COUNTDOWN - Calculé AU BUILD TIME pour éliminer friction cognitive
+const eventDate = new Date('2026-05-16');
+const today = new Date();
+const daysLeft = Math.floor((eventDate - today) / (1000 * 60 * 60 * 24));
+const isEventSoon = daysLeft < 30;
+---
+
+<section class="brutal-section brutal-section--black" style="position: relative; overflow: hidden;">
+  <!-- Pattern background -->
+  <div 
+    class="brutal-pattern-diagonal" 
+    style="position: absolute; inset: 0; pointer-events: none;"
+  ></div>
+  
+  <!-- Accent blocks - Contained positioning -->
+  <div class="accent-block accent-block-top" style="position: absolute; top: 10%; right: 0%; width: 200px; height: 200px; background: var(--brutal-ice); opacity: 0.1; transform: rotate(45deg);"></div>
+  <div class="accent-block accent-block-bottom" style="position: absolute; bottom: 0%; left: 0%; width: 150px; height: 150px; background: var(--brutal-ice); opacity: 0.1; transform: rotate(-30deg);"></div>
+
+  <div class="brutal-container" style="position: relative; z-index: 10; text-align: center; padding-top: 3rem; padding-bottom: 4rem;">
+    
+    <!-- 1. Badge dynamique entrée gratuite + countdown (FUSION UX 2025) -->
+    <div style="margin-bottom: 2rem;">
+      {isEventSoon ? (
+        <BrutalBadge variant="mint" size="large" animated={true} rotation={2}>
+          ⏰ J-{daysLeft} • ENTRÉE GRATUITE
+        </BrutalBadge>
+      ) : (
+        <BrutalBadge variant="mint" size="large" animated={true} rotation={2}>
+          🎫 ENTRÉE 100% GRATUITE
+        </BrutalBadge>
+      )}
+    </div>
+    
+    <!-- 2. Logo Championnat France 2026 (optimisé lisibilité 2025) -->
+    <div style="margin-bottom: 1rem;">
+      <img
+        src={`${import.meta.env.BASE_URL}/logo-championnat-france-2026.svg`}
+        alt="Championnat de France 2026"
+        class="hero-logo"
+        style="max-width: 100%; height: auto; width: clamp(240px, 60vw, 600px); margin: 0 auto; display: block;"
+      />
+    </div>
+
+    <!-- 3. Date et lieu sur une ligne -->
+    <div class="event-info" style="margin: 1.5rem 0;">
+      <div style="color: var(--brutal-white); font-size: var(--size-card); font-weight: 800; text-shadow: none; line-height: 1.2; display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap;">
+        <strong>16-17 MAI 2026</strong>
+        <span style="opacity: 0.5;">•</span>
+        <strong>SAINT-PIERRE-EN-FAUCIGNY (74)</strong>
+      </div>
+    </div>
+
+    <!-- 4. Trait mint -->
+    <BrutalSeparator color="mint" width="60%" margin="2rem auto" />
+    
+    <!-- 6. Organisé par + logos (layout horizontal) -->
+    <div style="margin: 1.5rem 0;">
+      <div style="display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap;">
+        <!-- Badge Organisé Par -->
+        <span style="
+          font-family: 'Inter', Arial, sans-serif;
+          font-size: 0.875rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          color: var(--brutal-ice);
+          background: var(--brutal-black);
+          padding: 0.5rem 1rem;
+          border: 2px solid var(--brutal-ice);
+          display: inline-block;
+          transform: rotate(-1deg);
+        ">
+          🤝 ORGANISÉ PAR
+        </span>
+        
+        <!-- Logos -->
+        <div class="partner-logos-container">
+          <PartnerLogo 
+            src="club-alpin-roche-bonneville.svg"
+            alt="Club Alpin de La Roche Bonneville"
+            backgroundColor="white"
+            rotation={-1}
+            width="207px"
+            height="127px"
+          />
+          
+          <PartnerLogo 
+            src="logo-ffme-horizontal.svg" 
+            alt="Fédération Française de Montagne et d'Escalade"
+            backgroundColor="white"
+            rotation={1}
+            width="207px"
+            height="127px"
+          />
+        </div>
+      </div>
+    </div>
+    
+    <!-- 7. Trait mint (même couleur que le premier) -->
+    <BrutalSeparator color="mint" width="60%" margin="2rem auto" />
+    
+    
+    <!-- 9. Navigation HIÉRARCHISÉE (PROGRAMME prioritaire) -->
+    <div class="hero-navigation" style="
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto auto;
+      grid-template-areas: 
+        'programme programme'
+        'voiture pratique' 
+        'arena arena';
+      gap: 2rem 1.5rem;
+      max-width: 800px;
+      margin: 2rem auto 0;
+      padding: 1rem;
+    ">
+      <!-- PROGRAMME - Bouton principal LARGE (2 colonnes) -->
+      <BrutalButton
+        href="#programme"
+        variant="primary"
+        rotation={-1}
+        class="hero-cta-primary"
+        ariaLabel="Consulter le programme détaillé des 2 jours de compétition"
+      >
+        📅 PROGRAMME COMPLET
+      </BrutalButton>
+
+      <!-- COVOITURAGE - Bouton logistique -->
+      <BrutalButton href="#covoiturage" variant="secondary" rotation={1} ariaLabel="Informations sur les différents moyens d'accès au lieu">
+        🗺️ COMMENT VENIR ?
+      </BrutalButton>
+
+      <!-- INFOS PRATIQUES - Bouton logistique (même style que COMMENT VENIR ?) -->
+      <BrutalButton href="#pratique" variant="secondary" rotation={2} ariaLabel="Informations pratiques : hébergement, transport et restauration">
+        🏨 INFOS PRATIQUES
+      </BrutalButton>
+
+      <!-- ARENA CHAMPIONS - Bouton découverte LARGE (même style que PROGRAMME) -->
+      <BrutalButton href="#arena" variant="primary" rotation={-2} class="hero-cta-secondary" ariaLabel="Découvrir 20 ans de compétitions et les champions qui ont grimpé ici">
+        <span class="desktop-text">🏆 DÉCOUVREZ NOS 20 ANS DE COMPET'</span>
+        <span class="mobile-text">🏆 20 ANS DE COMPET'</span>
+      </BrutalButton>
+    </div>
+    
+    
+  </div>
+</section>
+
+<style>
+/* HIÉRARCHIE CTA - Programme prioritaire */
+.hero-cta-primary {
+  grid-area: programme;
+  font-size: 1.125rem;
+  font-weight: 900;
+  padding: 1.25rem 2rem;
+}
+
+/* Arena Champions - Bouton découverte large */
+.hero-cta-secondary {
+  grid-area: arena;
+  font-size: 1rem;
+  font-weight: 800;
+  padding: 1rem 1.5rem;
+}
+
+/* Boutons logistique */
+.hero-navigation :global(.brutal-button[href="#covoiturage"]) {
+  grid-area: voiture;
+}
+
+.hero-navigation :global(.brutal-button[aria-label*="pratiques"]) {
+  grid-area: pratique;
+}
+
+/* Permettre les rotations des boutons */
+.hero-navigation :global(.brutal-button) {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Textes responsive */
+.desktop-text {
+  display: inline;
+}
+
+.mobile-text {
+  display: none;
+}
+
+.partner-logos-container {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .hero-navigation {
+    grid-template-columns: 1fr !important;
+    grid-template-areas: 
+      'programme'
+      'voiture' 
+      'pratique'
+      'arena' !important;
+    gap: 1rem !important;
+    padding: 0 1rem !important;
+    margin: 3rem auto 2rem !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  /* Assurer que tous les boutons sont visibles sur mobile */
+  .hero-navigation > * {
+    width: 100%;
+    margin: 0;
+    max-width: calc(100vw - 4rem);
+    box-sizing: border-box;
+  }
+
+  /* Supprimer les rotations sur mobile pour éviter débordement */
+  .hero-navigation :global(.brutal-button) {
+    transform: rotate(0deg) !important;
+  }
+  
+  /* Texte raccourci pour Arena sur mobile */
+  .hero-cta-secondary .mobile-text {
+    display: inline;
+  }
+  
+  .hero-cta-secondary .desktop-text {
+    display: none;
+  }
+  
+  .partner-logos-container {
+    gap: 1rem;
+  }
+  
+  /* CORRECTION RESPONSIVE : Cacher les accent blocks sur mobile pour éviter débordement */
+  .accent-block {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .partner-logos-container {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+</style>

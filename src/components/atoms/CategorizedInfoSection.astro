@@ -1,0 +1,561 @@
+---
+import BrutalHeading from './BrutalHeading.astro';
+import BrutalCard from './BrutalCard.astro';
+import BrutalCardInfo from './BrutalCardInfo.astro';
+import BrutalBadge from './BrutalBadge.astro';
+
+export interface Props {
+  title: string;
+  subtitle?: string;
+  icon?: string;
+  transportCards: Array<{
+    title: string;
+    content: string;
+    icon?: string;
+    badge?: string;
+    variant?: 'default' | 'mint' | 'black';
+    link?: string;
+  }>;
+  accommodationCards: {
+    title: string;
+    description: string;
+    offices: Array<{
+      title: string;
+      link: string;
+    }>;
+  } | Array<any>;
+  foodCards: Array<{
+    title: string;
+    content: string;
+    icon?: string;
+    badge?: string;
+    variant?: 'default' | 'mint' | 'black';
+  }>;
+  id?: string;
+}
+
+const { 
+  title, 
+  subtitle,
+  icon = '',
+  transportCards,
+  accommodationCards,
+  foodCards,
+  id
+} = Astro.props;
+
+// Rotations CHAOS pour les blocs et cartes (design néo-brutaliste)
+const categoryRotations = [-2, 3, -1]; // Rotations pour les 3 gros blocs
+const cardRotations = [
+  [1, -2, 0, 2],    // Rotations pour les cartes dans Transport
+  [2, -1, 3],       // Rotations pour les cartes dans Hébergement  
+  [-1, 1, -2]       // Rotations pour les cartes dans Restauration
+];
+---
+
+<section class="categorized-section brutal-section--white" id={id}>
+  <div class="brutal-container">
+    <!-- Titre principal -->
+    <div class="section-header">
+      <BrutalHeading 
+        level={2} 
+        rotation={-1}
+        shadow={true}
+        class="main-title text-l2"
+      >
+        {icon && <span class="title-icon">{icon}</span>}
+        {title}
+      </BrutalHeading>
+      {subtitle && <p class="section-subtitle">{subtitle}</p>}
+    </div>
+    
+    <!-- Bloc Transport -->
+    <BrutalCard variant="mint" rotation={0} className="transport-block category-card-hover chaos-rotation-transport" marginBottom="4rem">
+      <div class="category-title">
+        🚌 TRANSPORT EN COMMUN
+      </div>
+      <div class="category-grid transport-grid">
+        {transportCards.map((card, index) => (
+          <BrutalCardInfo 
+            variant={index % 2 === 0 ? 'black' : 'default'} 
+            className={`transport-card-${index}`}
+          >
+            {card.icon && <span class="card-icon">{card.icon}</span>}
+            <BrutalHeading level={4} rotation={0} noShadow={true} textColor={index % 2 === 0 ? 'white' : 'black'} class="card-heading">
+              {card.title}
+            </BrutalHeading>
+            <p class="card-content">{card.content}</p>
+            {card.badge && <BrutalBadge>{card.badge}</BrutalBadge>}
+            {card.link && (
+              <a 
+                href={card.link} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="card-link"
+                style={index % 2 === 0 ? "color: var(--brutal-ice) !important;" : "color: var(--brutal-ice) !important;"}
+              >
+                → Plus d'infos
+              </a>
+            )}
+          </BrutalCardInfo>
+        ))}
+      </div>
+    </BrutalCard>
+    
+    {/* Bloc Hébergement & Restauration - format spécial */}
+    {(accommodationCards.title || accommodationCards.length > 0) && (
+      <BrutalCard variant="black" rotation={0} className="accommodation-block category-card-hover chaos-rotation-accommodation" marginBottom="4rem">
+        <div class="category-title">
+          {accommodationCards.title || "🏨 HÉBERGEMENT & RESTAURATION"}
+        </div>
+        
+        {accommodationCards.description && (
+          <p class="hebergement-description">
+            Les <span class="highlight-tag">offices de tourisme</span> de La Roche-sur-Foron et Bonneville peuvent vous accompagner pour organiser votre séjour : <span class="highlight-tag">hébergements</span>, <span class="highlight-tag">restaurants</span>.
+          </p>
+        )}
+        
+        {accommodationCards.offices && (
+          <div class="buttons-grid">
+            {accommodationCards.offices.map((office) => (
+              <a href={office.link} target="_blank" rel="noopener noreferrer" class="brutal-office-btn">
+                <span class="btn-emoji">🔗</span> {office.title}
+              </a>
+            ))}
+          </div>
+        )}
+        
+        {/* Fallback pour ancien format */}
+        {accommodationCards.length > 0 && (
+          <div class="category-grid accommodation-grid">
+            {accommodationCards.map((card, index) => (
+              <BrutalCardInfo 
+                variant={index % 2 === 0 ? 'default' : 'mint'} 
+                className={`accommodation-card-${index}`}
+              >
+                {card.icon && <span class="card-icon">{card.icon}</span>}
+                <BrutalHeading level={4} rotation={0} noShadow={true} textColor="black" class="card-heading">
+                  {card.title}
+                </BrutalHeading>
+                <p class="card-content">{card.content}</p>
+                {card.badge && <BrutalBadge>{card.badge}</BrutalBadge>}
+                {card.link && (
+                  <a 
+                    href={card.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="card-link"
+                    style={index % 2 === 0 ? "color: var(--brutal-ice) !important;" : "color: var(--brutal-ice) !important;"}
+                  >
+                    → Plus d'infos
+                  </a>
+                )}
+              </BrutalCardInfo>
+            ))}
+          </div>
+        )}
+      </BrutalCard>
+    )}
+    
+    {/* Bloc Commerces de proximité - affiché seulement si des cartes */}
+    {foodCards.length > 0 && (
+      <BrutalCard variant="mint" rotation={0} className="food-block category-card-hover chaos-rotation-food" marginBottom="4rem">
+        <div class="category-title">
+          🏪 COMMERCES DE PROXIMITÉ
+        </div>
+        <div class="category-grid food-grid">
+          {foodCards.map((card, index) => (
+            <BrutalCardInfo 
+              variant={card.variant || (index % 2 === 0 ? 'default' : 'black')} 
+              className={`food-card-${index}`}
+            >
+              {card.icon && <span class="card-icon">{card.icon}</span>}
+              <BrutalHeading level={4} rotation={0} noShadow={true} textColor={card.variant === 'black' ? 'white' : 'black'} class="card-heading">
+                {card.title}
+              </BrutalHeading>
+              <p class="card-content">{card.content}</p>
+              {card.badge && <BrutalBadge>{card.badge}</BrutalBadge>}
+              {card.link && (
+                <a 
+                  href={card.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="card-link"
+                  style={card.variant === 'black' ? "color: var(--brutal-ice) !important;" : "color: var(--brutal-ice) !important;"}
+                >
+                  → S'y rendre
+                </a>
+              )}
+            </BrutalCardInfo>
+          ))}
+        </div>
+      </BrutalCard>
+    )}
+    
+    
+    <!-- Slot pour contenu additionnel (CTA button) -->
+    <div class="cta-section">
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .categorized-section {
+    background: var(--brutal-white);
+    padding: 4rem 2rem;
+    position: relative;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .title-icon {
+    margin-right: 0.5rem;
+  }
+
+  .section-subtitle {
+    font-size: 1.25rem;
+    margin-top: 1rem;
+    color: var(--brutal-black);
+    font-weight: 600;
+  }
+
+  :global(.category-block) {
+    margin-bottom: 5rem;
+    padding: 0;
+    position: relative;
+    /* Force styles inline à prendre priorité */
+  }
+
+  /* Transport: Menthe avec contour et ombre noir */
+  .transport-block {
+    background: var(--brutal-ice);
+    border: 4px solid var(--brutal-black);
+    box-shadow: 12px 12px 0px var(--brutal-black);
+    padding: 2rem;
+  }
+
+  /* Hébergement: Noir avec contour et ombre blanc */
+  .accommodation-block {
+    background: var(--brutal-black);
+    border: 4px solid var(--brutal-white);
+    box-shadow: 12px 12px 0px var(--brutal-white);
+    padding: 2rem;
+  }
+
+  /* Commerces: Menthe avec contour et ombre noir */
+  .food-block {
+    background: var(--brutal-ice);
+    border: 4px solid var(--brutal-black);
+    box-shadow: 12px 12px 0px var(--brutal-black);
+    padding: 2rem;
+  }
+
+  .category-title {
+    background: var(--brutal-white);
+    color: var(--brutal-black);
+    font-family: 'Space Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: none;
+    padding: 1rem 2rem;
+    margin: 2rem auto;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Titre spécial pour hébergement sur fond noir */
+  .accommodation-block .category-title {
+    background: var(--brutal-white);
+    color: var(--brutal-black);
+  }
+
+  .category-grid {
+    display: grid;
+    gap: 2rem;
+    padding: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  /* Grilles spécifiques pour optimiser l'affichage */
+  .transport-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+
+  .accommodation-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .food-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .card-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .card-content {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    opacity: 0.9;
+    margin: 1rem 0;
+    white-space: pre-line;
+  }
+
+  .card-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    color: inherit;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: transform 0.2s ease;
+  }
+
+  .card-link:hover {
+    transform: translateX(4px);
+    text-decoration: underline;
+  }
+
+  /* Couleur des liens selon le variant de la carte */
+  /* Cartes noires -> liens menthe */
+  :global(.brutal-card-info--black) .card-link,
+  :global(.brutal-card-info--black) a.card-link,
+  :global(.brutal-card-info--black) a[class*="card-link"] {
+    color: var(--brutal-ice) !important;
+  }
+  
+  /* Cartes menthe -> liens noirs */
+  :global(.brutal-card-info--mint) .card-link,
+  :global(.brutal-card-info--mint) a.card-link,
+  :global(.brutal-card-info--mint) a[class*="card-link"] {
+    color: var(--brutal-black) !important;
+  }
+  
+  /* Cartes blanches/default -> liens menthe */
+  :global(.brutal-card-info--default) .card-link,
+  :global(.brutal-card-info--default) a.card-link,
+  :global(.brutal-card-info--default) a[class*="card-link"] {
+    color: var(--brutal-ice) !important;
+  }
+
+  /* Styles pour la section hébergement spéciale */
+  .hebergement-description {
+    color: var(--brutal-ice);
+    font-size: 1.25rem;
+    line-height: 1.5;
+    margin: 2rem auto 3rem auto;
+    max-width: 600px;
+    text-align: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+  }
+
+  .highlight-tag {
+    background: var(--brutal-ice);
+    color: var(--brutal-black);
+    padding: 0.1rem 0.4rem;
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    transform: rotate(-0.5deg);
+  }
+
+  .buttons-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .brutal-office-btn {
+    background: var(--brutal-white);
+    color: var(--brutal-black);
+    border: 4px solid var(--brutal-ice);
+    padding: 1.5rem 2rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    box-shadow: 8px 8px 0px var(--brutal-ice);
+    transition: all 0.2s ease;
+    display: block;
+    transform: rotate(-2deg);
+  }
+
+  .brutal-office-btn:nth-child(2) {
+    transform: rotate(2deg);
+  }
+
+  .brutal-office-btn:hover {
+    transform: rotate(0deg) translate(-4px, -4px) scale(1.05);
+    box-shadow: 12px 12px 0px var(--brutal-white);
+    background: var(--brutal-ice);
+    border: 4px solid var(--brutal-white);
+  }
+
+  .btn-emoji {
+    font-size: 1.5em;
+    margin-right: 0.5rem;
+  }
+
+  .cta-section {
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .categorized-section {
+      padding: 3rem 1rem;
+    }
+    
+    .category-block {
+      margin-bottom: 3rem;
+      /* Rotation conservée sur mobile via style inline */
+    }
+    
+    .category-grid,
+    .transport-grid,
+    .accommodation-grid,
+    .food-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 1.5rem;
+    }
+    
+    .category-title {
+      font-size: 1.2rem;
+      padding: 0.8rem 1rem;
+    }
+    
+    /* Boutons des offices de tourisme en colonne sur mobile */
+    .buttons-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    
+    .brutal-office-btn {
+      font-size: 0.9rem;
+      padding: 1.2rem 1rem;
+      transform: rotate(0deg) !important;
+      box-shadow: 6px 6px 0px var(--brutal-ice);
+      white-space: normal;
+      word-break: break-word;
+    }
+    
+    .brutal-office-btn:hover {
+      transform: scale(1.02) !important;
+      box-shadow: 8px 8px 0px var(--brutal-white);
+    }
+    
+    .btn-emoji {
+      font-size: 1.2em;
+      display: block;
+      margin: 0 0 0.5rem 0;
+    }
+    
+    /* Description hébergement plus petite sur mobile */
+    .hebergement-description {
+      font-size: 1rem;
+      padding: 0 1rem;
+    }
+    
+    .highlight-tag {
+      font-size: 0.85rem;
+    }
+  }
+
+  /* Accessibilité - améliorer le contraste pour les titres */
+  .category-title {
+    font-weight: 900;
+    letter-spacing: -0.02em;
+  }
+
+  /* Animation hover pour les blocs - SUPPRIMÉE pour garder la rotation */
+
+  /* Suppression bordures pour accommodation block (Office Tourisme) */
+  .categorized-section .accommodation-block :global(.brutal-card-info) {
+    border: none;
+    box-shadow: none;
+  }
+
+  /* Rotations CHAOS pour les 3 gros BrutalCard (statiques) */
+  .categorized-section :global(.chaos-rotation-transport) {
+    transform: rotate(-2deg) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .categorized-section :global(.chaos-rotation-accommodation) {
+    transform: rotate(3deg) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .categorized-section :global(.chaos-rotation-food) {
+    transform: rotate(-1deg) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  /* Effet zoom + ombre détachée sur hover pour LES 3 GROS BRUTALCARD */
+  .categorized-section :global(.chaos-rotation-transport:hover) {
+    transform: rotate(-2deg) scale(1.03) !important;
+    box-shadow: 16px 16px 0px var(--brutal-black) !important;
+  }
+  
+  .categorized-section :global(.chaos-rotation-accommodation:hover) {
+    transform: rotate(3deg) scale(1.03) !important;
+    box-shadow: 16px 16px 0px var(--brutal-white) !important;
+  }
+  
+  .categorized-section :global(.chaos-rotation-food:hover) {
+    transform: rotate(-1deg) scale(1.03) !important;
+    box-shadow: 16px 16px 0px var(--brutal-black) !important;
+  }
+
+  /* Rotations CHAOS pour les BrutalCardInfo */
+  .categorized-section :global(.transport-card-0) { transform: rotate(1deg); }
+  .categorized-section :global(.transport-card-1) { transform: rotate(-2deg); }
+  .categorized-section :global(.transport-card-2) { transform: rotate(0deg); }
+  .categorized-section :global(.transport-card-3) { transform: rotate(2deg); }
+
+  .categorized-section :global(.accommodation-card-0) { transform: rotate(2deg); }
+  .categorized-section :global(.accommodation-card-1) { transform: rotate(-1deg); }
+  .categorized-section :global(.accommodation-card-2) { transform: rotate(3deg); }
+
+  .categorized-section :global(.food-card-0) { transform: rotate(-1deg); }
+  .categorized-section :global(.food-card-1) { transform: rotate(1deg); }
+  .categorized-section :global(.food-card-2) { transform: rotate(-2deg); }
+
+  /* Hover garde les rotations mais ajoute zoom */
+  .categorized-section :global(.transport-card-0:hover) { transform: rotate(1deg) scale(1.1); }
+  .categorized-section :global(.transport-card-1:hover) { transform: rotate(-2deg) scale(1.1); }
+  .categorized-section :global(.transport-card-2:hover) { transform: rotate(0deg) scale(1.1); }
+  .categorized-section :global(.transport-card-3:hover) { transform: rotate(2deg) scale(1.1); }
+
+  .categorized-section :global(.accommodation-card-0:hover) { transform: rotate(2deg) scale(1.1); }
+  .categorized-section :global(.accommodation-card-1:hover) { transform: rotate(-1deg) scale(1.1); }
+  .categorized-section :global(.accommodation-card-2:hover) { transform: rotate(3deg) scale(1.1); }
+
+  .categorized-section :global(.food-card-0:hover) { transform: rotate(-1deg) scale(1.1); }
+  .categorized-section :global(.food-card-1:hover) { transform: rotate(1deg) scale(1.1); }
+  .categorized-section :global(.food-card-2:hover) { transform: rotate(-2deg) scale(1.1); }
+  
+
+</style>
+

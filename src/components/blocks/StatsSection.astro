@@ -1,0 +1,111 @@
+---
+import BrutalHeading from '../atoms/BrutalHeading.astro';
+
+const stats = [
+  { value: '300', label: 'ATHLÈTES', rotation: -3 },
+  { value: '6', label: 'CATÉGORIES', rotation: 2 },
+  { value: '2', label: 'JOURS', rotation: -1 },
+  { value: '1', label: 'TITRE', rotation: 3 }
+];
+---
+
+<section class="brutal-section brutal-section--black" style="position: relative; overflow-x: hidden; background: var(--brutal-black);">
+  <!-- ASCII Art background -->
+  <div class="stats-background" style="position: absolute; inset: 0; font-family: 'Space Mono', monospace; font-size: 4rem; line-height: 0.8; opacity: 0.03; z-index: 1; pointer-events: none; overflow: hidden;">
+    <pre class="stats-emoji" style="position: absolute; top: 10%; left: 10%; transform: rotate(-10deg);">⛰️</pre>
+    <pre class="stats-emoji" style="position: absolute; top: 60%; right: 15%; transform: rotate(15deg);">🧗</pre>
+    <pre class="stats-emoji" style="position: absolute; bottom: 20%; left: 20%; transform: rotate(-20deg);">🏆</pre>
+  </div>
+  
+  <div class="brutal-container" style="position: relative; z-index: 10; text-align: center;">
+    <div style="margin-bottom: 3rem;">
+      <BrutalHeading level={2} rotation={-1} shadow={true} class="brutal-title text-l2">
+        EN CHIFFRES
+      </BrutalHeading>
+    </div>
+    
+    <!-- Disposition asymétrique CSS Grid -->
+    <div 
+      style="
+        display: grid; 
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+        gap: 2rem; 
+        max-width: 1000px; 
+        margin: 0 auto;
+      "
+    >
+      {stats.map((stat, index) => (
+        <div 
+          class="stat-item"
+          style={`
+            transform: rotate(${stat.rotation}deg);
+            animation-delay: ${index * 200}ms;
+          `}
+        >
+          <div
+            class="stat-number"
+            style="
+              font-family: 'Inter', sans-serif;
+              font-weight: 800;
+              font-size: 4rem;
+              line-height: 0.9;
+              -webkit-text-stroke: 3px var(--brutal-white);
+              -webkit-text-fill-color: var(--brutal-ice);
+              margin-bottom: 1rem;
+            "
+          >
+            {stat.value}
+          </div>
+          <div 
+            style="
+              font-family: 'Space Mono', monospace;
+              font-weight: 700;
+              font-size: 1rem;
+              text-transform: uppercase;
+              letter-spacing: 0.1em;
+              color: var(--brutal-white);
+            "
+          >
+            {stat.label}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .stat-item {
+    animation: slide-brutal 1s ease-out forwards;
+    opacity: 0;
+  }
+  
+  .stat-number:hover {
+    animation: glitch 0.5s ease-in-out;
+    -webkit-text-fill-color: var(--brutal-white);
+    -webkit-text-stroke: 4px var(--brutal-ice);
+  }
+  
+  @media (max-width: 768px) {
+    .stat-item {
+      transform: rotate(0deg);
+    }
+
+    .stat-number {
+      font-size: 3rem !important;
+      -webkit-text-stroke: 2px var(--brutal-white) !important;
+    }
+
+    /* Cacher emojis background sur mobile pour éviter débordement */
+    .stats-emoji {
+      display: none !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .stat-number {
+      font-size: 2.5rem !important;
+      -webkit-text-stroke: 2px var(--brutal-white) !important;
+    }
+  }
+</style>

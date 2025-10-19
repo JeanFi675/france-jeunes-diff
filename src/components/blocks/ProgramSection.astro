@@ -1,0 +1,122 @@
+---
+import BrutalHeading from '../atoms/BrutalHeading.astro';
+import BrutalBadge from '../atoms/BrutalBadge.astro';
+import BrutalCard from '../atoms/BrutalCard.astro';
+
+export interface Props {
+  background?: 'white' | 'black' | 'mint';
+}
+
+const { background = 'black' } = Astro.props;
+---
+
+<section class={`brutal-section brutal-section--${background}`} id="programme">
+  <div class="brutal-container">
+    <div style="text-align: center; margin-bottom: 4rem;">
+      <BrutalHeading 
+        level={2} 
+        rotation={-1}
+        shadow={true}
+        class="brutal-title text-l2"
+      >
+        PROGRAMME DES 2 JOURS
+      </BrutalHeading>
+    </div>
+    
+    <!-- LIVE STREAMING - ÉNORME et centré -->
+    <div style="text-align: center; margin-bottom: 4rem;">
+      <BrutalBadge variant="mint" animated={true} size="large">
+        🔴 LIVE STREAMING
+      </BrutalBadge>
+    </div>
+    
+    <div class="brutal-grid" style="grid-template-columns: 1fr 1fr; align-items: start; gap: 3rem;">
+      <!-- SAMEDI -->
+      <BrutalCard variant="default" rotation={-1} zIndex={2}>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+          <BrutalHeading level={3} rotation={0}>
+            SAMEDI 16 MAI
+          </BrutalHeading>
+          <BrutalBadge variant="mint">QUALIFICATIONS</BrutalBadge>
+        </div>
+        
+        <!-- PROGRAMME CONDENSÉ - Progressive disclosure UX 2025 -->
+        <div class="program-schedule">
+          <!-- HEURES PRINCIPALES - Visibilité immédiate -->
+          <div class="primary-schedule" style="margin-bottom: 2rem;">
+            <div style="background: var(--brutal-ice); color: var(--brutal-black); padding: 1rem; font-weight: 900; font-size: 1.25rem; text-align: center; transform: rotate(-1deg);">
+              8H00 → 18H00
+            </div>
+          </div>
+          
+          <!-- DÉTAILS SECONDAIRES - Style allégé -->
+          <div class="secondary-details" style="opacity: 0.8; font-size: 0.9rem;">
+            <div style="margin-bottom: 0.75rem;">• <strong>8h00</strong> Qualifications matin</div>
+            <div>• <strong>14h00</strong> Qualifications après-midi</div>
+          </div>
+        </div>
+      </BrutalCard>
+      
+      <!-- DIMANCHE -->
+      <BrutalCard variant="mint" rotation={1} zIndex={1}>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+          <BrutalHeading level={3} rotation={0} style="color: white; text-shadow: none;">
+            DIMANCHE 17 MAI
+          </BrutalHeading>
+          <BrutalBadge variant="finales">
+            FINALES
+          </BrutalBadge>
+        </div>
+        
+        <!-- PROGRAMME CONDENSÉ - Progressive disclosure UX 2025 -->
+        <div class="program-schedule">
+          <!-- HEURES PRINCIPALES - Visibilité immédiate -->
+          <div class="primary-schedule" style="margin-bottom: 2rem;">
+            <div style="background: var(--brutal-black); color: var(--brutal-white); padding: 1rem; font-weight: 900; font-size: 1.25rem; text-align: center; transform: rotate(1deg);">
+              9H30 → 15H00
+            </div>
+          </div>
+          
+          <!-- DÉTAILS SECONDAIRES - Style allégé -->
+          <div class="secondary-details" style="opacity: 0.9; font-size: 0.9rem; color: var(--brutal-black);">
+            <div style="margin-bottom: 0.75rem;">• <strong>9h30-12h45</strong> Finales U15/U17/U19</div>
+            <div>• <strong>14h15</strong> Remise des prix</div>
+          </div>
+        </div>
+      </BrutalCard>
+    </div>
+    
+  </div>
+</section>
+
+<style>
+  @media (max-width: 768px) {
+    .brutal-grid {
+      grid-template-columns: 1fr !important;
+      gap: 2rem !important;
+      align-items: stretch !important;
+    }
+    
+    .brutal-card {
+      margin-right: 0;
+      transform: rotate(0deg);
+      min-height: auto;
+      margin-bottom: 2rem;
+    }
+
+    /* Ajuster les paddings pour mobile */
+    .program-schedule {
+      padding-bottom: 1rem;
+    }
+
+    .primary-schedule > div {
+      font-size: 1.1rem !important;
+      padding: 0.75rem !important;
+    }
+
+    .secondary-details {
+      font-size: 0.85rem !important;
+      margin-bottom: 1rem;
+    }
+  }
+</style>

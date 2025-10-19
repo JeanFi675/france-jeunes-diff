@@ -1,0 +1,108 @@
+---
+import ChampionCard from './ChampionCard.astro';
+
+export interface Props {
+  champions: Array<{
+    name: string;
+    stPierreVictory: string;
+    achievements: string[];
+    photoUrl?: string;
+    rotation?: number;
+  }>;
+}
+
+const { champions } = Astro.props;
+---
+
+<div class="champions-grid-container">
+  <!-- Première ligne : 4 champions -->
+  <div class="champions-row champions-row--four">
+    {champions.slice(0, 4).map(champion => (
+      <ChampionCard
+        name={champion.name}
+        stPierreVictory={champion.stPierreVictory}
+        achievements={champion.achievements}
+        photoUrl={champion.photoUrl}
+        rotation={champion.rotation}
+        variant="mint"
+      />
+    ))}
+  </div>
+  
+  <!-- Deuxième ligne : 3 champions centrés -->
+  {champions.length > 4 && (
+    <div class="champions-row champions-row--three">
+      {champions.slice(4, 7).map(champion => (
+        <ChampionCard
+          name={champion.name}
+          stPierreVictory={champion.stPierreVictory}
+          achievements={champion.achievements}
+          photoUrl={champion.photoUrl}
+          rotation={champion.rotation}
+          variant="mint"
+        />
+      ))}
+    </div>
+  )}
+</div>
+
+<style>
+  .champions-grid-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  /* BASE : Comportement identique pour les deux lignes */
+  .champions-row {
+    display: flex;
+    flex-direction: row !important; /* FORCE horizontal en permanence */
+    flex-wrap: nowrap !important; /* Jamais de wrap */
+    gap: 1rem;
+    justify-content: center;
+  }
+  
+  /* LOGIQUE UNIFIÉE : Même système pour les deux lignes */
+  .champions-row :global(.champion-card) {
+    flex: 0 0 auto !important; /* Pas de grow/shrink - taille fixe */
+    width: 200px; /* Largeur fixe de base */
+    min-width: 0 !important; /* Pas de min-width contraignant */
+    max-width: none !important; /* Pas de max-width contraignant */
+  }
+  
+  /* DESKTOP : Plus d'espace */
+  @media (min-width: 1025px) {
+    .champions-row {
+      gap: 1.5rem;
+    }
+    
+    .champions-row :global(.champion-card) {
+      width: 240px; /* Plus large sur desktop */
+    }
+  }
+  
+  /* TABLET : Taille moyenne */
+  @media (max-width: 1024px) and (min-width: 769px) {
+    .champions-row {
+      gap: 0.75rem;
+    }
+    
+    .champions-row :global(.champion-card) {
+      width: 180px; /* Taille réduite tablet */
+    }
+  }
+  
+  /* MOBILE : Passage en colonne */
+  @media (max-width: 768px) {
+    .champions-row {
+      flex-direction: column !important;
+      gap: 1rem;
+      align-items: center;
+    }
+    
+    .champions-row :global(.champion-card) {
+      width: 100% !important;
+      max-width: 300px !important;
+    }
+  }
+</style>

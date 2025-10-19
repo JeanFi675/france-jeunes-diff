@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+
+// Import tous les blocs selon TODO_OPTIMIZED_DEV_JUNIOR.md (DRY)
+import HeroSection from '../components/blocks/HeroSection.astro';
+import PublicWelcomeSection from '../components/blocks/PublicWelcomeSection.astro';
+import ProgramSection from '../components/blocks/ProgramSection.astro';
+import CovoiturageSection from '../components/blocks/CovoiturageSection.astro';
+import PracticalInfoSection from '../components/blocks/PracticalInfoSection.astro';
+import StatsSection from '../components/blocks/StatsSection.astro';
+import ArenaChampionsSection from '../components/blocks/ArenaChampionsSection.astro';
+import PartnersSection from '../components/blocks/PartnersSection.astro';
+import ContactSection from '../components/blocks/ContactSection.astro';
+import FooterSection from '../components/blocks/FooterSection.astro';
+
+const metadata = {
+  title: 'Championnats de France Jeunes de Difficulté 2026',
+  description: 'Championnats de France Jeunes de Difficulté d\'escalade - 16-17 mai 2026 • Saint-Pierre-en-Faucigny • ENTRÉE GRATUITE • Spectacle familial'
+};
+---
+
+<BaseLayout title={metadata.title} description={metadata.description}>
+  <!-- HERO: Accroche vendeuse avec countdown intégré (FUSION UX 2025) -->
+  <HeroSection />
+  
+  <!-- PUBLIC: Info public + compétiteurs + météo -->
+  <PublicWelcomeSection />
+  
+  <!-- PROGRAMME: Horaires des 2 jours -->
+  <ProgramSection background="black" />
+  
+  <!-- COVOITURAGE: Venir en voiture et covoiturage -->
+  <CovoiturageSection />
+  
+  <!-- PRATIQUE: Transport + Hébergement + Commerces fusionnés -->
+  <PracticalInfoSection />
+  
+  <!-- STATS: Chiffres d'impact (REPOSITIONNÉ pour respiration cognitive) -->
+  <StatsSection />
+  
+  <!-- ARENA: Arène des Champions - Palmarès organisationnel et champions révélés -->
+  <ArenaChampionsSection />
+  
+  <!-- CONTACT: Formulaire de contact (id="contact" pour navigation) -->
+  <ContactSection id="contact" />
+  
+  <!-- PARTENAIRES: Trois catégories de partenaires -->
+  <PartnersSection />
+  
+  <!-- FOOTER: Footer minimaliste -->
+  <FooterSection />
+</BaseLayout>

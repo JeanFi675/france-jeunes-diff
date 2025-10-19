@@ -1,0 +1,53 @@
+---
+export interface Props {
+  color?: 'mint' | 'white' | 'black';
+  width?: string;
+  height?: string;
+  margin?: string;
+}
+
+const { 
+  color = 'mint',
+  width = '60%',
+  height = '4px',
+  margin = '2rem auto'
+} = Astro.props;
+
+const colorMap = {
+  mint: 'var(--brutal-ice)',
+  white: 'var(--brutal-white)',
+  black: 'var(--brutal-black)'
+};
+
+const separatorColor = colorMap[color];
+---
+
+<div 
+  class="brutal-separator"
+  style={`
+    --base-rotation: -0.5deg;
+    width: ${width};
+    height: ${height};
+    background: ${separatorColor};
+    margin: ${margin};
+    border: none;
+    display: block;
+    transform: rotate(var(--base-rotation));
+  `}
+></div>
+
+<style>
+.brutal-separator {
+  transition: all 0.2s ease;
+}
+
+.brutal-separator:hover {
+  transform: rotate(var(--base-rotation)) scale(1.02);
+}
+
+@media (max-width: 768px) {
+  .brutal-separator {
+    width: 80%;
+  }
+}
+</style>

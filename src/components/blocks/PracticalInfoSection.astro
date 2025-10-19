@@ -1,0 +1,20 @@
+---
+import CategorizedInfoSection from '../atoms/CategorizedInfoSection.astro';
+import BrutalButton from '../atoms/BrutalButton.astro';
+import competitionData from '../../data/competition-data.js';
+---
+
+<CategorizedInfoSection
+  title="INFOS PRATIQUES"
+  icon="📍"
+  transportCards={competitionData.transport}
+  accommodationCards={competitionData.accommodation}
+  foodCards={competitionData.food}
+  id="pratique"
+>
+</CategorizedInfoSection>
+
+<style>
+  /* Pas de styles spécifiques nécessaires - tout est géré par InfoSection (KISS) */
+  /* Le responsive est déjà géré par le composant parent (DRY) */
+</style>

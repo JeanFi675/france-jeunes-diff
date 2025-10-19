@@ -1,0 +1,70 @@
+---
+export interface Props {
+  src: string;
+  alt: string;
+  backgroundColor?: 'white' | 'mint' | 'black';
+  rotation?: number;
+  width?: string;
+  height?: string;
+}
+
+const { 
+  src, 
+  alt, 
+  backgroundColor = 'white',
+  rotation = 0,
+  width = '180px',
+  height = '110px'
+} = Astro.props;
+
+const bgColorMap = {
+  white: 'var(--brutal-white)',
+  mint: 'var(--brutal-ice)', 
+  black: 'var(--brutal-black)'
+};
+
+const bgColor = bgColorMap[backgroundColor];
+---
+
+<div 
+  class="partner-logo-container"
+  style={`
+    --base-rotation: ${rotation}deg;
+    display: inline-flex;
+    background: var(--brutal-white);
+    border: 4px solid var(--brutal-ice);
+    box-shadow: 6px 6px 0 var(--brutal-black);
+    padding: 0.5rem;
+    transform: rotate(var(--base-rotation));
+    transition: all 0.2s ease;
+    width: ${width};
+    height: ${height};
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+  `}
+>
+  <img
+    src={`${import.meta.env.BASE_URL}/${src}`}
+    alt={alt}
+    style={`
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    `}
+  />
+</div>
+
+<style>
+.partner-logo-container:hover {
+  transform: translate(-2px, -2px) rotate(calc(var(--base-rotation) + 2deg));
+  box-shadow: 8px 8px 0 var(--brutal-ice);
+}
+
+@media (max-width: 768px) {
+  .partner-logo-container {
+    width: 100px;
+  }
+}
+</style>

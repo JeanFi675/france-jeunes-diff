@@ -1,0 +1,68 @@
+---
+export interface Props {
+  variant?: 'mint' | 'black' | 'white' | 'finales';
+  animated?: boolean;
+  rotation?: number;
+  size?: 'normal' | 'large';
+  class?: string;
+}
+
+const { 
+  variant = 'mint', 
+  animated = false, 
+  rotation = Math.random() * 6 - 3, // -3 à 3deg
+  size = 'normal',
+  class: className = '' 
+} = Astro.props;
+
+const classes = `brutal-badge brutal-badge--${variant} ${size === 'large' ? 'brutal-badge--large' : ''} ${animated ? 'brutal-badge--animated' : ''} ${className}`.trim();
+---
+
+<span 
+  class={classes}
+  style={`transform: rotate(${rotation}deg)`}
+>
+  <slot />
+</span>
+
+<style>
+  .brutal-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: var(--brutal-ice);
+    color: var(--brutal-black);
+    border: 4px solid var(--brutal-black);
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  
+  .brutal-badge--black {
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    box-shadow: 4px 4px 0 var(--brutal-ice);
+  }
+  
+  .brutal-badge--white {
+    background: var(--brutal-white);
+    color: var(--brutal-black);
+  }
+  
+  .brutal-badge--finales {
+    background: var(--brutal-black);
+    color: var(--brutal-ice);
+    border: 4px solid var(--brutal-white);
+  }
+  
+  .brutal-badge--large {
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+    font-weight: 900;
+  }
+  
+  .brutal-badge--animated {
+    animation: pulse-brutal 3s ease-in-out infinite;
+  }
+</style>

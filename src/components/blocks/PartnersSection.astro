@@ -1,0 +1,300 @@
+---
+import BrutalHeading from '../atoms/BrutalHeading.astro';
+import BrutalCard from '../atoms/BrutalCard.astro';
+import PartnerCard from '../atoms/PartnerCard.astro';
+---
+
+<section class="brutal-section brutal-section--black partners-section">
+  <div class="brutal-container">
+    <div class="title-center">
+      <BrutalHeading level={2} shadow={true} rotation={-1} class="brutal-title text-l2">
+        NOS PARTENAIRES
+      </BrutalHeading>
+    </div>
+
+    <div class="partners-grid">
+      <!-- Partenaires officiels FFME -->
+      <BrutalCard 
+        variant="mint" 
+        rotation={-2} 
+        className="partners-subsection"
+        customBorder="4px solid var(--brutal-white)"
+        customShadow="8px 8px 0 var(--brutal-white)"
+      >
+        <div class="subsection-content">
+          <h3 class="subsection-title">PARTENAIRES OFFICIELS</h3>
+          <div class="partners-list-centered">
+            <PartnerCard 
+              src="Au vieux Campeur.png"
+              alt="Au Vieux Campeur"
+              url="https://www.auvieuxcampeur.fr/"
+              rotation={-1}
+              width="180px"
+              height="110px"
+            />
+            <PartnerCard 
+              src="Beal.png"
+              alt="Beal"
+              url="https://www.beal-planet.com/"
+              rotation={2}
+              width="180px"
+              height="110px"
+            />
+            <PartnerCard 
+              src="Qwetch.png"
+              alt="Qwetch"
+              url="https://www.qwetch.com/"
+              rotation={-2}
+              width="180px"
+              height="110px"
+            />
+          </div>
+        </div>
+      </BrutalCard>
+
+      <!-- Partenaires du club -->
+      <BrutalCard 
+        variant="mint" 
+        rotation={-1} 
+        className="partners-subsection"
+        customBorder="4px solid var(--brutal-white)"
+        customShadow="8px 8px 0 var(--brutal-white)"
+      >
+        <div class="subsection-content">
+          <h3 class="subsection-title">PARTENAIRES DU CLUB</h3>
+          <div class="partners-list-centered">
+            <PartnerCard 
+              src="Cheeta.png"
+              alt="Cheeta Climbing Holds"
+              url="https://www.cheeta-holds.com/"
+              rotation={-1}
+              width="180px"
+              height="110px"
+            />
+            <PartnerCard 
+              src="Intersport.png"
+              alt="Intersport La Roche-sur-Foron"
+              url="https://www.intersport.fr/Haute-Savoie-74/LAROCHES_FORON-74800/INTERSPORT-LAROCHES_FORON/00460_000/"
+              rotation={2}
+              width="180px"
+              height="110px"
+            />
+          </div>
+        </div>
+      </BrutalCard>
+
+      <!-- Collectivités -->
+      <BrutalCard 
+        variant="mint" 
+        rotation={1} 
+        className="partners-subsection"
+        customBorder="4px solid var(--brutal-white)"
+        customShadow="8px 8px 0 var(--brutal-white)"
+      >
+        <div class="subsection-content">
+          <h3 class="subsection-title">COLLECTIVITÉS</h3>
+          <div class="partners-list-container">
+            <!-- Première ligne : 4 collectivités -->
+            <div class="partners-row partners-row--four">
+              <PartnerCard 
+                src="01 - Logo_Auvergne-Rhône-Alpes.png"
+                alt="Région Auvergne-Rhône-Alpes"
+                url="https://www.auvergnerhonealpes.fr/"
+                rotation={-2}
+                width="190px"
+                height="120px"
+              />
+              <PartnerCard 
+                src="02 - Logo_Haute_Savoie_2015.png"
+                alt="Département Haute-Savoie"
+                url="https://hautesavoie.fr/"
+                rotation={1}
+                width="190px"
+                height="120px"
+              />
+              <PartnerCard 
+                src="03 - CCPR.png"
+                alt="Communauté de Communes du Pays Rochois"
+                url="https://www.ccpaysrochois.fr/"
+                rotation={-1}
+                width="190px"
+                height="120px"
+              />
+              <PartnerCard 
+                src="04 - Logo ORS 2018 finale.png"
+                alt="Office Rochois des Sports"
+                url="https://www.facebook.com/ORSLaRoche/"
+                rotation={2}
+                width="190px"
+                height="120px"
+              />
+            </div>
+            
+            <!-- Deuxième ligne : 3 collectivités centrées -->
+            <div class="partners-row partners-row--three">
+              <PartnerCard 
+                src="05 - La Roche.png"
+                alt="La Roche-sur-Foron"
+                url="https://www.larochesurforon.fr/"
+                rotation={-2}
+                width="190px"
+                height="120px"
+              />
+              <PartnerCard 
+                src="06 - Saint Pierre en Faucigny.png"
+                alt="Saint-Pierre-en-Faucigny"
+                url="https://www.saintpierreenfaucigny.fr/"
+                rotation={1}
+                width="190px"
+                height="120px"
+              />
+              <PartnerCard 
+                src="07 - Logo_Bonneville_Haute_Savoie.png"
+                alt="Bonneville"
+                url="https://www.bonneville.fr/"
+                rotation={-1}
+                width="190px"
+                height="120px"
+              />
+            </div>
+          </div>
+        </div>
+      </BrutalCard>
+    </div>
+  </div>
+</section>
+
+<style>
+.partners-section {
+  background-color: var(--brutal-black);
+  color: var(--brutal-white);
+  padding: 5rem 0;
+  min-height: 80vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.title-center {
+  text-align: center;
+}
+
+/* Plus besoin - utilise les classes globales brutal.css */
+
+.partners-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  margin-top: 4rem;
+}
+
+.partners-subsection {
+  min-height: 400px;
+}
+
+/* Force les contours et ombres blancs sur fond noir */
+.partners-section .brutal-card--mint {
+  border: 4px solid var(--brutal-white) !important;
+  box-shadow: 8px 8px 0 var(--brutal-white) !important;
+}
+
+.partners-section .brutal-card--mint:hover {
+  box-shadow: 16px 16px 0 var(--brutal-white) !important;
+}
+
+.subsection-content {
+  padding: 2.5rem;
+  height: 100%;
+}
+
+.subsection-title {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  color: var(--brutal-black);
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+.partners-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Centrage pour les 3 partenaires officiels */
+.partners-list-centered {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Styles pour la disposition 4+3 des collectivités */
+.partners-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.partners-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: nowrap;
+}
+
+.partners-row--four {
+  justify-content: space-between;
+}
+
+.partners-row--four > .partner-card-link {
+  flex: 1;
+  max-width: calc(25% - 0.75rem);
+}
+
+.partners-row--three {
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.partners-row--three > .partner-card-link {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 768px) {
+  .partners-section {
+    padding: 3rem 0;
+  }
+  
+  .partners-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .subsection-content {
+    padding: 2rem;
+  }
+  
+  .subsection-title {
+    font-size: 1.5rem;
+  }
+  
+  .partners-row {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .partners-row--four > .partner-card-link,
+  .partners-row--three > .partner-card-link {
+    max-width: none;
+    width: 140px;
+  }
+}
+</style>

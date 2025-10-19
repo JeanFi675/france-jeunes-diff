@@ -1,0 +1,95 @@
+---
+import competitionData from '../../data/competition-data.js';
+import '../../styles/brutal.css';
+
+export interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const { event } = competitionData;
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  
+  <!-- SEO amélioré avec données centralisées (DRY) -->
+  <meta name="keywords" content="escalade gratuit, championnat France, Saint-Pierre-en-Faucigny, famille, FFME, mai 2026, spectacle sportif, Haute-Savoie, compétition jeunes">
+  <meta name="author" content="CAF La Roche Bonneville">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph Enhanced -->
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content="🏆 Spectacle d'escalade GRATUIT • 16-17 mai 2026 • Venez en famille découvrir l'élite française !">
+  <meta property="og:type" content="event">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Championnats de France Escalade 2026">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+  
+  <!-- Event Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "SportsEvent",
+    "name": event.name,
+    "description": "Championnats de France Jeunes Difficulté d'escalade - Entrée gratuite pour tous",
+    "startDate": event.eventDate.toISOString(),
+    "endDate": new Date('2026-05-17T17:00:00').toISOString(),
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "location": {
+      "@type": "Place",
+      "name": event.venue,
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "110 rue des Alpes",
+        "addressLocality": "Saint-Pierre-en-Faucigny",
+        "postalCode": "74800",
+        "addressCountry": "FR"
+      }
+    },
+    "organizer": {
+      "@type": "Organization",
+      "name": "CAF La Roche Bonneville",
+      "url": "https://www.caflarochebonneville.fr"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR",
+      "availability": "https://schema.org/InStock"
+    },
+    "sport": "Rock Climbing"
+  })}
+  </script>
+  
+  <!-- Preload Critical Fonts -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Space+Grotesk:wght@400;700;900&display=swap" as="style">
+  
+  
+  <!-- Favicon Simple -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23000'/><rect x='10' y='10' width='80' height='80' fill='%237FE5B0'/></svg>">
+  
+  <!-- Smooth scroll (KISS) -->
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+  <main role="main" aria-label="Contenu principal de la page des Championnats de France d'escalade">
+    <slot />
+  </main>
+</body>
+</html>
