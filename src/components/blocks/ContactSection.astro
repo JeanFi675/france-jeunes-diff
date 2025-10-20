@@ -11,19 +11,14 @@ const { id } = Astro.props;
 
 <section id={id} class="brutal-section brutal-contact-section">
   <div class="brutal-container">
-    
-    <!-- TITRE PRINCIPAL -->
     <div style="margin-bottom: 3rem; text-align: center;">
       <BrutalHeading level={2} rotation={-2} shadow={true} class="brutal-title text-l2">
         📧 NOUS CONTACTER
       </BrutalHeading>
     </div>
-    
-    <!-- FORMULAIRE DE CONTACT -->
+
     <BrutalCard variant="white" rotation={1}>
       <div style="padding: 3rem;">
-        
-        <!-- Titre de la carte -->
         <div style="text-align: center; margin-bottom: 2rem;">
           <div style="background: var(--brutal-ice); padding: 0.5rem 1.5rem; display: inline-block;">
             <h3 style="color: var(--brutal-black); font-size: 1.75rem; margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; text-transform: uppercase;">
@@ -31,16 +26,12 @@ const { id } = Astro.props;
             </h3>
           </div>
         </div>
-        
-        <!-- Formulaire -->
+
         <form id="contact-form" class="brutal-contact-form" action="https://n8n.jpcloudkit.fr/webhook/49006622-c75d-49cc-8f4e-79016e9e7d1c" method="POST">
-          <!-- Sujet personnalisé -->
           <input type="hidden" name="subject" value="Nouveau message depuis le site Championnats de France Escalade 2026">
-          
-          <!-- Protection anti-spam -->
+
           <input type="checkbox" name="botcheck" id="" style="display: none;">
-          
-          <!-- Ligne 1: Nom et Prénom -->
+
           <div class="form-row">
             <div class="form-group">
               <label for="nom" class="brutal-label">Nom *</label>
@@ -65,8 +56,7 @@ const { id } = Astro.props;
               >
             </div>
           </div>
-          
-          <!-- Ligne 2: Email -->
+
           <div class="form-group">
             <label for="email" class="brutal-label">Email *</label>
             <input 
@@ -81,8 +71,7 @@ const { id } = Astro.props;
             >
             <div id="email-validation" class="email-validation"></div>
           </div>
-          
-          <!-- Ligne 3: Sujet -->
+
           <div class="form-group">
             <label for="sujet" class="brutal-label">Sujet *</label>
             <select id="sujet" name="sujet" class="brutal-select" required>
@@ -96,8 +85,7 @@ const { id } = Astro.props;
               <option value="Autre">Autre</option>
             </select>
           </div>
-          
-          <!-- Ligne 4: Message -->
+
           <div class="form-group">
             <label for="message" class="brutal-label">Message *</label>
             <textarea 
@@ -109,34 +97,27 @@ const { id } = Astro.props;
               rows="6"
             ></textarea>
           </div>
-          
-          <!-- Bouton d'envoi -->
+
           <div style="text-align: center; margin-top: 2rem;">
             <button type="submit" class="brutal-submit-btn">
               ENVOYER LE MESSAGE
             </button>
           </div>
-          
-          <!-- Zone de résultat -->
+
           <div id="form-result" class="form-result"></div>
         </form>
-        
-        
       </div>
     </BrutalCard>
-    
   </div>
 </section>
 
 <style>
-  /* Section principale */
   .brutal-contact-section {
     background: var(--brutal-white);
     padding: 4rem 2rem;
     position: relative;
   }
-  
-  /* Formulaire */
+
   .brutal-contact-form {
     max-width: 800px;
     margin: 0 auto;
@@ -303,12 +284,10 @@ const { id } = Astro.props;
     .brutal-textarea {
       font-size: 0.9rem;
     }
-    
   }
 </style>
 
 <script>
-// Formulaire de contact avec n8n webhook
 document.addEventListener('DOMContentLoaded', function() {
   const form = document.getElementById('contact-form');
   const result = document.getElementById('form-result');
@@ -316,8 +295,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const emailValidation = document.getElementById('email-validation');
   
   if (!form || !result) return;
-  
-  // Validation email simple (@ et .xxx)
+
   function validateEmail(email) {
     const re = /^.+@.+\..+$/;
     return re.test(email);
