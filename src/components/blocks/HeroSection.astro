@@ -4,11 +4,11 @@ import BrutalBadge from '../atoms/BrutalBadge.astro';
 import BrutalButton from '../atoms/BrutalButton.astro';
 import BrutalSeparator from '../atoms/BrutalSeparator.astro';
 import PartnerLogo from '../atoms/PartnerLogo.astro';
+import { competitionData, getDaysUntilEvent } from '../../data/competition-data.js';
 
-const eventDate = new Date('2026-05-16');
-const today = new Date();
-const daysLeft = Math.floor((eventDate - today) / (1000 * 60 * 60 * 24));
+const daysLeft = getDaysUntilEvent();
 const isEventSoon = daysLeft < 30;
+const { datesShort, locationShort, organizers } = competitionData.event;
 ---
 
 <section class="brutal-section brutal-section--black" style="position: relative; overflow: hidden;">
@@ -45,9 +45,9 @@ const isEventSoon = daysLeft < 30;
 
     <div class="event-info" style="margin: 1.5rem 0;">
       <div style="color: var(--brutal-white); font-size: var(--size-card); font-weight: 800; text-shadow: none; line-height: 1.2; display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap;">
-        <strong>16-17 MAI 2026</strong>
+        <strong>{datesShort}</strong>
         <span style="opacity: 0.5;">•</span>
-        <strong>SAINT-PIERRE-EN-FAUCIGNY (74)</strong>
+        <strong>{locationShort}</strong>
       </div>
     </div>
 
@@ -72,18 +72,18 @@ const isEventSoon = daysLeft < 30;
         </span>
 
         <div class="partner-logos-container">
-          <PartnerLogo 
+          <PartnerLogo
             src="club-alpin-roche-bonneville.svg"
-            alt="Club Alpin de La Roche Bonneville"
+            alt={organizers.main}
             backgroundColor="white"
             rotation={-1}
             width="207px"
             height="127px"
           />
-          
-          <PartnerLogo 
-            src="logo-ffme-horizontal.svg" 
-            alt="Fédération Française de Montagne et d'Escalade"
+
+          <PartnerLogo
+            src="logo-ffme-horizontal.svg"
+            alt={organizers.federation}
             backgroundColor="white"
             rotation={1}
             width="207px"

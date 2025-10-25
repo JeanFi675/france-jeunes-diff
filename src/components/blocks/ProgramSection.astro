@@ -2,12 +2,14 @@
 import BrutalHeading from '../atoms/BrutalHeading.astro';
 import BrutalBadge from '../atoms/BrutalBadge.astro';
 import BrutalCard from '../atoms/BrutalCard.astro';
+import { competitionData } from '../../data/competition-data.js';
 
 export interface Props {
   background?: 'white' | 'black' | 'mint';
 }
 
 const { background = 'black' } = Astro.props;
+const { saturday, dimanche } = competitionData.program;
 ---
 
 <section class={`brutal-section brutal-section--${background}`} id="programme">
@@ -30,36 +32,37 @@ const { background = 'black' } = Astro.props;
     </div>
 
     <div class="brutal-grid" style="grid-template-columns: 1fr 1fr; align-items: start; gap: 3rem;">
-      <BrutalCard variant="default" rotation={-1} zIndex={2}>
+      <BrutalCard variant="default" rotation={saturday.rotation} zIndex={2}>
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
           <BrutalHeading level={3} rotation={0}>
-            SAMEDI 16 MAI
+            {saturday.date}
           </BrutalHeading>
-          <BrutalBadge variant="mint">QUALIFICATIONS</BrutalBadge>
+          <BrutalBadge variant={saturday.badgeVariant}>{saturday.badge}</BrutalBadge>
         </div>
 
         <div class="program-schedule">
           <!-- HEURES PRINCIPALES - Visibilité immédiate -->
           <div class="primary-schedule" style="margin-bottom: 2rem;">
             <div style="background: var(--brutal-ice); color: var(--brutal-black); padding: 1rem; font-weight: 900; font-size: 1.25rem; text-align: center; transform: rotate(-1deg);">
-              8H00 → 18H00
+              {saturday.mainHours}
             </div>
           </div>
 
           <div class="secondary-details" style="opacity: 0.8; font-size: 0.9rem;">
-            <div style="margin-bottom: 0.75rem;">• <strong>8h00</strong> Qualifications matin</div>
-            <div>• <strong>14h00</strong> Qualifications après-midi</div>
+            {saturday.details.map((detail) => (
+              <div style="margin-bottom: 0.75rem;">• <strong>{detail.time}</strong> {detail.label}</div>
+            ))}
           </div>
         </div>
       </BrutalCard>
 
-      <BrutalCard variant="mint" rotation={1} zIndex={1}>
+      <BrutalCard variant="mint" rotation={dimanche.rotation} zIndex={1}>
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
           <BrutalHeading level={3} rotation={0} style="color: white; text-shadow: none;">
-            DIMANCHE 17 MAI
+            {dimanche.date}
           </BrutalHeading>
-          <BrutalBadge variant="finales">
-            FINALES
+          <BrutalBadge variant={dimanche.badgeVariant}>
+            {dimanche.badge}
           </BrutalBadge>
         </div>
 
@@ -67,13 +70,14 @@ const { background = 'black' } = Astro.props;
           <!-- HEURES PRINCIPALES - Visibilité immédiate -->
           <div class="primary-schedule" style="margin-bottom: 2rem;">
             <div style="background: var(--brutal-black); color: var(--brutal-white); padding: 1rem; font-weight: 900; font-size: 1.25rem; text-align: center; transform: rotate(1deg);">
-              9H30 → 15H00
+              {dimanche.mainHours}
             </div>
           </div>
 
           <div class="secondary-details" style="opacity: 0.9; font-size: 0.9rem; color: var(--brutal-black);">
-            <div style="margin-bottom: 0.75rem;">• <strong>9h30-12h45</strong> Finales U15/U17/U19</div>
-            <div>• <strong>14h15</strong> Remise des prix</div>
+            {dimanche.details.map((detail) => (
+              <div style="margin-bottom: 0.75rem;">• <strong>{detail.time}</strong> {detail.label}</div>
+            ))}
           </div>
         </div>
       </BrutalCard>

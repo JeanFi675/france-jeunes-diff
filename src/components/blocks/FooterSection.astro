@@ -1,5 +1,7 @@
 ---
-// Footer minimaliste néo-brutaliste
+import { competitionData } from '../../data/competition-data.js';
+
+const { year, shortName, organizers } = competitionData.event;
 ---
 
 <footer class="brutal-footer">
@@ -8,24 +10,24 @@
     <!-- FOOTER MOBILE - Sécurisé sans rotations -->
     <div class="footer-content footer-mobile">
       <div class="footer-event-mobile">
-        <div class="event-year">2026</div>
-        <div class="event-name">CHPTS FRANCE JEUNES<br>ESCALADE DIFFICULTÉ</div>
+        <div class="event-year">{year}</div>
+        <div class="event-name">{shortName.replace('ESCALADE', 'ESCALADE<br>')}</div>
       </div>
       <div class="footer-organizer-mobile">
         <span>Co-organisé par</span>
-        <strong>FFME & CAF La Roche Bonneville</strong>
+        <strong>{organizers.shortText}</strong>
       </div>
     </div>
-    
+
     <!-- FOOTER DESKTOP - Avec rotations néo-brutalistes -->
     <div class="footer-content footer-desktop">
       <div class="footer-event-desktop">
-        <span class="event-year-desktop">2026</span>
-        <span class="event-name-desktop">CHPTS FRANCE JEUNES ESCALADE</span>
+        <span class="event-year-desktop">{year}</span>
+        <span class="event-name-desktop">{shortName.replace(' DIFFICULTÉ', '')}</span>
       </div>
       <div class="footer-organizer-desktop">
         <span>Co-organisé par</span>
-        <strong>FFME & CAF La Roche Bonneville</strong>
+        <strong>{organizers.shortText}</strong>
       </div>
     </div>
     

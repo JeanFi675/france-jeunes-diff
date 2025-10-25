@@ -6,154 +6,22 @@ import ChampionCard from '../atoms/ChampionCard.astro';
 import ChampionsGrid from '../atoms/ChampionsGrid.astro';
 import VideosGrid from '../atoms/VideosGrid.astro';
 import HistoryCard from '../atoms/HistoryCard.astro';
+import { competitionData } from '../../data/competition-data.js';
 
-// Photos du mur à intégrer dans les données techniques
-const wallPhotos = [
-  { src: `${import.meta.env.BASE_URL}/IMG_4355_opt.jpg`, alt: "Mur d'escalade principal du complexe sportif" },
-  { src: `${import.meta.env.BASE_URL}/IMG_4364_opt.jpg`, alt: "Vue détaillée du mur d'escalade" },
-  { src: `${import.meta.env.BASE_URL}/coupe-deurope-escalade-jeunes--2565jpg_53013559053_o.jpg`, alt: "Compétition d'escalade en action" }
-];
+const { wallData, historyEvents, champions, videos } = competitionData.arena;
 
-// Palmarès organisationnel
-const historyEvents = [
-  {
-    year: "2019 & 2023",
-    title: "2 Coupes d'Europe jeunes",
-    description: "200 grimpeurs européens à chaque fois. Les French ont tout explosé !",
-    rotation: -2
-  },
-  {
-    year: "2021",
-    title: "Championnat de France U12-U14",
-    description: "220 jeunes grimpeurs, le seul championnat national de l'année COVID.",
-    rotation: 1
-  },
-  {
-    year: "2022",
-    title: "Championnat régional Auvergne-Rhône-Alpes",
-    description: "Une région de très haut niveau en escalade.",
-    rotation: -1
-  },
-  {
-    year: "Depuis 2006",
-    title: "14 R'batte",
-    description: "Notre compét' locale qui cartonne depuis toujours.",
-    rotation: 2
-  }
-];
+// Ajouter BASE_URL aux chemins des photos et vidéos
+const baseUrl = import.meta.env.BASE_URL;
+const wallPhotos = wallData.photos.map(photo => ({
+  src: `${baseUrl}/${photo.src}`,
+  alt: photo.alt
+}));
 
-// Champions qui ont grimpé ici
-const champions = [
-  {
-    name: "Alberto GINÉS LÓPEZ",
-    stPierreVictory: "🥉 Bronze U18 - Coupe d'Europe 2019",
-    achievements: [
-      "CHAMPION OLYMPIQUE 2021 (1er titre escalade JO)",
-      "Champion d'Europe senior 2019"
-    ],
-    photoUrl: "https://www.ifsc-climbing.org/_next/image?url=https%3A%2F%2Fd1n1qj9geboqnb.cloudfront.net%2Fifsc%2Fpublic%2Fmo6typrlxpapfeghys0tfqq76v06&w=1920&q=75",
-    rotation: -1
-  },
-  {
-    name: "Oriane BERTONE",
-    stPierreVictory: "🏆 Or U16 - Coupe d'Europe 2019",
-    achievements: [
-      "N°1 MONDIALE 2025 (1ère française depuis 2007)",
-      "Vice-championne du monde 2023",
-      "Finaliste JO Paris 2024"
-    ],
-    photoUrl: "https://www.ifsc-climbing.org/_next/image?url=https%3A%2F%2Fd1n1qj9geboqnb.cloudfront.net%2Fifsc%2Fpublic%2Famnere1bc35p9o3slgolzq0eoahp&w=1920&q=75",
-    rotation: 2
-  },
-  {
-    name: "Mejdi SCHALCK",
-    stPierreVictory: "🥈 Argent U16 - Coupe d'Europe 2019",
-    achievements: [
-      "N°2 MONDIAL 2025 (4 145 points)",
-      "Vice-champion du monde 2023"
-    ],
-    photoUrl: "https://www.ifsc-climbing.org/_next/image?url=https%3A%2F%2Fd1n1qj9geboqnb.cloudfront.net%2Fifsc%2Fpublic%2Fs1hp3hca9sgnilgndzsqx0xglr0u&w=1920&q=75",
-    rotation: -2
-  },
-  {
-    name: "Paul JENFT",
-    stPierreVictory: "🏆 Or U18 - Coupe d'Europe 2019",
-    achievements: [
-      "Finaliste JO Paris 2024 (8e place)",
-      "Champion d'Europe 2017, 2018, 2019",
-      "Bronze Coupe du monde 2023 (Hachioji)"
-    ],
-    photoUrl: "https://www.ifsc-climbing.org/_next/image?url=https%3A%2F%2Fd1n1qj9geboqnb.cloudfront.net%2Fifsc%2Fpublic%2F84js5tt7ogsd2xnow56v5bchwo86&w=1920&q=75",
-    rotation: 1
-  },
-  {
-    name: "Sam AVEZOU",
-    stPierreVictory: "🏆 Or U20 - Coupe d'Europe 2019",
-    achievements: [
-      "Demi-finaliste JO Paris 2024",
-      "3 médailles européennes 2024 (2 or + 1 argent)",
-      "Bronze JOJ 2018 (1er français médaillé JOJ)"
-    ],
-    photoUrl: "https://www.ifsc-climbing.org/_next/image?url=https%3A%2F%2Fd1n1qj9geboqnb.cloudfront.net%2Fifsc%2Fpublic%2Fhtxm4ch4wps6rim6us1iozkc2tsk&w=1920&q=75",
-    rotation: -1
-  },
-  {
-    name: "Max BERTONE",
-    stPierreVictory: "🏆 Or U18 - Coupe d'Europe 2023",
-    achievements: [
-      "Champion du monde U16 difficulté 2022",
-      "Champion de France senior 2025 (18 ans)",
-      "2e Coupe du monde 2025 (Bali)"
-    ],
-    photoUrl: "https://www.ifsc-climbing.org/_next/image?url=%2Fassets%2Fplaceholder-athlete-ifsc.webp&w=1920&q=75",
-    rotation: 2
-  },
-  {
-    name: "Louise PUECH YAZID",
-    stPierreVictory: "🏆 Championne France U14 2021",
-    achievements: [
-      "Bronze championne du monde jeunes 2025 (difficulté, 3 août)",
-      "Or Coupe d'Europe jeunes 2024",
-      "Équipe de France jeunes"
-    ],
-    photoUrl: "https://www.ifsc-climbing.org/_next/image?url=%2Fassets%2Fplaceholder-athlete-ifsc.webp&w=1920&q=75",
-    rotation: -2
-  }
-];
-
-// Vidéos de nos compétitions avec URLs réelles et vignettes
-const videos = [
-  { 
-    title: "Coupe d'Europe 2023", 
-    rotation: -2,
-    videoUrl: `${import.meta.env.BASE_URL}/videos/coupe-europe-2023.mp4`,
-    thumbnail: `${import.meta.env.BASE_URL}/videos/coupe-europe-2023-thumb.jpg`
-  },
-  { 
-    title: "Championnat de France U12-U14 2021", 
-    rotation: 1,
-    videoUrl: `${import.meta.env.BASE_URL}/videos/championnats-france-u12-u14-2021.mp4`,
-    thumbnail: `${import.meta.env.BASE_URL}/videos/championnats-france-u12-u14-2021-thumb.jpg`
-  },
-  { 
-    title: "Coupe d'Europe 2019", 
-    rotation: -1,
-    videoUrl: `${import.meta.env.BASE_URL}/videos/coupe-europe-2019.mp4`,
-    thumbnail: `${import.meta.env.BASE_URL}/videos/coupe-europe-2019-thumb.jpg`
-  },
-  { 
-    title: "R'batte 2018", 
-    rotation: 2,
-    videoUrl: `${import.meta.env.BASE_URL}/videos/rbatte-2018.mp4`,
-    thumbnail: `${import.meta.env.BASE_URL}/videos/rbatte-2018-thumb.jpg`
-  },
-  { 
-    title: "R'batte 2017", 
-    rotation: -2,
-    videoUrl: `${import.meta.env.BASE_URL}/videos/rbatte-2017.mp4`,
-    thumbnail: `${import.meta.env.BASE_URL}/videos/rbatte-2017-thumb.jpg`
-  }
-];
+const videosWithBaseUrl = videos.map(video => ({
+  ...video,
+  videoUrl: `${baseUrl}/${video.videoUrl}`,
+  thumbnail: `${baseUrl}/${video.thumbnail}`
+}));
 ---
 
 <section class="brutal-section brutal-section--mint" id="arena">
@@ -173,25 +41,19 @@ const videos = [
         <div style="text-align: center; margin-bottom: 2rem;">
           <div style="background: var(--brutal-ice); padding: 0.5rem 1.5rem; display: inline-block;">
             <h3 style="color: var(--brutal-black); font-size: 1.75rem; margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; text-transform: uppercase;">
-              NOTRE MUR D'ESCALADE
+              {wallData.title}
             </h3>
           </div>
         </div>
-        
+
         <!-- Données techniques avec cadre noir -->
         <div class="technical-data">
-          <div class="data-item data-item--black">
-            <div class="data-value">14,5M</div>
-            <div class="data-label">HAUTEUR</div>
-          </div>
-          <div class="data-item data-item--black">
-            <div class="data-value">705M²</div>
-            <div class="data-label">SURFACE GRIMPABLE</div>
-          </div>
-          <div class="data-item data-item--black">
-            <div class="data-value">8M</div>
-            <div class="data-label">AVANCÉE</div>
-          </div>
+          {wallData.specs.map((spec) => (
+            <div class="data-item data-item--black">
+              <div class="data-value">{spec.value}</div>
+              <div class="data-label">{spec.label}</div>
+            </div>
+          ))}
         </div>
         
         <!-- Galerie photos du mur -->
@@ -357,7 +219,7 @@ const videos = [
             Vidéos de nos compétitions
           </h4>
           
-          <VideosGrid videos={videos} />
+          <VideosGrid videos={videosWithBaseUrl} />
         </div>
       </BrutalCard>
     </div>
@@ -839,13 +701,17 @@ const videos = [
 </style>
 
 <script>
-// Gallery Modal Logic (copié exactement de VenueSection)
+// Gallery Modal Logic - Utilise les données déjà chargées
 document.addEventListener('DOMContentLoaded', function() {
-  const images = [
-    { src: `${import.meta.env.BASE_URL}/IMG_4355_opt.jpg`, alt: "Mur d'escalade principal du complexe sportif" },
-    { src: `${import.meta.env.BASE_URL}/IMG_4364_opt.jpg`, alt: "Vue détaillée du mur d'escalade" },
-    { src: `${import.meta.env.BASE_URL}/coupe-deurope-escalade-jeunes--2565jpg_53013559053_o.jpg`, alt: "Compétition d'escalade en action" }
-  ];
+  // Images déjà chargées dans le markup - on les récupère du DOM
+  const galleryItems = document.querySelectorAll('.brutal-gallery-item');
+  const images = Array.from(galleryItems).map(item => {
+    const img = item.querySelector('img');
+    return {
+      src: img.src,
+      alt: img.alt
+    };
+  });
   
   let currentImageIndex = 0;
   
@@ -912,31 +778,18 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// Video Modal Logic avec vraies vidéos et BASE_URL correct
+// Video Modal Logic - Utilise les données déjà chargées
 document.addEventListener('DOMContentLoaded', function() {
-  const baseUrl = `${import.meta.env.BASE_URL}`;
-  const videosData = [
-    {
-      title: "Coupe d'Europe 2023",
-      url: baseUrl + "/videos/coupe-europe-2023.mp4"
-    },
-    {
-      title: "Championnat de France U12-U14 2021", 
-      url: baseUrl + "/videos/championnats-france-u12-u14-2021.mp4"
-    },
-    {
-      title: "Coupe d'Europe 2019",
-      url: baseUrl + "/videos/coupe-europe-2019.mp4"
-    },
-    {
-      title: "R'batte 2018",
-      url: baseUrl + "/videos/rbatte-2018.mp4"
-    },
-    {
-      title: "R'batte 2017",
-      url: baseUrl + "/videos/rbatte-2017.mp4"
-    }
-  ];
+  // Vidéos déjà chargées dans le markup - on les récupère du DOM
+  const videoTiles = document.querySelectorAll('.video-tile');
+  const videosData = Array.from(videoTiles).map(tile => {
+    const title = tile.querySelector('.video-title')?.textContent || '';
+    const videoUrl = tile.dataset.videoUrl || '';
+    return {
+      title: title,
+      url: videoUrl
+    };
+  });
   
   let currentVideoIndex = 0;
   

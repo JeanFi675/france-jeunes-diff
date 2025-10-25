@@ -1,12 +1,8 @@
 ---
 import BrutalHeading from '../atoms/BrutalHeading.astro';
+import { competitionData } from '../../data/competition-data.js';
 
-const stats = [
-  { value: '300', label: 'ATHLÈTES', rotation: -3 },
-  { value: '6', label: 'CATÉGORIES', rotation: 2 },
-  { value: '2', label: 'JOURS', rotation: -1 },
-  { value: '1', label: 'TITRE', rotation: 3 }
-];
+const stats = competitionData.stats;
 ---
 
 <section class="brutal-section brutal-section--black" style="position: relative; overflow-x: hidden; background: var(--brutal-black);">

@@ -3,11 +3,21 @@ export const competitionData = {
   // Informations générales
   event: {
     name: "Championnats de France Jeunes de Difficulté",
+    shortName: "CHPTS FRANCE JEUNES ESCALADE DIFFICULTÉ",
     dates: "16-17 mai 2026",
+    datesShort: "16-17 MAI 2026",
+    year: "2026",
     location: "Saint-Pierre-en-Faucigny",
+    locationShort: "SAINT-PIERRE-EN-FAUCIGNY (74)",
     venue: "Complexe Sportif du Pays Rochois",
     address: "110 rue des Alpes, 74800 Saint-Pierre-en-Faucigny",
+    gpsCoords: "46.058511, 6.375860",
     eventDate: new Date('2026-05-16'),
+    organizers: {
+      main: "Club Alpin de La Roche Bonneville",
+      federation: "Fédération Française de Montagne et d'Escalade",
+      shortText: "FFME & CAF La Roche Bonneville"
+    }
   },
   
   // Section Hébergement & Restauration avec format spécial
@@ -100,6 +110,312 @@ export const competitionData = {
     ],
     important: "",
     callToAction: "Donnez tout sur le mur !"
+  },
+
+  // Section Statistiques
+  stats: [
+    { value: '300', label: 'ATHLÈTES', rotation: -3 },
+    { value: '6', label: 'CATÉGORIES', rotation: 2 },
+    { value: '2', label: 'JOURS', rotation: -1 },
+    { value: '1', label: 'TITRE', rotation: 3 }
+  ],
+
+  // Section Programme
+  program: {
+    saturday: {
+      date: "SAMEDI 16 MAI",
+      badge: "QUALIFICATIONS",
+      badgeVariant: "mint",
+      mainHours: "8H00 → 18H00",
+      details: [
+        { time: "8h00", label: "Qualifications matin" },
+        { time: "14h00", label: "Qualifications après-midi" }
+      ],
+      rotation: -1
+    },
+    dimanche: {
+      date: "DIMANCHE 17 MAI",
+      badge: "FINALES",
+      badgeVariant: "finales",
+      mainHours: "9H30 → 15H00",
+      details: [
+        { time: "9h30-12h45", label: "Finales U15/U17/U19" },
+        { time: "14h15", label: "Remise des prix" }
+      ],
+      rotation: 1
+    }
+  },
+
+  // Section Partenaires
+  partners: {
+    ffme: {
+      title: "PARTENAIRES OFFICIELS DE LA FFME",
+      items: [
+        {
+          src: "Au vieux Campeur.png",
+          alt: "Au Vieux Campeur",
+          url: "https://www.auvieuxcampeur.fr/",
+          rotation: -1,
+          width: "180px",
+          height: "110px"
+        },
+        {
+          src: "Beal.png",
+          alt: "Beal",
+          url: "https://www.beal-planet.com/",
+          rotation: 2,
+          width: "180px",
+          height: "110px",
+          caption: "Partenaire officiel du Championnat de France d'escalade de difficulté"
+        }
+      ]
+    },
+    club: {
+      title: "PARTENAIRES DU CLUB",
+      items: [
+        {
+          src: "Cheeta.png",
+          alt: "Cheeta Climbing Holds",
+          url: "https://www.cheeta-holds.com/",
+          rotation: -1,
+          width: "180px",
+          height: "110px"
+        },
+        {
+          src: "Intersport.png",
+          alt: "Intersport La Roche-sur-Foron",
+          url: "https://www.intersport.fr/Haute-Savoie-74/LAROCHES_FORON-74800/INTERSPORT-LAROCHES_FORON/00460_000/",
+          rotation: 2,
+          width: "180px",
+          height: "110px"
+        }
+      ]
+    },
+    collectivites: {
+      title: "COLLECTIVITÉS",
+      items: [
+        {
+          src: "01 - Logo_Auvergne-Rhône-Alpes.png",
+          alt: "Région Auvergne-Rhône-Alpes",
+          url: "https://www.auvergnerhonealpes.fr/",
+          rotation: -2,
+          width: "190px",
+          height: "120px"
+        },
+        {
+          src: "02 - Logo_Haute_Savoie_2015.png",
+          alt: "Département Haute-Savoie",
+          url: "https://hautesavoie.fr/",
+          rotation: 1,
+          width: "190px",
+          height: "120px"
+        },
+        {
+          src: "03 - CCPR.png",
+          alt: "Communauté de Communes du Pays Rochois",
+          url: "https://www.ccpaysrochois.fr/",
+          rotation: -1,
+          width: "190px",
+          height: "120px"
+        },
+        {
+          src: "04 - Logo ORS 2018 finale.png",
+          alt: "Office Rochois des Sports",
+          url: "https://www.facebook.com/ORSLaRoche/",
+          rotation: 2,
+          width: "190px",
+          height: "120px"
+        },
+        {
+          src: "05 - La Roche.png",
+          alt: "La Roche-sur-Foron",
+          url: "https://www.larochesurforon.fr/",
+          rotation: -2,
+          width: "190px",
+          height: "120px"
+        },
+        {
+          src: "06 - Saint Pierre en Faucigny.png",
+          alt: "Saint-Pierre-en-Faucigny",
+          url: "https://www.saintpierreenfaucigny.fr/",
+          rotation: 1,
+          width: "190px",
+          height: "120px"
+        },
+        {
+          src: "07 - Logo_Bonneville_Haute_Savoie.png",
+          alt: "Bonneville",
+          url: "https://www.bonneville.fr/",
+          rotation: -1,
+          width: "190px",
+          height: "120px"
+        }
+      ]
+    }
+  },
+
+  // Section Formulaire de contact
+  formSubjects: [
+    { value: "", label: "Choisissez un sujet" },
+    { value: "Inscription / Participation", label: "Inscription / Participation" },
+    { value: "Informations pratiques", label: "Informations pratiques" },
+    { value: "Hébergement / Transport", label: "Hébergement / Transport" },
+    { value: "Bénévolat", label: "Bénévolat" },
+    { value: "Partenariat / Sponsoring", label: "Partenariat / Sponsoring" },
+    { value: "Presse / Média", label: "Presse / Média" },
+    { value: "Autre", label: "Autre" }
+  ],
+
+  // Section Arène des Champions
+  arena: {
+    wallData: {
+      title: "NOTRE MUR D'ESCALADE",
+      specs: [
+        { value: "14,5M", label: "HAUTEUR" },
+        { value: "705M²", label: "SURFACE GRIMPABLE" },
+        { value: "8M", label: "AVANCÉE" }
+      ],
+      photos: [
+        { src: "IMG_4355_opt.jpg", alt: "Mur d'escalade principal du complexe sportif" },
+        { src: "IMG_4364_opt.jpg", alt: "Vue détaillée du mur d'escalade" },
+        { src: "coupe-deurope-escalade-jeunes--2565jpg_53013559053_o.jpg", alt: "Compétition d'escalade en action" }
+      ]
+    },
+    historyEvents: [
+      {
+        year: "2019 & 2023",
+        title: "2 Coupes d'Europe jeunes",
+        description: "200 grimpeurs européens à chaque fois. Les French ont tout explosé !",
+        rotation: -2
+      },
+      {
+        year: "2021",
+        title: "Championnat de France U12-U14",
+        description: "220 jeunes grimpeurs, le seul championnat national de l'année COVID.",
+        rotation: 1
+      },
+      {
+        year: "2022",
+        title: "Championnat régional Auvergne-Rhône-Alpes",
+        description: "Une région de très haut niveau en escalade.",
+        rotation: -1
+      },
+      {
+        year: "Depuis 2006",
+        title: "14 R'batte",
+        description: "Notre compét' locale qui cartonne depuis toujours.",
+        rotation: 2
+      }
+    ],
+    champions: [
+      {
+        name: "Alberto GINÉS LÓPEZ",
+        stPierreVictory: "🥉 Bronze U18 - Coupe d'Europe 2019",
+        achievements: [
+          "CHAMPION OLYMPIQUE 2021 (1er titre escalade JO)",
+          "Champion d'Europe senior 2019"
+        ],
+        photoUrl: "https://www.ifsc-climbing.org/_next/image?url=https%3A%2F%2Fd1n1qj9geboqnb.cloudfront.net%2Fifsc%2Fpublic%2Fmo6typrlxpapfeghys0tfqq76v06&w=1920&q=75",
+        rotation: -1
+      },
+      {
+        name: "Oriane BERTONE",
+        stPierreVictory: "🏆 Or U16 - Coupe d'Europe 2019",
+        achievements: [
+          "N°1 MONDIALE 2025 (1ère française depuis 2007)",
+          "Vice-championne du monde 2023",
+          "Finaliste JO Paris 2024"
+        ],
+        photoUrl: "https://www.ifsc-climbing.org/_next/image?url=https%3A%2F%2Fd1n1qj9geboqnb.cloudfront.net%2Fifsc%2Fpublic%2Famnere1bc35p9o3slgolzq0eoahp&w=1920&q=75",
+        rotation: 2
+      },
+      {
+        name: "Mejdi SCHALCK",
+        stPierreVictory: "🥈 Argent U16 - Coupe d'Europe 2019",
+        achievements: [
+          "N°2 MONDIAL 2025 (4 145 points)",
+          "Vice-champion du monde 2023"
+        ],
+        photoUrl: "https://www.ifsc-climbing.org/_next/image?url=https%3A%2F%2Fd1n1qj9geboqnb.cloudfront.net%2Fifsc%2Fpublic%2Fs1hp3hca9sgnilgndzsqx0xglr0u&w=1920&q=75",
+        rotation: -2
+      },
+      {
+        name: "Paul JENFT",
+        stPierreVictory: "🏆 Or U18 - Coupe d'Europe 2019",
+        achievements: [
+          "Finaliste JO Paris 2024 (8e place)",
+          "Champion d'Europe 2017, 2018, 2019",
+          "Bronze Coupe du monde 2023 (Hachioji)"
+        ],
+        photoUrl: "https://www.ifsc-climbing.org/_next/image?url=https%3A%2F%2Fd1n1qj9geboqnb.cloudfront.net%2Fifsc%2Fpublic%2F84js5tt7ogsd2xnow56v5bchwo86&w=1920&q=75",
+        rotation: 1
+      },
+      {
+        name: "Sam AVEZOU",
+        stPierreVictory: "🏆 Or U20 - Coupe d'Europe 2019",
+        achievements: [
+          "Demi-finaliste JO Paris 2024",
+          "3 médailles européennes 2024 (2 or + 1 argent)",
+          "Bronze JOJ 2018 (1er français médaillé JOJ)"
+        ],
+        photoUrl: "https://www.ifsc-climbing.org/_next/image?url=https%3A%2F%2Fd1n1qj9geboqnb.cloudfront.net%2Fifsc%2Fpublic%2Fhtxm4ch4wps6rim6us1iozkc2tsk&w=1920&q=75",
+        rotation: -1
+      },
+      {
+        name: "Max BERTONE",
+        stPierreVictory: "🏆 Or U18 - Coupe d'Europe 2023",
+        achievements: [
+          "Champion du monde U16 difficulté 2022",
+          "Champion de France senior 2025 (18 ans)",
+          "2e Coupe du monde 2025 (Bali)"
+        ],
+        photoUrl: "https://www.ifsc-climbing.org/_next/image?url=%2Fassets%2Fplaceholder-athlete-ifsc.webp&w=1920&q=75",
+        rotation: 2
+      },
+      {
+        name: "Louise PUECH YAZID",
+        stPierreVictory: "🏆 Championne France U14 2021",
+        achievements: [
+          "Bronze championne du monde jeunes 2025 (difficulté, 3 août)",
+          "Or Coupe d'Europe jeunes 2024",
+          "Équipe de France jeunes"
+        ],
+        photoUrl: "https://www.ifsc-climbing.org/_next/image?url=%2Fassets%2Fplaceholder-athlete-ifsc.webp&w=1920&q=75",
+        rotation: -2
+      }
+    ],
+    videos: [
+      {
+        title: "Coupe d'Europe 2023",
+        rotation: -2,
+        videoUrl: "videos/coupe-europe-2023.mp4",
+        thumbnail: "videos/coupe-europe-2023-thumb.jpg"
+      },
+      {
+        title: "Championnat de France U12-U14 2021",
+        rotation: 1,
+        videoUrl: "videos/championnats-france-u12-u14-2021.mp4",
+        thumbnail: "videos/championnats-france-u12-u14-2021-thumb.jpg"
+      },
+      {
+        title: "Coupe d'Europe 2019",
+        rotation: -1,
+        videoUrl: "videos/coupe-europe-2019.mp4",
+        thumbnail: "videos/coupe-europe-2019-thumb.jpg"
+      },
+      {
+        title: "R'batte 2018",
+        rotation: 2,
+        videoUrl: "videos/rbatte-2018.mp4",
+        thumbnail: "videos/rbatte-2018-thumb.jpg"
+      },
+      {
+        title: "R'batte 2017",
+        rotation: -2,
+        videoUrl: "videos/rbatte-2017.mp4",
+        thumbnail: "videos/rbatte-2017-thumb.jpg"
+      }
+    ]
   }
 };
 

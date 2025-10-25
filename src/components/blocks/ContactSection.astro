@@ -1,12 +1,14 @@
 ---
 import BrutalHeading from '../atoms/BrutalHeading.astro';
 import BrutalCard from '../atoms/BrutalCard.astro';
+import { competitionData } from '../../data/competition-data.js';
 
 export interface Props {
   id?: string;
 }
 
 const { id } = Astro.props;
+const formSubjects = competitionData.formSubjects;
 ---
 
 <section id={id} class="brutal-section brutal-contact-section">
@@ -75,14 +77,9 @@ const { id } = Astro.props;
           <div class="form-group">
             <label for="sujet" class="brutal-label">Sujet *</label>
             <select id="sujet" name="sujet" class="brutal-select" required>
-              <option value="">Choisissez un sujet</option>
-              <option value="Inscription / Participation">Inscription / Participation</option>
-              <option value="Informations pratiques">Informations pratiques</option>
-              <option value="Hébergement / Transport">Hébergement / Transport</option>
-              <option value="Bénévolat">Bénévolat</option>
-              <option value="Partenariat / Sponsoring">Partenariat / Sponsoring</option>
-              <option value="Presse / Média">Presse / Média</option>
-              <option value="Autre">Autre</option>
+              {formSubjects.map((subject) => (
+                <option value={subject.value}>{subject.label}</option>
+              ))}
             </select>
           </div>
 

@@ -3,12 +3,14 @@ import BrutalHeading from '../atoms/BrutalHeading.astro';
 import BrutalCard from '../atoms/BrutalCard.astro';
 import BrutalBadge from '../atoms/BrutalBadge.astro';
 import BrutalTogetzerWidget from '../atoms/BrutalTogetzerWidget.astro';
+import { competitionData } from '../../data/competition-data.js';
 
 export interface Props {
   id?: string;
 }
 
 const { id } = Astro.props;
+const { venue, address, gpsCoords } = competitionData.event;
 ---
 
 <section class="brutal-section brutal-section--mint" id="covoiturage">
@@ -32,13 +34,13 @@ const { id } = Astro.props;
             </div>
           </div>
           <p style="color: var(--brutal-black); font-size: 1.25rem; line-height: 1.6; font-weight: 600;">
-            Complexe Sportif du Pays Rochois<br>
-            <strong style="color: var(--brutal-black);">110 rue des Alpes</strong><br>
-            74800 Saint-Pierre-en-Faucigny
+            {venue}<br>
+            <strong style="color: var(--brutal-black);">{address.split(',')[0]}</strong><br>
+            {address.split(',').slice(1).join(',').trim()}
           </p>
           <div style="margin-top: 1.5rem;">
             <BrutalBadge variant="mint" size="small">
-              GPS: 46.0637°N, 6.3751°E
+              GPS: {gpsCoords}
             </BrutalBadge>
           </div>
         </div>

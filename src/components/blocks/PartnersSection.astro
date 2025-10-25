@@ -2,6 +2,9 @@
 import BrutalHeading from '../atoms/BrutalHeading.astro';
 import BrutalCard from '../atoms/BrutalCard.astro';
 import PartnerCard from '../atoms/PartnerCard.astro';
+import { competitionData } from '../../data/competition-data.js';
+
+const { ffme, club, collectivites } = competitionData.partners;
 ---
 
 <section class="brutal-section brutal-section--black partners-section">
@@ -14,141 +17,93 @@ import PartnerCard from '../atoms/PartnerCard.astro';
 
     <div class="partners-grid">
       <!-- Partenaires officiels FFME -->
-      <BrutalCard 
-        variant="mint" 
-        rotation={-2} 
+      <BrutalCard
+        variant="mint"
+        rotation={-2}
         className="partners-subsection"
         customBorder="4px solid var(--brutal-white)"
         customShadow="8px 8px 0 var(--brutal-white)"
       >
         <div class="subsection-content">
-          <h3 class="subsection-title">PARTENAIRES OFFICIELS DE LA FFME</h3>
+          <h3 class="subsection-title">{ffme.title}</h3>
           <div class="partners-list-centered">
-            <PartnerCard
-              src="Au vieux Campeur.png"
-              alt="Au Vieux Campeur"
-              url="https://www.auvieuxcampeur.fr/"
-              rotation={-1}
-              width="180px"
-              height="110px"
-            />
-            <PartnerCard
-              src="Beal.png"
-              alt="Beal"
-              url="https://www.beal-planet.com/"
-              rotation={2}
-              width="180px"
-              height="110px"
-              caption="Partenaire officiel du Championnat de France d'escalade de difficulté"
-            />
+            {ffme.items.map((partner) => (
+              <PartnerCard
+                src={partner.src}
+                alt={partner.alt}
+                url={partner.url}
+                rotation={partner.rotation}
+                width={partner.width}
+                height={partner.height}
+                caption={partner.caption}
+              />
+            ))}
           </div>
         </div>
       </BrutalCard>
 
       <!-- Partenaires du club -->
-      <BrutalCard 
-        variant="mint" 
-        rotation={-1} 
+      <BrutalCard
+        variant="mint"
+        rotation={-1}
         className="partners-subsection"
         customBorder="4px solid var(--brutal-white)"
         customShadow="8px 8px 0 var(--brutal-white)"
       >
         <div class="subsection-content">
-          <h3 class="subsection-title">PARTENAIRES DU CLUB</h3>
+          <h3 class="subsection-title">{club.title}</h3>
           <div class="partners-list-centered">
-            <PartnerCard 
-              src="Cheeta.png"
-              alt="Cheeta Climbing Holds"
-              url="https://www.cheeta-holds.com/"
-              rotation={-1}
-              width="180px"
-              height="110px"
-            />
-            <PartnerCard 
-              src="Intersport.png"
-              alt="Intersport La Roche-sur-Foron"
-              url="https://www.intersport.fr/Haute-Savoie-74/LAROCHES_FORON-74800/INTERSPORT-LAROCHES_FORON/00460_000/"
-              rotation={2}
-              width="180px"
-              height="110px"
-            />
+            {club.items.map((partner) => (
+              <PartnerCard
+                src={partner.src}
+                alt={partner.alt}
+                url={partner.url}
+                rotation={partner.rotation}
+                width={partner.width}
+                height={partner.height}
+              />
+            ))}
           </div>
         </div>
       </BrutalCard>
 
       <!-- Collectivités -->
-      <BrutalCard 
-        variant="mint" 
-        rotation={1} 
+      <BrutalCard
+        variant="mint"
+        rotation={1}
         className="partners-subsection"
         customBorder="4px solid var(--brutal-white)"
         customShadow="8px 8px 0 var(--brutal-white)"
       >
         <div class="subsection-content">
-          <h3 class="subsection-title">COLLECTIVITÉS</h3>
+          <h3 class="subsection-title">{collectivites.title}</h3>
           <div class="partners-list-container">
             <!-- Première ligne : 4 collectivités -->
             <div class="partners-row partners-row--four">
-              <PartnerCard 
-                src="01 - Logo_Auvergne-Rhône-Alpes.png"
-                alt="Région Auvergne-Rhône-Alpes"
-                url="https://www.auvergnerhonealpes.fr/"
-                rotation={-2}
-                width="190px"
-                height="120px"
-              />
-              <PartnerCard 
-                src="02 - Logo_Haute_Savoie_2015.png"
-                alt="Département Haute-Savoie"
-                url="https://hautesavoie.fr/"
-                rotation={1}
-                width="190px"
-                height="120px"
-              />
-              <PartnerCard 
-                src="03 - CCPR.png"
-                alt="Communauté de Communes du Pays Rochois"
-                url="https://www.ccpaysrochois.fr/"
-                rotation={-1}
-                width="190px"
-                height="120px"
-              />
-              <PartnerCard 
-                src="04 - Logo ORS 2018 finale.png"
-                alt="Office Rochois des Sports"
-                url="https://www.facebook.com/ORSLaRoche/"
-                rotation={2}
-                width="190px"
-                height="120px"
-              />
+              {collectivites.items.slice(0, 4).map((partner) => (
+                <PartnerCard
+                  src={partner.src}
+                  alt={partner.alt}
+                  url={partner.url}
+                  rotation={partner.rotation}
+                  width={partner.width}
+                  height={partner.height}
+                />
+              ))}
             </div>
-            
+
             <!-- Deuxième ligne : 3 collectivités centrées -->
             <div class="partners-row partners-row--three">
-              <PartnerCard 
-                src="05 - La Roche.png"
-                alt="La Roche-sur-Foron"
-                url="https://www.larochesurforon.fr/"
-                rotation={-2}
-                width="190px"
-                height="120px"
-              />
-              <PartnerCard 
-                src="06 - Saint Pierre en Faucigny.png"
-                alt="Saint-Pierre-en-Faucigny"
-                url="https://www.saintpierreenfaucigny.fr/"
-                rotation={1}
-                width="190px"
-                height="120px"
-              />
-              <PartnerCard 
-                src="07 - Logo_Bonneville_Haute_Savoie.png"
-                alt="Bonneville"
-                url="https://www.bonneville.fr/"
-                rotation={-1}
-                width="190px"
-                height="120px"
-              />
+              {collectivites.items.slice(4, 7).map((partner) => (
+                <PartnerCard
+                  src={partner.src}
+                  alt={partner.alt}
+                  url={partner.url}
+                  rotation={partner.rotation}
+                  width={partner.width}
+                  height={partner.height}
+                />
+              ))}
             </div>
           </div>
         </div>
