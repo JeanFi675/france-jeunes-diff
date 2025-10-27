@@ -1,0 +1,11 @@
+exclude:
+  - src
+  - node_modules
+  - package.json
+  - package-lock.json
+  - astro.config.ts
+  - deploy.sh
+  - public
+  - .github
+  - .vscode
+  - .prettierignore
