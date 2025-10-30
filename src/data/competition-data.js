@@ -117,7 +117,7 @@ export const competitionData = {
     { value: '300', label: 'ATHLÈTES', rotation: -3 },
     { value: '6', label: 'CATÉGORIES', rotation: 2 },
     { value: '2', label: 'JOURS', rotation: -1 },
-    { value: '1', label: 'TITRE', rotation: 3 }
+    { value: '1', label: 'OBJECTIF : Le Titre', rotation: 3 }
   ],
 
   // Section Programme
