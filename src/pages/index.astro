@@ -46,6 +46,17 @@ const annonceurUrl = `${import.meta.env.BASE_URL}/dossier_annonceur/dossier_anno
       <button id="close-annonceurs-modal" class="brutal-modal-close">
         ✕
       </button>
+
+      <!-- Lien partager -->
+      <a
+        href={annonceurUrl}
+        class="brutal-modal-share-link"
+        target="_blank"
+        rel="noopener noreferrer"
+        title="Partager le dossier annonceurs"
+      >
+        PARTAGER →
+      </a>
     </div>
   </div>
 
@@ -108,12 +119,69 @@ const annonceurUrl = `${import.meta.env.BASE_URL}/dossier_annonceur/dossier_anno
       transform: scale(1.1);
     }
 
+    /* Share Link - Bottom Right of Modal */
+    .brutal-modal-share-link {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+
+      /* Neobrutalist styling */
+      background: var(--brutal-ice);
+      color: var(--brutal-black);
+      padding: 0.75rem 1.5rem;
+      border: 3px solid var(--brutal-black);
+      box-shadow: 6px 6px 0 var(--brutal-black);
+
+      /* Typography */
+      font-weight: 900;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      font-family: 'Space Grotesk', sans-serif;
+
+      /* Animation */
+      transform: rotate(-1deg);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .brutal-modal-share-link:hover {
+      transform: translate(-3px, -3px) rotate(0deg);
+      box-shadow: 9px 9px 0 var(--brutal-black);
+    }
+
+    .brutal-modal-share-link:active {
+      transform: translate(1px, 1px) rotate(-1deg);
+      box-shadow: 3px 3px 0 var(--brutal-black);
+    }
+
+    .brutal-modal-share-link:focus-visible {
+      outline: 3px solid var(--brutal-white);
+      outline-offset: 4px;
+      transform: translate(-2px, -2px) rotate(0deg);
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       .brutal-modal-close {
         font-size: 1.5rem;
         padding: 0.25rem 0.5rem;
         top: -40px;
+      }
+
+      .brutal-modal-share-link {
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+        bottom: 1rem;
+        right: 1rem;
+        box-shadow: 4px 4px 0 var(--brutal-black);
+      }
+
+      .brutal-modal-share-link:hover {
+        transform: translate(-2px, -2px) rotate(0deg);
+        box-shadow: 6px 6px 0 var(--brutal-black);
       }
     }
   </style>

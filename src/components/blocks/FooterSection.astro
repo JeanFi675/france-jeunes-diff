@@ -2,8 +2,6 @@
 import { competitionData } from '../../data/competition-data.js';
 
 const { year, shortName, organizers } = competitionData.event;
-
-const annonceurUrl = `${import.meta.env.BASE_URL}/dossier_annonceur/dossier_annonceurs_encarts_publicitaires.html`;
 ---
 
 <footer class="brutal-footer">
@@ -27,14 +25,6 @@ const annonceurUrl = `${import.meta.env.BASE_URL}/dossier_annonceur/dossier_anno
         >
           📰 Dossier annonceurs
         </button>
-        <a
-          href={annonceurUrl}
-          class="footer-link-text"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          (partager)
-        </a>
       </div>
     </div>
 
@@ -52,14 +42,6 @@ const annonceurUrl = `${import.meta.env.BASE_URL}/dossier_annonceur/dossier_anno
         >
           📰 Dossier annonceurs
         </button>
-        <a
-          href={annonceurUrl}
-          class="footer-link-text"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          (partager)
-        </a>
       </div>
       <div class="footer-organizer-desktop">
         <span>Co-organisé par</span>
@@ -154,19 +136,6 @@ const annonceurUrl = `${import.meta.env.BASE_URL}/dossier_annonceur/dossier_anno
   background: var(--brutal-white);
   color: var(--brutal-black);
   box-shadow: 3px 3px 0 var(--brutal-black);
-}
-
-.footer-link-text {
-  color: var(--brutal-black);
-  text-decoration: none;
-  font-size: 0.75rem;
-  font-weight: 700;
-  opacity: 0.7;
-  transition: opacity 0.3s ease;
-}
-
-.footer-link-text:hover {
-  opacity: 1;
 }
 
 /* ===== FOOTER DESKTOP (avec rotations) ===== */
