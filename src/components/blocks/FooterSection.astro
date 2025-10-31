@@ -2,6 +2,8 @@
 import { competitionData } from '../../data/competition-data.js';
 
 const { year, shortName, organizers } = competitionData.event;
+
+const annonceurUrl = `${import.meta.env.BASE_URL}/dossier_annonceur/dossier_annonceurs_encarts_publicitaires.html`;
 ---
 
 <footer class="brutal-footer">
@@ -17,6 +19,23 @@ const { year, shortName, organizers } = competitionData.event;
         <span>Co-organisé par</span>
         <strong>{organizers.shortText}</strong>
       </div>
+      <div class="footer-links-mobile">
+        <button
+          class="footer-link-button"
+          onclick="window.openAnnonceurModal()"
+          title="Ouvrir le dossier annonceurs"
+        >
+          📰 Dossier annonceurs
+        </button>
+        <a
+          href={annonceurUrl}
+          class="footer-link-text"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          (partager)
+        </a>
+      </div>
     </div>
 
     <!-- FOOTER DESKTOP - Avec rotations néo-brutalistes -->
@@ -24,6 +43,23 @@ const { year, shortName, organizers } = competitionData.event;
       <div class="footer-event-desktop">
         <span class="event-year-desktop">{year}</span>
         <span class="event-name-desktop">{shortName.replace(' DIFFICULTÉ', '')}</span>
+      </div>
+      <div class="footer-links-desktop">
+        <button
+          class="footer-link-button"
+          onclick="window.openAnnonceurModal()"
+          title="Ouvrir le dossier annonceurs"
+        >
+          📰 Dossier annonceurs
+        </button>
+        <a
+          href={annonceurUrl}
+          class="footer-link-text"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          (partager)
+        </a>
       </div>
       <div class="footer-organizer-desktop">
         <span>Co-organisé par</span>
@@ -91,6 +127,48 @@ const { year, shortName, organizers } = competitionData.event;
   margin-top: 0.25rem;
 }
 
+.footer-links-mobile {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.footer-link-button {
+  background: var(--brutal-black);
+  color: var(--brutal-white);
+  border: 2px solid var(--brutal-black);
+  padding: 0.5rem 1rem;
+  font-weight: 700;
+  font-size: 0.875rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.footer-link-button:hover {
+  background: var(--brutal-white);
+  color: var(--brutal-black);
+  box-shadow: 3px 3px 0 var(--brutal-black);
+}
+
+.footer-link-text {
+  color: var(--brutal-black);
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.footer-link-text:hover {
+  opacity: 1;
+}
+
 /* ===== FOOTER DESKTOP (avec rotations) ===== */
 .footer-desktop {
   display: none;
@@ -145,6 +223,15 @@ const { year, shortName, organizers } = competitionData.event;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-top: 0.25rem;
+}
+
+.footer-links-desktop {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin: 0 2rem;
 }
 
 
