@@ -54,6 +54,8 @@ jobs:
         
       - name: Build with Astro
         run: ${{ steps.detect-package-manager.outputs.runner }} astro build
+        env:
+          PUBLIC_WEBHOOK_URL: ${{ secrets.PUBLIC_WEBHOOK_URL }}
           
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
