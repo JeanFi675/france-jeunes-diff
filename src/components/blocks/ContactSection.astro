@@ -9,32 +9,35 @@ export interface Props {
 
 const { id } = Astro.props;
 const formSubjects = competitionData.formSubjects;
+const webhookUrl = import.meta.env.PUBLIC_WEBHOOK_URL;
+
+if (!webhookUrl) {
+  throw new Error('PUBLIC_WEBHOOK_URL environment variable is not defined');
+}
 ---
 
 <section id={id} class="brutal-section brutal-contact-section">
   <div class="brutal-container">
-    <div style="margin-bottom: 3rem; text-align: center;">
+    <div class="section-title-wrapper">
       <BrutalHeading level={2} rotation={-2} shadow={true} class="brutal-title text-l2">
         📧 NOUS CONTACTER
       </BrutalHeading>
     </div>
 
     <BrutalCard variant="white" rotation={1}>
-      <div style="padding: 3rem;">
-        <div style="text-align: center; margin-bottom: 2rem;">
-          <div style="background: var(--brutal-ice); padding: 0.5rem 1.5rem; display: inline-block;">
-            <h3 style="color: var(--brutal-black); font-size: 1.75rem; margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; text-transform: uppercase;">
-              Une question ? Contactez-nous !
-            </h3>
+      <div class="form-wrapper">
+        <div class="text-center mb-4">
+          <div class="title-with-tag">
+            <h3>Une question ? Contactez-nous !</h3>
           </div>
         </div>
 
-        <form id="contact-form" class="brutal-contact-form" action="https://n8n.jpcloudkit.fr/webhook/49006622-c75d-49cc-8f4e-79016e9e7d1c" method="POST">
+        <form id="contact-form" class="brutal-contact-form" action={webhookUrl} method="POST">
           <input type="hidden" name="subject" value="Nouveau message depuis le site Championnats de France Escalade 2026">
 
           <input type="checkbox" name="botcheck" id="" style="display: none;">
 
-          <div class="form-row">
+          <div class="form-row grid-2-cols-responsive">
             <div class="form-group">
               <label for="nom" class="brutal-label">Nom *</label>
               <input 
@@ -121,9 +124,6 @@ const formSubjects = competitionData.formSubjects;
   }
   
   .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
     margin-bottom: 1.5rem;
   }
   
@@ -347,7 +347,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const json = JSON.stringify(object);
     
     // Envoyer via n8n webhook
-    fetch('https://n8n.jpcloudkit.fr/webhook/49006622-c75d-49cc-8f4e-79016e9e7d1c', {
+    const webhookUrl = document.querySelector('form').getAttribute('action');
+    fetch(webhookUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -356,7 +357,7 @@ document.addEventListener('DOMContentLoaded', function() {
       body: json
     })
     .then(async (response) => {
-      let json = await response.json();
+      const json = await response.json();
       if (response.status === 200) {
         // Succès
         result.className = 'form-result success';
@@ -364,13 +365,11 @@ document.addEventListener('DOMContentLoaded', function() {
         form.reset();
       } else {
         // Erreur
-        console.log(response);
         result.className = 'form-result error';
         result.innerHTML = '❌ Erreur lors de l\'envoi : ' + json.message;
       }
     })
     .catch(error => {
-      console.log(error);
       result.className = 'form-result error';
       result.innerHTML = '❌ Erreur de connexion. Veuillez réessayer plus tard.';
     })

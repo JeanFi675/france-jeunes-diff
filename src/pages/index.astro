@@ -243,7 +243,8 @@ const annonceurUrl = `${import.meta.env.BASE_URL}/dossier_annonceur/dossier_anno
                 });
               }
             } catch (e) {
-              console.warn('Cannot access iframe links due to CORS or same-origin policy');
+              // Cannot access iframe links due to CORS or same-origin policy
+              // This is expected and handled gracefully
             }
           });
         }
