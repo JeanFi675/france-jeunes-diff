@@ -43,14 +43,6 @@ const {
   foodCards,
   id
 } = Astro.props;
-
-// Rotations CHAOS pour les blocs et cartes (design néo-brutaliste)
-const categoryRotations = [-2, 3, -1]; // Rotations pour les 3 gros blocs
-const cardRotations = [
-  [1, -2, 0, 2],    // Rotations pour les cartes dans Transport
-  [2, -1, 3],       // Rotations pour les cartes dans Hébergement  
-  [-1, 1, -2]       // Rotations pour les cartes dans Restauration
-];
 ---
 
 <section class="categorized-section brutal-section--white" id={id}>

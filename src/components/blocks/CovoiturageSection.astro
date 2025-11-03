@@ -8,8 +8,6 @@ import { competitionData } from '../../data/competition-data.js';
 export interface Props {
   id?: string;
 }
-
-const { id } = Astro.props;
 const { venue, address, gpsCoords } = competitionData.event;
 ---
 

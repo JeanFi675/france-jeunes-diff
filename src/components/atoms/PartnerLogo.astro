@@ -8,22 +8,13 @@ export interface Props {
   height?: string;
 }
 
-const { 
-  src, 
-  alt, 
-  backgroundColor = 'white',
+const {
+  src,
+  alt,
   rotation = 0,
   width = '180px',
   height = '110px'
 } = Astro.props;
-
-const bgColorMap = {
-  white: 'var(--brutal-white)',
-  mint: 'var(--brutal-ice)', 
-  black: 'var(--brutal-black)'
-};
-
-const bgColor = bgColorMap[backgroundColor];
 ---
 
 <div 
