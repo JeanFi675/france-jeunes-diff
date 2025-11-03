@@ -369,7 +369,7 @@ document.addEventListener('DOMContentLoaded', function() {
         result.innerHTML = '❌ Erreur lors de l\'envoi : ' + json.message;
       }
     })
-    .catch(error => {
+    .catch(() => {
       result.className = 'form-result error';
       result.innerHTML = '❌ Erreur de connexion. Veuillez réessayer plus tard.';
     })
