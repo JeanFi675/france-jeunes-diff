@@ -30,44 +30,24 @@ const { publicInfo, competitorsInfo } = competitionData;
       width: 100%;
     ">
       <p style="margin: 0;">
-        🔥 Plus de 
-        <span style="
-          background: var(--brutal-ice);
-          color: var(--brutal-black);
-          padding: 0.1rem 0.4rem;
-          display: inline-block;
-          font-family: 'Space Mono', monospace;
-          font-size: 1rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.02em;
-          transform: rotate(-0.5deg);
-        ">300 jeunes grimpeurs</span>, 
-        <span style="
-          background: var(--brutal-ice);
-          color: var(--brutal-black);
-          padding: 0.1rem 0.4rem;
-          display: inline-block;
-          font-family: 'Space Mono', monospace;
-          font-size: 1rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.02em;
-          transform: rotate(0.5deg);
-        ">6 catégories</span>, 
-        un seul objectif : décrocher le titre de 
-        <span style="
-          background: var(--brutal-ice);
-          color: var(--brutal-black);
-          padding: 0.1rem 0.4rem;
-          display: inline-block;
-          font-family: 'Space Mono', monospace;
-          font-size: 1rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.02em;
-          transform: rotate(-0.5deg);
-        ">Champion de France</span>
+        {publicInfo.highlights[0].parts.map((part, idx) => (
+          part.style === 'highlight' ? (
+            <span key={idx} style="
+              background: var(--brutal-ice);
+              color: var(--brutal-black);
+              padding: 0.1rem 0.4rem;
+              display: inline-block;
+              font-family: 'Space Mono', monospace;
+              font-size: 1rem;
+              font-weight: 700;
+              text-transform: uppercase;
+              letter-spacing: 0.02em;
+              transform: rotate({idx % 2 === 0 ? '-0.5deg' : '0.5deg'});
+            ">{part.text}</span>
+          ) : (
+            part.text
+          )
+        ))}
       </p>
     </div>
     
@@ -124,46 +104,24 @@ const { publicInfo, competitorsInfo } = competitionData;
       width: 100%;
     ">
       <p style="margin: 0;">
-        💥 Vibrez au rythme des 
-        <span style="
-          background: var(--brutal-black);
-          color: var(--brutal-white);
-          padding: 0.1rem 0.4rem;
-          display: inline-block;
-          font-family: 'Space Mono', monospace;
-          font-size: 1rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.02em;
-          transform: rotate(0.5deg);
-        ">qualifications</span>, 
-        tremblez pendant les 
-        <span style="
-          background: var(--brutal-black);
-          color: var(--brutal-white);
-          padding: 0.1rem 0.4rem;
-          display: inline-block;
-          font-family: 'Space Mono', monospace;
-          font-size: 1rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.02em;
-          transform: rotate(-0.5deg);
-        ">finales</span>… 
-        et assistez à la naissance des 
-        <span style="
-          background: var(--brutal-black);
-          color: var(--brutal-white);
-          padding: 0.1rem 0.4rem;
-          display: inline-block;
-          font-family: 'Space Mono', monospace;
-          font-size: 1rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.02em;
-          transform: rotate(0.5deg);
-        ">futures stars</span> 
-        de l'escalade !
+        {publicInfo.highlights[1].parts.map((part, idx) => (
+          part.style === 'highlight' ? (
+            <span key={idx} style="
+              background: var(--brutal-black);
+              color: var(--brutal-white);
+              padding: 0.1rem 0.4rem;
+              display: inline-block;
+              font-family: 'Space Mono', monospace;
+              font-size: 1rem;
+              font-weight: 700;
+              text-transform: uppercase;
+              letter-spacing: 0.02em;
+              transform: rotate({idx % 2 === 0 ? '0.5deg' : '-0.5deg'});
+            ">{part.text}</span>
+          ) : (
+            part.text
+          )
+        ))}
       </p>
     </div>
   </div>

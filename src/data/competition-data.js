@@ -95,6 +95,29 @@ export const competitionData = {
   publicInfo: {
     title: "UN WEEK-END D'ESCALADE INTENSE",
     subtitle: '👥 SPECTATEURS',
+    highlights: [
+      {
+        parts: [
+          { text: '🔥 Plus de ', style: null },
+          { text: '300 jeunes grimpeurs', style: 'highlight' },
+          { text: ', ', style: null },
+          { text: '6 catégories', style: 'highlight' },
+          { text: ', un seul objectif: décrocher les titres de ', style: null },
+          { text: 'Champions et Championnes de France', style: 'highlight' },
+        ],
+      },
+      {
+        parts: [
+          { text: '💥 Vibrez au rythme des ', style: null },
+          { text: 'qualifications', style: 'highlight' },
+          { text: ', tremblez pendant les ', style: null },
+          { text: 'finales', style: 'highlight' },
+          { text: '… et assistez à la naissance des ', style: null },
+          { text: 'futures stars', style: 'highlight' },
+          { text: ' de l\'escalade !', style: null },
+        ],
+      },
+    ],
     points: [
       '🎫 Entrée 100% gratuite',
       '✨ Spectacle impressionnant garanti',
@@ -127,6 +150,7 @@ export const competitionData = {
 
   // Section Programme
   program: {
+    disclaimer: '⚠️ Programme prévisionnel, sujet à modifications',
     saturday: {
       date: 'SAMEDI 16 MAI',
       badge: 'QUALIFICATIONS',
@@ -332,7 +356,7 @@ export const competitionData = {
         stPierreVictory: "🏆 Or U16 - Coupe d'Europe 2019",
         achievements: [
           'N°1 MONDIALE 2025 (1ère française depuis 2007)',
-          'Vice-championne du monde 2023',
+          'Vice-championne du monde 2023 et 2025',
           'Finaliste JO Paris 2024',
         ],
         photoUrl:
@@ -342,7 +366,7 @@ export const competitionData = {
       {
         name: 'Mejdi SCHALCK',
         stPierreVictory: "🥈 Argent U16 - Coupe d'Europe 2019",
-        achievements: ['N°2 MONDIAL 2025 (4 145 points)', 'Vice-champion du monde 2023'],
+        achievements: ['N°2 MONDIAL 2025 (4 145 points)', 'Vice-champion du monde 2023 et 2025'],
         photoUrl:
           'https://www.ifsc-climbing.org/_next/image?url=https%3A%2F%2Fd1n1qj9geboqnb.cloudfront.net%2Fifsc%2Fpublic%2Fs1hp3hca9sgnilgndzsqx0xglr0u&w=1920&q=75',
         rotation: -2,
@@ -351,7 +375,7 @@ export const competitionData = {
         name: 'Paul JENFT',
         stPierreVictory: "🏆 Or U18 - Coupe d'Europe 2019",
         achievements: [
-          'Finaliste JO Paris 2024 (8e place)',
+          'Finaliste JO Paris 2024',
           "Champion d'Europe 2017, 2018, 2019",
           'Bronze Coupe du monde 2023 (Hachioji)',
         ],

@@ -9,7 +9,7 @@ export interface Props {
 }
 
 const { background = 'black' } = Astro.props;
-const { saturday, dimanche } = competitionData.program;
+const { disclaimer, saturday, dimanche } = competitionData.program;
 ---
 
 <section class={`brutal-section brutal-section--${background}`} id="programme">
@@ -29,6 +29,14 @@ const { saturday, dimanche } = competitionData.program;
       <BrutalBadge variant="mint" animated={true} size="normal">
         🔴 LIVE STREAMING
       </BrutalBadge>
+    </div>
+
+    <div style="margin-bottom: 3rem;">
+      <BrutalCard variant="default" rotation={-1} zIndex={2}>
+        <div style="text-align: center; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 0.95rem; line-height: 1.6; text-transform: uppercase; letter-spacing: 0.1em;">
+          {disclaimer}
+        </div>
+      </BrutalCard>
     </div>
 
     <div class="brutal-grid" style="grid-template-columns: 1fr 1fr; align-items: start; gap: 3rem;">
