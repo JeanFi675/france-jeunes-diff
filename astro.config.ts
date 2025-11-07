@@ -2,8 +2,8 @@ import { defineConfig } from 'astro/config';
 
 export default defineConfig({
   output: 'static',
-  site: 'https://JeanFi675.github.io',
-  base: '/france-jeunes-diff',
+  site: 'https://fjd2026.caflarochebonneville.fr',
+  base: '/',
   build: {
     inlineStylesheets: 'auto',
   },
