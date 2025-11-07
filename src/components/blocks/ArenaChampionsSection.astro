@@ -10,14 +10,14 @@ const { wallData, historyEvents, champions, videos } = competitionData.arena;
 // Ajouter BASE_URL aux chemins des photos et vidéos
 const baseUrl = import.meta.env.BASE_URL;
 const wallPhotos = wallData.photos.map(photo => ({
-  src: `${baseUrl}/${photo.src}`,
+  src: `${baseUrl}${photo.src}`,
   alt: photo.alt
 }));
 
 const videosWithBaseUrl = videos.map(video => ({
   ...video,
-  videoUrl: `${baseUrl}/${video.videoUrl}`,
-  thumbnail: `${baseUrl}/${video.thumbnail}`
+  videoUrl: `${baseUrl}${video.videoUrl}`,
+  thumbnail: `${baseUrl}${video.thumbnail}`
 }));
 ---
 
