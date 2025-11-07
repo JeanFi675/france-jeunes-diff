@@ -15,7 +15,7 @@ const { videos } = Astro.props;
   <!-- Première ligne : 3 vidéos -->
   <div class="videos-row videos-row--three-first">
     {videos.slice(0, 3).map((video, index) => (
-      <div class="video-tile" data-video={index} data-videoUrl={video.videoUrl} style={`transform: rotate(${video.rotation || 0}deg)`}>
+      <div class="video-tile" data-video={index} data-video-url={video.videoUrl} style={`transform: rotate(${video.rotation || 0}deg)`}>
         <div class="video-thumbnail">
           {video.thumbnail ? (
             <img src={video.thumbnail} alt={video.title} loading="lazy" />
@@ -34,7 +34,7 @@ const { videos } = Astro.props;
   {videos.length > 3 && (
     <div class="videos-row videos-row--two">
       {videos.slice(3, 5).map((video, index) => (
-        <div class="video-tile" data-video={index + 3} data-videoUrl={video.videoUrl} style={`transform: rotate(${video.rotation || 0}deg)`}>
+        <div class="video-tile" data-video={index + 3} data-video-url={video.videoUrl} style={`transform: rotate(${video.rotation || 0}deg)`}>
           <div class="video-thumbnail">
             {video.thumbnail ? (
               <img src={video.thumbnail} alt={video.title} loading="lazy" />
