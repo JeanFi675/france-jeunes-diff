@@ -1,0 +1,130 @@
+---
+import { getCollection } from 'astro:content';
+import BlogPostLayout from '../../components/layout/BlogPostLayout.astro';
+
+export async function getStaticPaths() {
+  const blogPosts = await getCollection('blog');
+  return blogPosts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: any;
+}
+
+const { post } = Astro.props as Props;
+const { Content } = await post.render();
+
+// Get all posts for navigation
+const allPosts = (await getCollection('blog')).sort(
+  (a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
+);
+
+// Find current post index
+const postIndex = allPosts.findIndex((p) => p.slug === post.slug);
+const previousPost = postIndex < allPosts.length - 1 ? allPosts[postIndex + 1] : null;
+const nextPost = postIndex > 0 ? allPosts[postIndex - 1] : null;
+---
+
+<BlogPostLayout
+  title={post.data.title}
+  description={post.data.description}
+  publishDate={post.data.publishDate}
+  tags={post.data.tags}
+>
+  <Content />
+
+  <!-- Navigation articles -->
+  {(previousPost || nextPost) && (
+    <div class="blog-post-navigation">
+      <div class="navigation-grid">
+        {previousPost && (
+          <a href={`/blog/${previousPost.slug}`} class="nav-card nav-prev">
+            <span class="nav-label">← Article précédent</span>
+            <h4 class="nav-title">{previousPost.data.title}</h4>
+          </a>
+        )}
+
+        {nextPost && (
+          <a href={`/blog/${nextPost.slug}`} class="nav-card nav-next">
+            <span class="nav-label">Article suivant →</span>
+            <h4 class="nav-title">{nextPost.data.title}</h4>
+          </a>
+        )}
+      </div>
+    </div>
+  )}
+</BlogPostLayout>
+
+<style>
+  .blog-post-navigation {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 3px solid var(--brutal-black);
+  }
+
+  .navigation-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .nav-card {
+    display: block;
+    padding: 1.5rem;
+    background: var(--brutal-white);
+    border: 3px solid var(--brutal-black);
+    box-shadow: 6px 6px 0 var(--brutal-black);
+    text-decoration: none;
+    color: var(--brutal-black);
+    transform: rotate(-1deg);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .nav-card:hover {
+    transform: translate(-2px, -2px) rotate(0deg);
+    box-shadow: 8px 8px 0 var(--brutal-black);
+  }
+
+  .nav-label {
+    display: block;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--brutal-ice);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-title {
+    font-size: 1.1rem;
+    line-height: 1.3;
+    color: var(--brutal-black);
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .nav-prev {
+    text-align: left;
+  }
+
+  .nav-next {
+    text-align: right;
+  }
+
+  @media (max-width: 768px) {
+    .navigation-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .nav-title {
+      font-size: 1rem;
+    }
+  }
+</style>

@@ -18,12 +18,15 @@ const { year, shortName, organizers } = competitionData.event;
         <strong>{organizers.shortText}</strong>
       </div>
       <div class="footer-links-mobile">
+        <a href="/blog" class="footer-link-button" title="Voir le blog">
+          📰 Blog
+        </a>
         <button
           class="footer-link-button"
           onclick="window.openAnnonceurModal()"
           title="Ouvrir le dossier annonceurs"
         >
-          📰 Dossier annonceurs
+          📋 Dossier annonceurs
         </button>
       </div>
     </div>
@@ -35,12 +38,15 @@ const { year, shortName, organizers } = competitionData.event;
         <span class="event-name-desktop">{shortName.replace(' DIFFICULTÉ', '')}</span>
       </div>
       <div class="footer-links-desktop">
+        <a href="/blog" class="footer-link-button" title="Voir le blog">
+          📰 Blog
+        </a>
         <button
           class="footer-link-button"
           onclick="window.openAnnonceurModal()"
           title="Ouvrir le dossier annonceurs"
         >
-          📰 Dossier annonceurs
+          📋 Dossier annonceurs
         </button>
       </div>
       <div class="footer-organizer-desktop">
@@ -130,6 +136,9 @@ const { year, shortName, organizers } = competitionData.event;
   letter-spacing: 0.05em;
   transition: all 0.3s ease;
   font-family: 'Space Grotesk', sans-serif;
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 0;
 }
 
 .footer-link-button:hover {

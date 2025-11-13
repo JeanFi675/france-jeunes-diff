@@ -1,0 +1,168 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  publishDate: Date;
+  tags?: string[];
+  slug: string;
+}
+
+const { title, description, publishDate, tags = [], slug } = Astro.props;
+
+const formattedDate = new Intl.DateTimeFormat('fr-FR', {
+  day: '2-digit',
+  month: 'long',
+  year: 'numeric',
+}).format(publishDate);
+---
+
+<a href={`/blog/${slug}`} class="blog-card-link">
+  <div class="brutal-card blog-card">
+    <div class="blog-card-content">
+      <h3 class="blog-card-title">{title}</h3>
+
+      <p class="blog-card-description">{description}</p>
+
+      {tags && tags.length > 0 && (
+        <div class="blog-card-tags">
+          {tags.map((tag) => (
+            <span class="blog-tag">{tag}</span>
+          ))}
+        </div>
+      )}
+
+      <div class="blog-card-footer">
+        <span class="blog-date">{formattedDate}</span>
+        <span class="blog-link-arrow">→</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+<style>
+  .blog-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition:
+      transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .blog-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 2rem;
+    overflow: hidden;
+    transform: rotate(-1deg);
+  }
+
+  .blog-card-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .blog-card-title {
+    font-size: var(--size-card);
+    margin-bottom: 1rem;
+    color: var(--brutal-black);
+    line-height: 1.2;
+  }
+
+  .blog-card-description {
+    font-size: 0.95rem;
+    color: var(--brutal-gray);
+    margin-bottom: 1rem;
+    flex: 1;
+  }
+
+  .blog-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .blog-tag {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    background: var(--brutal-ice);
+    color: var(--brutal-black);
+    border: 2px solid var(--brutal-black);
+    display: inline-block;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+
+  .blog-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 2px solid var(--brutal-black);
+  }
+
+  .blog-date {
+    color: var(--brutal-gray);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .blog-link-arrow {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--brutal-ice);
+    transition: transform 0.2s ease;
+  }
+
+  .blog-card-link:hover .blog-link-arrow {
+    transform: translateX(4px);
+  }
+
+  .brutal-section--white .blog-card {
+    border: 4px solid var(--brutal-black);
+    box-shadow: 8px 8px 0 var(--brutal-black);
+  }
+
+  .brutal-section--white .blog-card-link:hover {
+    transform: translate(-2px, -2px);
+  }
+
+  .brutal-section--white .blog-card-link:hover .blog-card {
+    box-shadow: 12px 12px 0 var(--brutal-black);
+  }
+
+  .brutal-section--mint .blog-card {
+    border: 4px solid var(--brutal-black);
+    box-shadow: 8px 8px 0 var(--brutal-black);
+  }
+
+  .brutal-section--mint .blog-card-link:hover {
+    transform: translate(-2px, -2px);
+  }
+
+  .brutal-section--mint .blog-card-link:hover .blog-card {
+    box-shadow: 12px 12px 0 var(--brutal-black);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .blog-card {
+      padding: 1.5rem;
+    }
+
+    .blog-card-title {
+      font-size: 1.25rem;
+    }
+
+    .blog-card-footer {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+  }
+</style>
