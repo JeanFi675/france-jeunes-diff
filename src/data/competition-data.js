@@ -68,7 +68,7 @@ export const competitionData = {
   food: [
     {
       title: 'SUPERMARCHÉ SUPER U',
-      content: '59 place des Arcades\n74800 Saint-Pierre-en-Faucigny',
+      content: '59 place des Arcades\n74800 SAINT PIERRE EN FAUCIGNY',
       icon: '🛒',
       variant: 'default',
       link: 'https://www.google.fr/maps/place/Super+U/@46.0585137,6.3730111,17z/data=!3m1!4b1!4m6!3m5!1s0x478c0b005a92d187:0xec332f40c73a8dac!8m2!3d46.05851!4d6.375586!16s%2Fg%2F11xzcssclm?entry=ttu&g_ep=EgoyMDI1MTAxNC4wIKXMDSoASAFQAw%3D%3D',
@@ -76,7 +76,7 @@ export const competitionData = {
     {
       title: 'PHARMACIE DE LA GARE',
       content:
-        '20 place des Arcades\n74800 Saint-Pierre-en-Faucigny\n\n• Lun-Ven: 8h15-12h15 / 14h-19h15\n• Sam: 8h15-12h15 / 14h-18h45\n• Dim: Fermé',
+        '20 place des Arcades\n74800 SAINT PIERRE EN FAUCIGNY\n\n• Lun-Ven: 8h15-12h15 / 14h-19h15\n• Sam: 8h15-12h15 / 14h-18h45\n• Dim: Fermé',
       icon: '💊',
       variant: 'black',
       link: 'https://maps.google.com/maps?q=Pharmacie+de+la+Gare+20+place+des+Arcades+74800+Saint-Pierre-en-Faucigny',
@@ -84,7 +84,7 @@ export const competitionData = {
     {
       title: 'CRÉDIT AGRICOLE + DAB',
       content:
-        '81 place des Arcades\n74800 Saint-Pierre-en-Faucigny\n\n• DAB disponible 24h/7j\n• Agence: Mar-Ven 9h-12h / 14h-18h\n• Samedi: 9h-12h',
+        '81 place des Arcades\n74800 SAINT PIERRE EN FAUCIGNY\n\n• DAB disponible 24h/7j\n• Agence: Mar-Ven 9h-12h / 14h-18h\n• Samedi: 9h-12h',
       icon: '💳',
       variant: 'default',
       link: 'https://maps.google.com/maps?q=Crédit+Agricole+81+place+des+Arcades+74800+Saint-Pierre-en-Faucigny',
