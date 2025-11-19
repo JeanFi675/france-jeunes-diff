@@ -341,17 +341,6 @@ export const competitionData = {
     ],
     champions: [
       {
-        name: 'Alberto GINÉS LÓPEZ',
-        stPierreVictory: "🥉 Bronze U18 - Coupe d'Europe 2019",
-        achievements: [
-          'CHAMPION OLYMPIQUE 2021 (1er titre escalade JO)',
-          "Champion d'Europe senior 2019",
-        ],
-        photoUrl:
-          'https://www.ifsc-climbing.org/_next/image?url=https%3A%2F%2Fd1n1qj9geboqnb.cloudfront.net%2Fifsc%2Fpublic%2Fmo6typrlxpapfeghys0tfqq76v06&w=1920&q=75',
-        rotation: -1,
-      },
-      {
         name: 'Oriane BERTONE',
         stPierreVictory: "🏆 Or U16 - Coupe d'Europe 2019",
         achievements: [
@@ -403,8 +392,7 @@ export const competitionData = {
           'Champion de France senior 2025 (18 ans)',
           '2e Coupe du monde 2025 (Bali)',
         ],
-        photoUrl:
-          'https://www.ifsc-climbing.org/_next/image?url=%2Fassets%2Fplaceholder-athlete-ifsc.webp&w=1920&q=75',
+        photoUrl: '/images/champions/Max-Bertone.jpg',
         rotation: 2,
       },
       {
@@ -415,10 +403,20 @@ export const competitionData = {
           "Or Coupe d'Europe jeunes 2024",
           'Équipe de France jeunes',
         ],
-        photoUrl:
-          'https://www.ifsc-climbing.org/_next/image?url=%2Fassets%2Fplaceholder-athlete-ifsc.webp&w=1920&q=75',
+        photoUrl: '/images/champions/Louise.jpg',
         rotation: -2,
       },
+			{
+		name: 'Alberto GINÉS LÓPEZ',
+		stPierreVictory: "🥉 Bronze U18 - Coupe d'Europe 2019",
+		achievements: [
+		  'CHAMPION OLYMPIQUE 2021 (1er titre escalade JO)',
+		  "Champion d'Europe senior 2019",
+		],
+		photoUrl:
+		  'https://www.ifsc-climbing.org/_next/image?url=https%3A%2F%2Fd1n1qj9geboqnb.cloudfront.net%2Fifsc%2Fpublic%2Fmo6typrlxpapfeghys0tfqq76v06&w=1920&q=75',
+		rotation: -1,
+	  },
     ],
     videos: [
       {

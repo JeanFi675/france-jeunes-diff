@@ -5,6 +5,7 @@ import BlogCard from '../../components/atoms/BlogCard.astro';
 import BrutalHeading from '../../components/atoms/BrutalHeading.astro';
 import BlogFooterSection from '../../components/blocks/BlogFooterSection.astro';
 import AnnonceurModal from '../../components/blocks/AnnonceurModal.astro';
+import PartnersSection from '../../components/blocks/PartnersSection.astro';
 
 // Get all blog posts sorted by date (newest first)
 const allPosts = (await getCollection('blog')).sort(
@@ -95,6 +96,7 @@ const nextPageUrl = `/blog/${currentPage + 1}`;
       )}
     </div>
   </section>
+  <PartnersSection />
   <BlogFooterSection />
   <AnnonceurModal />
 </BaseLayout>

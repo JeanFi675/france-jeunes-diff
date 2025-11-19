@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import BlogFooterSection from '../blocks/BlogFooterSection.astro';
 import AnnonceurModal from '../blocks/AnnonceurModal.astro';
+import PartnersSection from '../blocks/PartnersSection.astro';
 
 interface Props {
   title: string;
@@ -61,6 +62,7 @@ const formattedDate = new Intl.DateTimeFormat('fr-FR', {
       </div>
     </div>
   </section>
+  <PartnersSection />
   <BlogFooterSection />
   <AnnonceurModal />
 </BaseLayout>
