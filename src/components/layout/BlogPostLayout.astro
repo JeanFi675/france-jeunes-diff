@@ -3,15 +3,19 @@ import BaseLayout from './BaseLayout.astro';
 import BlogFooterSection from '../blocks/BlogFooterSection.astro';
 import AnnonceurModal from '../blocks/AnnonceurModal.astro';
 import PartnersSection from '../blocks/PartnersSection.astro';
+import FlickrGallery from '../atoms/FlickrGallery.astro';
 
 interface Props {
   title: string;
   description: string;
   publishDate: Date;
   tags?: string[];
+  flickrAlbumUrl?: string;
+  albumTitle?: string;
+  photoCredit?: string;
 }
 
-const { title, description, publishDate, tags = [] } = Astro.props;
+const { title, description, publishDate, tags = [], flickrAlbumUrl, albumTitle, photoCredit } = Astro.props;
 
 const formattedDate = new Intl.DateTimeFormat('fr-FR', {
   day: '2-digit',
@@ -55,6 +59,13 @@ const formattedDate = new Intl.DateTimeFormat('fr-FR', {
       <article class="blog-post-content">
         <slot />
       </article>
+
+      <!-- Flickr Gallery -->
+      {flickrAlbumUrl && (
+        <div class="blog-post-gallery-wrapper">
+          <FlickrGallery flickrAlbumUrl={flickrAlbumUrl} albumTitle={albumTitle} photoCredit={photoCredit} />
+        </div>
+      )}
 
       <!-- Navigation -->
       <div class="blog-post-nav">
@@ -273,6 +284,11 @@ const formattedDate = new Intl.DateTimeFormat('fr-FR', {
     margin: 2rem 0;
     border: 3px solid var(--brutal-black);
     box-shadow: 8px 8px 0 var(--brutal-black);
+  }
+
+  .blog-post-gallery-wrapper {
+    max-width: 900px;
+    margin: 0 auto 4rem;
   }
 
   .blog-post-nav {

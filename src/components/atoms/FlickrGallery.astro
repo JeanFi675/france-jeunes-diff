@@ -1,0 +1,163 @@
+---
+interface Props {
+  flickrAlbumUrl: string;
+  albumTitle?: string;
+  photoCredit?: string;
+}
+
+const { flickrAlbumUrl, albumTitle = "Album photos", photoCredit } = Astro.props;
+
+// Extract album ID and user ID from Flickr URL
+// Supports formats like:
+// - https://www.flickr.com/photos/{user-id}/albums/{album-id}/
+// - https://flickr.com/photos/{user-id}/albums/{album-id}/
+function extractFlickrIds(url: string) {
+  const match = url.match(/\/photos\/([^/]+)\/albums\/(\d+)/);
+  if (match) {
+    return { userId: match[1], albumId: match[2] };
+  }
+  return null;
+}
+
+const ids = extractFlickrIds(flickrAlbumUrl);
+---
+
+{
+  ids ? (
+    <figure class="flickr-gallery">
+      <p class="album-intro">Revivez l'ambiance de la compétition à travers l'album :<br /><strong>{albumTitle}</strong></p>
+        <div class="flickr-gallery-container">
+          <iframe
+            title={albumTitle}
+            src={`https://www.flickr.com/photos/${ids.userId}/albums/${ids.albumId}/player/`}
+            width="100%"
+            height="500"
+            frameborder="0"
+            allowFullScreen
+          ></iframe>
+        </div>
+        <div class="flickr-footer">
+          <a href={flickrAlbumUrl} target="_blank" rel="noopener noreferrer" class="flickr-link">
+            Voir l'album complet sur Flickr →
+          </a>
+          {photoCredit && (
+            <p class="photo-credit">Crédits photos : {photoCredit}</p>
+          )}
+      </div>
+    </figure>
+  ) : (
+    <div class="flickr-error">
+      <p>❌ Impossible de charger l'album Flickr. URL invalide.</p>
+    </div>
+  )
+}
+
+<style>
+  .flickr-gallery {
+    margin: 3rem 0;
+    border: 4px solid var(--brutal-black);
+    box-shadow: 12px 12px 0 var(--brutal-black);
+    padding: 2rem;
+    background: var(--brutal-white);
+    transform: rotate(-1deg);
+  }
+
+  .album-intro {
+    margin: 0 0 1.5rem 0;
+    padding: 1rem 1.25rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--brutal-ice);
+    font-weight: 500;
+    border: 3px solid var(--brutal-ice);
+    background: var(--brutal-black);
+    box-shadow: 6px 6px 0 var(--brutal-ice);
+  }
+
+  .album-intro strong {
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--brutal-ice);
+  }
+
+  .flickr-gallery-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    border: 2px solid var(--brutal-black);
+  }
+
+  .flickr-gallery-container iframe {
+    display: block;
+    width: 100% !important;
+  }
+
+  .flickr-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    align-items: flex-start;
+    padding-top: 1.5rem;
+    border-top: 3px solid var(--brutal-black);
+  }
+
+  .photo-credit {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--brutal-black);
+    font-style: italic;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .flickr-link {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--brutal-ice);
+    color: var(--brutal-black);
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 3px solid var(--brutal-black);
+    box-shadow: 8px 8px 0 var(--brutal-black);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    transform: rotate(1deg);
+  }
+
+  .flickr-link:hover {
+    transform: translate(2px, 2px) rotate(0deg);
+    box-shadow: 5px 5px 0 var(--brutal-black);
+    background: var(--brutal-white);
+  }
+
+  .flickr-error {
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border: 3px solid var(--brutal-black);
+    background: #fff3cd;
+    color: #856404;
+    font-weight: 700;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .flickr-gallery {
+      padding: 1.5rem;
+      margin: 2rem 0;
+      box-shadow: 8px 8px 0 var(--brutal-black);
+    }
+
+    .flickr-gallery-container {
+      height: 350px;
+    }
+
+    .flickr-gallery-title {
+      font-size: 1.25rem;
+    }
+  }
+</style>
