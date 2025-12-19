@@ -127,7 +127,14 @@ if (import.meta.env.PROD) {
     <div id="main">
       <div id="toolbar">
         <span id="current-file">Sélectionnez un fichier...</span>
-        <button id="save-btn" disabled>Sauvegarder (Ctrl+S)</button>
+        <div>
+          <button
+            id="export-btn"
+            style="background: #4b5563; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.25rem; cursor: pointer; font-weight: 500; margin-right: 0.5rem;"
+            disabled>🖨️ Export PDF</button
+          >
+          <button id="save-btn" disabled>Sauvegarder (Ctrl+S)</button>
+        </div>
       </div>
       <div id="editor-container">
         <textarea id="editor" placeholder="Le contenu apparaîtra ici..."></textarea>
@@ -141,6 +148,7 @@ if (import.meta.env.PROD) {
       const previewIframe = document.getElementById('preview');
       const currentFileEl = document.getElementById('current-file');
       const saveBtn = document.getElementById('save-btn');
+      const exportBtn = document.getElementById('export-btn');
 
       let activeFile = null;
       let isPreviewReady = false;
@@ -179,6 +187,7 @@ if (import.meta.env.PROD) {
         activeFile = filename;
         currentFileEl.textContent = filename;
         saveBtn.disabled = true; // Disable save during load
+        exportBtn.disabled = true;
         editorEl.value = 'Chargement...'; // Show loading state
         editorEl.disabled = true;
 
@@ -199,6 +208,7 @@ if (import.meta.env.PROD) {
           editorEl.value = data.content;
           editorEl.disabled = false;
           saveBtn.disabled = false;
+          exportBtn.disabled = false;
           updatePreview();
         } catch (err) {
           console.error('Failed to load file content', err);
@@ -231,6 +241,12 @@ if (import.meta.env.PROD) {
           saveBtn.textContent = 'Erreur !';
         }
       }
+
+      exportBtn.addEventListener('click', () => {
+        if (previewIframe.contentWindow) {
+          previewIframe.contentWindow.print();
+        }
+      });
 
       function updatePreview() {
         if (!isPreviewReady || !previewIframe.contentWindow) return;

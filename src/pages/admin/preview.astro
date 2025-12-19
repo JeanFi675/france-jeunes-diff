@@ -16,6 +16,22 @@ if (import.meta.env.PROD) {
 }
 ---
 
+<style is:global>
+  @media print {
+    .blog-back-link,
+    .blog-post-nav,
+    .blog-post-breadcrumb {
+      display: none !important;
+    }
+
+    /* Ensure background graphics (like the bandeau) are printed */
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+  }
+</style>
+
 <BlogPostLayout {...props}>
   <div id="preview-content">Chargement de l'aperçu...</div>
 </BlogPostLayout>
