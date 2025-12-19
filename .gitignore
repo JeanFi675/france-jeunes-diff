@@ -57,3 +57,6 @@ DOSSIER_PARTENARIAT_CHAMP_FRANCE_2026.md
 SETUP_INSTRUCTIONS.txt
 
 !src/**/*.md
+
+# Blog posts (work in progress)
+src/content/blog/*.md
