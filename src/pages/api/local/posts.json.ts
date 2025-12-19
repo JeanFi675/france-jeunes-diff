@@ -3,7 +3,7 @@ import type { APIRoute } from 'astro';
 import fs from 'node:fs';
 import path from 'node:path';
 
-export const prerender = false;
+
 
 export const GET: APIRoute = async () => {
   if (import.meta.env.PROD) {
