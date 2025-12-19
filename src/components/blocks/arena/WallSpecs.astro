@@ -1,0 +1,201 @@
+---
+import BrutalCard from '../../atoms/BrutalCard.astro';
+import { competitionData } from '../../../data/competition-data.js';
+
+const { wallData } = competitionData.arena;
+const baseUrl = import.meta.env.BASE_URL;
+
+const wallPhotos = wallData.photos.map((photo) => ({
+  src: `${baseUrl}${photo.src}`,
+  alt: photo.alt,
+}));
+---
+
+<BrutalCard variant="default" rotation={-1}>
+  <div style="padding: 2rem;">
+    <!-- Titre de la carte -->
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <div style="background: var(--brutal-ice); padding: 0.5rem 1.5rem; display: inline-block;">
+        <h3
+          style="color: var(--brutal-black); font-size: 1.75rem; margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; text-transform: uppercase;"
+        >
+          {wallData.title}
+        </h3>
+      </div>
+    </div>
+
+    <!-- Données techniques avec cadre noir -->
+    <div class="technical-data">
+      {
+        wallData.specs.map((spec) => (
+          <div class="data-item data-item--black">
+            <div class="data-value">{spec.value}</div>
+            <div class="data-label">{spec.label}</div>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Galerie photos du mur -->
+    <div class="brutal-gallery">
+      {
+        wallPhotos.map((photo, index) => (
+          <div class="brutal-gallery-item" data-image={index}>
+            <div
+              class={`brutal-photo-frame brutal-photo-frame--tilt-${index === 0 ? 'left' : index === 1 ? 'right' : 'slight'}`}
+            >
+              <img class="brutal-photo" src={photo.src} alt={photo.alt} loading="lazy" />
+            </div>
+            <div class="brutal-photo-badge">📸 {index + 1}/3</div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</BrutalCard>
+
+<style>
+  /* Données techniques */
+  .technical-data {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .data-item {
+    text-align: center;
+  }
+
+  .data-item--black {
+    background: var(--brutal-black);
+    padding: 1.5rem 1rem;
+    border: 4px solid var(--brutal-black);
+    box-shadow: 8px 8px 0 var(--brutal-ice);
+    transform: rotate(-1deg);
+    transition: all 0.3s ease;
+  }
+
+  .data-item--black:nth-child(2) {
+    transform: rotate(1deg);
+  }
+
+  .data-item--black:nth-child(3) {
+    transform: rotate(-2deg);
+  }
+
+  .data-item--black:hover {
+    transform: rotate(0deg) scale(1.05) translate(-4px, -4px);
+    box-shadow: 12px 12px 0 var(--brutal-ice);
+  }
+
+  .data-item--black .data-value {
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: var(--size-l3);
+    color: var(--brutal-white);
+    margin-bottom: 0.5rem;
+    line-height: 1;
+  }
+
+  .data-item--black .data-label {
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--brutal-ice);
+  }
+
+  /* Galerie photos */
+  .brutal-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto 0;
+    animation: slide-brutal 1s ease-out forwards;
+  }
+
+  .brutal-gallery-item {
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+
+  .brutal-gallery-item:hover {
+    transform: translateY(-4px);
+  }
+
+  .brutal-photo-frame {
+    background: var(--brutal-white);
+    padding: 10px;
+    border: 4px solid var(--brutal-black);
+    box-shadow: 8px 8px 0 var(--brutal-black);
+    height: 250px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .brutal-photo-frame--tilt-left {
+    transform: rotate(-2deg);
+  }
+
+  .brutal-photo-frame--tilt-right {
+    transform: rotate(2deg);
+  }
+
+  .brutal-photo-frame--tilt-slight {
+    transform: rotate(-1deg);
+  }
+
+  .brutal-gallery-item:hover .brutal-photo-frame {
+    transform: rotate(0) translate(-4px, -4px);
+    box-shadow: 12px 12px 0 var(--brutal-black);
+  }
+
+  .brutal-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .brutal-photo-badge {
+    position: absolute;
+    bottom: -10px;
+    right: 10px;
+    background: var(--brutal-ice);
+    color: var(--brutal-black);
+    padding: 0.5rem 1rem;
+    font-weight: 800;
+    font-size: 0.875rem;
+    transform: rotate(2deg);
+    box-shadow: 4px 4px 0 var(--brutal-black);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .technical-data {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .data-item--black {
+      transform: rotate(0deg) !important;
+    }
+
+    .data-item--black .data-value {
+      font-size: var(--size-l4);
+    }
+
+    .brutal-gallery {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .brutal-photo-frame {
+      height: 200px;
+    }
+  }
+</style>

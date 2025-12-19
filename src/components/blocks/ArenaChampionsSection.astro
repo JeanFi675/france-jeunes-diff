@@ -3,16 +3,14 @@ import BrutalHeading from '../atoms/BrutalHeading.astro';
 import BrutalCard from '../atoms/BrutalCard.astro';
 import ChampionsGrid from '../atoms/ChampionsGrid.astro';
 import VideosGrid from '../atoms/VideosGrid.astro';
+import WallSpecs from './arena/WallSpecs.astro';
+import CompetitionHistory from './arena/CompetitionHistory.astro';
 import { competitionData } from '../../data/competition-data.js';
 
-const { wallData, historyEvents, champions, videos } = competitionData.arena;
+const { historyEvents, champions, videos } = competitionData.arena;
 
 // Ajouter BASE_URL aux chemins des photos et vidéos
 const baseUrl = import.meta.env.BASE_URL;
-const wallPhotos = wallData.photos.map((photo) => ({
-  src: `${baseUrl}${photo.src}`,
-  alt: photo.alt,
-}));
 
 const videosWithBaseUrl = videos.map((video) => ({
   ...video,
@@ -31,50 +29,7 @@ const videosWithBaseUrl = videos.map((video) => ({
     </div>
 
     <!-- 1. DONNÉES TECHNIQUES DU MUR (fond blanc) -->
-    <BrutalCard variant="default" rotation={-1}>
-      <div style="padding: 2rem;">
-        <!-- Titre de la carte -->
-        <div style="text-align: center; margin-bottom: 2rem;">
-          <div
-            style="background: var(--brutal-ice); padding: 0.5rem 1.5rem; display: inline-block;"
-          >
-            <h3
-              style="color: var(--brutal-black); font-size: 1.75rem; margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; text-transform: uppercase;"
-            >
-              {wallData.title}
-            </h3>
-          </div>
-        </div>
-
-        <!-- Données techniques avec cadre noir -->
-        <div class="technical-data">
-          {
-            wallData.specs.map((spec) => (
-              <div class="data-item data-item--black">
-                <div class="data-value">{spec.value}</div>
-                <div class="data-label">{spec.label}</div>
-              </div>
-            ))
-          }
-        </div>
-
-        <!-- Galerie photos du mur -->
-        <div class="brutal-gallery">
-          {
-            wallPhotos.map((photo, index) => (
-              <div class="brutal-gallery-item" data-image={index}>
-                <div
-                  class={`brutal-photo-frame brutal-photo-frame--tilt-${index === 0 ? 'left' : index === 1 ? 'right' : 'slight'}`}
-                >
-                  <img class="brutal-photo" src={photo.src} alt={photo.alt} loading="lazy" />
-                </div>
-                <div class="brutal-photo-badge">📸 {index + 1}/3</div>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </BrutalCard>
+    <WallSpecs />
 
     <!-- 2. TEXTE 20 ANS -->
     <div
@@ -162,47 +117,7 @@ const videosWithBaseUrl = videos.map((video) => ({
     </div>
 
     <!-- 3. PALMARÈS ORGANISATIONNEL (fond blanc) -->
-    <BrutalCard variant="default" rotation={1}>
-      <div style="padding: 2rem;">
-        <div style="text-align: center; margin-bottom: 2rem;">
-          <div class="palmares-title-wrapper">
-            <h3 class="palmares-title">Notre palmarès organisationnel</h3>
-          </div>
-        </div>
-
-        <div class="history-events">
-          {
-            historyEvents.map((event) => (
-              <div class="event-item">
-                <div class="event-header">
-                  <span
-                    class="event-year-tag"
-                    style="
-                  background: var(--brutal-black);
-                  color: var(--brutal-ice);
-                  padding: 0.3rem 0.8rem;
-                  font-family: 'Space Mono', monospace;
-                  font-weight: 700;
-                  font-size: 0.875rem;
-                  text-transform: uppercase;
-                  letter-spacing: 0.05em;
-                  border: 2px solid var(--brutal-white);
-                  box-shadow: 3px 3px 0 var(--brutal-white);
-                  transform: rotate(-2deg);
-                  display: inline-block;
-                "
-                  >
-                    {event.year}
-                  </span>
-                </div>
-                <h4 class="event-title">{event.title}</h4>
-                <p class="event-description">{event.description}</p>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </BrutalCard>
+    <CompetitionHistory />
 
     <!-- 4. CHAMPIONS QUI ONT GRIMPÉ ICI (fond noir) -->
     <div style="margin-top: 3rem;">
@@ -313,136 +228,6 @@ const videosWithBaseUrl = videos.map((video) => ({
     background: var(--brutal-ice);
     padding: 4rem 2rem;
     position: relative;
-  }
-
-  /* Données techniques */
-  .technical-data {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin-bottom: 2rem;
-  }
-
-  .data-item {
-    text-align: center;
-  }
-
-  .data-item--black {
-    background: var(--brutal-black);
-    padding: 1.5rem 1rem;
-    border: 4px solid var(--brutal-black);
-    box-shadow: 8px 8px 0 var(--brutal-ice);
-    transform: rotate(-1deg);
-    transition: all 0.3s ease;
-  }
-
-  .data-item--black:nth-child(2) {
-    transform: rotate(1deg);
-  }
-
-  .data-item--black:nth-child(3) {
-    transform: rotate(-2deg);
-  }
-
-  .data-item--black:hover {
-    transform: rotate(0deg) scale(1.05) translate(-4px, -4px);
-    box-shadow: 12px 12px 0 var(--brutal-ice);
-  }
-
-  .data-item--black .data-value {
-    font-family: 'Inter', sans-serif;
-    font-weight: 900;
-    font-size: var(--size-l3);
-    color: var(--brutal-white);
-    margin-bottom: 0.5rem;
-    line-height: 1;
-  }
-
-  .data-item--black .data-label {
-    font-family: 'Space Mono', monospace;
-    font-weight: 700;
-    font-size: 0.875rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--brutal-ice);
-  }
-
-  /* Galerie photos */
-  .brutal-gallery {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 2rem auto 0;
-    animation: slide-brutal 1s ease-out forwards;
-  }
-
-  .brutal-gallery-item {
-    cursor: pointer;
-    position: relative;
-    transition: transform 0.3s ease;
-  }
-
-  .brutal-gallery-item:hover {
-    transform: translateY(-4px);
-  }
-
-  .brutal-photo-frame {
-    background: var(--brutal-white);
-    padding: 10px;
-    border: 4px solid var(--brutal-black);
-    box-shadow: 8px 8px 0 var(--brutal-black);
-    height: 250px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-  }
-
-  .brutal-photo-frame--tilt-left {
-    transform: rotate(-2deg);
-  }
-
-  .brutal-photo-frame--tilt-right {
-    transform: rotate(2deg);
-  }
-
-  .brutal-photo-frame--tilt-slight {
-    transform: rotate(-1deg);
-  }
-
-  .brutal-gallery-item:hover .brutal-photo-frame {
-    transform: rotate(0) translate(-4px, -4px);
-    box-shadow: 12px 12px 0 var(--brutal-black);
-  }
-
-  .brutal-photo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .brutal-photo-badge {
-    position: absolute;
-    bottom: -10px;
-    right: 10px;
-    background: var(--brutal-ice);
-    color: var(--brutal-black);
-    padding: 0.5rem 1rem;
-    font-weight: 800;
-    font-size: 0.875rem;
-    transform: rotate(2deg);
-    box-shadow: 4px 4px 0 var(--brutal-black);
-  }
-
-  @keyframes slide-brutal {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 
   /* Modal Gallery (copié de VenueSection) */
@@ -558,114 +343,10 @@ const videosWithBaseUrl = videos.map((video) => ({
     opacity: 0.8;
   }
 
-  /* Palmarès organisationnel */
-  .palmares-title-wrapper {
-    background: var(--brutal-ice);
-    padding: 0.5rem 1.5rem;
-    display: inline-block;
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-
-  .palmares-title {
-    color: var(--brutal-black);
-    font-size: 1.75rem;
-    margin: 0;
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
-    line-height: 1.3;
-  }
-
-  .history-events {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-  }
-
-  .event-item {
-    padding: 1.5rem;
-    background: var(--brutal-ice);
-    color: var(--brutal-black);
-    border: 3px solid var(--brutal-black);
-    box-shadow: 6px 6px 0 var(--brutal-black);
-    transform: rotate(-1deg);
-    transition: all 0.3s ease;
-  }
-
-  .event-item:nth-child(even) {
-    transform: rotate(1deg);
-    background: var(--brutal-black);
-    color: var(--brutal-white);
-    border: 3px solid var(--brutal-ice);
-    box-shadow: 6px 6px 0 var(--brutal-ice);
-  }
-
-  .event-item:nth-child(even) .event-year-tag {
-    background: var(--brutal-white) !important;
-    color: var(--brutal-black) !important;
-    border-color: var(--brutal-ice) !important;
-    box-shadow: 3px 3px 0 var(--brutal-ice) !important;
-  }
-
-  .event-item:hover {
-    transform: rotate(0deg) scale(1.05) translate(-3px, -3px);
-    box-shadow: 9px 9px 0 var(--brutal-black);
-  }
-
-  .event-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .event-icon {
-    font-size: 1.5rem;
-  }
-
-  .event-title {
-    font-family: 'Inter', sans-serif;
-    font-weight: 800;
-    font-size: 1rem;
-    text-transform: uppercase;
-    margin: 0.5rem 0;
-    color: inherit;
-  }
-
-  .event-description {
-    font-size: 0.875rem;
-    line-height: 1.4;
-    margin: 0.5rem 0;
-    color: inherit;
-  }
-
   /* Responsive */
   @media (max-width: 768px) {
     .brutal-section {
       padding: 3rem 1rem;
-    }
-
-    .technical-data {
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-
-    .data-item--black {
-      transform: rotate(0deg) !important;
-    }
-
-    .data-item--black .data-value {
-      font-size: var(--size-l4);
-    }
-
-    .brutal-gallery {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-
-    .brutal-photo-frame {
-      height: 200px;
     }
 
     .brutal-modal-nav {
@@ -692,243 +373,163 @@ const videosWithBaseUrl = videos.map((video) => ({
       font-size: 0.875rem;
       padding: 0.5rem 1rem;
     }
-
-    .history-events {
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-
-    .event-item {
-      transform: rotate(0deg) !important;
-    }
-
-    /* Responsive pour titre palmarès sur mobile */
-    .palmares-title-wrapper {
-      padding: 0.5rem 1rem;
-    }
-
-    .palmares-title {
-      font-size: 1.1rem;
-      line-height: 1.4;
-      word-break: break-word;
-    }
   }
 </style>
 
 <script>
-  // Gallery Modal Logic - Utilise les donnees deja chargees
+  import { BrutalModal } from '../../scripts/modal-utils';
+
   document.addEventListener('DOMContentLoaded', function () {
-    // Images deja chargees dans le markup - on les recupere du DOM
+    // --- GESTION GALERIE PHOTOS ---
     const galleryItems = document.querySelectorAll('.brutal-gallery-item');
-    const images = Array.from(galleryItems).map((item) => {
-      const img = item.querySelector('img');
-      return {
-        src: img?.src || '',
-        alt: img?.alt || '',
-      };
-    });
 
-    let currentImageIndex = 0;
-
-    const modal = document.getElementById('photo-modal');
-    const modalImage = document.getElementById('modal-image') as HTMLImageElement | null;
-    const counter = document.getElementById('photo-counter');
-    const closeBtn = document.getElementById('close-modal');
-    const prevBtn = document.getElementById('prev-photo');
-    const nextBtn = document.getElementById('next-photo');
-
-    if (!modal || !modalImage || !counter || !closeBtn || !prevBtn || !nextBtn) return;
-
-    // Ouvrir modal
-    document.querySelectorAll('.brutal-gallery-item').forEach((item, index) => {
-      item.addEventListener('click', () => {
-        currentImageIndex = index;
-        showModal();
+    if (galleryItems.length > 0) {
+      const images = Array.from(galleryItems).map((item) => {
+        const img = item.querySelector('img');
+        return {
+          src: img?.src || '',
+          alt: img?.alt || '',
+        };
       });
-    });
 
-    // Fermer modal
-    closeBtn.addEventListener('click', hideModal);
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) hideModal();
-    });
+      let currentImageIndex = 0;
+      const modalImage = document.getElementById('modal-image') as HTMLImageElement | null;
+      const counter = document.getElementById('photo-counter');
 
-    // Navigation
-    prevBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-      updateModal();
-    });
+      try {
+        const photoModal = new BrutalModal('photo-modal');
 
-    nextBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      currentImageIndex = (currentImageIndex + 1) % images.length;
-      updateModal();
-    });
-
-    // Clavier
-    document.addEventListener('keydown', (e) => {
-      if (modal.style.display === 'flex') {
-        switch (e.key) {
-          case 'Escape':
-            hideModal();
-            break;
-          case 'ArrowLeft':
-            prevBtn.click();
-            break;
-          case 'ArrowRight':
-            nextBtn.click();
-            break;
+        function updatePhotoModal() {
+          if (!modalImage || !counter) return;
+          modalImage.src = images[currentImageIndex].src;
+          modalImage.alt = images[currentImageIndex].alt;
+          counter.textContent = `${currentImageIndex + 1} / ${images.length}`;
         }
+
+        // Triggers ouverture
+        galleryItems.forEach((item, index) => {
+          item.addEventListener('click', () => {
+            currentImageIndex = index;
+            updatePhotoModal();
+            photoModal.open();
+          });
+        });
+
+        // Navigation
+        document.getElementById('prev-photo')?.addEventListener('click', (e) => {
+          e.stopPropagation();
+          currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+          updatePhotoModal();
+        });
+
+        document.getElementById('next-photo')?.addEventListener('click', (e) => {
+          e.stopPropagation();
+          currentImageIndex = (currentImageIndex + 1) % images.length;
+          updatePhotoModal();
+        });
+
+        // Clavier spécifique galerie
+        document.addEventListener('keydown', (e) => {
+          if (photoModal.isOpen) {
+            switch (e.key) {
+              case 'ArrowLeft':
+                currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                updatePhotoModal();
+                break;
+              case 'ArrowRight':
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                updatePhotoModal();
+                break;
+            }
+          }
+        });
+      } catch (e) {
+        console.warn('Photo modal init failed:', e);
       }
-    });
-
-    function showModal() {
-      if (!modal) return;
-      modal.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-      updateModal();
     }
 
-    function hideModal() {
-      if (!modal) return;
-      modal.style.display = 'none';
-      document.body.style.overflow = '';
-    }
-
-    function updateModal() {
-      if (!modalImage || !counter) return;
-      modalImage.src = images[currentImageIndex].src;
-      modalImage.alt = images[currentImageIndex].alt;
-      counter.textContent = `${currentImageIndex + 1} / ${images.length}`;
-    }
-  });
-
-  // Video Modal Logic - Utilise les donnees deja chargees
-  document.addEventListener('DOMContentLoaded', function () {
-    // Videos deja chargees dans le markup - on les recupere du DOM
+    // --- GESTION VIDÉOS ---
     const videoTiles = document.querySelectorAll('.video-tile');
-    const videosData = Array.from(videoTiles).map((tile) => {
-      const title = tile.querySelector('.video-title')?.textContent || '';
-      const videoUrl = (tile as HTMLElement).dataset.videoUrl || '';
-      return {
-        title: title,
-        url: videoUrl,
-      };
-    });
-
-    let currentVideoIndex = 0;
-
-    const videoModal = document.getElementById('video-modal');
-    const videoContent = document.getElementById('video-content');
-    const videoCounter = document.querySelector('#video-counter .video-counter-text');
-    const videoTitleModal = document.querySelector('#video-counter .video-title-modal');
-    const closeVideoBtn = document.getElementById('close-video-modal');
-    const prevVideoBtn = document.getElementById('prev-video');
-    const nextVideoBtn = document.getElementById('next-video');
-
-    if (
-      !videoModal ||
-      !videoContent ||
-      !videoCounter ||
-      !videoTitleModal ||
-      !closeVideoBtn ||
-      !prevVideoBtn ||
-      !nextVideoBtn
-    )
-      return;
-
-    // Ouvrir modal
-    document.querySelectorAll('.video-tile').forEach((tile, index) => {
-      tile.addEventListener('click', () => {
-        currentVideoIndex = index;
-        showVideoModal();
+    if (videoTiles.length > 0) {
+      const videosData = Array.from(videoTiles).map((tile) => {
+        const title = tile.querySelector('.video-title')?.textContent || '';
+        const videoUrl = (tile as HTMLElement).dataset.videoUrl || '';
+        return { title, url: videoUrl };
       });
-    });
 
-    // Fermer modal
-    closeVideoBtn.addEventListener('click', hideVideoModal);
-    videoModal.addEventListener('click', (e) => {
-      if (e.target === videoModal) hideVideoModal();
-    });
+      let currentVideoIndex = 0;
+      const videoContent = document.getElementById('video-content');
+      const videoCounter = document.querySelector('#video-counter .video-counter-text');
+      const videoTitleModal = document.querySelector('#video-counter .video-title-modal');
 
-    // Navigation
-    prevVideoBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      currentVideoIndex = (currentVideoIndex - 1 + videosData.length) % videosData.length;
-      updateVideoModal();
-    });
+      try {
+        const videoModal = new BrutalModal('video-modal', {
+          onClose: () => {
+            // Arrêter la vidéo en vidant le contenu
+            if (videoContent) videoContent.innerHTML = '';
+          },
+        });
 
-    nextVideoBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      currentVideoIndex = (currentVideoIndex + 1) % videosData.length;
-      updateVideoModal();
-    });
+        function updateVideoModal() {
+          if (!videoContent || !videoCounter || !videoTitleModal) return;
 
-    // Clavier
-    document.addEventListener('keydown', (e) => {
-      if (videoModal.style.display === 'flex') {
-        switch (e.key) {
-          case 'Escape':
-            hideVideoModal();
-            break;
-          case 'ArrowLeft':
-            prevVideoBtn.click();
-            break;
-          case 'ArrowRight':
-            nextVideoBtn.click();
-            break;
+          const video = videosData[currentVideoIndex];
+
+          // Mise à jour du compteur et titre
+          videoCounter.textContent = `${currentVideoIndex + 1} / ${videosData.length}`;
+          videoTitleModal.textContent = video.title;
+
+          // Injection du player
+          if (video.url) {
+            videoContent.innerHTML = `
+              <video controls autoplay class="modal-video-player" style="width: 100%; height: 100%; object-fit: contain;">
+                <source src="${video.url}" type="video/mp4">
+                Votre navigateur ne supporte pas la lecture de vidéos.
+              </video>
+            `;
+          }
         }
+
+        // Triggers ouverture
+        videoTiles.forEach((tile, index) => {
+          tile.addEventListener('click', () => {
+            currentVideoIndex = index;
+            updateVideoModal();
+            videoModal.open();
+          });
+        });
+
+        // Navigation
+        document.getElementById('prev-video')?.addEventListener('click', (e) => {
+          e.stopPropagation();
+          currentVideoIndex = (currentVideoIndex - 1 + videosData.length) % videosData.length;
+          updateVideoModal();
+        });
+
+        document.getElementById('next-video')?.addEventListener('click', (e) => {
+          e.stopPropagation();
+          currentVideoIndex = (currentVideoIndex + 1) % videosData.length;
+          updateVideoModal();
+        });
+
+        // Clavier spécifique vidéo
+        document.addEventListener('keydown', (e) => {
+          if (videoModal.isOpen) {
+            switch (e.key) {
+              case 'ArrowLeft':
+                currentVideoIndex = (currentVideoIndex - 1 + videosData.length) % videosData.length;
+                updateVideoModal();
+                break;
+              case 'ArrowRight':
+                currentVideoIndex = (currentVideoIndex + 1) % videosData.length;
+                updateVideoModal();
+                break;
+            }
+          }
+        });
+      } catch (e) {
+        console.warn('Video modal init failed:', e);
       }
-    });
-
-    function showVideoModal() {
-      videoModal!.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-      updateVideoModal();
-    }
-
-    function hideVideoModal() {
-      videoModal!.style.display = 'none';
-      document.body.style.overflow = '';
-      // Arreter la lecture video en vidant le contenu
-      videoContent!.innerHTML = '';
-    }
-
-    function updateVideoModal() {
-      const video = videosData[currentVideoIndex];
-      if (video.url) {
-        // Si c'est un fichier local (commence par /)
-        if (video.url.startsWith('/')) {
-          videoContent!.innerHTML = `
-          <video controls autoplay class="modal-video-player" style="width: 100%; height: 100%; object-fit: contain;">
-            <source src="${video.url}" type="video/mp4">
-            Votre navigateur ne supporte pas la lecture de vidéos.
-          </video>
-        `;
-        }
-        // Si c'est une URL externe (YouTube, etc.)
-        else if (video.url.includes('youtube') || video.url.includes('youtu.be')) {
-          // Logique d'embed YouTube si necessaire
-          // Pour l'instant on suppose des fichiers locaux ou URLs directes comme dans le composant original
-          videoContent!.innerHTML = `
-          <video controls autoplay class="modal-video-player" style="width: 100%; height: 100%; object-fit: contain;">
-            <source src="${video.url}" type="video/mp4">
-            Votre navigateur ne supporte pas la lecture de vidéos.
-          </video>
-        `;
-        } else {
-          videoContent!.innerHTML = `
-          <video controls autoplay class="modal-video-player" style="width: 100%; height: 100%; object-fit: contain;">
-            <source src="${video.url}" type="video/mp4">
-            Votre navigateur ne supporte pas la lecture de vidéos.
-          </video>
-        `;
-        }
-      }
-
-      videoCounter!.textContent = `${currentVideoIndex + 1} / ${videosData.length}`;
-      videoTitleModal!.textContent = video.title;
     }
   });
 </script>

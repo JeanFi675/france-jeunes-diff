@@ -55,3 +55,5 @@ DOSSIER_PARTENARIAT_CHAMP_FRANCE_2026.md
 # Fichiers de configuration personnels
 .gitconfig
 SETUP_INSTRUCTIONS.txt
+
+!src/**/*.md
