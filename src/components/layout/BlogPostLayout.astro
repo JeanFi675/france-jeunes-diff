@@ -15,7 +15,15 @@ interface Props {
   photoCredit?: string;
 }
 
-const { title, description, publishDate, tags = [], flickrAlbumUrl, albumTitle, photoCredit } = Astro.props;
+const {
+  title,
+  description,
+  publishDate,
+  tags = [],
+  flickrAlbumUrl,
+  albumTitle,
+  photoCredit,
+} = Astro.props;
 
 const formattedDate = new Intl.DateTimeFormat('fr-FR', {
   day: '2-digit',
@@ -46,13 +54,15 @@ const formattedDate = new Intl.DateTimeFormat('fr-FR', {
           </div>
         </div>
 
-        {tags && tags.length > 0 && (
-          <div class="blog-post-tags">
-            {tags.map((tag) => (
-              <span class="blog-post-tag">{tag}</span>
-            ))}
-          </div>
-        )}
+        {
+          tags && tags.length > 0 && (
+            <div class="blog-post-tags">
+              {tags.map((tag) => (
+                <span class="blog-post-tag">{tag}</span>
+              ))}
+            </div>
+          )
+        }
       </header>
 
       <!-- Article Content -->
@@ -61,11 +71,17 @@ const formattedDate = new Intl.DateTimeFormat('fr-FR', {
       </article>
 
       <!-- Flickr Gallery -->
-      {flickrAlbumUrl && (
-        <div class="blog-post-gallery-wrapper">
-          <FlickrGallery flickrAlbumUrl={flickrAlbumUrl} albumTitle={albumTitle} photoCredit={photoCredit} />
-        </div>
-      )}
+      {
+        flickrAlbumUrl && (
+          <div class="blog-post-gallery-wrapper">
+            <FlickrGallery
+              flickrAlbumUrl={flickrAlbumUrl}
+              albumTitle={albumTitle}
+              photoCredit={photoCredit}
+            />
+          </div>
+        )
+      }
 
       <!-- Navigation -->
       <div class="blog-post-nav">
@@ -104,8 +120,8 @@ const formattedDate = new Intl.DateTimeFormat('fr-FR', {
   .blog-bandeau {
     position: relative;
     width: 100%;
-    aspect-ratio: 1200 / 513;
-    background: url('/images/bandeau-blog.png') no-repeat center center;
+    aspect-ratio: 1024 / 563;
+    background: url('/images/bandeau-blog-2026.webp') no-repeat center center;
     background-size: contain;
     background-position: center;
     background-color: var(--brutal-white);
@@ -118,22 +134,22 @@ const formattedDate = new Intl.DateTimeFormat('fr-FR', {
 
   .blog-bandeau-title {
     position: absolute;
-    left: 39.375%;
-    top: 77.98%;
+    left: 40%;
+    top: 82%;
     transform: translate(-50%, -50%);
 
     /* Contraintes zone texte */
-    max-width: 850px;
-    width: 75%;
-    padding: 0 1.5rem;
+    width: 80%;
+    max-width: 900px;
+    padding: 0 1rem;
 
     /* Style texte */
     color: #ffffff;
     font-family: 'Inter', sans-serif;
-    font-weight: 800;
+    font-weight: 900;
     text-transform: uppercase;
-    font-size: clamp(2rem, 4vw, 3rem);
-    line-height: 1.2;
+    font-size: clamp(1.8rem, 4vw, 3.2rem);
+    line-height: 1.1;
     text-align: center;
 
     /* Limiter à 2 lignes */
@@ -143,8 +159,8 @@ const formattedDate = new Intl.DateTimeFormat('fr-FR', {
     overflow: hidden;
     text-overflow: ellipsis;
 
-    /* Pas d'ombre ni contour */
-    text-shadow: none;
+    /* Premium Text Shadow */
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
   }
 
   .blog-post-header {
@@ -305,8 +321,9 @@ const formattedDate = new Intl.DateTimeFormat('fr-FR', {
     }
 
     .blog-bandeau-title {
-      font-size: 1.5rem;
-      max-width: 85%;
+      font-size: clamp(1.2rem, 5vw, 1.8rem);
+      max-width: 90%;
+      width: 90%;
     }
 
     .blog-post-meta {
