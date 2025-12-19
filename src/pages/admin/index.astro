@@ -1,0 +1,310 @@
+---
+if (import.meta.env.PROD) {
+  return Astro.redirect('/');
+}
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Éditeur de Blog Local</title>
+    <style>
+      body {
+        margin: 0;
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        display: flex;
+        height: 100vh;
+        overflow: hidden;
+      }
+      #sidebar {
+        width: 250px;
+        background: #f4f4f5;
+        border-right: 1px solid #e4e4e7;
+        display: flex;
+        flex-direction: column;
+      }
+      #sidebar h2 {
+        padding: 1rem;
+        margin: 0;
+        font-size: 1.2rem;
+        border-bottom: 1px solid #e4e4e7;
+      }
+      #file-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        overflow-y: auto;
+        flex: 1;
+      }
+      #file-list li {
+        padding: 0.75rem 1rem;
+        cursor: pointer;
+        border-bottom: 1px solid #eee;
+        font-size: 0.9rem;
+      }
+      #file-list li:hover {
+        background: #e4e4e7;
+      }
+      #file-list li.active {
+        background: #e0e7ff;
+        color: #3730a3;
+        font-weight: 500;
+      }
+
+      #main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+      #toolbar {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid #e4e4e7;
+        background: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      #current-file {
+        font-weight: bold;
+      }
+      #save-btn {
+        background: #2563eb;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        font-weight: 500;
+      }
+      #save-btn:hover {
+        background: #1d4ed8;
+      }
+      #save-btn:disabled {
+        background: #93c5fd;
+        cursor: not-allowed;
+      }
+
+      #editor-container {
+        flex: 1;
+        display: flex;
+        overflow: hidden;
+      }
+      #editor {
+        flex: 1;
+        border: none;
+        padding: 1rem;
+        font-family: 'Consolas', 'Monaco', monospace;
+        font-size: 14px;
+        resize: none;
+        outline: none;
+        border-right: 1px solid #e4e4e7;
+        line-height: 1.5;
+        background: #fafafa;
+      }
+      #preview {
+        flex: 1;
+        padding: 1rem 2rem;
+        overflow-y: auto;
+        background: #fff;
+      }
+
+      /* Markdown Preview Styles - REMOVED as we use iframe now */
+    </style>
+    <!-- Js-yaml for frontmatter parsing -->
+    <!-- Custom styles if needed -->
+  </head>
+  <body>
+    <div id="sidebar">
+      <h2>Articles</h2>
+      <ul id="file-list">
+        <!-- Files loaded here -->
+      </ul>
+    </div>
+    <div id="main">
+      <div id="toolbar">
+        <span id="current-file">Sélectionnez un fichier...</span>
+        <button id="save-btn" disabled>Sauvegarder (Ctrl+S)</button>
+      </div>
+      <div id="editor-container">
+        <textarea id="editor" placeholder="Le contenu apparaîtra ici..."></textarea>
+        <iframe id="preview" src="/admin/preview" title="Preview"></iframe>
+      </div>
+    </div>
+
+    <script type="module">
+      const fileListEl = document.getElementById('file-list');
+      const editorEl = document.getElementById('editor');
+      const previewIframe = document.getElementById('preview');
+      const currentFileEl = document.getElementById('current-file');
+      const saveBtn = document.getElementById('save-btn');
+
+      let activeFile = null;
+      let isPreviewReady = false;
+
+      // Handle message from preview
+      window.addEventListener('message', (e) => {
+        if (e.data.type === 'preview-ready') {
+          isPreviewReady = true;
+          updatePreview(); // Send initial content if ready
+        }
+      });
+
+      // Fetch file list
+      async function loadFileList() {
+        try {
+          const res = await fetch('/api/local/posts.json');
+          const data = await res.json();
+          renderFileList(data.files || []);
+        } catch (err) {
+          console.error('Failed to load posts', err);
+        }
+      }
+
+      function renderFileList(files) {
+        fileListEl.innerHTML = '';
+        files.forEach((file) => {
+          const li = document.createElement('li');
+          li.textContent = file;
+          li.onclick = () => loadFile(file);
+          if (activeFile === file) li.classList.add('active');
+          fileListEl.appendChild(li);
+        });
+      }
+
+      async function loadFile(filename) {
+        activeFile = filename;
+        currentFileEl.textContent = filename;
+        saveBtn.disabled = true; // Disable save during load
+        editorEl.value = 'Chargement...'; // Show loading state
+        editorEl.disabled = true;
+
+        // Update active state in list
+        Array.from(fileListEl.children).forEach((li) => {
+          if (li.textContent === filename) li.classList.add('active');
+          else li.classList.remove('active');
+        });
+
+        try {
+          const res = await fetch(`/api/local/post.json?file=${encodeURIComponent(filename)}`);
+          const data = await res.json();
+
+          if (!res.ok || data.error) {
+            throw new Error(data.error || `Erreur HTTP: ${res.status}`);
+          }
+
+          editorEl.value = data.content;
+          editorEl.disabled = false;
+          saveBtn.disabled = false;
+          updatePreview();
+        } catch (err) {
+          console.error('Failed to load file content', err);
+          editorEl.value = `ERREUR: Impossible de charger le fichier.\nDétails: ${err.message}`;
+          editorEl.disabled = true;
+        }
+      }
+
+      async function saveFile() {
+        if (!activeFile) return;
+
+        const content = editorEl.value;
+        saveBtn.textContent = 'Sauvegarde...';
+
+        try {
+          const res = await fetch('/api/local/post.json', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ file: activeFile, content }),
+          });
+
+          if (res.ok) {
+            saveBtn.textContent = 'Sauvegardé !';
+            setTimeout(() => (saveBtn.textContent = 'Sauvegarder (Ctrl+S)'), 2000);
+          } else {
+            saveBtn.textContent = 'Erreur !';
+          }
+        } catch (err) {
+          console.error('Failed to save', err);
+          saveBtn.textContent = 'Erreur !';
+        }
+      }
+
+      function updatePreview() {
+        if (!isPreviewReady || !previewIframe.contentWindow) return;
+
+        const raw = editorEl.value;
+        const { frontmatter, content } = parseFrontmatter(raw);
+
+        previewIframe.contentWindow.postMessage(
+          {
+            type: 'preview-update',
+            frontmatter,
+            content,
+          },
+          '*'
+        );
+      }
+
+      function parseFrontmatter(text) {
+        // Simple manual parsing to avoid external dependencies issues
+        const match = text.match(/^---\s*[\r\n]+([\s\S]*?)[\r\n]+---/);
+        let frontmatter = {};
+        let content = text;
+
+        if (match) {
+          const fmText = match[1];
+          content = text.slice(match[0].length);
+
+          // Parse Title
+          const titleMatch =
+            fmText.match(/title:\s*(?:["'])(.*?)(?:["'])/) || fmText.match(/title:\s*([^\n]+)/);
+          if (titleMatch) frontmatter.title = titleMatch[1];
+
+          // Parse Description
+          const descMatch =
+            fmText.match(/description:\s*(?:["'])(.*?)(?:["'])/) ||
+            fmText.match(/description:\s*([^\n]+)/);
+          if (descMatch) frontmatter.description = descMatch[1];
+
+          // Parse PublishDate
+          const dateMatch = fmText.match(/publishDate:\s*([^\n]+)/);
+          if (dateMatch) frontmatter.publishDate = dateMatch[1];
+
+          // Parse Tags
+          const tagsMatch = fmText.match(/tags:\s*\[(.*?)\]/);
+          if (tagsMatch) {
+            frontmatter.tags = tagsMatch[1].split(',').map((t) => t.trim().replace(/['"]/g, ''));
+          }
+
+          // Parse Flickr
+          const flickrMatch =
+            fmText.match(/flickrAlbumUrl:\s*(?:["'])(.*?)(?:["'])/) ||
+            fmText.match(/flickrAlbumUrl:\s*([^\n]+)/);
+          if (flickrMatch) frontmatter.flickrAlbumUrl = flickrMatch[1];
+
+          frontmatter.albumTitle = frontmatter.title;
+        }
+        return { frontmatter, content };
+      }
+
+      // Live preview
+      editorEl.addEventListener('input', updatePreview);
+
+      // Save shortcut
+      document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+          e.preventDefault();
+          saveFile();
+        }
+      });
+
+      saveBtn.addEventListener('click', saveFile);
+
+      // Initial load
+      loadFileList();
+    </script>
+  </body>
+</html>
