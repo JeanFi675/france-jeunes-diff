@@ -10,12 +10,14 @@ const { publicInfo, competitorsInfo } = competitionData;
   <div class="brutal-container">
     <div class="section-header">
       <BrutalHeading level={2} rotation={-1} shadow={true} class="brutal-title">
-        UN WEEK-END<br>D'ESCALADE INTENSE
+        UN WEEK-END<br />D'ESCALADE INTENSE
       </BrutalHeading>
     </div>
-    
+
     <!-- 🔥 CADRE 1 : L'ÉVÉNEMENT -->
-    <div class="competition-fact" style="
+    <div
+      class="competition-fact"
+      style="
       background: var(--brutal-black);
       color: var(--brutal-ice);
       border: 4px solid var(--brutal-ice);
@@ -28,11 +30,14 @@ const { publicInfo, competitorsInfo } = competitionData;
       text-align: center;
       font-weight: 700;
       width: 100%;
-    ">
+    "
+    >
       <p style="margin: 0;">
-        {publicInfo.highlights[0].parts.map((part, idx) => (
-          part.style === 'highlight' ? (
-            <span key={idx} style="
+        {
+          publicInfo.highlights[0].parts.map((part) =>
+            part.style === 'highlight' ? (
+              <span
+                style="
               background: var(--brutal-ice);
               color: var(--brutal-black);
               padding: 0.1rem 0.4rem;
@@ -43,14 +48,18 @@ const { publicInfo, competitorsInfo } = competitionData;
               text-transform: uppercase;
               letter-spacing: 0.02em;
               transform: rotate({idx % 2 === 0 ? '-0.5deg' : '0.5deg'});
-            ">{part.text}</span>
-          ) : (
-            part.text
+            "
+              >
+                {part.text}
+              </span>
+            ) : (
+              part.text
+            )
           )
-        ))}
+        }
       </p>
     </div>
-    
+
     <div class="two-columns">
       <!-- Colonne PUBLIC -->
       <BrutalCard variant="mint" rotation={1}>
@@ -58,38 +67,38 @@ const { publicInfo, competitorsInfo } = competitionData;
           {publicInfo.subtitle}
         </BrutalHeading>
         <ul class="benefit-list">
-          {publicInfo.points.map(point => (
-            <li>{point}</li>
-          ))}
+          {publicInfo.points.map((point) => <li>{point}</li>)}
         </ul>
         <div class="brutal-cta-box">
           {publicInfo.callToAction}
         </div>
       </BrutalCard>
-      
+
       <!-- Colonne COMPÉTITEURS -->
       <BrutalCard variant="black" rotation={-1}>
         <BrutalHeading level={3} rotation={-1}>
           {competitorsInfo.subtitle}
         </BrutalHeading>
         <ul class="benefit-list">
-          {competitorsInfo.points.map(point => (
-            <li>{point}</li>
-          ))}
+          {competitorsInfo.points.map((point) => <li>{point}</li>)}
         </ul>
         <div class="brutal-cta-box brutal-cta-box--mint">
           {competitorsInfo.callToAction}
         </div>
-        {competitorsInfo.important && (
-          <p style="color: var(--brutal-ice); font-weight: 700; margin-top: 2rem;">
-            {competitorsInfo.important}
-          </p>
-        )}
+        {
+          competitorsInfo.important && (
+            <p style="color: var(--brutal-ice); font-weight: 700; margin-top: 2rem;">
+              {competitorsInfo.important}
+            </p>
+          )
+        }
       </BrutalCard>
     </div>
-    
+
     <!-- 💥 CADRE 2 : L'EXPÉRIENCE -->
-    <div class="competition-emotion" style="
+    <div
+      class="competition-emotion"
+      style="
       background: var(--brutal-ice);
       color: var(--brutal-black);
       border: 4px solid var(--brutal-black);
@@ -102,11 +111,14 @@ const { publicInfo, competitorsInfo } = competitionData;
       text-align: center;
       font-weight: 700;
       width: 100%;
-    ">
+    "
+    >
       <p style="margin: 0;">
-        {publicInfo.highlights[1].parts.map((part, idx) => (
-          part.style === 'highlight' ? (
-            <span key={idx} style="
+        {
+          publicInfo.highlights[1].parts.map((part) =>
+            part.style === 'highlight' ? (
+              <span
+                style="
               background: var(--brutal-black);
               color: var(--brutal-white);
               padding: 0.1rem 0.4rem;
@@ -117,11 +129,15 @@ const { publicInfo, competitorsInfo } = competitionData;
               text-transform: uppercase;
               letter-spacing: 0.02em;
               transform: rotate({idx % 2 === 0 ? '0.5deg' : '-0.5deg'});
-            ">{part.text}</span>
-          ) : (
-            part.text
+            "
+              >
+                {part.text}
+              </span>
+            ) : (
+              part.text
+            )
           )
-        ))}
+        }
       </p>
     </div>
   </div>
@@ -134,18 +150,18 @@ const { publicInfo, competitorsInfo } = competitionData;
     padding: 0;
     margin: 1rem 0;
   }
-  
+
   .benefit-list li {
     padding: 0.5rem 0;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
-  
+
   .benefit-list li:last-child {
     border-bottom: none;
   }
-  
+
   /* Styles h3 supprimés - gérés par BrutalHeading */
-  
+
   /* Style bouton pour le CTA */
   .brutal-cta-box {
     background: var(--brutal-black);
@@ -160,51 +176,53 @@ const { publicInfo, competitorsInfo } = competitionData;
     transition: all 0.3s ease;
     display: inline-block;
   }
-  
+
   .brutal-cta-box:hover {
     background: var(--brutal-white);
     color: var(--brutal-black);
     transform: translate(-2px, -2px);
   }
-  
+
   /* Styles spécifiques pour benefit-list dans les cartes */
   .brutal-card--mint .benefit-list li {
-    border-bottom: 1px solid rgba(0,0,0,0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   }
-  
+
   .brutal-card--black .benefit-list li {
-    border-bottom: 1px solid rgba(255,255,255,0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   }
-  
+
   /* Bouton CTA version mint pour compétiteurs */
   .brutal-cta-box--mint {
     background: var(--brutal-ice);
     color: var(--brutal-black);
     border: 4px solid var(--brutal-ice);
   }
-  
+
   .brutal-cta-box--mint:hover {
     background: var(--brutal-black);
     color: var(--brutal-ice);
     border-color: var(--brutal-ice);
   }
-  
+
   /* Animations hover pour les cadres */
   .competition-fact,
   .competition-emotion {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
   }
-  
+
   .competition-fact:hover {
     transform: rotate(0deg) scale(1.02);
     box-shadow: 12px 12px 0 var(--brutal-ice);
   }
-  
+
   .competition-emotion:hover {
     transform: rotate(0deg) scale(1.02);
     box-shadow: 12px 12px 0 var(--brutal-black);
   }
-  
+
   /* Responsive pour les cadres */
   @media (max-width: 768px) {
     .competition-fact,
@@ -212,7 +230,7 @@ const { publicInfo, competitorsInfo } = competitionData;
       transform: rotate(0deg);
       font-size: 1rem;
     }
-    
+
     .competition-fact span,
     .competition-emotion span {
       font-size: 1.25rem;

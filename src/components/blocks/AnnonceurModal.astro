@@ -9,13 +9,10 @@ const annonceurUrl = `${import.meta.env.BASE_URL}dossier_annonceur/dossier_annon
       id="annonceurs-iframe"
       class="brutal-iframe"
       src={annonceurUrl}
-      title="Dossier Annonceurs"
-    ></iframe>
+      title="Dossier Annonceurs"></iframe>
 
     <!-- Bouton fermeture -->
-    <button id="close-annonceurs-modal" class="brutal-modal-close">
-      ✕
-    </button>
+    <button id="close-annonceurs-modal" class="brutal-modal-close"> ✕ </button>
 
     <!-- Lien partager -->
     <a
@@ -158,7 +155,7 @@ const annonceurUrl = `${import.meta.env.BASE_URL}dossier_annonceur/dossier_annon
 
 <script>
   // Fonction globale pour ouvrir le modal
-  window.openAnnonceurModal = function() {
+  window.openAnnonceurModal = function () {
     const modal = document.getElementById('annonceurs-modal');
     if (modal) {
       modal.style.display = 'flex';
@@ -174,10 +171,10 @@ const annonceurUrl = `${import.meta.env.BASE_URL}dossier_annonceur/dossier_annon
     }
   }
 
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     const modal = document.getElementById('annonceurs-modal');
     const closeBtn = document.getElementById('close-annonceurs-modal');
-    const iframe = document.getElementById('annonceurs-iframe');
+    const iframe = document.getElementById('annonceurs-iframe') as HTMLIFrameElement | null;
 
     if (modal && closeBtn) {
       // Fermer au clic du bouton
@@ -197,13 +194,13 @@ const annonceurUrl = `${import.meta.env.BASE_URL}dossier_annonceur/dossier_annon
 
       // Ouvrir les liens de l'iframe dans une nouvelle fenêtre
       if (iframe) {
-        iframe.addEventListener('load', function() {
+        iframe.addEventListener('load', function () {
           try {
-            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
             if (iframeDoc) {
               const links = iframeDoc.querySelectorAll('a');
-              links.forEach(link => {
-                link.addEventListener('click', function(e) {
+              links.forEach((link: HTMLAnchorElement) => {
+                link.addEventListener('click', function (e: Event) {
                   e.preventDefault();
                   const href = link.getAttribute('href');
                   if (href) {

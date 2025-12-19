@@ -5,7 +5,7 @@ interface Props {
   photoCredit?: string;
 }
 
-const { flickrAlbumUrl, albumTitle = "Album photos", photoCredit } = Astro.props;
+const { flickrAlbumUrl, albumTitle = 'Album photos', photoCredit } = Astro.props;
 
 // Extract album ID and user ID from Flickr URL
 // Supports formats like:
@@ -25,24 +25,28 @@ const ids = extractFlickrIds(flickrAlbumUrl);
 {
   ids ? (
     <figure class="flickr-gallery">
-      <p class="album-intro">Revivez l'ambiance de la compétition à travers l'album :<br /><strong>{albumTitle}</strong></p>
-        <div class="flickr-gallery-container">
-          <iframe
-            title={albumTitle}
-            src={`https://www.flickr.com/photos/${ids.userId}/albums/${ids.albumId}/player/`}
-            width="100%"
-            height="500"
-            frameborder="0"
-            allowFullScreen
-          ></iframe>
-        </div>
-        <div class="flickr-footer">
-          <a href={flickrAlbumUrl} target="_blank" rel="noopener noreferrer" class="flickr-link">
-            Voir l'album complet sur Flickr →
-          </a>
-          {photoCredit && (
-            <p class="photo-credit">Crédits photos : {photoCredit}</p>
-          )}
+      <p class="album-intro">
+        Revivez l'ambiance de la compétition à travers l'album :
+        <>
+          <br />
+          <strong>{albumTitle}</strong>
+        </>
+      </p>
+      <div class="flickr-gallery-container">
+        <iframe
+          title={albumTitle}
+          src={`https://www.flickr.com/photos/${ids.userId}/albums/${ids.albumId}/player/`}
+          width="100%"
+          height="500"
+          style="border: none;"
+          allowfullscreen
+        />
+      </div>
+      <div class="flickr-footer">
+        <a href={flickrAlbumUrl} target="_blank" rel="noopener noreferrer" class="flickr-link">
+          Voir l'album complet sur Flickr →
+        </a>
+        {photoCredit && <p class="photo-credit">Crédits photos : {photoCredit}</p>}
       </div>
     </figure>
   ) : (

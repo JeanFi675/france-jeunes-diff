@@ -9,35 +9,38 @@ const { wallData, historyEvents, champions, videos } = competitionData.arena;
 
 // Ajouter BASE_URL aux chemins des photos et vidéos
 const baseUrl = import.meta.env.BASE_URL;
-const wallPhotos = wallData.photos.map(photo => ({
+const wallPhotos = wallData.photos.map((photo) => ({
   src: `${baseUrl}${photo.src}`,
-  alt: photo.alt
+  alt: photo.alt,
 }));
 
-const videosWithBaseUrl = videos.map(video => ({
+const videosWithBaseUrl = videos.map((video) => ({
   ...video,
   videoUrl: `${baseUrl}${video.videoUrl}`,
-  thumbnail: `${baseUrl}${video.thumbnail}`
+  thumbnail: `${baseUrl}${video.thumbnail}`,
 }));
 ---
 
 <section class="brutal-section brutal-section--mint" id="arena">
   <div class="brutal-container">
-    
     <!-- TITRE PRINCIPAL -->
     <div style="margin-bottom: 3rem; text-align: center;">
       <BrutalHeading level={2} rotation={-2} shadow={true} class="brutal-title text-l2">
         🏆 L'ARÈNE DES CHAMPIONS
       </BrutalHeading>
     </div>
-    
+
     <!-- 1. DONNÉES TECHNIQUES DU MUR (fond blanc) -->
-    <BrutalCard variant="white" rotation={-1}>
+    <BrutalCard variant="default" rotation={-1}>
       <div style="padding: 2rem;">
         <!-- Titre de la carte -->
         <div style="text-align: center; margin-bottom: 2rem;">
-          <div style="background: var(--brutal-ice); padding: 0.5rem 1.5rem; display: inline-block;">
-            <h3 style="color: var(--brutal-black); font-size: 1.75rem; margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; text-transform: uppercase;">
+          <div
+            style="background: var(--brutal-ice); padding: 0.5rem 1.5rem; display: inline-block;"
+          >
+            <h3
+              style="color: var(--brutal-black); font-size: 1.75rem; margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; text-transform: uppercase;"
+            >
               {wallData.title}
             </h3>
           </div>
@@ -45,37 +48,38 @@ const videosWithBaseUrl = videos.map(video => ({
 
         <!-- Données techniques avec cadre noir -->
         <div class="technical-data">
-          {wallData.specs.map((spec) => (
-            <div class="data-item data-item--black">
-              <div class="data-value">{spec.value}</div>
-              <div class="data-label">{spec.label}</div>
-            </div>
-          ))}
+          {
+            wallData.specs.map((spec) => (
+              <div class="data-item data-item--black">
+                <div class="data-value">{spec.value}</div>
+                <div class="data-label">{spec.label}</div>
+              </div>
+            ))
+          }
         </div>
-        
+
         <!-- Galerie photos du mur -->
         <div class="brutal-gallery">
-          {wallPhotos.map((photo, index) => (
-            <div class="brutal-gallery-item" data-image={index}>
-              <div class={`brutal-photo-frame brutal-photo-frame--tilt-${index === 0 ? 'left' : index === 1 ? 'right' : 'slight'}`}>
-                <img 
-                  class="brutal-photo"
-                  src={photo.src} 
-                  alt={photo.alt}
-                  loading="lazy"
-                />
+          {
+            wallPhotos.map((photo, index) => (
+              <div class="brutal-gallery-item" data-image={index}>
+                <div
+                  class={`brutal-photo-frame brutal-photo-frame--tilt-${index === 0 ? 'left' : index === 1 ? 'right' : 'slight'}`}
+                >
+                  <img class="brutal-photo" src={photo.src} alt={photo.alt} loading="lazy" />
+                </div>
+                <div class="brutal-photo-badge">📸 {index + 1}/3</div>
               </div>
-              <div class="brutal-photo-badge">
-                📸 {index + 1}/3
-              </div>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </div>
     </BrutalCard>
-    
+
     <!-- 2. TEXTE 20 ANS -->
-    <div class="competition-fact" style="
+    <div
+      class="competition-fact"
+      style="
       background: var(--brutal-black);
       color: var(--brutal-white);
       border: 4px solid var(--brutal-white);
@@ -88,10 +92,12 @@ const videosWithBaseUrl = videos.map(video => ({
       text-align: center;
       font-weight: 700;
       width: 100%;
-    ">
+    "
+    >
       <p style="margin: 0;">
-        Le mur de Saint-Pierre fêtera ses 
-        <span style="
+        Le mur de Saint-Pierre fêtera ses
+        <span
+          style="
           background: var(--brutal-ice);
           color: var(--brutal-black);
           padding: 0.1rem 0.4rem;
@@ -102,9 +108,12 @@ const videosWithBaseUrl = videos.map(video => ({
           text-transform: uppercase;
           letter-spacing: 0.02em;
           transform: rotate(-0.5deg);
-        ">20 ans</span> !<br>
-        Depuis 
-        <span style="
+        "
+          >20 ans</span
+        > !<br />
+        Depuis
+        <span
+          style="
           background: var(--brutal-ice);
           color: var(--brutal-black);
           padding: 0.1rem 0.4rem;
@@ -115,9 +124,11 @@ const videosWithBaseUrl = videos.map(video => ({
           text-transform: uppercase;
           letter-spacing: 0.02em;
           transform: rotate(0.5deg);
-        ">2006</span>, 
-        ce mur de 
-        <span style="
+        "
+          >2006</span
+        >, ce mur de
+        <span
+          style="
           background: var(--brutal-ice);
           color: var(--brutal-black);
           padding: 0.1rem 0.4rem;
@@ -128,9 +139,12 @@ const videosWithBaseUrl = videos.map(video => ({
           text-transform: uppercase;
           letter-spacing: 0.02em;
           transform: rotate(-0.5deg);
-        ">14,5 mètres</span> 
+        "
+          >14,5 mètres</span
+        >
         accueille les futures stars de l'escalade.
-        <span style="
+        <span
+          style="
           background: var(--brutal-ice);
           color: var(--brutal-black);
           padding: 0.1rem 0.4rem;
@@ -141,26 +155,29 @@ const videosWithBaseUrl = videos.map(video => ({
           text-transform: uppercase;
           letter-spacing: 0.02em;
           transform: rotate(0.5deg);
-        ">2026 = 20 ans pile !</span>
+        "
+          >2026 = 20 ans pile !</span
+        >
       </p>
     </div>
-    
+
     <!-- 3. PALMARÈS ORGANISATIONNEL (fond blanc) -->
-    <BrutalCard variant="white" rotation={1}>
+    <BrutalCard variant="default" rotation={1}>
       <div style="padding: 2rem;">
         <div style="text-align: center; margin-bottom: 2rem;">
           <div class="palmares-title-wrapper">
-            <h3 class="palmares-title">
-              Notre palmarès organisationnel
-            </h3>
+            <h3 class="palmares-title">Notre palmarès organisationnel</h3>
           </div>
         </div>
-        
+
         <div class="history-events">
-          {historyEvents.map(event => (
-            <div class="event-item">
-              <div class="event-header">
-                <span class="event-year-tag" style="
+          {
+            historyEvents.map((event) => (
+              <div class="event-item">
+                <div class="event-header">
+                  <span
+                    class="event-year-tag"
+                    style="
                   background: var(--brutal-black);
                   color: var(--brutal-ice);
                   padding: 0.3rem 0.8rem;
@@ -173,112 +190,115 @@ const videosWithBaseUrl = videos.map(video => ({
                   box-shadow: 3px 3px 0 var(--brutal-white);
                   transform: rotate(-2deg);
                   display: inline-block;
-                ">{event.year}</span>
+                "
+                  >
+                    {event.year}
+                  </span>
+                </div>
+                <h4 class="event-title">{event.title}</h4>
+                <p class="event-description">{event.description}</p>
               </div>
-              <h4 class="event-title">{event.title}</h4>
-              <p class="event-description">{event.description}</p>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </div>
     </BrutalCard>
-    
+
     <!-- 4. CHAMPIONS QUI ONT GRIMPÉ ICI (fond noir) -->
     <div style="margin-top: 3rem;">
       <BrutalCard variant="black" rotation={-2}>
         <div style="padding: 2rem;">
           <div style="text-align: center; margin-bottom: 2rem;">
-            <div style="background: var(--brutal-ice); padding: 0.5rem 1.5rem; display: inline-block;">
-              <h3 style="color: var(--brutal-black); font-size: 1.75rem; margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; text-transform: uppercase;">
+            <div
+              style="background: var(--brutal-ice); padding: 0.5rem 1.5rem; display: inline-block;"
+            >
+              <h3
+                style="color: var(--brutal-black); font-size: 1.75rem; margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; text-transform: uppercase;"
+              >
                 Quelques champions qui ont grimpé ici
               </h3>
             </div>
           </div>
-          
+
           <ChampionsGrid champions={champions} />
         </div>
       </BrutalCard>
     </div>
-    
+
     <!-- 5. VIDÉOS (fond blanc) -->
     <div style="margin-top: 3rem;">
-      <BrutalCard variant="white" rotation={2}>
+      <BrutalCard variant="default" rotation={2}>
         <div style="padding: 2rem;">
           <div style="text-align: center; margin-bottom: 2rem;">
-            <div style="background: var(--brutal-ice); padding: 0.5rem 1.5rem; display: inline-block;">
-              <h3 style="color: var(--brutal-black); font-size: 1.75rem; margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; text-transform: uppercase;">
+            <div
+              style="background: var(--brutal-ice); padding: 0.5rem 1.5rem; display: inline-block;"
+            >
+              <h3
+                style="color: var(--brutal-black); font-size: 1.75rem; margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; text-transform: uppercase;"
+              >
                 Un aperçu de l'ambiance qui vous attend
               </h3>
             </div>
           </div>
-          
+
           <h4 style="text-align: center; color: var(--brutal-black); margin-bottom: 2rem;">
             Vidéos de nos compétitions
           </h4>
-          
+
           <VideosGrid videos={videosWithBaseUrl} />
         </div>
       </BrutalCard>
     </div>
-    
+
     <!-- 6. PHRASE FINALE -->
     <div style="margin: 4rem 0 2rem; text-align: center;">
-      <div style="display: inline-block; background: var(--brutal-black); padding: 1.5rem 2rem; transform: rotate(-1deg); border: 4px solid var(--brutal-white); box-shadow: 8px 8px 0 var(--brutal-white);">
-        <h3 style="color: var(--brutal-white); font-size: var(--size-l4); margin: 0; font-weight: 800; text-transform: uppercase; line-height: 1.2;">
-          16-17 mai 2026 : <span style="color: var(--brutal-ice);">Qui marquera cette édition anniversaire ?</span>
+      <div
+        style="display: inline-block; background: var(--brutal-black); padding: 1.5rem 2rem; transform: rotate(-1deg); border: 4px solid var(--brutal-white); box-shadow: 8px 8px 0 var(--brutal-white);"
+      >
+        <h3
+          style="color: var(--brutal-white); font-size: var(--size-l4); margin: 0; font-weight: 800; text-transform: uppercase; line-height: 1.2;"
+        >
+          16-17 mai 2026 : <span style="color: var(--brutal-ice);"
+            >Qui marquera cette édition anniversaire ?</span
+          >
         </h3>
       </div>
     </div>
-    
   </div>
-  
+
   <!-- Modal Gallery -->
   <div id="photo-modal" class="brutal-modal">
     <div class="brutal-modal-content">
       <img id="modal-image" class="brutal-modal-image" src="" alt="" />
-      
+
       <!-- Bouton fermeture -->
-      <button id="close-modal" class="brutal-modal-close">
-        ✕
-      </button>
-      
+      <button id="close-modal" class="brutal-modal-close"> ✕ </button>
+
       <!-- Navigation -->
-      <button id="prev-photo" class="brutal-modal-nav brutal-modal-nav--prev">
-        ←
-      </button>
-      
-      <button id="next-photo" class="brutal-modal-nav brutal-modal-nav--next">
-        →
-      </button>
-      
+      <button id="prev-photo" class="brutal-modal-nav brutal-modal-nav--prev"> ← </button>
+
+      <button id="next-photo" class="brutal-modal-nav brutal-modal-nav--next"> → </button>
+
       <!-- Compteur -->
-      <div id="photo-counter" class="brutal-modal-counter">
-        1 / 3
-      </div>
+      <div id="photo-counter" class="brutal-modal-counter">1 / 3</div>
     </div>
   </div>
-  
+
   <!-- Modal Vidéos -->
   <div id="video-modal" class="brutal-modal">
     <div class="brutal-modal-content">
       <div id="video-content" class="video-modal-content">
         <!-- Le contenu vidéo sera inséré ici -->
       </div>
-      
+
       <!-- Bouton fermeture -->
-      <button id="close-video-modal" class="brutal-modal-close">
-        ✕
-      </button>
-      
+      <button id="close-video-modal" class="brutal-modal-close"> ✕ </button>
+
       <!-- Navigation -->
-      <button id="prev-video" class="brutal-modal-nav brutal-modal-nav--prev">
-        ←
-      </button>
-      
-      <button id="next-video" class="brutal-modal-nav brutal-modal-nav--next">
-        →
-      </button>
-      
+      <button id="prev-video" class="brutal-modal-nav brutal-modal-nav--prev"> ← </button>
+
+      <button id="next-video" class="brutal-modal-nav brutal-modal-nav--next"> → </button>
+
       <!-- Compteur et titre -->
       <div id="video-counter" class="brutal-modal-counter">
         <div class="video-counter-text">1 / 5</div>
@@ -294,7 +314,7 @@ const videosWithBaseUrl = videos.map(video => ({
     padding: 4rem 2rem;
     position: relative;
   }
-  
+
   /* Données techniques */
   .technical-data {
     display: grid;
@@ -302,11 +322,11 @@ const videosWithBaseUrl = videos.map(video => ({
     gap: 2rem;
     margin-bottom: 2rem;
   }
-  
+
   .data-item {
     text-align: center;
   }
-  
+
   .data-item--black {
     background: var(--brutal-black);
     padding: 1.5rem 1rem;
@@ -315,20 +335,20 @@ const videosWithBaseUrl = videos.map(video => ({
     transform: rotate(-1deg);
     transition: all 0.3s ease;
   }
-  
+
   .data-item--black:nth-child(2) {
     transform: rotate(1deg);
   }
-  
+
   .data-item--black:nth-child(3) {
     transform: rotate(-2deg);
   }
-  
+
   .data-item--black:hover {
     transform: rotate(0deg) scale(1.05) translate(-4px, -4px);
     box-shadow: 12px 12px 0 var(--brutal-ice);
   }
-  
+
   .data-item--black .data-value {
     font-family: 'Inter', sans-serif;
     font-weight: 900;
@@ -337,7 +357,7 @@ const videosWithBaseUrl = videos.map(video => ({
     margin-bottom: 0.5rem;
     line-height: 1;
   }
-  
+
   .data-item--black .data-label {
     font-family: 'Space Mono', monospace;
     font-weight: 700;
@@ -346,7 +366,7 @@ const videosWithBaseUrl = videos.map(video => ({
     letter-spacing: 0.1em;
     color: var(--brutal-ice);
   }
-  
+
   /* Galerie photos */
   .brutal-gallery {
     display: grid;
@@ -424,7 +444,7 @@ const videosWithBaseUrl = videos.map(video => ({
       transform: translateY(0);
     }
   }
-  
+
   /* Modal Gallery (copié de VenueSection) */
   .brutal-modal {
     display: none;
@@ -438,13 +458,13 @@ const videosWithBaseUrl = videos.map(video => ({
     align-items: center;
     justify-content: center;
   }
-  
+
   .brutal-modal-content {
     position: relative;
     max-width: 90%;
     max-height: 90%;
   }
-  
+
   .brutal-modal-image {
     width: 100%;
     height: auto;
@@ -453,7 +473,7 @@ const videosWithBaseUrl = videos.map(video => ({
     border: 4px solid var(--brutal-white);
     box-shadow: 0 0 50px rgba(127, 229, 176, 0.3);
   }
-  
+
   .brutal-modal-close {
     position: absolute;
     top: -50px;
@@ -467,12 +487,12 @@ const videosWithBaseUrl = videos.map(video => ({
     cursor: pointer;
     transition: all 0.3s ease;
   }
-  
+
   .brutal-modal-close:hover {
     background: var(--brutal-white);
     transform: scale(1.1);
   }
-  
+
   .brutal-modal-nav {
     position: absolute;
     top: 50%;
@@ -486,20 +506,20 @@ const videosWithBaseUrl = videos.map(video => ({
     cursor: pointer;
     transition: all 0.3s ease;
   }
-  
+
   .brutal-modal-nav--prev {
     left: 20px;
   }
-  
+
   .brutal-modal-nav--next {
     right: 20px;
   }
-  
+
   .brutal-modal-nav:hover {
     background: var(--brutal-white);
     transform: translateY(-50%) scale(1.1);
   }
-  
+
   .brutal-modal-counter {
     position: absolute;
     bottom: -50px;
@@ -512,7 +532,7 @@ const videosWithBaseUrl = videos.map(video => ({
     font-size: 1rem;
     border: 2px solid var(--brutal-white);
   }
-  
+
   /* Modal vidéo spécifique */
   .video-modal-content {
     width: 100%;
@@ -526,18 +546,18 @@ const videosWithBaseUrl = videos.map(video => ({
     color: var(--brutal-white);
     font-size: 1.5rem;
   }
-  
+
   .video-counter-text {
     font-size: 1rem;
     margin-bottom: 0.5rem;
   }
-  
+
   .video-title-modal {
     font-size: 0.875rem;
     text-align: center;
     opacity: 0.8;
   }
-  
+
   /* Palmarès organisationnel */
   .palmares-title-wrapper {
     background: var(--brutal-ice);
@@ -562,7 +582,7 @@ const videosWithBaseUrl = videos.map(video => ({
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
   }
-  
+
   .event-item {
     padding: 1.5rem;
     background: var(--brutal-ice);
@@ -572,7 +592,7 @@ const videosWithBaseUrl = videos.map(video => ({
     transform: rotate(-1deg);
     transition: all 0.3s ease;
   }
-  
+
   .event-item:nth-child(even) {
     transform: rotate(1deg);
     background: var(--brutal-black);
@@ -580,30 +600,30 @@ const videosWithBaseUrl = videos.map(video => ({
     border: 3px solid var(--brutal-ice);
     box-shadow: 6px 6px 0 var(--brutal-ice);
   }
-  
+
   .event-item:nth-child(even) .event-year-tag {
     background: var(--brutal-white) !important;
     color: var(--brutal-black) !important;
     border-color: var(--brutal-ice) !important;
     box-shadow: 3px 3px 0 var(--brutal-ice) !important;
   }
-  
+
   .event-item:hover {
     transform: rotate(0deg) scale(1.05) translate(-3px, -3px);
     box-shadow: 9px 9px 0 var(--brutal-black);
   }
-  
+
   .event-header {
     display: flex;
     align-items: center;
     gap: 1rem;
     margin-bottom: 1rem;
   }
-  
+
   .event-icon {
     font-size: 1.5rem;
   }
-  
+
   .event-title {
     font-family: 'Inter', sans-serif;
     font-weight: 800;
@@ -612,73 +632,72 @@ const videosWithBaseUrl = videos.map(video => ({
     margin: 0.5rem 0;
     color: inherit;
   }
-  
+
   .event-description {
     font-size: 0.875rem;
     line-height: 1.4;
     margin: 0.5rem 0;
     color: inherit;
   }
-  
-  
+
   /* Responsive */
   @media (max-width: 768px) {
     .brutal-section {
       padding: 3rem 1rem;
     }
-    
+
     .technical-data {
       grid-template-columns: 1fr;
       gap: 1rem;
     }
-    
+
     .data-item--black {
       transform: rotate(0deg) !important;
     }
-    
+
     .data-item--black .data-value {
       font-size: var(--size-l4);
     }
-    
+
     .brutal-gallery {
       grid-template-columns: 1fr;
       gap: 2rem;
     }
-    
+
     .brutal-photo-frame {
       height: 200px;
     }
-    
+
     .brutal-modal-nav {
       font-size: 1.5rem;
       padding: 0.75rem;
     }
-    
+
     .brutal-modal-nav--prev {
       left: 10px;
     }
-    
+
     .brutal-modal-nav--next {
       right: 10px;
     }
-    
+
     .brutal-modal-close {
       font-size: 1.5rem;
       padding: 0.25rem 0.5rem;
       top: -40px;
     }
-    
+
     .brutal-modal-counter {
       bottom: -40px;
       font-size: 0.875rem;
       padding: 0.5rem 1rem;
     }
-    
+
     .history-events {
       grid-template-columns: 1fr;
       gap: 1rem;
     }
-    
+
     .event-item {
       transform: rotate(0deg) !important;
     }
@@ -693,204 +712,223 @@ const videosWithBaseUrl = videos.map(video => ({
       line-height: 1.4;
       word-break: break-word;
     }
-
   }
 </style>
 
 <script>
-// Gallery Modal Logic - Utilise les données déjà chargées
-document.addEventListener('DOMContentLoaded', function() {
-  // Images déjà chargées dans le markup - on les récupère du DOM
-  const galleryItems = document.querySelectorAll('.brutal-gallery-item');
-  const images = Array.from(galleryItems).map(item => {
-    const img = item.querySelector('img');
-    return {
-      src: img.src,
-      alt: img.alt
-    };
-  });
-  
-  let currentImageIndex = 0;
-  
-  const modal = document.getElementById('photo-modal');
-  const modalImage = document.getElementById('modal-image');
-  const counter = document.getElementById('photo-counter');
-  const closeBtn = document.getElementById('close-modal');
-  const prevBtn = document.getElementById('prev-photo');
-  const nextBtn = document.getElementById('next-photo');
-  
-  // Ouvrir modal
-  document.querySelectorAll('.brutal-gallery-item').forEach((item, index) => {
-    item.addEventListener('click', () => {
-      currentImageIndex = index;
-      showModal();
+  // Gallery Modal Logic - Utilise les donnees deja chargees
+  document.addEventListener('DOMContentLoaded', function () {
+    // Images deja chargees dans le markup - on les recupere du DOM
+    const galleryItems = document.querySelectorAll('.brutal-gallery-item');
+    const images = Array.from(galleryItems).map((item) => {
+      const img = item.querySelector('img');
+      return {
+        src: img?.src || '',
+        alt: img?.alt || '',
+      };
     });
-  });
-  
-  // Fermer modal
-  closeBtn.addEventListener('click', hideModal);
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) hideModal();
-  });
-  
-  // Navigation
-  prevBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-    updateModal();
-  });
-  
-  nextBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    currentImageIndex = (currentImageIndex + 1) % images.length;
-    updateModal();
-  });
-  
-  // Clavier
-  document.addEventListener('keydown', (e) => {
-    if (modal.style.display === 'flex') {
-      switch(e.key) {
-        case 'Escape': hideModal(); break;
-        case 'ArrowLeft': prevBtn.click(); break;
-        case 'ArrowRight': nextBtn.click(); break;
+
+    let currentImageIndex = 0;
+
+    const modal = document.getElementById('photo-modal');
+    const modalImage = document.getElementById('modal-image') as HTMLImageElement | null;
+    const counter = document.getElementById('photo-counter');
+    const closeBtn = document.getElementById('close-modal');
+    const prevBtn = document.getElementById('prev-photo');
+    const nextBtn = document.getElementById('next-photo');
+
+    if (!modal || !modalImage || !counter || !closeBtn || !prevBtn || !nextBtn) return;
+
+    // Ouvrir modal
+    document.querySelectorAll('.brutal-gallery-item').forEach((item, index) => {
+      item.addEventListener('click', () => {
+        currentImageIndex = index;
+        showModal();
+      });
+    });
+
+    // Fermer modal
+    closeBtn.addEventListener('click', hideModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) hideModal();
+    });
+
+    // Navigation
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+      updateModal();
+    });
+
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentImageIndex = (currentImageIndex + 1) % images.length;
+      updateModal();
+    });
+
+    // Clavier
+    document.addEventListener('keydown', (e) => {
+      if (modal.style.display === 'flex') {
+        switch (e.key) {
+          case 'Escape':
+            hideModal();
+            break;
+          case 'ArrowLeft':
+            prevBtn.click();
+            break;
+          case 'ArrowRight':
+            nextBtn.click();
+            break;
+        }
       }
+    });
+
+    function showModal() {
+      if (!modal) return;
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      updateModal();
+    }
+
+    function hideModal() {
+      if (!modal) return;
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    function updateModal() {
+      if (!modalImage || !counter) return;
+      modalImage.src = images[currentImageIndex].src;
+      modalImage.alt = images[currentImageIndex].alt;
+      counter.textContent = `${currentImageIndex + 1} / ${images.length}`;
     }
   });
-  
-  function showModal() {
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-    updateModal();
-  }
-  
-  function hideModal() {
-    modal.style.display = 'none';
-    document.body.style.overflow = '';
-  }
-  
-  function updateModal() {
-    modalImage.src = images[currentImageIndex].src;
-    modalImage.alt = images[currentImageIndex].alt;
-    counter.textContent = `${currentImageIndex + 1} / ${images.length}`;
-  }
-});
 
-// Video Modal Logic - Utilise les données déjà chargées
-document.addEventListener('DOMContentLoaded', function() {
-  // Vidéos déjà chargées dans le markup - on les récupère du DOM
-  const videoTiles = document.querySelectorAll('.video-tile');
-  const videosData = Array.from(videoTiles).map(tile => {
-    const title = tile.querySelector('.video-title')?.textContent || '';
-    const videoUrl = tile.dataset.videoUrl || '';
-    return {
-      title: title,
-      url: videoUrl
-    };
-  });
-  
-  let currentVideoIndex = 0;
-  
-  const videoModal = document.getElementById('video-modal');
-  const videoContent = document.getElementById('video-content');
-  const videoCounter = document.querySelector('#video-counter .video-counter-text');
-  const videoTitleModal = document.querySelector('#video-counter .video-title-modal');
-  const closeVideoBtn = document.getElementById('close-video-modal');
-  const prevVideoBtn = document.getElementById('prev-video');
-  const nextVideoBtn = document.getElementById('next-video');
-  
-  // Ouvrir modal vidéo
-  document.querySelectorAll('.video-tile').forEach((item, index) => {
-    item.addEventListener('click', () => {
-      currentVideoIndex = index;
-      showVideoModal();
+  // Video Modal Logic - Utilise les donnees deja chargees
+  document.addEventListener('DOMContentLoaded', function () {
+    // Videos deja chargees dans le markup - on les recupere du DOM
+    const videoTiles = document.querySelectorAll('.video-tile');
+    const videosData = Array.from(videoTiles).map((tile) => {
+      const title = tile.querySelector('.video-title')?.textContent || '';
+      const videoUrl = (tile as HTMLElement).dataset.videoUrl || '';
+      return {
+        title: title,
+        url: videoUrl,
+      };
     });
-  });
-  
-  // Fermer modal
-  if (closeVideoBtn) {
+
+    let currentVideoIndex = 0;
+
+    const videoModal = document.getElementById('video-modal');
+    const videoContent = document.getElementById('video-content');
+    const videoCounter = document.querySelector('#video-counter .video-counter-text');
+    const videoTitleModal = document.querySelector('#video-counter .video-title-modal');
+    const closeVideoBtn = document.getElementById('close-video-modal');
+    const prevVideoBtn = document.getElementById('prev-video');
+    const nextVideoBtn = document.getElementById('next-video');
+
+    if (
+      !videoModal ||
+      !videoContent ||
+      !videoCounter ||
+      !videoTitleModal ||
+      !closeVideoBtn ||
+      !prevVideoBtn ||
+      !nextVideoBtn
+    )
+      return;
+
+    // Ouvrir modal
+    document.querySelectorAll('.video-tile').forEach((tile, index) => {
+      tile.addEventListener('click', () => {
+        currentVideoIndex = index;
+        showVideoModal();
+      });
+    });
+
+    // Fermer modal
     closeVideoBtn.addEventListener('click', hideVideoModal);
-  }
-  
-  if (videoModal) {
     videoModal.addEventListener('click', (e) => {
       if (e.target === videoModal) hideVideoModal();
     });
-  }
-  
-  // Navigation
-  if (prevVideoBtn) {
+
+    // Navigation
     prevVideoBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       currentVideoIndex = (currentVideoIndex - 1 + videosData.length) % videosData.length;
       updateVideoModal();
     });
-  }
-  
-  if (nextVideoBtn) {
+
     nextVideoBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       currentVideoIndex = (currentVideoIndex + 1) % videosData.length;
       updateVideoModal();
     });
-  }
-  
-  // Clavier
-  document.addEventListener('keydown', (e) => {
-    if (videoModal && videoModal.style.display === 'flex') {
-      switch(e.key) {
-        case 'Escape': hideVideoModal(); break;
-        case 'ArrowLeft': if (prevVideoBtn) prevVideoBtn.click(); break;
-        case 'ArrowRight': if (nextVideoBtn) nextVideoBtn.click(); break;
+
+    // Clavier
+    document.addEventListener('keydown', (e) => {
+      if (videoModal.style.display === 'flex') {
+        switch (e.key) {
+          case 'Escape':
+            hideVideoModal();
+            break;
+          case 'ArrowLeft':
+            prevVideoBtn.click();
+            break;
+          case 'ArrowRight':
+            nextVideoBtn.click();
+            break;
+        }
       }
-    }
-  });
-  
-  function showVideoModal() {
-    if (videoModal) {
-      videoModal.style.display = 'flex';
+    });
+
+    function showVideoModal() {
+      videoModal!.style.display = 'flex';
       document.body.style.overflow = 'hidden';
       updateVideoModal();
     }
-  }
-  
-  function hideVideoModal() {
-    if (videoModal) {
-      videoModal.style.display = 'none';
+
+    function hideVideoModal() {
+      videoModal!.style.display = 'none';
       document.body.style.overflow = '';
-      // Arrêter toutes les vidéos
-      const videos = videoContent.querySelectorAll('video');
-      videos.forEach(video => {
-        video.pause();
-        video.currentTime = 0;
-      });
+      // Arreter la lecture video en vidant le contenu
+      videoContent!.innerHTML = '';
     }
-  }
-  
-  function updateVideoModal() {
-    if (videoContent && videoCounter && videoTitleModal) {
-      const currentVideo = videosData[currentVideoIndex];
-      
-      // Créer et insérer la vraie vidéo
-      videoContent.innerHTML = `
-        <video 
-          controls 
-          autoplay 
-          style="
-            width: 100%; 
-            height: 100%; 
-            object-fit: contain;
-            background: var(--brutal-black);
-          "
-          preload="metadata"
-        >
-          <source src="${currentVideo.url}" type="video/mp4" />
-          Votre navigateur ne supporte pas la lecture vidéo.
-        </video>
-      `;
-      
-      videoCounter.textContent = `${currentVideoIndex + 1} / ${videosData.length}`;
-      videoTitleModal.textContent = currentVideo.title;
+
+    function updateVideoModal() {
+      const video = videosData[currentVideoIndex];
+      if (video.url) {
+        // Si c'est un fichier local (commence par /)
+        if (video.url.startsWith('/')) {
+          videoContent!.innerHTML = `
+          <video controls autoplay class="modal-video-player" style="width: 100%; height: 100%; object-fit: contain;">
+            <source src="${video.url}" type="video/mp4">
+            Votre navigateur ne supporte pas la lecture de vidéos.
+          </video>
+        `;
+        }
+        // Si c'est une URL externe (YouTube, etc.)
+        else if (video.url.includes('youtube') || video.url.includes('youtu.be')) {
+          // Logique d'embed YouTube si necessaire
+          // Pour l'instant on suppose des fichiers locaux ou URLs directes comme dans le composant original
+          videoContent!.innerHTML = `
+          <video controls autoplay class="modal-video-player" style="width: 100%; height: 100%; object-fit: contain;">
+            <source src="${video.url}" type="video/mp4">
+            Votre navigateur ne supporte pas la lecture de vidéos.
+          </video>
+        `;
+        } else {
+          videoContent!.innerHTML = `
+          <video controls autoplay class="modal-video-player" style="width: 100%; height: 100%; object-fit: contain;">
+            <source src="${video.url}" type="video/mp4">
+            Votre navigateur ne supporte pas la lecture de vidéos.
+          </video>
+        `;
+        }
+      }
+
+      videoCounter!.textContent = `${currentVideoIndex + 1} / ${videosData.length}`;
+      videoTitleModal!.textContent = video.title;
     }
-  }
-});
+  });
 </script>

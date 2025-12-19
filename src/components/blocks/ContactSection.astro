@@ -24,7 +24,7 @@ if (!webhookUrl) {
       </BrutalHeading>
     </div>
 
-    <BrutalCard variant="white" rotation={1}>
+    <BrutalCard variant="default" rotation={1}>
       <div class="form-wrapper">
         <div class="text-center mb-4">
           <div class="title-with-tag">
@@ -33,75 +33,78 @@ if (!webhookUrl) {
         </div>
 
         <form id="contact-form" class="brutal-contact-form" action={webhookUrl} method="POST">
-          <input type="hidden" name="subject" value="Nouveau message depuis le site Championnats de France Escalade 2026">
+          <input
+            type="hidden"
+            name="subject"
+            value="Nouveau message depuis le site Championnats de France Escalade 2026"
+          />
 
-          <input type="checkbox" name="botcheck" id="" style="display: none;">
+          <input type="checkbox" name="botcheck" id="" style="display: none;" />
 
           <div class="form-row grid-2-cols-responsive">
             <div class="form-group">
               <label for="nom" class="brutal-label">Nom *</label>
-              <input 
-                type="text" 
-                id="nom" 
-                name="nom" 
-                class="brutal-input" 
-                required 
+              <input
+                type="text"
+                id="nom"
+                name="nom"
+                class="brutal-input"
+                required
                 placeholder="Votre nom"
-              >
+              />
             </div>
             <div class="form-group">
               <label for="prenom" class="brutal-label">Prénom *</label>
-              <input 
-                type="text" 
-                id="prenom" 
-                name="prenom" 
-                class="brutal-input" 
-                required 
+              <input
+                type="text"
+                id="prenom"
+                name="prenom"
+                class="brutal-input"
+                required
                 placeholder="Votre prénom"
-              >
+              />
             </div>
           </div>
 
           <div class="form-group">
             <label for="email" class="brutal-label">Email *</label>
-            <input 
-              type="email" 
-              id="email" 
-              name="email" 
-              class="brutal-input" 
-              required 
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="brutal-input"
+              required
               placeholder="votre@email.fr"
               pattern=".+@.+\..+"
               title="Veuillez saisir une adresse email valide (ex: nom@domaine.fr)"
-            >
+            />
             <div id="email-validation" class="email-validation"></div>
           </div>
 
           <div class="form-group">
             <label for="sujet" class="brutal-label">Sujet *</label>
             <select id="sujet" name="sujet" class="brutal-select" required>
-              {formSubjects.map((subject) => (
-                <option value={subject.value}>{subject.label}</option>
-              ))}
+              {
+                formSubjects.map((subject) => (
+                  <option value={subject.value}>{subject.label}</option>
+                ))
+              }
             </select>
           </div>
 
           <div class="form-group">
             <label for="message" class="brutal-label">Message *</label>
-            <textarea 
-              id="message" 
-              name="message" 
-              class="brutal-textarea" 
-              required 
+            <textarea
+              id="message"
+              name="message"
+              class="brutal-textarea"
+              required
               placeholder="Décrivez votre demande en détail..."
-              rows="6"
-            ></textarea>
+              rows="6"></textarea>
           </div>
 
           <div style="text-align: center; margin-top: 2rem;">
-            <button type="submit" class="brutal-submit-btn">
-              ENVOYER LE MESSAGE
-            </button>
+            <button type="submit" class="brutal-submit-btn"> ENVOYER LE MESSAGE </button>
           </div>
 
           <div id="form-result" class="form-result"></div>
@@ -122,15 +125,15 @@ if (!webhookUrl) {
     max-width: 800px;
     margin: 0 auto;
   }
-  
+
   .form-row {
     margin-bottom: 1.5rem;
   }
-  
+
   .form-group {
     margin-bottom: 1.5rem;
   }
-  
+
   .brutal-label {
     display: block;
     font-family: 'Space Grotesk', sans-serif;
@@ -141,7 +144,7 @@ if (!webhookUrl) {
     text-transform: uppercase;
     letter-spacing: 0.02em;
   }
-  
+
   .brutal-input,
   .brutal-select,
   .brutal-textarea {
@@ -156,7 +159,7 @@ if (!webhookUrl) {
     transition: all 0.3s ease;
     box-sizing: border-box;
   }
-  
+
   .brutal-input:focus,
   .brutal-select:focus,
   .brutal-textarea:focus {
@@ -165,23 +168,23 @@ if (!webhookUrl) {
     box-shadow: 6px 6px 0 var(--brutal-ice);
     border-color: var(--brutal-ice);
   }
-  
+
   .brutal-input::placeholder,
   .brutal-textarea::placeholder {
     color: var(--brutal-gray);
     opacity: 0.7;
   }
-  
+
   .brutal-select {
     cursor: pointer;
   }
-  
+
   .brutal-textarea {
     resize: vertical;
     min-height: 120px;
     font-family: 'Space Grotesk', sans-serif;
   }
-  
+
   /* Bouton d'envoi */
   .brutal-submit-btn {
     background: var(--brutal-black);
@@ -198,7 +201,7 @@ if (!webhookUrl) {
     transition: all 0.3s ease;
     box-shadow: 6px 6px 0 var(--brutal-ice);
   }
-  
+
   .brutal-submit-btn:hover {
     transform: rotate(0deg) translate(-2px, -2px);
     box-shadow: 8px 8px 0 var(--brutal-ice);
@@ -206,12 +209,12 @@ if (!webhookUrl) {
     color: var(--brutal-black);
     border-color: var(--brutal-black);
   }
-  
+
   .brutal-submit-btn:active {
     transform: rotate(0deg) translate(0px, 0px);
     box-shadow: 4px 4px 0 var(--brutal-ice);
   }
-  
+
   /* Zone de résultat */
   .form-result {
     margin-top: 1.5rem;
@@ -221,21 +224,21 @@ if (!webhookUrl) {
     font-family: 'Space Grotesk', sans-serif;
     display: none;
   }
-  
+
   .form-result.success {
     background: var(--brutal-ice);
     color: var(--brutal-black);
     border: 4px solid var(--brutal-black);
     box-shadow: 4px 4px 0 var(--brutal-black);
   }
-  
+
   .form-result.error {
     background: #ff4444;
     color: var(--brutal-white);
     border: 4px solid var(--brutal-black);
     box-shadow: 4px 4px 0 var(--brutal-black);
   }
-  
+
   /* Validation email */
   .email-validation {
     margin-top: 0.5rem;
@@ -243,39 +246,38 @@ if (!webhookUrl) {
     font-weight: 600;
     display: none;
   }
-  
+
   .email-validation.valid {
     color: #00aa00;
     display: block;
   }
-  
+
   .email-validation.invalid {
     color: #ff4444;
     display: block;
   }
-  
+
   .brutal-input.email-valid {
     border-color: #00aa00;
     box-shadow: 4px 4px 0 #00aa00;
   }
-  
+
   .brutal-input.email-invalid {
     border-color: #ff4444;
     box-shadow: 4px 4px 0 #ff4444;
   }
-  
-  
+
   /* Responsive */
   @media (max-width: 768px) {
     .brutal-contact-section {
       padding: 3rem 1rem;
     }
-    
+
     .form-row {
       grid-template-columns: 1fr;
       gap: 1rem;
     }
-    
+
     .brutal-input,
     .brutal-select,
     .brutal-textarea {
@@ -285,104 +287,110 @@ if (!webhookUrl) {
 </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const form = document.getElementById('contact-form');
-  const result = document.getElementById('form-result');
-  const emailInput = document.getElementById('email');
-  const emailValidation = document.getElementById('email-validation');
-  
-  if (!form || !result) return;
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    const result = document.getElementById('form-result');
+    const emailInput = document.getElementById('email') as HTMLInputElement | null;
+    const emailValidation = document.getElementById('email-validation');
 
-  function validateEmail(email) {
-    const re = /^.+@.+\..+$/;
-    return re.test(email);
-  }
-  
-  emailInput.addEventListener('input', function() {
-    const email = this.value.trim();
-    
-    if (email === '') {
-      emailValidation.style.display = 'none';
-      emailInput.classList.remove('email-valid', 'email-invalid');
-      return;
+    if (!form || !result || !emailInput || !emailValidation) return;
+
+    function validateEmail(email: string) {
+      const re = /^.+@.+\..+$/;
+      return re.test(email);
     }
-    
-    if (!validateEmail(email)) {
-      emailValidation.className = 'email-validation invalid';
-      emailValidation.textContent = '❌ Format d\'email invalide (ex: nom@domaine.fr)';
-      emailInput.classList.remove('email-valid');
-      emailInput.classList.add('email-invalid');
-    } else {
-      emailValidation.className = 'email-validation valid';
-      emailValidation.textContent = '✅ Email valide';
-      emailInput.classList.remove('email-invalid');
-      emailInput.classList.add('email-valid');
-    }
-  });
-  
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Vérifier l'email avant envoi
-    const email = emailInput.value.trim();
-    if (!validateEmail(email)) {
-      emailValidation.className = 'email-validation invalid';
-      emailValidation.textContent = '❌ Veuillez corriger l\'adresse email avant d\'envoyer';
-      return;
-    }
-    
-    // Afficher le message de chargement
-    result.style.display = 'block';
-    result.className = 'form-result';
-    result.innerHTML = '⏳ Envoi en cours...';
-    
-    // Désactiver le bouton pendant l'envoi
-    const submitBtn = form.querySelector('.brutal-submit-btn');
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = '⏳ ENVOI...';
-    
-    // Préparer les données
-    const formData = new FormData(form);
-    const object = Object.fromEntries(formData);
-    const json = JSON.stringify(object);
-    
-    // Envoyer via n8n webhook
-    const webhookUrl = document.querySelector('form').getAttribute('action');
-    fetch(webhookUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: json
-    })
-    .then(async (response) => {
-      const json = await response.json();
-      if (response.status === 200) {
-        // Succès
-        result.className = 'form-result success';
-        result.innerHTML = '✅ Message envoyé avec succès ! Nous vous répondrons rapidement.';
-        form.reset();
-      } else {
-        // Erreur
-        result.className = 'form-result error';
-        result.innerHTML = '❌ Erreur lors de l\'envoi : ' + json.message;
+
+    emailInput.addEventListener('input', function (this: HTMLInputElement) {
+      const email = this.value.trim();
+
+      if (email === '') {
+        emailValidation!.style.display = 'none';
+        emailInput!.classList.remove('email-valid', 'email-invalid');
+        return;
       }
-    })
-    .catch(() => {
-      result.className = 'form-result error';
-      result.innerHTML = '❌ Erreur de connexion. Veuillez réessayer plus tard.';
-    })
-    .finally(() => {
-      // Réactiver le bouton
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = 'ENVOYER LE MESSAGE';
-      
-      // Masquer le message après 5 secondes
-      setTimeout(() => {
-        result.style.display = 'none';
-      }, 5000);
+
+      if (!validateEmail(email)) {
+        emailValidation!.className = 'email-validation invalid';
+        emailValidation!.textContent = "❌ Format d'email invalide (ex: nom@domaine.fr)";
+        emailInput!.classList.remove('email-valid');
+        emailInput!.classList.add('email-invalid');
+      } else {
+        emailValidation!.className = 'email-validation valid';
+        emailValidation!.textContent = '✅ Email valide';
+        emailInput!.classList.remove('email-invalid');
+        emailInput!.classList.add('email-valid');
+      }
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Vérifier l'email avant envoi
+      const email = emailInput.value.trim();
+      if (!validateEmail(email)) {
+        emailValidation!.className = 'email-validation invalid';
+        emailValidation!.textContent = "❌ Veuillez corriger l'adresse email avant d'envoyer";
+        return;
+      }
+
+      // Afficher le message de chargement
+      result!.style.display = 'block';
+      result!.className = 'form-result';
+      result!.innerHTML = '⏳ Envoi en cours...';
+
+      // Désactiver le bouton pendant l'envoi
+      const submitBtn = form.querySelector('.brutal-submit-btn') as HTMLButtonElement | null;
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '⏳ ENVOI...';
+      }
+
+      // Préparer les données
+      const formData = new FormData(form);
+      const object = Object.fromEntries(formData);
+      const json = JSON.stringify(object);
+
+      // Envoyer via n8n webhook
+      const webhookUrl = form.getAttribute('action');
+      if (!webhookUrl) return;
+
+      fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: json,
+      })
+        .then(async (response) => {
+          const json = await response.json();
+          if (response.status === 200) {
+            // Succès
+            result!.className = 'form-result success';
+            result!.innerHTML = '✅ Message envoyé avec succès ! Nous vous répondrons rapidement.';
+            form.reset();
+          } else {
+            // Erreur
+            result!.className = 'form-result error';
+            result!.innerHTML = "❌ Erreur lors de l'envoi : " + json.message;
+          }
+        })
+        .catch(() => {
+          result!.className = 'form-result error';
+          result!.innerHTML = '❌ Erreur de connexion. Veuillez réessayer plus tard.';
+        })
+        .finally(() => {
+          // Réactiver le bouton
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = 'ENVOYER LE MESSAGE';
+          }
+
+          // Masquer le message après 5 secondes
+          setTimeout(() => {
+            result!.style.display = 'none';
+          }, 5000);
+        });
     });
   });
-});
 </script>

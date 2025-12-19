@@ -15,25 +15,20 @@ const { disclaimer, saturday, dimanche } = competitionData.program;
 <section class={`brutal-section brutal-section--${background}`} id="programme">
   <div class="brutal-container">
     <div style="text-align: center; margin-bottom: 4rem;">
-      <BrutalHeading 
-        level={2} 
-        rotation={-1}
-        shadow={true}
-        class="brutal-title text-l2"
-      >
+      <BrutalHeading level={2} rotation={-1} shadow={true} class="brutal-title text-l2">
         PROGRAMME DES 2 JOURS
       </BrutalHeading>
     </div>
 
     <div style="text-align: center; margin-bottom: 4rem;">
-      <BrutalBadge variant="mint" animated={true} size="normal">
-        🔴 LIVE STREAMING
-      </BrutalBadge>
+      <BrutalBadge variant="mint" animated={true} size="normal"> 🔴 LIVE STREAMING </BrutalBadge>
     </div>
 
     <div style="margin-bottom: 3rem;">
       <BrutalCard variant="default" rotation={-1} zIndex={2}>
-        <div style="text-align: center; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 0.95rem; line-height: 1.6; text-transform: uppercase; letter-spacing: 0.1em;">
+        <div
+          style="text-align: center; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 0.95rem; line-height: 1.6; text-transform: uppercase; letter-spacing: 0.1em;"
+        >
           {disclaimer}
         </div>
       </BrutalCard>
@@ -41,35 +36,45 @@ const { disclaimer, saturday, dimanche } = competitionData.program;
 
     <div class="brutal-grid" style="grid-template-columns: 1fr 1fr; align-items: start; gap: 3rem;">
       <BrutalCard variant="default" rotation={saturday.rotation} zIndex={2}>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <div
+          style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;"
+        >
           <BrutalHeading level={3} rotation={0}>
             {saturday.date}
           </BrutalHeading>
-          <BrutalBadge variant={saturday.badgeVariant}>{saturday.badge}</BrutalBadge>
+          <BrutalBadge variant={saturday.badgeVariant as any}>{saturday.badge}</BrutalBadge>
         </div>
 
         <div class="program-schedule">
           <!-- HEURES PRINCIPALES - Visibilité immédiate -->
           <div class="primary-schedule" style="margin-bottom: 2rem;">
-            <div style="background: var(--brutal-ice); color: var(--brutal-black); padding: 1rem; font-weight: 900; font-size: 1.25rem; text-align: center; transform: rotate(-1deg);">
+            <div
+              style="background: var(--brutal-ice); color: var(--brutal-black); padding: 1rem; font-weight: 900; font-size: 1.25rem; text-align: center; transform: rotate(-1deg);"
+            >
               {saturday.mainHours}
             </div>
           </div>
 
           <div class="secondary-details" style="opacity: 0.8; font-size: 0.9rem;">
-            {saturday.details.map((detail) => (
-              <div style="margin-bottom: 0.75rem;">• <strong>{detail.time}</strong> {detail.label}</div>
-            ))}
+            {
+              saturday.details.map((detail) => (
+                <div style="margin-bottom: 0.75rem;">
+                  • <strong>{detail.time}</strong> {detail.label}
+                </div>
+              ))
+            }
           </div>
         </div>
       </BrutalCard>
 
       <BrutalCard variant="mint" rotation={dimanche.rotation} zIndex={1}>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <div
+          style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;"
+        >
           <BrutalHeading level={3} rotation={0} style="color: white; text-shadow: none;">
             {dimanche.date}
           </BrutalHeading>
-          <BrutalBadge variant={dimanche.badgeVariant}>
+          <BrutalBadge variant={dimanche.badgeVariant as any}>
             {dimanche.badge}
           </BrutalBadge>
         </div>
@@ -77,15 +82,24 @@ const { disclaimer, saturday, dimanche } = competitionData.program;
         <div class="program-schedule">
           <!-- HEURES PRINCIPALES - Visibilité immédiate -->
           <div class="primary-schedule" style="margin-bottom: 2rem;">
-            <div style="background: var(--brutal-black); color: var(--brutal-white); padding: 1rem; font-weight: 900; font-size: 1.25rem; text-align: center; transform: rotate(1deg);">
+            <div
+              style="background: var(--brutal-black); color: var(--brutal-white); padding: 1rem; font-weight: 900; font-size: 1.25rem; text-align: center; transform: rotate(1deg);"
+            >
               {dimanche.mainHours}
             </div>
           </div>
 
-          <div class="secondary-details" style="opacity: 0.9; font-size: 0.9rem; color: var(--brutal-black);">
-            {dimanche.details.map((detail) => (
-              <div style="margin-bottom: 0.75rem;">• <strong>{detail.time}</strong> {detail.label}</div>
-            ))}
+          <div
+            class="secondary-details"
+            style="opacity: 0.9; font-size: 0.9rem; color: var(--brutal-black);"
+          >
+            {
+              dimanche.details.map((detail) => (
+                <div style="margin-bottom: 0.75rem;">
+                  • <strong>{detail.time}</strong> {detail.label}
+                </div>
+              ))
+            }
           </div>
         </div>
       </BrutalCard>
@@ -100,7 +114,7 @@ const { disclaimer, saturday, dimanche } = competitionData.program;
       gap: 2rem !important;
       align-items: stretch !important;
     }
-    
+
     .brutal-card {
       margin-right: 0;
       transform: rotate(0deg);

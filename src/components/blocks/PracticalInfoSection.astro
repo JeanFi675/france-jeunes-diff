@@ -6,12 +6,11 @@ import competitionData from '../../data/competition-data.js';
 <CategorizedInfoSection
   title="INFOS PRATIQUES"
   icon="📍"
-  transportCards={competitionData.transport}
+  transportCards={competitionData.transport as any}
   accommodationCards={competitionData.accommodation}
-  foodCards={competitionData.food}
+  foodCards={competitionData.food as any}
   id="pratique"
->
-</CategorizedInfoSection>
+/>
 
 <style>
   /* Pas de styles spécifiques nécessaires - tout est géré par InfoSection (KISS) */
