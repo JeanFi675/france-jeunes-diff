@@ -6,7 +6,6 @@ const { year, shortName, organizers } = competitionData.event;
 
 <footer class="brutal-footer">
   <div class="brutal-container">
-    
     <!-- FOOTER MOBILE - Sécurisé sans rotations -->
     <div class="footer-content footer-mobile">
       <div class="footer-event-mobile">
@@ -18,9 +17,7 @@ const { year, shortName, organizers } = competitionData.event;
         <strong>{organizers.shortText}</strong>
       </div>
       <div class="footer-links-mobile">
-        <a href="/blog" class="footer-link-button" title="Voir le blog">
-          📰 Blog
-        </a>
+        <a href="/blog" class="footer-link-button" title="Voir le blog"> 📰 Blog </a>
         <button
           class="footer-link-button"
           onclick="window.openAnnonceurModal()"
@@ -28,6 +25,13 @@ const { year, shortName, organizers } = competitionData.event;
         >
           📋 Dossier annonceurs
         </button>
+        <a
+          href="https://fjd2026.caflarochebonneville.fr/#contact"
+          class="footer-link-button"
+          title="Nous contacter"
+        >
+          📧 Nous contacter
+        </a>
       </div>
     </div>
 
@@ -38,9 +42,7 @@ const { year, shortName, organizers } = competitionData.event;
         <span class="event-name-desktop">{shortName.replace(' DIFFICULTÉ', '')}</span>
       </div>
       <div class="footer-links-desktop">
-        <a href="/blog" class="footer-link-button" title="Voir le blog">
-          📰 Blog
-        </a>
+        <a href="/blog" class="footer-link-button" title="Voir le blog"> 📰 Blog </a>
         <button
           class="footer-link-button"
           onclick="window.openAnnonceurModal()"
@@ -48,208 +50,213 @@ const { year, shortName, organizers } = competitionData.event;
         >
           📋 Dossier annonceurs
         </button>
+        <a
+          href="https://fjd2026.caflarochebonneville.fr/#contact"
+          class="footer-link-button"
+          title="Nous contacter"
+        >
+          📧 Nous contacter
+        </a>
       </div>
       <div class="footer-organizer-desktop">
         <span>Co-organisé par</span>
         <strong>{organizers.shortText}</strong>
       </div>
     </div>
-    
   </div>
 </footer>
 
 <style>
-.brutal-footer {
-  background: var(--brutal-ice);
-  padding: 2rem 0;
-  position: relative;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* ===== FOOTER MOBILE (sécurisé) ===== */
-.footer-mobile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  text-align: center;
-  color: var(--brutal-black);
-  font-family: 'Space Grotesk', sans-serif;
-  padding: 0 1rem;
-}
-
-.footer-event-mobile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.footer-mobile .event-year {
-  font-family: 'Impact', Arial, sans-serif;
-  font-size: 1.5rem;
-  font-weight: 900;
-  line-height: 1;
-}
-
-.footer-mobile .event-name {
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  line-height: 1.3;
-}
-
-.footer-organizer-mobile {
-  font-size: 0.8rem;
-  line-height: 1.3;
-  text-align: center;
-}
-
-.footer-organizer-mobile strong {
-  display: block;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-top: 0.25rem;
-}
-
-.footer-links-mobile {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  justify-content: center;
-  margin-top: 1rem;
-  flex-wrap: wrap;
-}
-
-.footer-link-button {
-  background: var(--brutal-black);
-  color: var(--brutal-white);
-  border: 2px solid var(--brutal-black);
-  padding: 0.5rem 1rem;
-  font-weight: 700;
-  font-size: 0.875rem;
-  cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  transition: all 0.3s ease;
-  font-family: 'Space Grotesk', sans-serif;
-  display: inline-block;
-  text-decoration: none;
-  border-radius: 0;
-}
-
-.footer-link-button:hover {
-  background: var(--brutal-white);
-  color: var(--brutal-black);
-  box-shadow: 3px 3px 0 var(--brutal-black);
-}
-
-/* ===== FOOTER DESKTOP (avec rotations) ===== */
-.footer-desktop {
-  display: none;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--brutal-black);
-  font-family: 'Space Grotesk', sans-serif;
-  padding: 0 2rem;
-  position: relative;
-}
-
-.footer-event-desktop {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex: 1;
-}
-
-.event-year-desktop {
-  font-family: 'Impact', Arial, sans-serif;
-  font-size: 2rem;
-  font-weight: 900;
-  line-height: 1;
-  transform: rotate(-2deg);
-  transform-origin: center;
-  position: relative;
-  z-index: 2;
-}
-
-.event-name-desktop {
-  font-size: 1rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  transform: rotate(1deg);
-  transform-origin: left center;
-  position: relative;
-  z-index: 1;
-}
-
-.footer-organizer-desktop {
-  font-size: 0.9rem;
-  line-height: 1.3;
-  text-align: right;
-  flex-shrink: 0;
-  max-width: 280px;
-}
-
-.footer-organizer-desktop strong {
-  display: block;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-top: 0.25rem;
-}
-
-.footer-links-desktop {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  margin: 0 2rem;
-}
-
-
-/* ===== BREAKPOINTS RESPONSIVE ===== */
-
-/* Mobile : Footer sécurisé sans rotations */
-@media (max-width: 768px) {
-  .footer-mobile {
-    display: flex;
-  }
-  
-  .footer-desktop {
-    display: none;
-  }
-}
-
-/* Desktop : Footer avec rotations néo-brutalistes */
-@media (min-width: 769px) {
-  .footer-mobile {
-    display: none;
-  }
-  
-  .footer-desktop {
-    display: flex;
-  }
-  
-  /* Conteneur sécurisé pour rotations */
-  .footer-event-desktop {
+  .brutal-footer {
+    background: var(--brutal-ice);
+    padding: 2rem 0;
     position: relative;
-    padding: 0.5rem 0;
-    margin-right: 2rem;
+    width: 100%;
+    box-sizing: border-box;
   }
-  
-  /* Espacement extra pour rotations sans débordement */
+
+  /* ===== FOOTER MOBILE (sécurisé) ===== */
+  .footer-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+    color: var(--brutal-black);
+    font-family: 'Space Grotesk', sans-serif;
+    padding: 0 1rem;
+  }
+
+  .footer-event-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .footer-mobile .event-year {
+    font-family: 'Impact', Arial, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .footer-mobile .event-name {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.3;
+  }
+
+  .footer-organizer-mobile {
+    font-size: 0.8rem;
+    line-height: 1.3;
+    text-align: center;
+  }
+
+  .footer-organizer-mobile strong {
+    display: block;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.25rem;
+  }
+
+  .footer-links-mobile {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-link-button {
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    border: 2px solid var(--brutal-black);
+    padding: 0.5rem 1rem;
+    font-weight: 700;
+    font-size: 0.875rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    font-family: 'Space Grotesk', sans-serif;
+    display: inline-block;
+    text-decoration: none;
+    border-radius: 0;
+  }
+
+  .footer-link-button:hover {
+    background: var(--brutal-white);
+    color: var(--brutal-black);
+    box-shadow: 3px 3px 0 var(--brutal-black);
+  }
+
+  /* ===== FOOTER DESKTOP (avec rotations) ===== */
+  .footer-desktop {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--brutal-black);
+    font-family: 'Space Grotesk', sans-serif;
+    padding: 0 2rem;
+    position: relative;
+  }
+
+  .footer-event-desktop {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+  }
+
   .event-year-desktop {
-    margin: 0 0.25rem;
+    font-family: 'Impact', Arial, sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 1;
+    transform: rotate(-2deg);
+    transform-origin: center;
+    position: relative;
+    z-index: 2;
   }
-  
+
   .event-name-desktop {
-    margin: 0 0.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transform: rotate(1deg);
+    transform-origin: left center;
+    position: relative;
+    z-index: 1;
   }
-}
+
+  .footer-organizer-desktop {
+    font-size: 0.9rem;
+    line-height: 1.3;
+    text-align: right;
+    flex-shrink: 0;
+    max-width: 280px;
+  }
+
+  .footer-organizer-desktop strong {
+    display: block;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.25rem;
+  }
+
+  .footer-links-desktop {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin: 0 2rem;
+  }
+
+  /* ===== BREAKPOINTS RESPONSIVE ===== */
+
+  /* Mobile : Footer sécurisé sans rotations */
+  @media (max-width: 768px) {
+    .footer-mobile {
+      display: flex;
+    }
+
+    .footer-desktop {
+      display: none;
+    }
+  }
+
+  /* Desktop : Footer avec rotations néo-brutalistes */
+  @media (min-width: 769px) {
+    .footer-mobile {
+      display: none;
+    }
+
+    .footer-desktop {
+      display: flex;
+    }
+
+    /* Conteneur sécurisé pour rotations */
+    .footer-event-desktop {
+      position: relative;
+      padding: 0.5rem 0;
+      margin-right: 2rem;
+    }
+
+    /* Espacement extra pour rotations sans débordement */
+    .event-year-desktop {
+      margin: 0 0.25rem;
+    }
+
+    .event-name-desktop {
+      margin: 0 0.5rem;
+    }
+  }
 </style>

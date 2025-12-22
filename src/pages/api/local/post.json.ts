@@ -4,10 +4,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 
+export const prerender = false;
 
 export const GET: APIRoute = async ({ url, request }) => {
-  console.log('API Request URL:', url.toString());
-  console.log('API Request SearchParams:', url.searchParams.toString());
+
   
   if (import.meta.env.PROD) {
     return new Response(JSON.stringify({ error: 'Not available in production' }), {

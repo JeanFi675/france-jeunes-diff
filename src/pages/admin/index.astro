@@ -184,6 +184,13 @@ if (import.meta.env.PROD) {
       }
 
       async function loadFile(filename) {
+        // eslint-disable-next-line no-console
+        console.log('loadFile called with:', filename);
+        if (!filename) {
+          // eslint-disable-next-line no-console
+          console.error('loadFile called with null/empty filename');
+          return;
+        }
         activeFile = filename;
         currentFileEl.textContent = filename;
         saveBtn.disabled = true; // Disable save during load
@@ -267,7 +274,7 @@ if (import.meta.env.PROD) {
       function parseFrontmatter(text) {
         // Simple manual parsing to avoid external dependencies issues
         const match = text.match(/^---\s*[\r\n]+([\s\S]*?)[\r\n]+---/);
-        let frontmatter = {};
+        const frontmatter = {};
         let content = text;
 
         if (match) {
