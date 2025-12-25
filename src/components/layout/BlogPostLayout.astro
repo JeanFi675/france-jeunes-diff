@@ -70,20 +70,44 @@ const formattedDate = new Intl.DateTimeFormat('fr-FR', {
         <slot />
       </article>
 
-      <!-- Flickr Gallery -->
+      <!-- Flickr Gallery / Video -->
       {
         flickrAlbumUrl && (
           <div class="blog-post-gallery-wrapper">
-            <FlickrGallery
-              flickrAlbumUrl={flickrAlbumUrl}
-              albumTitle={albumTitle}
-              photoCredit={photoCredit}
-            />
+            {flickrAlbumUrl.includes('/video/') || flickrAlbumUrl.endsWith('.mp4') ? (
+              <figure class="video-card">
+                <p class="video-intro">Revivez l'ambiance de la compétition !</p>
+                <div class="video-wrapper">
+                  <video controls width="100%" height="100%" class="blog-video" preload="metadata">
+                    <source src={`${flickrAlbumUrl}#t=20`} type="video/mp4" />
+                    Votre navigateur ne supporte pas la lecture de vidéos.
+                  </video>
+                </div>
+                <figcaption class="video-caption">
+                  {flickrAlbumUrl
+                    .split('/')
+                    .pop()
+                    ?.replace('.mp4', '')
+                    .split('-')
+                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                    .join(' ')}
+                </figcaption>
+              </figure>
+            ) : (
+              <FlickrGallery
+                flickrAlbumUrl={flickrAlbumUrl}
+                albumTitle={albumTitle}
+                photoCredit={photoCredit}
+              />
+            )}
           </div>
         )
       }
 
-      <!-- Navigation -->
+      <!-- Navigation (Prev/Next from [slug]) -->
+      <slot name="navigation" />
+
+      <!-- Footer Link -->
       <div class="blog-post-nav">
         <a href="/blog" class="brutal-btn">← Voir tous les articles</a>
       </div>
@@ -310,7 +334,7 @@ const formattedDate = new Intl.DateTimeFormat('fr-FR', {
   .blog-post-nav {
     text-align: center;
     padding-top: 2rem;
-    border-top: 3px solid var(--brutal-black);
+    margin-top: 4rem;
   }
 
   /* Responsive */
@@ -343,4 +367,109 @@ const formattedDate = new Intl.DateTimeFormat('fr-FR', {
       font-size: 1.25rem;
     }
   }
+
+  /* Video Card Style */
+  .video-card {
+    margin: 3rem auto;
+    background: var(--brutal-white);
+    border: 3px solid var(--brutal-black);
+    padding: 0.75rem 0.75rem 1.5rem 0.75rem; /* Padding bottom plus large pour l'espace texte */
+    box-shadow: 8px 8px 0 var(--brutal-ice); /* Ombre bleue comme sur le screen */
+    transform: rotate(-2deg);
+    max-width: 600px; /* Limiter la largeur pour l'effet carte */
+    transition: transform 0.3s ease;
+  }
+
+  .video-card:hover {
+    transform: rotate(0deg) scale(1.02);
+    box-shadow: 12px 12px 0 var(--brutal-ice);
+  }
+
+  .video-wrapper {
+    border: 2px solid var(--brutal-black);
+    overflow: hidden;
+    background: #000;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .blog-video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-caption {
+    margin-top: 1rem;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 1.25rem;
+    color: var(--brutal-black);
+    line-height: 1.2;
+    padding: 0 0.5rem;
+  }
+
+  .video-intro {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 1rem;
+    color: var(--brutal-black);
+    margin: 0 0 1rem 0;
+    text-align: center;
+    letter-spacing: 0.05em;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .video-card {
+      margin: 2rem 0;
+      box-shadow: 6px 6px 0 var(--brutal-ice);
+      padding: 0.5rem;
+      transform: rotate(0deg);
+    }
+  }
+
+  .album-intro {
+    margin: 0 0 1.5rem 0;
+    padding: 1rem 1.25rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--brutal-ice);
+    font-weight: 500;
+    border: 3px solid var(--brutal-ice);
+    background: var(--brutal-black);
+    box-shadow: 6px 6px 0 var(--brutal-ice);
+  }
+
+  .album-intro strong {
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--brutal-ice);
+  }
 </style>
+
+<script>
+  // Gestion de la lecture vidéo : reset au début lors du premier clic
+  function setupVideo() {
+    const videos = document.querySelectorAll('video.blog-video');
+    videos.forEach((video) => {
+      const v = video as HTMLVideoElement;
+      v.addEventListener('play', () => {
+        if (!v.hasAttribute('data-has-played')) {
+          v.currentTime = 0;
+          v.setAttribute('data-has-played', 'true');
+        }
+      });
+    });
+  }
+
+  // Exécuter au chargement initial et après navigation (View Transitions)
+  setupVideo();
+  document.addEventListener('astro:page-load', setupVideo);
+</script>

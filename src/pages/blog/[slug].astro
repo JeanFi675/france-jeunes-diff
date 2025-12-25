@@ -40,32 +40,33 @@ const nextPost = postIndex > 0 ? allPosts[postIndex - 1] : null;
   <Content />
 
   <!-- Navigation articles -->
-  {(previousPost || nextPost) && (
-    <div class="blog-post-navigation">
-      <div class="navigation-grid">
-        {previousPost && (
-          <a href={`/blog/${previousPost.slug}`} class="nav-card nav-prev">
-            <span class="nav-label">← Article précédent</span>
-            <h4 class="nav-title">{previousPost.data.title}</h4>
-          </a>
-        )}
+  {
+    (previousPost || nextPost) && (
+      <div class="blog-post-navigation" slot="navigation">
+        <div class="navigation-grid">
+          {previousPost && (
+            <a href={`/blog/${previousPost.slug}`} class="nav-card nav-prev">
+              <span class="nav-label">← Article précédent</span>
+              <h4 class="nav-title">{previousPost.data.title}</h4>
+            </a>
+          )}
 
-        {nextPost && (
-          <a href={`/blog/${nextPost.slug}`} class="nav-card nav-next">
-            <span class="nav-label">Article suivant →</span>
-            <h4 class="nav-title">{nextPost.data.title}</h4>
-          </a>
-        )}
+          {nextPost && (
+            <a href={`/blog/${nextPost.slug}`} class="nav-card nav-next">
+              <span class="nav-label">Article suivant →</span>
+              <h4 class="nav-title">{nextPost.data.title}</h4>
+            </a>
+          )}
+        </div>
       </div>
-    </div>
-  )}
+    )
+  }
 </BlogPostLayout>
 
 <style>
   .blog-post-navigation {
     margin-top: 4rem;
     padding-top: 2rem;
-    border-top: 3px solid var(--brutal-black);
   }
 
   .navigation-grid {

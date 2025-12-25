@@ -12,7 +12,8 @@ const blogCollection = defineCollection({
   }).transform(async (data) => {
     // Si une URL Flickr est fournie, récupère automatiquement le titre
     // Le crédit photo est toujours Marie-Pierre LAFONTAINE
-    if (data.flickrAlbumUrl) {
+    // Si c'est une vidéo, on ne fait rien de spécial côté métadonnées
+    if (data.flickrAlbumUrl && data.flickrAlbumUrl.includes('/photos/')) {
       const { title: flickrTitle } = await getFlickrAlbumInfo(data.flickrAlbumUrl);
       return {
         ...data,
