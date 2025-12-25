@@ -1,5 +1,6 @@
 
 import type { APIRoute } from 'astro';
+export const prerender = false;
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -14,6 +15,12 @@ export const GET: APIRoute = async ({ url, request }) => {
       status: 404,
     });
   }
+
+  console.log('GET /api/local/post.json called');
+  console.log('Example URL object:', url);
+  console.log('Full URL (toString):', url.toString());
+  console.log('Request URL:', request.url);
+  console.log('Search Params:', url.searchParams.toString());
 
   const filename = url.searchParams.get('file');
   console.log('Requested filename:', filename);

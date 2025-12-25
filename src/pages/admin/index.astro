@@ -168,6 +168,7 @@ if (import.meta.env.PROD) {
           const data = await res.json();
           renderFileList(data.files || []);
         } catch (err) {
+          // eslint-disable-next-line no-console
           console.error('Failed to load posts', err);
         }
       }
@@ -204,12 +205,15 @@ if (import.meta.env.PROD) {
           else li.classList.remove('active');
         });
 
+        const url = `/api/local/post.json?file=${encodeURIComponent(filename)}`;
         try {
-          const res = await fetch(`/api/local/post.json?file=${encodeURIComponent(filename)}`);
+          const res = await fetch(url);
           const data = await res.json();
 
           if (!res.ok || data.error) {
-            throw new Error(data.error || `Erreur HTTP: ${res.status}`);
+            throw new Error(
+              data.error ? `${data.error} (URL: ${data.url || url})` : `Erreur HTTP: ${res.status}`
+            );
           }
 
           editorEl.value = data.content;
@@ -217,9 +221,11 @@ if (import.meta.env.PROD) {
           saveBtn.disabled = false;
           exportBtn.disabled = false;
           updatePreview();
+          updatePreview();
         } catch (err) {
+          // eslint-disable-next-line no-console
           console.error('Failed to load file content', err);
-          editorEl.value = `ERREUR: Impossible de charger le fichier.\nDétails: ${err.message}`;
+          editorEl.value = `ERREUR: Impossible de charger le fichier.\nDétails: ${err.message}\nURL demandée: ${url}`;
           editorEl.disabled = true;
         }
       }
@@ -244,10 +250,228 @@ if (import.meta.env.PROD) {
             saveBtn.textContent = 'Erreur !';
           }
         } catch (err) {
+          // eslint-disable-next-line no-console
           console.error('Failed to save', err);
           saveBtn.textContent = 'Erreur !';
         }
       }
+
+      // ... (existing code) ...
+
+      // --- Social Image Generator ---
+      const GOOGLE_FONTS_URL =
+        'https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap';
+
+      // Load Font
+      const fontLink = document.createElement('link');
+      fontLink.href = GOOGLE_FONTS_URL;
+      fontLink.rel = 'stylesheet';
+      document.head.appendChild(fontLink);
+
+      async function generateSocialImage(format) {
+        if (!activeFile) return;
+        const editorText = editorEl.value;
+        const { frontmatter } = parseFrontmatter(editorText);
+
+        if (!frontmatter.title) {
+          alert('Le titre est manquant dans le frontmatter !');
+          return;
+        }
+
+        let btn;
+        if (format === 'insta') btn = btnInsta;
+        else if (format === 'fb') btn = btnFb;
+        const originalText = btn.textContent;
+        btn.textContent = '⏳ Génération...';
+        btn.disabled = true;
+
+        try {
+          // 1. Config dimensions
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+
+          let width, height, filenameSuffix;
+          if (format === 'insta') {
+            width = 1080;
+            height = 1080;
+            filenameSuffix = 'instagram';
+          } else {
+            // facebook portrait
+            width = 1080;
+            height = 1350;
+            filenameSuffix = 'facebook-portrait';
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+
+          // 2. Load Image (Bandeau)
+          const bannerUrl = '/images/bandeau-blog-2026.webp';
+          const img = new Image();
+          img.crossOrigin = 'anonymous';
+          img.src = bannerUrl;
+
+          await new Promise((resolve, reject) => {
+            img.onload = resolve;
+            img.onerror = () => reject(new Error('Impossible de charger le bandeau'));
+          });
+
+          // 3. Background Logic
+          // 3. Background Logic: GRADIENT MESH (Default for all)
+
+          // Extract 2-3 colors (Top Left, Center, Bottom Right)
+          const tempCanvas = document.createElement('canvas');
+          const tempCtx = tempCanvas.getContext('2d');
+          tempCanvas.width = 10;
+          tempCanvas.height = 10;
+          tempCtx.drawImage(img, 0, 0, 10, 10);
+          const data = tempCtx.getImageData(0, 0, 10, 10).data;
+
+          function getRGB(x, y) {
+            const i = (y * 10 + x) * 4;
+            return `rgb(${data[i]}, ${data[i + 1]}, ${data[i + 2]})`;
+          }
+          const colorTL = getRGB(2, 2);
+          const colorCenter = getRGB(5, 5);
+          const colorBR = getRGB(8, 8);
+
+          // Base Fill
+          ctx.fillStyle = colorCenter;
+          ctx.fillRect(0, 0, width, height);
+
+          // Large Radial Gradients
+          // Top Left
+          const grad1 = ctx.createRadialGradient(0, 0, 100, 0, 0, width * 0.8);
+          grad1.addColorStop(0, colorTL);
+          grad1.addColorStop(1, 'rgba(0,0,0,0)');
+          ctx.fillStyle = grad1;
+          ctx.fillRect(0, 0, width, height);
+
+          // Bottom Right
+          const grad2 = ctx.createRadialGradient(width, height, 100, width, height, width * 0.8);
+          grad2.addColorStop(0, colorBR);
+          grad2.addColorStop(1, 'rgba(0,0,0,0)');
+          ctx.fillStyle = grad2;
+          ctx.fillRect(0, 0, width, height);
+
+          // Global Gradient Overlay for "Bottom Anchor"
+          const bgGradient = ctx.createLinearGradient(0, 0, 0, height);
+          bgGradient.addColorStop(0, 'rgba(0,0,0,0)');
+          bgGradient.addColorStop(1, 'rgba(0,0,0,0.4)');
+          ctx.fillStyle = bgGradient;
+          ctx.fillRect(0, 0, width, height);
+
+          // 4. Draw Main Image (Fit/Contain)
+          // "Respect des dimensions" -> Contain
+          const scaleContain = Math.min(width / img.width, height / img.height);
+
+          const wContain = img.width * scaleContain;
+          const hContain = img.height * scaleContain;
+
+          const xContain = (width - wContain) / 2;
+          const yContain = (height - hContain) / 2;
+
+          // Draw the image
+          ctx.drawImage(img, xContain, yContain, wContain, hContain);
+
+          // 5. Draw Title
+          // Replicate CSS positioning relative to the *contained image*
+          // CSS: left: 40%; top: 82%; transform: translate(-50%, -50%); width: 80%
+
+          await document.fonts.load('900 100px "Inter"');
+
+          ctx.fillStyle = '#ffffff';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+
+          // Font size matching CSS: 4vw (relative to image width)
+          // 4vw of wContain.
+          // Note: In browser 4vw is relative to viewport width.
+          // If the banner takes full width, it matches.
+          // CSS: font-size: clamp(1.8rem, 4vw, 3.2rem);
+          // Let's use 4% of the image width, constrained by min/max if needed.
+          // For high-res output (wContain ~1080), 4% is ~43px.
+          // On a 1920px screen, 4vw is 76px.
+          // The banner in the site is max 100% width.
+          // Let's aim slightly higher for legibility on static image. 5%?
+          // User said "taille du texte comme le bandeau".
+          // Let's stick to 4.5% of wContain as a safe bet.
+          const fontSize = Math.floor(wContain * 0.045);
+          ctx.font = `900 ${fontSize}px "Inter", sans-serif`;
+
+          // Text Shadow per CSS
+          // text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+          ctx.shadowColor = 'rgba(0, 0, 0, 0.6)';
+          ctx.shadowBlur = 24;
+          ctx.shadowOffsetX = 0;
+          ctx.shadowOffsetY = 4;
+
+          // Position
+          // Center of text block should be at 40% X, 82% Y of the IMAGE.
+          const textX = xContain + wContain * 0.4;
+          const textY = yContain + hContain * 0.82;
+          const maxTextWidth = wContain * 0.8;
+
+          // Text Wrapping
+          const words = frontmatter.title.toUpperCase().split(' ');
+          let line = '';
+          const lines = [];
+
+          for (let n = 0; n < words.length; n++) {
+            const testLine = line + words[n] + ' ';
+            const metrics = ctx.measureText(testLine);
+            const testWidth = metrics.width;
+            if (testWidth > maxTextWidth && n > 0) {
+              lines.push(line);
+              line = words[n] + ' ';
+            } else {
+              line = testLine;
+            }
+          }
+          lines.push(line);
+
+          // Draw lines
+          const lineHeight = fontSize * 1.1;
+
+          lines.forEach((l, i) => {
+            const yOffset = (i - (lines.length - 1) / 2) * lineHeight;
+            ctx.fillText(l.trim(), textX, textY + yOffset);
+          });
+
+          // 6. Download
+          const link = document.createElement('a');
+          link.download = `${activeFile.replace(/\.md$/, '')}-${filenameSuffix}.png`;
+          link.href = canvas.toDataURL('image/png');
+          link.click();
+        } catch (err) {
+          // eslint-disable-next-line no-console
+          console.error('Erreur génération image:', err);
+          alert("Erreur lors de la génération de l'image : " + err.message);
+        } finally {
+          btn.textContent = originalText;
+          btn.disabled = false;
+        }
+      }
+
+      // Add buttons logic
+      const btnInsta = document.createElement('button');
+      btnInsta.textContent = '📸 Insta (Carré)';
+      btnInsta.style.cssText =
+        'background: #E1306C; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.25rem; cursor: pointer; font-weight: 500; margin-right: 0.5rem;';
+      btnInsta.onclick = () => generateSocialImage('insta');
+
+      const btnFb = document.createElement('button');
+      btnFb.textContent = '📸 FB (Portrait)';
+      btnFb.style.cssText =
+        'background: #1877F2; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.25rem; cursor: pointer; font-weight: 500; margin-right: 0.5rem;';
+      btnFb.onclick = () => generateSocialImage('fb');
+
+      // Insert buttons into toolbar before export button
+      const toolbarDiv = document.querySelector('#toolbar > div');
+      toolbarDiv.insertBefore(btnFb, exportBtn);
+      toolbarDiv.insertBefore(btnInsta, btnFb);
+
+      // --- Restored Event Listeners & Helpers ---
 
       exportBtn.addEventListener('click', () => {
         if (previewIframe.contentWindow) {
