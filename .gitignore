@@ -56,6 +56,7 @@ DOSSIER_PARTENARIAT_CHAMP_FRANCE_2026.md
 .gitconfig
 SETUP_INSTRUCTIONS.txt
 
+!docs/*.md
 !src/**/*.md
 
 # Blog posts (work in progress)
