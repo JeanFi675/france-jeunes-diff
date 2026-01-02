@@ -20,7 +20,48 @@ const metadata = {
 };
 
 const annonceurUrl = `${import.meta.env.BASE_URL}dossier_annonceur/dossier_annonceurs_encarts_publicitaires.html`;
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: "L'entrée aux Championnats de France d'escalade est-elle payante ?",
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Non, l'entrée est 100% gratuite pour tous les spectateurs durant tout le week-end du 16 et 17 mai 2026.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Où se déroule la compétition ?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'La compétition a lieu au Complexe Sportif du Pays Rochois à Saint-Pierre-en-Faucigny (74800).',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Y a-t-il de la restauration sur place ?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Oui, une buvette et un service de restauration sont disponibles sur place pour les spectateurs et les compétiteurs.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Quelles sont les catégories présentes ?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'La compétition rassemble les meilleures jeunes grimpeurs français dans les catégories U15, U17 et U19 (Garçons et Filles).',
+      },
+    },
+  ],
+};
 ---
+
+<script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
 
 <BaseLayout title={metadata.title} description={metadata.description}>
   <HeroSection />

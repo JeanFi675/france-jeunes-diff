@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fjd2026.caflarochebonneville.fr/sitemap-index.xml
