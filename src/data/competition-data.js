@@ -12,7 +12,7 @@ export const competitionData = {
     venue: 'Complexe Sportif du Pays Rochois',
     address: '110 rue des Alpes, 74800 Saint-Pierre-en-Faucigny',
     gpsCoords: '46.058511, 6.375860',
-    eventDate: new Date('2026-05-16'),
+    eventDate: new Date('2026-05-16T09:00:00'),
     organizers: {
       main: 'CAF La Roche Bonneville',
       federation: "Fédération Française de Montagne et d'Escalade",
@@ -114,7 +114,7 @@ export const competitionData = {
           { text: 'finales', style: 'highlight' },
           { text: '… et assistez à la naissance des ', style: null },
           { text: 'futures stars', style: 'highlight' },
-          { text: ' de l\'escalade !', style: null },
+          { text: " de l'escalade !", style: null },
         ],
       },
     ],
@@ -406,17 +406,17 @@ export const competitionData = {
         photoUrl: '/images/champions/Louise.jpg',
         rotation: -2,
       },
-			{
-		name: 'Alberto GINÉS LÓPEZ',
-		stPierreVictory: "🥉 Bronze U18 - Coupe d'Europe 2019",
-		achievements: [
-		  'CHAMPION OLYMPIQUE 2021 (1er titre escalade JO)',
-		  "Champion d'Europe senior 2019",
-		],
-		photoUrl:
-		  'https://www.ifsc-climbing.org/_next/image?url=https%3A%2F%2Fd1n1qj9geboqnb.cloudfront.net%2Fifsc%2Fpublic%2Fmo6typrlxpapfeghys0tfqq76v06&w=1920&q=75',
-		rotation: -1,
-	  },
+      {
+        name: 'Alberto GINÉS LÓPEZ',
+        stPierreVictory: "🥉 Bronze U18 - Coupe d'Europe 2019",
+        achievements: [
+          'CHAMPION OLYMPIQUE 2021 (1er titre escalade JO)',
+          "Champion d'Europe senior 2019",
+        ],
+        photoUrl:
+          'https://www.ifsc-climbing.org/_next/image?url=https%3A%2F%2Fd1n1qj9geboqnb.cloudfront.net%2Fifsc%2Fpublic%2Fmo6typrlxpapfeghys0tfqq76v06&w=1920&q=75',
+        rotation: -1,
+      },
     ],
     videos: [
       {

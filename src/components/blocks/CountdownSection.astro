@@ -1,0 +1,161 @@
+---
+import BrutalCard from '../atoms/BrutalCard.astro';
+import BrutalHeading from '../atoms/BrutalHeading.astro';
+import { competitionData } from '../../data/competition-data.js';
+
+const targetDate = competitionData.event.eventDate.toISOString();
+---
+
+<section class="brutal-section brutal-section--mint">
+  <div class="brutal-container">
+    <div style="margin-bottom: 3rem; text-align: center;">
+      <BrutalHeading level={2} rotation={-2} shadow={true} class="brutal-title text-l2">
+        LE DÉCOMPTE EST LANCÉ
+      </BrutalHeading>
+    </div>
+
+    <div id="countdown" class="countdown-grid" data-target={targetDate}>
+      <div class="countdown-item">
+        <BrutalCard
+          rotation={-1}
+          textAlign="center"
+          className="countdown-card"
+          variant="default"
+          customBorder="4px solid var(--brutal-black)"
+          customShadow="8px 8px 0 var(--brutal-black)"
+        >
+          <div class="countdown-value" id="days">00</div>
+          <div class="countdown-label">JOURS</div>
+        </BrutalCard>
+      </div>
+      <div class="countdown-item">
+        <BrutalCard
+          rotation={2}
+          textAlign="center"
+          className="countdown-card"
+          variant="default"
+          customBorder="4px solid var(--brutal-black)"
+          customShadow="8px 8px 0 var(--brutal-black)"
+        >
+          <div class="countdown-value" id="hours">00</div>
+          <div class="countdown-label">HEURES</div>
+        </BrutalCard>
+      </div>
+      <div class="countdown-item">
+        <BrutalCard
+          rotation={-2}
+          textAlign="center"
+          className="countdown-card"
+          variant="default"
+          customBorder="4px solid var(--brutal-black)"
+          customShadow="8px 8px 0 var(--brutal-black)"
+        >
+          <div class="countdown-value" id="minutes">00</div>
+          <div class="countdown-label">MINUTES</div>
+        </BrutalCard>
+      </div>
+      <div class="countdown-item">
+        <BrutalCard
+          rotation={1}
+          textAlign="center"
+          className="countdown-card"
+          variant="default"
+          customBorder="4px solid var(--brutal-black)"
+          customShadow="8px 8px 0 var(--brutal-black)"
+        >
+          <div class="countdown-value" id="seconds">00</div>
+          <div class="countdown-label">SECONDES</div>
+        </BrutalCard>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .countdown-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .countdown-card {
+    padding: 2rem 1rem;
+    min-width: 150px;
+  }
+
+  .countdown-value {
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: 4rem;
+    line-height: 1;
+    color: var(--brutal-black);
+    margin-bottom: 0.5rem;
+  }
+
+  .countdown-label {
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--brutal-black);
+  }
+
+  @media (max-width: 900px) {
+    .countdown-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .countdown-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .countdown-value {
+      font-size: 3rem;
+    }
+  }
+</style>
+
+<script>
+  function updateCountdown() {
+    const countdownEl = document.getElementById('countdown');
+    if (!countdownEl) return;
+
+    const targetDate = new Date(countdownEl.dataset.target || '').getTime();
+
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
+
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    if (distance < 0) {
+      if (daysEl) daysEl.innerText = '00';
+      if (hoursEl) hoursEl.innerText = '00';
+      if (minutesEl) minutesEl.innerText = '00';
+      if (secondsEl) secondsEl.innerText = '00';
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    if (daysEl) daysEl.innerText = days.toString().padStart(2, '0');
+    if (hoursEl) hoursEl.innerText = hours.toString().padStart(2, '0');
+    if (minutesEl) minutesEl.innerText = minutes.toString().padStart(2, '0');
+    if (secondsEl) secondsEl.innerText = seconds.toString().padStart(2, '0');
+  }
+
+  // Mettre à jour immédiatement puis toutes les secondes
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>

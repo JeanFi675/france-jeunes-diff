@@ -3,34 +3,34 @@ import BrutalBadge from '../atoms/BrutalBadge.astro';
 import BrutalButton from '../atoms/BrutalButton.astro';
 import BrutalSeparator from '../atoms/BrutalSeparator.astro';
 import PartnerLogo from '../atoms/PartnerLogo.astro';
-import { competitionData, getDaysUntilEvent } from '../../data/competition-data.js';
+import { competitionData } from '../../data/competition-data.js';
 
-const daysLeft = getDaysUntilEvent();
-const isEventSoon = daysLeft < 30;
 const { datesShort, locationShort, organizers } = competitionData.event;
 ---
 
 <section class="brutal-section brutal-section--black" style="position: relative; overflow: hidden;">
+  <div class="brutal-pattern-diagonal" style="position: absolute; inset: 0; pointer-events: none;">
+  </div>
+
   <div
-    class="brutal-pattern-diagonal"
-    style="position: absolute; inset: 0; pointer-events: none;"
-  ></div>
+    class="accent-block accent-block-top"
+    style="position: absolute; top: 10%; right: 0%; width: 200px; height: 200px; background: var(--brutal-ice); opacity: 0.1; transform: rotate(45deg);"
+  >
+  </div>
+  <div
+    class="accent-block accent-block-bottom"
+    style="position: absolute; bottom: 0%; left: 0%; width: 150px; height: 150px; background: var(--brutal-ice); opacity: 0.1; transform: rotate(-30deg);"
+  >
+  </div>
 
-  <div class="accent-block accent-block-top" style="position: absolute; top: 10%; right: 0%; width: 200px; height: 200px; background: var(--brutal-ice); opacity: 0.1; transform: rotate(45deg);"></div>
-  <div class="accent-block accent-block-bottom" style="position: absolute; bottom: 0%; left: 0%; width: 150px; height: 150px; background: var(--brutal-ice); opacity: 0.1; transform: rotate(-30deg);"></div>
-
-  <div class="brutal-container" style="position: relative; z-index: 10; text-align: center; padding-top: 3rem; padding-bottom: 4rem;">
-
+  <div
+    class="brutal-container"
+    style="position: relative; z-index: 10; text-align: center; padding-top: 3rem; padding-bottom: 4rem;"
+  >
     <div style="margin-bottom: 2rem;">
-      {isEventSoon ? (
-        <BrutalBadge variant="mint" size="normal" animated={true} rotation={2}>
-          ⏰ J-{daysLeft} • ENTRÉE GRATUITE
-        </BrutalBadge>
-      ) : (
-        <BrutalBadge variant="mint" size="normal" animated={true} rotation={2}>
-          🎫 ENTRÉE 100% GRATUITE
-        </BrutalBadge>
-      )}
+      <BrutalBadge variant="mint" size="normal" animated={true} rotation={2}>
+        🎫 ENTRÉE 100% GRATUITE
+      </BrutalBadge>
     </div>
 
     <div style="margin-bottom: 1rem;">
@@ -43,7 +43,9 @@ const { datesShort, locationShort, organizers } = competitionData.event;
     </div>
 
     <div class="event-info" style="margin: 1.5rem 0;">
-      <div style="color: var(--brutal-white); font-size: var(--size-card); font-weight: 800; text-shadow: none; line-height: 1.2; display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap;">
+      <div
+        style="color: var(--brutal-white); font-size: var(--size-card); font-weight: 800; text-shadow: none; line-height: 1.2; display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap;"
+      >
         <strong>{datesShort}</strong>
         <span style="opacity: 0.5;">•</span>
         <strong>{locationShort}</strong>
@@ -53,8 +55,11 @@ const { datesShort, locationShort, organizers } = competitionData.event;
     <BrutalSeparator color="mint" width="60%" margin="2rem auto" />
 
     <div style="margin: 1.5rem 0;">
-      <div style="display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap;">
-        <span style="
+      <div
+        style="display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap;"
+      >
+        <span
+          style="
           font-family: 'Inter', Arial, sans-serif;
           font-size: 0.875rem;
           font-weight: 700;
@@ -66,7 +71,8 @@ const { datesShort, locationShort, organizers } = competitionData.event;
           border: 2px solid var(--brutal-ice);
           display: inline-block;
           transform: rotate(-1deg);
-        ">
+        "
+        >
           🤝 ORGANISÉ PAR
         </span>
 
@@ -94,7 +100,9 @@ const { datesShort, locationShort, organizers } = competitionData.event;
 
     <BrutalSeparator color="mint" width="60%" margin="2rem auto" />
 
-    <div class="hero-navigation" style="
+    <div
+      class="hero-navigation"
+      style="
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: auto auto auto;
@@ -106,7 +114,8 @@ const { datesShort, locationShort, organizers } = competitionData.event;
       max-width: 800px;
       margin: 2rem auto 0;
       padding: 1rem;
-    ">
+    "
+    >
       <BrutalButton
         href="#programme"
         variant="primary"
@@ -117,15 +126,31 @@ const { datesShort, locationShort, organizers } = competitionData.event;
         📅 PROGRAMME COMPLET
       </BrutalButton>
 
-      <BrutalButton href="#covoiturage" variant="secondary" rotation={1} ariaLabel="Informations sur les différents moyens d'accès au lieu">
+      <BrutalButton
+        href="#covoiturage"
+        variant="secondary"
+        rotation={1}
+        ariaLabel="Informations sur les différents moyens d'accès au lieu"
+      >
         🗺️ COMMENT VENIR ?
       </BrutalButton>
 
-      <BrutalButton href="#pratique" variant="secondary" rotation={2} ariaLabel="Informations pratiques : hébergement, transport et restauration">
+      <BrutalButton
+        href="#pratique"
+        variant="secondary"
+        rotation={2}
+        ariaLabel="Informations pratiques : hébergement, transport et restauration"
+      >
         🏨 INFOS PRATIQUES
       </BrutalButton>
 
-      <BrutalButton href="#arena" variant="primary" rotation={-2} class="hero-cta-secondary" ariaLabel="Découvrir 20 ans de compétitions et les champions qui ont grimpé ici">
+      <BrutalButton
+        href="#arena"
+        variant="primary"
+        rotation={-2}
+        class="hero-cta-secondary"
+        ariaLabel="Découvrir 20 ans de compétitions et les champions qui ont grimpé ici"
+      >
         <span class="desktop-text">🏆 DÉCOUVREZ NOS 20 ANS DE COMPET'</span>
         <span class="mobile-text">🏆 20 ANS DE COMPET'</span>
       </BrutalButton>
@@ -134,98 +159,97 @@ const { datesShort, locationShort, organizers } = competitionData.event;
 </section>
 
 <style>
-.hero-cta-primary {
-  grid-area: programme;
-  font-size: 1.125rem;
-  font-weight: 900;
-  padding: 1.25rem 2rem;
-}
-
-.hero-cta-secondary {
-  grid-area: arena;
-  font-size: 1rem;
-  font-weight: 800;
-  padding: 1rem 1.5rem;
-}
-
-.hero-navigation :global(.brutal-button[href="#covoiturage"]) {
-  grid-area: voiture;
-}
-
-.hero-navigation :global(.brutal-button[aria-label*="pratiques"]) {
-  grid-area: pratique;
-}
-
-.hero-navigation :global(.brutal-button) {
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
-.desktop-text {
-  display: inline;
-}
-
-.mobile-text {
-  display: none;
-}
-
-.partner-logos-container {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-@media (max-width: 768px) {
-  .hero-navigation {
-    grid-template-columns: 1fr !important;
-    grid-template-areas: 
-      'programme'
-      'voiture' 
-      'pratique'
-      'arena' !important;
-    gap: 1rem !important;
-    padding: 0 1rem !important;
-    margin: 3rem auto 2rem !important;
-    max-width: 100% !important;
-    overflow: hidden !important;
+  .hero-cta-primary {
+    grid-area: programme;
+    font-size: 1.125rem;
+    font-weight: 900;
+    padding: 1.25rem 2rem;
   }
 
-  /* Assurer que tous les boutons sont visibles sur mobile */
-  .hero-navigation > * {
-    width: 100%;
-    margin: 0;
-    max-width: calc(100vw - 4rem);
-    box-sizing: border-box;
+  .hero-cta-secondary {
+    grid-area: arena;
+    font-size: 1rem;
+    font-weight: 800;
+    padding: 1rem 1.5rem;
+  }
+
+  .hero-navigation :global(.brutal-button[href='#covoiturage']) {
+    grid-area: voiture;
+  }
+
+  .hero-navigation :global(.brutal-button[aria-label*='pratiques']) {
+    grid-area: pratique;
   }
 
   .hero-navigation :global(.brutal-button) {
-    transform: rotate(0deg) !important;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
-  .hero-cta-secondary .mobile-text {
+  .desktop-text {
     display: inline;
   }
-  
-  .hero-cta-secondary .desktop-text {
+
+  .mobile-text {
     display: none;
   }
-  
+
   .partner-logos-container {
-    gap: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
-  .accent-block {
-    display: none !important;
-  }
-}
+  @media (max-width: 768px) {
+    .hero-navigation {
+      grid-template-columns: 1fr !important;
+      grid-template-areas:
+        'programme'
+        'voiture'
+        'pratique'
+        'arena' !important;
+      gap: 1rem !important;
+      padding: 0 1rem !important;
+      margin: 3rem auto 2rem !important;
+      max-width: 100% !important;
+      overflow: hidden !important;
+    }
 
-@media (max-width: 480px) {
-  .partner-logos-container {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-}
+    /* Assurer que tous les boutons sont visibles sur mobile */
+    .hero-navigation > * {
+      width: 100%;
+      margin: 0;
+      max-width: calc(100vw - 4rem);
+      box-sizing: border-box;
+    }
 
+    .hero-navigation :global(.brutal-button) {
+      transform: rotate(0deg) !important;
+    }
+
+    .hero-cta-secondary .mobile-text {
+      display: inline;
+    }
+
+    .hero-cta-secondary .desktop-text {
+      display: none;
+    }
+
+    .partner-logos-container {
+      gap: 1rem;
+    }
+
+    .accent-block {
+      display: none !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .partner-logos-container {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
 </style>
