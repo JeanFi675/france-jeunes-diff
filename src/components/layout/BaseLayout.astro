@@ -5,9 +5,10 @@ import '../../styles/brutal.css';
 export interface Props {
   title: string;
   description: string;
+  ogImage?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, ogImage } = Astro.props;
 // eslint-disable-next-line no-unused-vars
 const { event } = competitionData;
 
@@ -25,13 +26,16 @@ const { event } = competitionData;
   <meta name="keywords" content="escalade gratuit, championnat France, Saint-Pierre-en-Faucigny, famille, FFME, mai 2026, spectacle sportif, Haute-Savoie, compétition jeunes">
   <meta name="author" content="CAF La Roche Bonneville">
   <meta name="robots" content="index, follow">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="google-site-verification" content="eS8e2_qYXgadlu-1szgO49XnFIiKsuOmoXjLNNWrQ5s" />
   <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
   
   <!-- Open Graph Enhanced -->
   <meta property="og:title" content={title}>
-  <meta property="og:description" content="🏆 Spectacle d'escalade GRATUIT • 16-17 mai 2026 • Venez en famille découvrir l'élite française !">
+  <meta property="og:description" content={description}>
   <meta property="og:type" content="event">
+  <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)}>
+  <meta property="og:image" content={new URL(ogImage || '/social-share.jpg', Astro.site)}>
   <meta property="og:locale" content="fr_FR">
   <meta property="og:site_name" content="Championnats de France Escalade 2026">
   
@@ -39,8 +43,10 @@ const { event } = competitionData;
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content={title}>
   <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content={new URL(ogImage || '/social-share.jpg', Astro.site)}>
   
   <!-- GoatCounter Analytics (Privacy-First / No-Cookie) -->
+  <link rel="preconnect" href="https://gc.zgo.at">
   <script data-goatcounter="https://fjd2026.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 

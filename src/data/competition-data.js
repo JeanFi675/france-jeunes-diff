@@ -1,4 +1,8 @@
 // Données centralisées pour éviter la duplication (DRY)
+import imgWallMain from '../assets/IMG_4355_opt.jpg';
+import imgWallDetail from '../assets/IMG_4364_opt.jpg';
+import imgCompetitionAction from '../assets/coupe-deurope-escalade-jeunes--2565jpg_53013559053_o.jpg';
+
 export const competitionData = {
   // Informations générales
   event: {
@@ -305,10 +309,10 @@ export const competitionData = {
         { value: '8M', label: 'AVANCÉE' },
       ],
       photos: [
-        { src: 'IMG_4355_opt.jpg', alt: "Mur d'escalade principal du complexe sportif" },
-        { src: 'IMG_4364_opt.jpg', alt: "Vue détaillée du mur d'escalade" },
+        { src: imgWallMain, alt: "Mur d'escalade principal du complexe sportif" },
+        { src: imgWallDetail, alt: "Vue détaillée du mur d'escalade" },
         {
-          src: 'coupe-deurope-escalade-jeunes--2565jpg_53013559053_o.jpg',
+          src: imgCompetitionAction,
           alt: "Compétition d'escalade en action",
         },
       ],

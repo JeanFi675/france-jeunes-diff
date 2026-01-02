@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import BrutalButton from '../components/atoms/BrutalButton.astro';
+import BrutalBadge from '../components/atoms/BrutalBadge.astro';
+
+const title = 'Page non trouvée - Championnats de France Escalade 2026';
+const description = "Oups ! Cette page n'existe pas.";
+---
+
+<BaseLayout title={title} description={description}>
+  <section
+    class="brutal-section brutal-section--white"
+    style="min-height: 80vh; display: flex; align-items: center; justify-content: center;"
+  >
+    <div class="brutal-container" style="text-align: center;">
+      <div style="margin-bottom: 2rem; transform: rotate(-2deg);">
+        <BrutalBadge variant="mint" size="large"> ERREUR 404 </BrutalBadge>
+      </div>
+
+      <h1
+        class="brutal-title"
+        style="font-size: clamp(3rem, 10vw, 8rem); margin: 0 0 2rem 0; line-height: 1;"
+      >
+        OUPS !
+      </h1>
+
+      <p
+        class="brutal-text"
+        style="font-size: 1.5rem; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;"
+      >
+        On dirait que vous avez perdu la prise... <br />
+        Cette voie ne mène nulle part !
+      </p>
+
+      <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
+        <BrutalButton href="/" variant="primary" rotation={-1}>
+          🏠 RETOUR À L'ACCUEIL
+        </BrutalButton>
+      </div>
+
+      <!-- Accent graphic -->
+      <div style="margin-top: 4rem; opacity: 0.5;">
+        <svg width="200" height="100" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10,90 Q50,10 90,90 T170,90" fill="none" stroke="black" stroke-width="4"></path>
+        </svg>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
