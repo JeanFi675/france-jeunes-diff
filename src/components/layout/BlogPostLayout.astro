@@ -30,7 +30,66 @@ const formattedDate = new Intl.DateTimeFormat('fr-FR', {
   month: 'long',
   year: 'numeric',
 }).format(publishDate);
+
+// Données structurées SEO - BlogPosting schema
+const blogPostingSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description: description,
+  datePublished: publishDate.toISOString(),
+  dateModified: publishDate.toISOString(),
+  author: {
+    '@type': 'Organization',
+    name: 'CAF La Roche Bonneville',
+    url: 'https://www.caflarochebonneville.fr',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'CAF La Roche Bonneville',
+    logo: {
+      '@type': 'ImageObject',
+      url: new URL('/club-alpin-roche-bonneville.svg', Astro.site).toString(),
+    },
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': new URL(Astro.url.pathname, Astro.site).toString(),
+  },
+  keywords: tags.join(', '),
+};
+
+// Données structurées SEO - BreadcrumbList schema
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Accueil',
+      item: new URL('/', Astro.site).toString(),
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Blog',
+      item: new URL('/blog/', Astro.site).toString(),
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: title,
+    },
+  ],
+};
 ---
+
+<!-- SEO: BlogPosting Schema -->
+<script type="application/ld+json" set:html={JSON.stringify(blogPostingSchema)} />
+
+<!-- SEO: BreadcrumbList Schema -->
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 
 <BaseLayout title={title} description={description}>
   <section class="brutal-section brutal-section--white blog-post-section">

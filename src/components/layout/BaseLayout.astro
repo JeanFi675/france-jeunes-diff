@@ -36,6 +36,9 @@ const { event } = competitionData;
   <meta property="og:type" content="event">
   <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)}>
   <meta property="og:image" content={new URL(ogImage || '/social-share.jpg', Astro.site)}>
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
   <meta property="og:locale" content="fr_FR">
   <meta property="og:site_name" content="Championnats de France Escalade 2026">
   
@@ -44,6 +47,13 @@ const { event } = competitionData;
   <meta name="twitter:title" content={title}>
   <meta name="twitter:description" content={description}>
   <meta name="twitter:image" content={new URL(ogImage || '/social-share.jpg', Astro.site)}>
+  
+  <!-- SEO: hreflang pour ciblage France -->
+  <link rel="alternate" hreflang="fr-FR" href={new URL(Astro.url.pathname, Astro.site)}>
+  <link rel="alternate" hreflang="x-default" href={new URL(Astro.url.pathname, Astro.site)}>
+  
+  <!-- SEO: Theme color pour navigateurs mobiles -->
+  <meta name="theme-color" content="#8bbfd5">
   
   <!-- GoatCounter Analytics (Privacy-First / No-Cookie) -->
   <link rel="preconnect" href="https://gc.zgo.at">
