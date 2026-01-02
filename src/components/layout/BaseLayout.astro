@@ -11,111 +11,129 @@ export interface Props {
 const { title, description, ogImage } = Astro.props;
 // eslint-disable-next-line no-unused-vars
 const { event } = competitionData;
-
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{title}</title>
-  <meta name="description" content={description}>
-  
-  <!-- SEO amélioré avec données centralisées (DRY) -->
-  <meta name="keywords" content="escalade gratuit, championnat France, Saint-Pierre-en-Faucigny, famille, FFME, mai 2026, spectacle sportif, Haute-Savoie, compétition jeunes">
-  <meta name="author" content="CAF La Roche Bonneville">
-  <meta name="robots" content="index, follow">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta name="google-site-verification" content="eS8e2_qYXgadlu-1szgO49XnFIiKsuOmoXjLNNWrQ5s" />
-  <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
-  
-  <!-- Open Graph Enhanced -->
-  <meta property="og:title" content={title}>
-  <meta property="og:description" content={description}>
-  <meta property="og:type" content="event">
-  <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)}>
-  <meta property="og:image" content={new URL(ogImage || '/social-share.jpg', Astro.site)}>
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:type" content="image/jpeg">
-  <meta property="og:locale" content="fr_FR">
-  <meta property="og:site_name" content="Championnats de France Escalade 2026">
-  
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content={title}>
-  <meta name="twitter:description" content={description}>
-  <meta name="twitter:image" content={new URL(ogImage || '/social-share.jpg', Astro.site)}>
-  
-  <!-- SEO: hreflang pour ciblage France -->
-  <link rel="alternate" hreflang="fr-FR" href={new URL(Astro.url.pathname, Astro.site)}>
-  <link rel="alternate" hreflang="x-default" href={new URL(Astro.url.pathname, Astro.site)}>
-  
-  <!-- SEO: Theme color pour navigateurs mobiles -->
-  <meta name="theme-color" content="#8bbfd5">
-  
-  <!-- GoatCounter Analytics (Privacy-First / No-Cookie) -->
-  <link rel="preconnect" href="https://gc.zgo.at">
-  <script data-goatcounter="https://fjd2026.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
 
-  <!-- Event Structured Data (JSON-LD) -->
-  <script type="application/ld+json">
-  {JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "SportsEvent",
-    "name": event.name,
-    "description": "Championnats de France Jeunes Difficulté d'escalade - Entrée gratuite pour tous",
-    "startDate": event.eventDate.toISOString(),
-    "endDate": new Date('2026-05-17T17:00:00').toISOString(),
-    "eventStatus": "https://schema.org/EventScheduled",
-    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-    "location": {
-      "@type": "Place",
-      "name": event.venue,
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "110 rue des Alpes",
-        "addressLocality": "Saint-Pierre-en-Faucigny",
-        "postalCode": "74800",
-        "addressCountry": "FR"
-      }
-    },
-    "organizer": {
-      "@type": "Organization",
-      "name": "CAF La Roche Bonneville",
-      "url": "https://www.caflarochebonneville.fr"
-    },
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "EUR",
-      "availability": "https://schema.org/InStock"
-    },
-    "sport": "Rock Climbing"
-  })}
-  </script>
-  
-  <!-- Preload Critical Fonts -->
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Space+Grotesk:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" as="style">
+    <!-- SEO amélioré avec données centralisées (DRY) -->
+    <meta
+      name="keywords"
+      content="escalade gratuit, championnat France, Saint-Pierre-en-Faucigny, famille, FFME, mai 2026, spectacle sportif, Haute-Savoie, compétition jeunes"
+    />
+    <meta name="author" content="CAF La Roche Bonneville" />
+    <meta name="robots" content="index, follow" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="google-site-verification" content="eS8e2_qYXgadlu-1szgO49XnFIiKsuOmoXjLNNWrQ5s" />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
 
-  <!-- RSS Feed -->
-  <link rel="alternate" type="application/rss+xml" title="Blog RSS" href="/rss.xml">
+    <!-- Open Graph Enhanced -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="event" />
+    <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
+    <meta property="og:image" content={new URL(ogImage || '/social-share.jpg', Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="Championnats de France Escalade 2026" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage || '/social-share.jpg', Astro.site)} />
+
+    <!-- SEO: hreflang pour ciblage France -->
+    <link rel="alternate" hreflang="fr-FR" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="alternate" hreflang="x-default" href={new URL(Astro.url.pathname, Astro.site)} />
+
+    <!-- SEO: Theme color pour navigateurs mobiles -->
+    <meta name="theme-color" content="#8bbfd5" />
+
+    <!-- GoatCounter Analytics (Privacy-First / No-Cookie) -->
+    <link rel="preconnect" href="https://gc.zgo.at" />
+    <script
+      data-goatcounter="https://fjd2026.goatcounter.com/count"
+      async
+      src="//gc.zgo.at/count.js"></script>
+
+    <!-- Event Structured Data (JSON-LD) -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'SportsEvent',
+        name: event.name,
+        description:
+          "Championnats de France Jeunes Difficulté d'escalade - Entrée gratuite pour tous",
+        startDate: event.eventDate.toISOString(),
+        endDate: new Date('2026-05-17T17:00:00').toISOString(),
+        eventStatus: 'https://schema.org/EventScheduled',
+        eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+        location: {
+          '@type': 'Place',
+          name: event.venue,
+          address: {
+            '@type': 'PostalAddress',
+            streetAddress: '110 rue des Alpes',
+            addressLocality: 'Saint-Pierre-en-Faucigny',
+            postalCode: '74800',
+            addressCountry: 'FR',
+          },
+        },
+        organizer: {
+          '@type': 'Organization',
+          name: 'CAF La Roche Bonneville',
+          url: 'https://www.caflarochebonneville.fr',
+        },
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'EUR',
+          availability: 'https://schema.org/InStock',
+        },
+        sport: 'Rock Climbing',
+      })}
+    />
+
+    <!-- Preload Critical Fonts -->
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Space+Grotesk:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap"
+      as="style"
+    />
+
+    <!-- RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title="Blog RSS" href="/rss.xml" />
 
     <!-- Favicon -->
-  <link rel="icon" type="image/png" href={import.meta.env.BASE_URL + 'favicon.png'} sizes="32x32">
+    <link
+      rel="icon"
+      type="image/png"
+      href={import.meta.env.BASE_URL + 'favicon.png'}
+      sizes="32x32"
+    />
 
-  <!-- Smooth scroll (KISS) -->
-  <style>
-    html {
-      scroll-behavior: smooth;
-    }
-  </style>
-</head>
-<body>
-  <main role="main" aria-label="Contenu principal de la page des Championnats de France d'escalade">
-    <slot />
-  </main>
-</body>
+    <!-- Smooth scroll (KISS) -->
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+  </head>
+  <body>
+    <main
+      role="main"
+      aria-label="Contenu principal de la page des Championnats de France d'escalade"
+    >
+      <slot />
+    </main>
+  </body>
 </html>
