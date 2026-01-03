@@ -89,3 +89,9 @@ echo -e "${GREEN}✅ DÉPLOIEMENT RÉUSSI !${NC}"
 echo -e "${BLUE}🌐 Le site sera disponible dans ~2 minutes sur :${NC}"
 echo -e "   https://${GITHUB_USERNAME}.github.io/${GITHUB_REPO}/"
 echo ""
+
+# 7. Notification IndexNow
+echo -e "${BLUE}📡 Notification IndexNow aux moteurs de recherche...${NC}"
+npm run indexnow
+echo ""
+
