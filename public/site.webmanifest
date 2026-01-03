@@ -1,0 +1,21 @@
+{
+  "name": "Championnats de France Escalade 2026",
+  "short_name": "France Jeunes 2026",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#8bbfd5",
+  "description": "Championnats de France Jeunes de Difficulté d'escalade - 16-17 mai 2026",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
