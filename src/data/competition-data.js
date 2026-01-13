@@ -199,7 +199,6 @@ export const competitionData = {
           rotation: 2,
           width: '180px',
           height: '110px',
-          caption: "Partenaire officiel du Championnat de France d'escalade de difficulté",
         },
       ],
     },
