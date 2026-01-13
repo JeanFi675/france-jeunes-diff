@@ -14,10 +14,10 @@ function decodeHTMLEntities(text: string): string {
 
   let decoded = text;
   // Traite aussi les entités numériques génériques
-  decoded = decoded.replace(/&#(\d+);/g, (match, code) => {
+  decoded = decoded.replace(/&#(\d+);/g, (_, code) => {
     return String.fromCharCode(parseInt(code, 10));
   });
-  decoded = decoded.replace(/&#x([0-9a-f]+);/gi, (match, code) => {
+  decoded = decoded.replace(/&#x([0-9a-f]+);/gi, (_, code) => {
     return String.fromCharCode(parseInt(code, 16));
   });
 

@@ -61,7 +61,7 @@ const faqSchema = {
 };
 ---
 
-<script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
+<script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(faqSchema)} />
 
 <BaseLayout title={metadata.title} description={metadata.description}>
   <HeroSection />

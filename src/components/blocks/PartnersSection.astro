@@ -27,17 +27,18 @@ const { ffme, club, collectivites } = competitionData.partners;
         <div class="subsection-content">
           <h3 class="subsection-title">{ffme.title}</h3>
           <div class="partners-list-centered">
-            {ffme.items.map((partner) => (
-              <PartnerCard
-                src={partner.src}
-                alt={partner.alt}
-                url={partner.url}
-                rotation={partner.rotation}
-                width={partner.width}
-                height={partner.height}
-                caption={partner.caption}
-              />
-            ))}
+            {
+              ffme.items.map((partner) => (
+                <PartnerCard
+                  src={partner.src}
+                  alt={partner.alt}
+                  url={partner.url}
+                  rotation={partner.rotation}
+                  width={partner.width}
+                  height={partner.height}
+                />
+              ))
+            }
           </div>
         </div>
       </BrutalCard>
@@ -53,16 +54,18 @@ const { ffme, club, collectivites } = competitionData.partners;
         <div class="subsection-content">
           <h3 class="subsection-title">{club.title}</h3>
           <div class="partners-list-centered">
-            {club.items.map((partner) => (
-              <PartnerCard
-                src={partner.src}
-                alt={partner.alt}
-                url={partner.url}
-                rotation={partner.rotation}
-                width={partner.width}
-                height={partner.height}
-              />
-            ))}
+            {
+              club.items.map((partner) => (
+                <PartnerCard
+                  src={partner.src}
+                  alt={partner.alt}
+                  url={partner.url}
+                  rotation={partner.rotation}
+                  width={partner.width}
+                  height={partner.height}
+                />
+              ))
+            }
           </div>
         </div>
       </BrutalCard>
@@ -80,30 +83,38 @@ const { ffme, club, collectivites } = competitionData.partners;
           <div class="partners-list-container">
             <!-- Première ligne : 4 collectivités -->
             <div class="partners-row partners-row--four">
-              {collectivites.items.slice(0, 4).map((partner) => (
-                <PartnerCard
-                  src={partner.src}
-                  alt={partner.alt}
-                  url={partner.url}
-                  rotation={partner.rotation}
-                  width={partner.width}
-                  height={partner.height}
-                />
-              ))}
+              {
+                collectivites.items
+                  .slice(0, 4)
+                  .map((partner) => (
+                    <PartnerCard
+                      src={partner.src}
+                      alt={partner.alt}
+                      url={partner.url}
+                      rotation={partner.rotation}
+                      width={partner.width}
+                      height={partner.height}
+                    />
+                  ))
+              }
             </div>
 
             <!-- Deuxième ligne : 3 collectivités centrées -->
             <div class="partners-row partners-row--three">
-              {collectivites.items.slice(4, 7).map((partner) => (
-                <PartnerCard
-                  src={partner.src}
-                  alt={partner.alt}
-                  url={partner.url}
-                  rotation={partner.rotation}
-                  width={partner.width}
-                  height={partner.height}
-                />
-              ))}
+              {
+                collectivites.items
+                  .slice(4, 7)
+                  .map((partner) => (
+                    <PartnerCard
+                      src={partner.src}
+                      alt={partner.alt}
+                      url={partner.url}
+                      rotation={partner.rotation}
+                      width={partner.width}
+                      height={partner.height}
+                    />
+                  ))
+              }
             </div>
           </div>
         </div>
@@ -113,134 +124,134 @@ const { ffme, club, collectivites } = competitionData.partners;
 </section>
 
 <style>
-.partners-section {
-  background-color: var(--brutal-black);
-  color: var(--brutal-white);
-  padding: 5rem 0;
-  min-height: 80vh;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-.title-center {
-  text-align: center;
-}
-
-.partners-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 3rem;
-  margin-top: 4rem;
-}
-
-.partners-subsection {
-  min-height: 400px;
-}
-
-/* Force les contours et ombres blancs sur fond noir */
-.partners-section .brutal-card--mint {
-  border: 4px solid var(--brutal-white) !important;
-  box-shadow: 8px 8px 0 var(--brutal-white) !important;
-}
-
-.partners-section .brutal-card--mint:hover {
-  box-shadow: 16px 16px 0 var(--brutal-white) !important;
-}
-
-.subsection-content {
-  padding: 2.5rem;
-  height: 100%;
-}
-
-.subsection-title {
-  font-family: var(--font-heading);
-  font-size: 1.8rem;
-  color: var(--brutal-black);
-  margin-bottom: 2rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  text-align: center;
-}
-
-.partners-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 1.5rem;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Centrage pour les 3 partenaires officiels */
-.partners-list-centered {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-/* Styles pour la disposition 4+3 des collectivités */
-.partners-list-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.partners-row {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: nowrap;
-}
-
-.partners-row--four {
-  justify-content: space-between;
-}
-
-.partners-row--four > .partner-card-link {
-  flex: 1;
-  max-width: calc(25% - 0.75rem);
-}
-
-.partners-row--three {
-  justify-content: center;
-  gap: 1.5rem;
-}
-
-.partners-row--three > .partner-card-link {
-  flex: 0 0 auto;
-}
-
-@media (max-width: 768px) {
   .partners-section {
-    padding: 3rem 0;
+    background-color: var(--brutal-black);
+    color: var(--brutal-white);
+    padding: 5rem 0;
+    min-height: 80vh;
   }
-  
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .title-center {
+    text-align: center;
+  }
+
   .partners-grid {
+    display: grid;
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 3rem;
+    margin-top: 4rem;
   }
-  
+
+  .partners-subsection {
+    min-height: 400px;
+  }
+
+  /* Force les contours et ombres blancs sur fond noir */
+  .partners-section .brutal-card--mint {
+    border: 4px solid var(--brutal-white) !important;
+    box-shadow: 8px 8px 0 var(--brutal-white) !important;
+  }
+
+  .partners-section .brutal-card--mint:hover {
+    box-shadow: 16px 16px 0 var(--brutal-white) !important;
+  }
+
   .subsection-content {
-    padding: 2rem;
+    padding: 2.5rem;
+    height: 100%;
   }
-  
+
   .subsection-title {
-    font-size: 1.5rem;
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: var(--brutal-black);
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: center;
   }
-  
-  .partners-row {
-    flex-direction: column;
-    gap: 1rem;
+
+  .partners-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1.5rem;
+    justify-content: center;
     align-items: center;
   }
-  
-  .partners-row--four > .partner-card-link,
-  .partners-row--three > .partner-card-link {
-    max-width: none;
-    width: 140px;
+
+  /* Centrage pour les 3 partenaires officiels */
+  .partners-list-centered {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
   }
-}
+
+  /* Styles pour la disposition 4+3 des collectivités */
+  .partners-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .partners-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: nowrap;
+  }
+
+  .partners-row--four {
+    justify-content: space-between;
+  }
+
+  .partners-row--four > .partner-card-link {
+    flex: 1;
+    max-width: calc(25% - 0.75rem);
+  }
+
+  .partners-row--three {
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .partners-row--three > .partner-card-link {
+    flex: 0 0 auto;
+  }
+
+  @media (max-width: 768px) {
+    .partners-section {
+      padding: 3rem 0;
+    }
+
+    .partners-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .subsection-content {
+      padding: 2rem;
+    }
+
+    .subsection-title {
+      font-size: 1.5rem;
+    }
+
+    .partners-row {
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .partners-row--four > .partner-card-link,
+    .partners-row--three > .partner-card-link {
+      max-width: none;
+      width: 140px;
+    }
+  }
 </style>

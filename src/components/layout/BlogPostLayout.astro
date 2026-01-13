@@ -86,10 +86,10 @@ const breadcrumbSchema = {
 ---
 
 <!-- SEO: BlogPosting Schema -->
-<script type="application/ld+json" set:html={JSON.stringify(blogPostingSchema)} />
+<script type="application/ld+json" is:inline set:html={JSON.stringify(blogPostingSchema)} />
 
 <!-- SEO: BreadcrumbList Schema -->
-<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+<script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbSchema)} />
 
 <BaseLayout title={title} description={description}>
   <section class="brutal-section brutal-section--white blog-post-section">
