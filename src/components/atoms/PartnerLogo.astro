@@ -6,19 +6,18 @@ export interface Props {
   rotation?: number;
   width?: string;
   height?: string;
+  href?: string;
 }
 
-const {
-  src,
-  alt,
-  rotation = 0,
-  width = '180px',
-  height = '110px'
-} = Astro.props;
+const { src, alt, rotation = 0, width = '180px', height = '110px', href } = Astro.props;
+
+const Element = href ? 'a' : 'div';
+const elementProps = href ? { href, target: '_blank', rel: 'noopener noreferrer' } : {};
 ---
 
-<div 
+<Element
   class="partner-logo-container"
+  {...elementProps}
   style={`
     --base-rotation: ${rotation}deg;
     display: inline-flex;
@@ -33,6 +32,8 @@ const {
     overflow: hidden;
     align-items: center;
     justify-content: center;
+    text-decoration: none;
+    cursor: ${href ? 'pointer' : 'default'};
   `}
 >
   <img
@@ -45,17 +46,17 @@ const {
       display: block;
     `}
   />
-</div>
+</Element>
 
 <style>
-.partner-logo-container:hover {
-  transform: translate(-2px, -2px) rotate(calc(var(--base-rotation) + 2deg));
-  box-shadow: 8px 8px 0 var(--brutal-ice);
-}
-
-@media (max-width: 768px) {
-  .partner-logo-container {
-    width: 100px;
+  .partner-logo-container:hover {
+    transform: translate(-2px, -2px) rotate(calc(var(--base-rotation) + 2deg));
+    box-shadow: 8px 8px 0 var(--brutal-ice);
   }
-}
+
+  @media (max-width: 768px) {
+    .partner-logo-container {
+      width: 100px;
+    }
+  }
 </style>

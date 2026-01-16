@@ -20,7 +20,7 @@ export const competitionData = {
     organizers: {
       main: 'CAF La Roche Bonneville',
       federation: "Fédération Française de Montagne et d'Escalade",
-      shortText: 'FFME & CAF La Roche Bonneville',
+      shortText: 'FFME & CAF La Roche Bonneville & CT74 FFME',
     },
   },
 
