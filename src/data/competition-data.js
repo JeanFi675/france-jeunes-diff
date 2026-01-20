@@ -221,6 +221,14 @@ export const competitionData = {
           width: '180px',
           height: '110px',
         },
+        {
+          src: 'ffcam74-logo.png',
+          alt: 'FFCAM 74',
+          url: 'https://cd-haute-savoie.ffcam.fr/',
+          rotation: 1,
+          width: '180px',
+          height: '110px',
+        },
       ],
     },
     collectivites: {
