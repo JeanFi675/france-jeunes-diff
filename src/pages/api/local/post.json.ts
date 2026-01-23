@@ -5,6 +5,9 @@ import path from 'node:path';
 
 
 
+
+export const prerender = false;
+
 export const GET: APIRoute = async ({ url, request }) => {
 
   
@@ -15,16 +18,21 @@ export const GET: APIRoute = async ({ url, request }) => {
   }
 
   console.log('GET /api/local/post.json called');
-  console.log('Example URL object:', url);
-  console.log('Full URL (toString):', url.toString());
   console.log('Request URL:', request.url);
-  console.log('Search Params:', url.searchParams.toString());
+  
+  // FIX: Use request.url directly to ensure we get the full query string
+  // Astro's `url` object might strip params in some static/hybrid configs
+  const requestUrl = new URL(request.url);
+  const filename = requestUrl.searchParams.get('file');
 
-  const filename = url.searchParams.get('file');
+  console.log('Search Params:', requestUrl.searchParams.toString());
   console.log('Requested filename:', filename);
 
   if (!filename) {
-    return new Response(JSON.stringify({ error: 'File parameter is required', url: url.toString() }), {
+    return new Response(JSON.stringify({ 
+      error: 'File parameter is required', 
+      url: request.url 
+    }), {
       status: 400,
       headers: { 'Content-Type': 'application/json' },
     });
