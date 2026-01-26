@@ -52,6 +52,16 @@ jobs:
 
       - name: Type Check
         run: ${{ steps.detect-package-manager.outputs.runner }} astro check
+      
+      - name: Move dev-only API routes
+        run: |
+          # Move dev-only API routes out of pages to avoid build errors
+          # These routes use node:fs and are only for local development
+          if [ -d "src/pages/api/local" ]; then
+            mkdir -p .dev-api-backup
+            mv src/pages/api/local .dev-api-backup/
+            echo "Moved src/pages/api/local to .dev-api-backup/"
+          fi
         
       - name: Build with Astro
         run: ${{ steps.detect-package-manager.outputs.runner }} astro build

@@ -14,7 +14,6 @@
     "format:check": "prettier --check src/",
     "indexnow": "node scripts/indexnow.js"
   },
-
   "dependencies": {
     "@astrojs/check": "^0.9.6",
     "@astrojs/rss": "^4.0.14",
@@ -22,6 +21,7 @@
     "astro": "^5.16.6"
   },
   "devDependencies": {
+    "@astrojs/node": "^9.5.2",
     "@typescript-eslint/parser": "^8.46.2",
     "astro-eslint-parser": "^1.2.2",
     "eslint": "^9.39.0",
