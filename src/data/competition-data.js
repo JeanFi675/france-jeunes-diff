@@ -2,6 +2,7 @@
 import imgWallMain from '../assets/IMG_4355_opt.jpg';
 import imgWallDetail from '../assets/IMG_4364_opt.jpg';
 import imgCompetitionAction from '../assets/coupe-deurope-escalade-jeunes--2565jpg_53013559053_o.jpg';
+import imgCamp from '../assets/CAMP.png';
 
 export const competitionData = {
   // Informations générales
@@ -218,6 +219,14 @@ export const competitionData = {
           alt: 'Intersport La Roche-sur-Foron',
           url: 'https://www.intersport.fr/Haute-Savoie-74/LAROCHES_FORON-74800/INTERSPORT-LAROCHES_FORON/00460_000/',
           rotation: 2,
+          width: '180px',
+          height: '110px',
+        },
+        {
+          src: imgCamp,
+          alt: 'CAMP',
+          url: 'https://www.camp.it/d/fr/fr/corporate',
+          rotation: -2,
           width: '180px',
           height: '110px',
         },
