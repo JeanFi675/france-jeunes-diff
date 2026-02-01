@@ -1,8 +1,19 @@
-// Données centralisées pour éviter la duplication (DRY)
 import imgWallMain from '../assets/IMG_4355_opt.jpg';
 import imgWallDetail from '../assets/IMG_4364_opt.jpg';
 import imgCompetitionAction from '../assets/coupe-deurope-escalade-jeunes--2565jpg_53013559053_o.jpg';
 import imgCamp from '../assets/CAMP.png';
+import imgAuVieuxCampeur from '../assets/Au vieux Campeur.png';
+import imgBeal from '../assets/Beal.png';
+import imgCheeta from '../assets/Cheeta.png';
+import imgIntersport from '../assets/Intersport.png';
+import imgFfcam74 from '../assets/ffcam74-logo.png';
+import imgAura from '../assets/01 - Logo_Auvergne-Rhône-Alpes.png';
+import imgHauteSavoie from '../assets/02 - Logo_Haute_Savoie_2015.png';
+import imgCCPR from '../assets/03 - CCPR.png';
+import imgORS from '../assets/04 - Logo ORS 2018 finale.png';
+import imgLaRoche from '../assets/05 - La Roche.png';
+import imgStPierre from '../assets/06 - Saint Pierre en Faucigny.png';
+import imgBonneville from '../assets/07 - Logo_Bonneville_Haute_Savoie.png';
 
 export const competitionData = {
   // Informations générales
@@ -186,7 +197,7 @@ export const competitionData = {
       title: 'PARTENAIRES OFFICIELS DE LA FFME',
       items: [
         {
-          src: 'Au vieux Campeur.png',
+          src: imgAuVieuxCampeur,
           alt: 'Au Vieux Campeur',
           url: 'https://www.auvieuxcampeur.fr/',
           rotation: -1,
@@ -194,7 +205,7 @@ export const competitionData = {
           height: '110px',
         },
         {
-          src: 'Beal.png',
+          src: imgBeal,
           alt: 'Beal',
           url: 'https://www.beal-planet.com/',
           rotation: 2,
@@ -207,7 +218,7 @@ export const competitionData = {
       title: 'PARTENAIRES DU CLUB',
       items: [
         {
-          src: 'Cheeta.png',
+          src: imgCheeta,
           alt: 'Cheeta Climbing Holds',
           url: 'https://www.cheeta-holds.com/',
           rotation: -1,
@@ -215,7 +226,7 @@ export const competitionData = {
           height: '110px',
         },
         {
-          src: 'Intersport.png',
+          src: imgIntersport,
           alt: 'Intersport La Roche-sur-Foron',
           url: 'https://www.intersport.fr/Haute-Savoie-74/LAROCHES_FORON-74800/INTERSPORT-LAROCHES_FORON/00460_000/',
           rotation: 2,
@@ -231,7 +242,7 @@ export const competitionData = {
           height: '110px',
         },
         {
-          src: 'ffcam74-logo.png',
+          src: imgFfcam74,
           alt: 'FFCAM 74',
           url: 'https://cd-haute-savoie.ffcam.fr/',
           rotation: 1,
@@ -244,7 +255,7 @@ export const competitionData = {
       title: 'COLLECTIVITÉS',
       items: [
         {
-          src: '01 - Logo_Auvergne-Rhône-Alpes.png',
+          src: imgAura,
           alt: 'Région Auvergne-Rhône-Alpes',
           url: 'https://www.auvergnerhonealpes.fr/',
           rotation: -2,
@@ -252,7 +263,7 @@ export const competitionData = {
           height: '120px',
         },
         {
-          src: '02 - Logo_Haute_Savoie_2015.png',
+          src: imgHauteSavoie,
           alt: 'Département Haute-Savoie',
           url: 'https://hautesavoie.fr/',
           rotation: 1,
@@ -260,7 +271,7 @@ export const competitionData = {
           height: '120px',
         },
         {
-          src: '03 - CCPR.png',
+          src: imgCCPR,
           alt: 'Communauté de Communes du Pays Rochois',
           url: 'https://www.ccpaysrochois.fr/',
           rotation: -1,
@@ -268,7 +279,7 @@ export const competitionData = {
           height: '120px',
         },
         {
-          src: '04 - Logo ORS 2018 finale.png',
+          src: imgORS,
           alt: 'Office Rochois des Sports',
           url: 'https://www.facebook.com/ORSLaRoche/',
           rotation: 2,
@@ -276,7 +287,7 @@ export const competitionData = {
           height: '120px',
         },
         {
-          src: '05 - La Roche.png',
+          src: imgLaRoche,
           alt: 'La Roche-sur-Foron',
           url: 'https://www.larochesurforon.fr/',
           rotation: -2,
@@ -284,7 +295,7 @@ export const competitionData = {
           height: '120px',
         },
         {
-          src: '06 - Saint Pierre en Faucigny.png',
+          src: imgStPierre,
           alt: 'Saint-Pierre-en-Faucigny',
           url: 'https://www.saintpierreenfaucigny.fr/',
           rotation: 1,
@@ -292,7 +303,7 @@ export const competitionData = {
           height: '120px',
         },
         {
-          src: '07 - Logo_Bonneville_Haute_Savoie.png',
+          src: imgBonneville,
           alt: 'Bonneville',
           url: 'https://www.bonneville.fr/',
           rotation: -1,

@@ -1,9 +1,14 @@
 ---
+import { Image } from 'astro:assets';
 import BrutalBadge from '../atoms/BrutalBadge.astro';
 import BrutalButton from '../atoms/BrutalButton.astro';
 import BrutalSeparator from '../atoms/BrutalSeparator.astro';
 import PartnerLogo from '../atoms/PartnerLogo.astro';
 import { competitionData } from '../../data/competition-data.js';
+import imgLogoChamp from '../../assets/logo-championnat-france-2026.svg';
+import imgClub from '../../assets/club-alpin-roche-bonneville.svg';
+import imgCt74 from '../../assets/ct74-ffme.jpg';
+import imgFfme from '../../assets/logo-ffme-horizontal.svg';
 
 const { datesShort, locationShort, organizers } = competitionData.event;
 ---
@@ -37,8 +42,8 @@ const { datesShort, locationShort, organizers } = competitionData.event;
       <h1 class="visually-hidden">
         Championnats de France Jeunes d'Escalade de Difficulté 2026 - Saint-Pierre-en-Faucigny
       </h1>
-      <img
-        src={`${import.meta.env.BASE_URL}logo-championnat-france-2026.svg`}
+      <Image
+        src={imgLogoChamp}
         alt="Logo Championnat de France 2026"
         class="hero-logo"
         style="max-width: 100%; height: auto; width: clamp(300px, 70vw, 900px); margin: 0 auto; display: block;"
@@ -81,7 +86,7 @@ const { datesShort, locationShort, organizers } = competitionData.event;
 
         <div class="partner-logos-container">
           <PartnerLogo
-            src="club-alpin-roche-bonneville.svg"
+            src={imgClub}
             alt={organizers.main}
             backgroundColor="white"
             rotation={-1}
@@ -91,7 +96,7 @@ const { datesShort, locationShort, organizers } = competitionData.event;
           />
 
           <PartnerLogo
-            src="ct74-ffme.jpg"
+            src={imgCt74}
             alt="Comité Territorial 74 FFME"
             backgroundColor="white"
             rotation={2}
@@ -101,7 +106,7 @@ const { datesShort, locationShort, organizers } = competitionData.event;
           />
 
           <PartnerLogo
-            src="logo-ffme-horizontal.svg"
+            src={imgFfme}
             alt={organizers.federation}
             backgroundColor="white"
             rotation={1}

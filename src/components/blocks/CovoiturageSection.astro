@@ -1,9 +1,11 @@
 ---
+import { Image } from 'astro:assets';
 import BrutalHeading from '../atoms/BrutalHeading.astro';
 import BrutalCard from '../atoms/BrutalCard.astro';
 import BrutalBadge from '../atoms/BrutalBadge.astro';
 import BrutalTogetzerWidget from '../atoms/BrutalTogetzerWidget.astro';
 import { competitionData } from '../../data/competition-data.js';
+import imgParking from '../../assets/parking-plan.png';
 
 export interface Props {
   id?: string;
@@ -93,8 +95,8 @@ const { venue, address, gpsCoords } = competitionData.event;
         </div>
 
         <div class="parking-map-container">
-          <img
-            src={`${import.meta.env.BASE_URL}parking-plan.png`}
+          <Image
+            src={imgParking}
             alt="Plan des parkings gratuits autour du complexe sportif"
             class="parking-map"
           />
