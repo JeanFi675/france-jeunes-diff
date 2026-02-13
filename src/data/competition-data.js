@@ -147,7 +147,7 @@ export const competitionData = {
     title: "UN WEEK-END D'ESCALADE INTENSE",
     subtitle: '🏆 COMPÉTITEURS',
     points: [
-      '⏰ Accueil dès 7h30',
+      '⏰ Accueil dès 7h00',
       '🧳 Consigne',
       '👕 Vestiaires et douches disponibles',
       '🍽️ Buvette et restauration sur place',
@@ -166,15 +166,17 @@ export const competitionData = {
 
   // Section Programme
   program: {
-    disclaimer: '⚠️ Programme prévisionnel, sujet à modifications',
+    disclaimer:
+      "Compétiteurs : voir horaires officiels sur <a href='https://mycompet.ffme.fr/action/resumeCompetition/18306' target='_blank' style='text-decoration:underline;'>MyCompet</a>.",
     saturday: {
       date: 'SAMEDI 16 MAI',
       badge: 'QUALIFICATIONS',
       badgeVariant: 'mint',
-      mainHours: '8H30 → 19H00',
+      mainHours: '9H00 → 19H00',
       details: [
-        { time: '8h30', label: 'Qualifications matin' },
-        { time: '14h00', label: 'Qualifications après-midi' },
+        { time: '9h00', label: 'U15 Femmes / U15 Hommes / U17 Hommes' },
+        { time: '13h45', label: 'Diffusion de Vale M la montagne' },
+        { time: '14h30', label: 'U17 Femmes / U19 Femmes / U19 Hommes' },
       ],
       rotation: -1,
     },
@@ -182,10 +184,12 @@ export const competitionData = {
       date: 'DIMANCHE 17 MAI',
       badge: 'FINALES',
       badgeVariant: 'finales',
-      mainHours: '10H30 → 16H00',
+      mainHours: '10H25 → 16H00',
       details: [
-        { time: '10h30-13h45', label: 'Finales U15/U17/U19' },
-        { time: '15h15', label: 'Remise des prix' },
+        { time: '10h25-11h45', label: 'Finales U15' },
+        { time: '11h55-13h15', label: 'Finales U17' },
+        { time: '14h10-15h30', label: 'Finales U19' },
+        { label: 'Suivi par la Cérémonie des Podiums' },
       ],
       rotation: 1,
     },

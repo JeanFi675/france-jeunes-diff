@@ -16,7 +16,7 @@ const { disclaimer, saturday, dimanche } = competitionData.program;
   <div class="brutal-container">
     <div style="text-align: center; margin-bottom: 4rem;">
       <BrutalHeading level={2} rotation={-1} shadow={true} class="brutal-title text-l2">
-        PROGRAMME DES 2 JOURS
+        PROGRAMME PREVISIONNEL DES 2 JOURS
       </BrutalHeading>
     </div>
 
@@ -28,9 +28,8 @@ const { disclaimer, saturday, dimanche } = competitionData.program;
       <BrutalCard variant="default" rotation={-1} zIndex={2}>
         <div
           style="text-align: center; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 0.95rem; line-height: 1.6; text-transform: uppercase; letter-spacing: 0.1em;"
-        >
-          {disclaimer}
-        </div>
+          set:html={disclaimer}
+        />
       </BrutalCard>
     </div>
 
