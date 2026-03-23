@@ -11,5 +11,9 @@ export default defineConfig({
     inlineStylesheets: 'auto',
   },
 
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes('/admin/'),
+    }),
+  ],
 });

@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Exclure les pages admin (outil interne, non destiné à l'indexation)
+Disallow: /admin/
+Disallow: /admin/preview/
+
+# Sitemap
+Sitemap: https://fjd2026.caflarochebonneville.fr/sitemap-index.xml
