@@ -8,7 +8,7 @@ import path from 'node:path';
 
 export const prerender = false;
 
-export const GET: APIRoute = async ({ url, request }) => {
+export const GET: APIRoute = async ({ request }) => {
 
   
   if (import.meta.env.PROD) {
