@@ -2,4 +2,5 @@
 
 interface Window {
   openAnnonceurModal: () => void;
+  openBrochureModal: () => void;
 }

@@ -5,6 +5,7 @@ import BlogCard from '../../components/atoms/BlogCard.astro';
 import BrutalHeading from '../../components/atoms/BrutalHeading.astro';
 import BlogFooterSection from '../../components/blocks/BlogFooterSection.astro';
 import AnnonceurModal from '../../components/blocks/AnnonceurModal.astro';
+import BrochureModal from '../../components/blocks/BrochureModal.astro';
 import PartnersSection from '../../components/blocks/PartnersSection.astro';
 
 // Get all blog posts sorted by date (newest first)
@@ -99,6 +100,7 @@ const nextPageUrl = `/blog/${currentPage + 1}`;
   <PartnersSection />
   <BlogFooterSection />
   <AnnonceurModal />
+  <BrochureModal />
 </BaseLayout>
 
 <style>

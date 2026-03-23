@@ -25,6 +25,13 @@ const { year, shortName, organizers } = competitionData.event;
         >
           📋 Dossier annonceurs
         </button>
+        <button
+          class="footer-link-button"
+          onclick="window.openBrochureModal()"
+          title="Ouvrir la brochure officielle"
+        >
+          📄 Brochure officielle
+        </button>
         <a
           href="https://fjd2026.caflarochebonneville.fr/#contact"
           class="footer-link-button"
@@ -58,6 +65,13 @@ const { year, shortName, organizers } = competitionData.event;
           title="Ouvrir le dossier annonceurs"
         >
           📋 Dossier annonceurs
+        </button>
+        <button
+          class="footer-link-button"
+          onclick="window.openBrochureModal()"
+          title="Ouvrir la brochure officielle"
+        >
+          📄 Brochure officielle
         </button>
         <a
           href="https://fjd2026.caflarochebonneville.fr/#contact"
@@ -235,7 +249,9 @@ const { year, shortName, organizers } = competitionData.event;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    margin: 0 2rem;
+    flex-wrap: wrap;
+    max-width: 480px;
+    margin: 0 1rem;
   }
 
   /* ===== BREAKPOINTS RESPONSIVE ===== */
