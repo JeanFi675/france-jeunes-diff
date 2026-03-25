@@ -38,6 +38,7 @@ const blogPostingSchema = {
   '@type': 'BlogPosting',
   headline: title,
   description: description,
+  image: new URL('/social-share.jpg', Astro.site).toString(),
   datePublished: publishDate.toISOString(),
   dateModified: publishDate.toISOString(),
   author: {
@@ -81,18 +82,17 @@ const breadcrumbSchema = {
       '@type': 'ListItem',
       position: 3,
       name: title,
+      item: new URL(Astro.url.pathname, Astro.site).toString(),
     },
   ],
 };
 ---
 
-<!-- SEO: BlogPosting Schema -->
-<script type="application/ld+json" is:inline set:html={JSON.stringify(blogPostingSchema)} />
-
-<!-- SEO: BreadcrumbList Schema -->
-<script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbSchema)} />
-
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} ogType="article">
+  <!-- SEO: BlogPosting Schema -->
+  <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(blogPostingSchema)} />
+  <!-- SEO: BreadcrumbList Schema -->
+  <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
   <section class="brutal-section brutal-section--white blog-post-section">
     <div class="brutal-container">
       <!-- Back Link -->
@@ -102,7 +102,7 @@ const breadcrumbSchema = {
 
       <!-- Article Bandeau -->
       <div class="blog-bandeau">
-        <h1 class="blog-bandeau-title">{title}</h1>
+        <div class="blog-bandeau-title">{title}</div>
       </div>
 
       <!-- Article Header -->

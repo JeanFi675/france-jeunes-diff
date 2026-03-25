@@ -1,16 +1,14 @@
 ---
-import competitionData from '../../data/competition-data.js';
 import '../../styles/brutal.css';
 
 export interface Props {
   title: string;
   description: string;
   ogImage?: string;
+  ogType?: string;
 }
 
-const { title, description, ogImage } = Astro.props;
-
-const { event } = competitionData;
+const { title, description, ogImage, ogType = 'website' } = Astro.props;
 ---
 
 <!doctype html>
@@ -35,7 +33,7 @@ const { event } = competitionData;
     <!-- Open Graph Enhanced -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="event" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
     <meta property="og:image" content={new URL(ogImage || '/social-share.jpg', Astro.site)} />
     <meta property="og:image:width" content="1200" />
@@ -65,51 +63,11 @@ const { event } = competitionData;
       async
       src="//gc.zgo.at/count.js"></script>
 
-    <!-- Event Structured Data (JSON-LD) -->
-    <script
-      is:inline
-      type="application/ld+json"
-      set:html={JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'SportsEvent',
-        name: event.name,
-        description:
-          "Championnats de France Jeunes Difficulté d'escalade - Entrée gratuite pour tous",
-        startDate: event.eventDate.toISOString(),
-        endDate: new Date('2026-05-17T17:00:00').toISOString(),
-        eventStatus: 'https://schema.org/EventScheduled',
-        eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-        location: {
-          '@type': 'Place',
-          name: event.venue,
-          address: {
-            '@type': 'PostalAddress',
-            streetAddress: '110 rue des Alpes',
-            addressLocality: 'Saint-Pierre-en-Faucigny',
-            postalCode: '74800',
-            addressCountry: 'FR',
-          },
-        },
-        organizer: {
-          '@type': 'Organization',
-          name: 'CAF La Roche Bonneville',
-          url: 'https://www.caflarochebonneville.fr',
-        },
-        offers: {
-          '@type': 'Offer',
-          price: '0',
-          priceCurrency: 'EUR',
-          availability: 'https://schema.org/InStock',
-        },
-        sport: 'Rock Climbing',
-      })}
-    />
-
-    <!-- Preload Critical Fonts -->
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      rel="preload"
+      rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Space+Grotesk:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap"
-      as="style"
     />
 
     <!-- RSS Feed -->
@@ -125,12 +83,14 @@ const { event } = competitionData;
     <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Smooth scroll (KISS) -->
-
     <style>
       html {
         scroll-behavior: smooth;
       }
     </style>
+
+    <!-- Slot pour injecter du contenu dans <head> (ex: JSON-LD spécifiques aux pages) -->
+    <slot name="head" />
   </head>
   <body>
     <main
