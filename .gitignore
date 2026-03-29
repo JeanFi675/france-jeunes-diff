@@ -20,6 +20,12 @@ pnpm-debug.log*
 # GitHub token configuration (SÉCURITÉ)
 .github-token
 
+# Claude Code configuration locale (spécifique à la machine)
+.claude/
+
+# Fichiers de logs générés
+*.log
+
 # macOS-specific files
 .DS_Store
 
