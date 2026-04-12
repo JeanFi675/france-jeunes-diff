@@ -125,10 +125,11 @@ const { datesShort, locationShort, organizers } = competitionData.event;
       style="
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto auto auto;
-      grid-template-areas: 
+      grid-template-rows: auto auto auto auto;
+      grid-template-areas:
+        'trailer trailer'
         'programme programme'
-        'voiture pratique' 
+        'voiture pratique'
         'arena arena';
       gap: 2rem 1.5rem;
       max-width: 800px;
@@ -136,6 +137,15 @@ const { datesShort, locationShort, organizers } = competitionData.event;
       padding: 1rem;
     "
     >
+      <button
+        class="brutal-btn brutal-btn--secondary hero-cta-trailer"
+        data-open-trailer
+        aria-label="Voir le trailer de présentation de l'événement"
+        style="transform: rotate(1deg);"
+      >
+        ▶ VOIR LE TRAILER
+      </button>
+
       <BrutalButton
         href="#programme"
         variant="primary"
@@ -179,6 +189,16 @@ const { datesShort, locationShort, organizers } = competitionData.event;
 </section>
 
 <style>
+  .hero-cta-trailer {
+    grid-area: trailer;
+    font-size: 1rem;
+    font-weight: 800;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: center;
+  }
+
   .hero-cta-primary {
     grid-area: programme;
     font-size: 1.125rem;
@@ -226,6 +246,7 @@ const { datesShort, locationShort, organizers } = competitionData.event;
     .hero-navigation {
       grid-template-columns: 1fr !important;
       grid-template-areas:
+        'trailer'
         'programme'
         'voiture'
         'pratique'
