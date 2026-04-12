@@ -83,6 +83,12 @@ const videoUrl = `${import.meta.env.BASE_URL}videos/trailer-web.mp4`;
 <script>
   import { BrutalModal } from '../../scripts/modal-utils';
 
+  declare global {
+    interface Window {
+      openTrailerModal: () => void;
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     const video = document.getElementById('trailer-video') as HTMLVideoElement | null;
 
