@@ -53,19 +53,37 @@ const { ffme, club, collectivites } = competitionData.partners;
       >
         <div class="subsection-content">
           <h3 class="subsection-title">{club.title}</h3>
-          <div class="partners-list-centered">
-            {
-              club.items.map((partner) => (
-                <PartnerCard
-                  src={partner.src}
-                  alt={partner.alt}
-                  url={partner.url}
-                  rotation={partner.rotation}
-                  width={partner.width}
-                  height={partner.height}
-                />
-              ))
-            }
+          <div class="partners-list-container">
+            <!-- Première ligne : 3 partenaires -->
+            <div class="partners-row partners-row--three-club">
+              {
+                club.items.slice(0, 3).map((partner) => (
+                  <PartnerCard
+                    src={partner.src}
+                    alt={partner.alt}
+                    url={partner.url}
+                    rotation={partner.rotation}
+                    width={partner.width}
+                    height={partner.height}
+                  />
+                ))
+              }
+            </div>
+            <!-- Deuxième ligne : 2 partenaires centrés -->
+            <div class="partners-row partners-row--two-club">
+              {
+                club.items.slice(3, 5).map((partner) => (
+                  <PartnerCard
+                    src={partner.src}
+                    alt={partner.alt}
+                    url={partner.url}
+                    rotation={partner.rotation}
+                    width={partner.width}
+                    height={partner.height}
+                  />
+                ))
+              }
+            </div>
           </div>
         </div>
       </BrutalCard>
@@ -224,6 +242,24 @@ const { ffme, club, collectivites } = competitionData.partners;
     flex: 0 0 auto;
   }
 
+  .partners-row--three-club {
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .partners-row--three-club > .partner-card-link {
+    flex: 0 0 auto;
+  }
+
+  .partners-row--two-club {
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .partners-row--two-club > .partner-card-link {
+    flex: 0 0 auto;
+  }
+
   @media (max-width: 768px) {
     .partners-section {
       padding: 3rem 0;
@@ -249,7 +285,9 @@ const { ffme, club, collectivites } = competitionData.partners;
     }
 
     .partners-row--four > .partner-card-link,
-    .partners-row--three > .partner-card-link {
+    .partners-row--three > .partner-card-link,
+    .partners-row--three-club > .partner-card-link,
+    .partners-row--two-club > .partner-card-link {
       max-width: none;
       width: 140px;
     }

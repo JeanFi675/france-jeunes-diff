@@ -6,6 +6,7 @@ import imgAuVieuxCampeur from '../assets/Au vieux Campeur.png';
 import imgBeal from '../assets/Beal.png';
 import imgCheeta from '../assets/Cheeta.png';
 import imgIntersport from '../assets/Intersport.png';
+import imgPetzl from '../assets/Petzl.png';
 import imgFfcam74 from '../assets/ffcam74-logo.png';
 import imgAura from '../assets/01 - Logo_Auvergne-Rhône-Alpes.png';
 import imgHauteSavoie from '../assets/02 - Logo_Haute_Savoie_2015.png';
@@ -230,6 +231,22 @@ export const competitionData = {
           height: '110px',
         },
         {
+          src: imgFfcam74,
+          alt: 'FFCAM 74',
+          url: 'https://cd-haute-savoie.ffcam.fr/',
+          rotation: 1,
+          width: '180px',
+          height: '110px',
+        },
+        {
+          src: imgPetzl,
+          alt: 'Petzl',
+          url: 'https://www.petzl.com/',
+          rotation: -2,
+          width: '180px',
+          height: '110px',
+        },
+        {
           src: imgIntersport,
           alt: 'Intersport La Roche-sur-Foron',
           url: 'https://www.intersport.fr/Haute-Savoie-74/LAROCHES_FORON-74800/INTERSPORT-LAROCHES_FORON/00460_000/',
@@ -242,14 +259,6 @@ export const competitionData = {
           alt: 'CAMP',
           url: 'https://www.camp.it/d/fr/fr/corporate',
           rotation: -2,
-          width: '180px',
-          height: '110px',
-        },
-        {
-          src: imgFfcam74,
-          alt: 'FFCAM 74',
-          url: 'https://cd-haute-savoie.ffcam.fr/',
-          rotation: 1,
           width: '180px',
           height: '110px',
         },
