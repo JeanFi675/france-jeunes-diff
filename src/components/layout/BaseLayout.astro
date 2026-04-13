@@ -89,12 +89,12 @@ const { title, description, ogImage, ogType = 'website' } = Astro.props;
       }
     </style>
 
-    <!-- Meta Pixel Code -->
+    <!-- Facebook Pixel Code -->
     <script is:inline>
       !(function (f, b, e, v, n, t, s) {
         if (f.fbq) return;
         n = f.fbq = function () {
-          n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments);
+          n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
         };
         if (!f._fbq) f._fbq = n;
         n.push = n;
@@ -107,18 +107,17 @@ const { title, description, ogImage, ogType = 'website' } = Astro.props;
         s = b.getElementsByTagName(e)[0];
         s.parentNode.insertBefore(t, s);
       })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '933104232657330');
+      fbq('init', '941485231829506');
       fbq('track', 'PageView');
     </script>
     <noscript
       ><img
         height="1"
         width="1"
-        style="display:none"
-        src="https://www.facebook.com/tr?id=933104232657330&ev=PageView&noscript=1"
+        src="https://www.facebook.com/tr?id=941485231829506&ev=PageView&noscript=1"
       /></noscript
     >
-    <!-- End Meta Pixel Code -->
+    <!-- End Facebook Pixel Code -->
     <!-- Slot pour injecter du contenu dans <head> (ex: JSON-LD spécifiques aux pages) -->
     <slot name="head" />
   </head>
