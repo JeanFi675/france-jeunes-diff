@@ -74,8 +74,11 @@ const videoUrl = `${import.meta.env.BASE_URL}videos/trailer-web.mp4`;
   }
 
   .trailer-view-count {
+    position: absolute;
+    bottom: -2rem;
+    left: 0;
+    right: 0;
     text-align: center;
-    margin: 0.5rem 0 0;
     font-size: 0.85rem;
     font-weight: 700;
     color: var(--brutal-ice);
@@ -85,7 +88,8 @@ const videoUrl = `${import.meta.env.BASE_URL}videos/trailer-web.mp4`;
 
   .trailer-count-img {
     vertical-align: middle;
-    filter: invert(1);
+    height: 1em;
+    filter: invert(1) brightness(2);
   }
 
   @media (max-width: 768px) {
@@ -137,7 +141,10 @@ const videoUrl = `${import.meta.env.BASE_URL}videos/trailer-web.mp4`;
           event: true,
         });
 
-
+        if (countImg) {
+          const base = 'https://fjd2026.goatcounter.com/counter/trailer-view.svg';
+          countImg.src = `${base}?t=${Date.now()}`;
+        }
       },
       onClose: () => {
         if (video) {
