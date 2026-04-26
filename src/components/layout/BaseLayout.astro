@@ -73,6 +73,10 @@ const { title, description, ogImage, ogType = 'website' } = Astro.props;
     <!-- RSS Feed -->
     <link rel="alternate" type="application/rss+xml" title="Blog RSS" href="/rss.xml" />
 
+    <!-- Agent discovery (RFC 8288) -->
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+    <link rel="describedby" type="text/plain" href="/llms.txt" />
+
     <!-- Favicon -->
     <link
       rel="icon"
