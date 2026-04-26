@@ -15,7 +15,12 @@ const videoUrl = `${import.meta.env.BASE_URL}videos/trailer-web.mp4`;
       preload="none"
     ></video>
     <p class="trailer-view-count">
-      <span id="trailer-count-number">—</span> vues
+      <img
+        src="https://fjd2026.goatcounter.com/counter/trailer-view.svg"
+        alt=""
+        class="trailer-count-img"
+        onerror="this.closest('.trailer-view-count').style.display='none'"
+      /> vues
     </p>
   </div>
 </div>
@@ -78,6 +83,11 @@ const videoUrl = `${import.meta.env.BASE_URL}videos/trailer-web.mp4`;
     text-transform: uppercase;
   }
 
+  .trailer-count-img {
+    vertical-align: middle;
+    filter: invert(1);
+  }
+
   @media (max-width: 768px) {
     .trailer-modal-content {
       height: 80vh;
@@ -122,15 +132,7 @@ const videoUrl = `${import.meta.env.BASE_URL}videos/trailer-web.mp4`;
           event: true,
         });
 
-        setTimeout(() => {
-          fetch('https://fjd2026.goatcounter.com/counter/trailer-view.json')
-            .then(r => r.json())
-            .then(data => {
-              const el = document.getElementById('trailer-count-number');
-              if (el && data.count) el.textContent = data.count;
-            })
-            .catch(() => {});
-        }, 500);
+
       },
       onClose: () => {
         if (video) {
