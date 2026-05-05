@@ -67,6 +67,8 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.runner }} astro build
         env:
           PUBLIC_WEBHOOK_URL: ${{ secrets.PUBLIC_WEBHOOK_URL }}
+          PUBLIC_LIVE_SHEET_ID: ${{ secrets.PUBLIC_LIVE_SHEET_ID }}
+          PUBLIC_YT_API_KEY: ${{ secrets.PUBLIC_YT_API_KEY }}
           
       - name: Upload artifact
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
