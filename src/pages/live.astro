@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../components/layout/BaseLayout.astro';
+import PartnersSection from '../components/blocks/PartnersSection.astro';
 import FooterSection from '../components/blocks/FooterSection.astro';
 ---
 
@@ -11,6 +12,7 @@ import FooterSection from '../components/blocks/FooterSection.astro';
   <!-- En-tête de page -->
   <section class="live-header-section">
     <div class="brutal-container">
+      <a href={import.meta.env.BASE_URL || '/'} class="live-back-btn">← RETOUR AU SITE</a>
       <h1 class="live-main-title">📡 LIVE STREAMING</h1>
       <p class="live-subtitle">Championnats de France Jeunes — 16 &amp; 17 mai 2026</p>
     </div>
@@ -44,6 +46,7 @@ import FooterSection from '../components/blocks/FooterSection.astro';
     </div>
   </section>
 
+  <PartnersSection />
   <FooterSection />
 </BaseLayout>
 
@@ -53,6 +56,25 @@ import FooterSection from '../components/blocks/FooterSection.astro';
     background: var(--brutal-black);
     padding: clamp(3rem, 6vw, 5rem) 1rem;
     text-align: center;
+  }
+  .live-back-btn {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    color: var(--brutal-ice);
+    border: 3px solid var(--brutal-ice);
+    box-shadow: 4px 4px 0 var(--brutal-ice);
+    padding: 0.5rem 1.25rem;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .live-back-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--brutal-ice);
   }
   .live-hero-section {
     background: var(--brutal-ice);

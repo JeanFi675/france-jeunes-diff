@@ -127,7 +127,7 @@ const { datesShort, locationShort, organizers } = competitionData.event;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: auto auto auto auto;
       grid-template-areas:
-        'trailer trailer'
+        'trailer live'
         'programme programme'
         'voiture pratique'
         'arena arena';
@@ -145,6 +145,16 @@ const { datesShort, locationShort, organizers } = competitionData.event;
       >
         ▶ VOIR LE TRAILER
       </button>
+
+      <a
+        href={`${import.meta.env.BASE_URL}live/`}
+        class="brutal-btn hero-cta-live"
+        aria-label="Accéder à la page de streaming live"
+        style="transform: rotate(-1deg);"
+      >
+        <span class="live-pulse-dot"></span>
+        🔴 STREAMING LIVE
+      </a>
 
       <BrutalButton
         href="#programme"
@@ -199,6 +209,45 @@ const { datesShort, locationShort, organizers } = competitionData.event;
     text-align: center;
   }
 
+  .hero-cta-live {
+    grid-area: live;
+    font-size: 1rem;
+    font-weight: 800;
+    padding: 1rem 1.5rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: #cc0000;
+    color: #ffffff;
+    border: 4px solid #ffffff;
+    box-shadow: 4px 4px 0 #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .hero-cta-live:hover {
+    transform: translate(-2px, -2px) rotate(-1deg);
+    box-shadow: 6px 6px 0 #ffffff;
+  }
+
+  .live-pulse-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #ffffff;
+    flex-shrink: 0;
+    animation: live-dot-pulse 1.4s ease-in-out infinite;
+  }
+
+  @keyframes live-dot-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.3; transform: scale(0.6); }
+  }
+
   .hero-cta-primary {
     grid-area: programme;
     font-size: 1.125rem;
@@ -247,6 +296,7 @@ const { datesShort, locationShort, organizers } = competitionData.event;
       grid-template-columns: 1fr !important;
       grid-template-areas:
         'trailer'
+        'live'
         'programme'
         'voiture'
         'pratique'
