@@ -1,0 +1,696 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import FooterSection from '../components/blocks/FooterSection.astro';
+---
+
+<BaseLayout
+  title="Live Streaming — Championnats de France Escalade 2026"
+  description="Suivez les Championnats de France Jeunes de Difficulté 2026 en direct sur YouTube. Qualifications le 16 mai, finales le 17 mai."
+  ogType="website"
+>
+  <!-- En-tête de page -->
+  <section class="live-header-section">
+    <div class="brutal-container">
+      <h1 class="live-main-title">📡 LIVE STREAMING</h1>
+      <p class="live-subtitle">Championnats de France Jeunes — 16 &amp; 17 mai 2026</p>
+    </div>
+  </section>
+
+  <!-- Zone héro dynamique (live en cours ou prochain) -->
+  <section class="live-hero-section" id="live-hero-section">
+    <div class="brutal-container">
+      <div id="live-loading" class="live-state-loading">
+        <div class="live-spinner"></div>
+        <p>Chargement du programme...</p>
+      </div>
+      <div id="live-error" class="live-state-error" hidden>
+        <p>⚠️ Impossible de charger le programme.<br />Vérifiez votre connexion et réessayez.</p>
+        <button onclick="location.reload()" class="brutal-btn live-btn-retry">Réessayer</button>
+      </div>
+      <div id="live-now" hidden></div>
+      <div id="live-upcoming" hidden></div>
+      <div id="live-empty" class="live-state-empty" hidden>
+        <p class="live-empty-title">Aucun live programmé</p>
+        <p>Revenez bientôt !</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grille de tous les lives -->
+  <section class="live-grid-section" id="live-grid-section" hidden>
+    <div class="brutal-container">
+      <h2 class="live-section-title">TOUS LES LIVES</h2>
+      <div id="streams-grid" class="live-streams-grid"></div>
+    </div>
+  </section>
+
+  <FooterSection />
+</BaseLayout>
+
+<!-- Styles scoped : éléments présents dans le HTML statique -->
+<style>
+  .live-header-section {
+    background: var(--brutal-black);
+    padding: clamp(3rem, 6vw, 5rem) 1rem;
+    text-align: center;
+  }
+  .live-hero-section {
+    background: var(--brutal-ice);
+    padding: clamp(3rem, 6vw, 5rem) 1rem;
+    min-height: 300px;
+  }
+  .live-grid-section {
+    background: var(--brutal-white);
+    padding: clamp(3rem, 6vw, 5rem) 1rem;
+  }
+  .live-main-title {
+    font-family: 'Inter', Arial, sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    text-transform: uppercase;
+    color: var(--brutal-ice);
+    text-shadow: 4px 4px 0 var(--brutal-white);
+    transform: rotate(-1deg);
+    display: inline-block;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .live-subtitle {
+    color: var(--brutal-white);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: clamp(0.875rem, 2vw, 1.1rem);
+  }
+  .live-state-loading {
+    text-align: center;
+    padding: 4rem 0;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--brutal-black);
+  }
+  .live-spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid var(--brutal-black);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 1.5rem;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .live-state-error {
+    text-align: center;
+    padding: 2.5rem;
+    border: 4px solid var(--brutal-black);
+    box-shadow: 8px 8px 0 var(--brutal-black);
+    background: var(--brutal-white);
+    font-weight: 700;
+    text-transform: uppercase;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+  .live-state-empty {
+    text-align: center;
+    padding: 4rem 0;
+    color: var(--brutal-black);
+  }
+  .live-empty-title {
+    font-family: 'Inter', Arial, sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .live-section-title {
+    font-family: 'Inter', Arial, sans-serif;
+    font-weight: 900;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    text-transform: uppercase;
+    color: var(--brutal-black);
+    text-shadow: 3px 3px 0 var(--brutal-ice);
+    transform: rotate(-1deg);
+    display: inline-block;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+  .live-streams-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+</style>
+
+<!-- Styles globaux : éléments injectés dynamiquement par JS (pas de hash Astro) -->
+<style is:global>
+  @keyframes pulse-brutal {
+    0%, 100% { transform: rotate(-1deg) scale(1); }
+    50%       { transform: rotate(-1deg) scale(1.04); }
+  }
+
+  /* Badges hero */
+  .live-now-badge {
+    display: inline-block;
+    background: #ff0000;
+    color: #fff;
+    padding: 0.75rem 2rem;
+    border: 4px solid var(--brutal-black);
+    box-shadow: 6px 6px 0 var(--brutal-black);
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transform: rotate(-1deg);
+    animation: pulse-brutal 2s ease-in-out infinite;
+  }
+  .live-upcoming-badge {
+    display: inline-block;
+    background: var(--brutal-black);
+    color: var(--brutal-ice);
+    padding: 0.5rem 1.5rem;
+    border: 4px solid var(--brutal-ice);
+    box-shadow: 4px 4px 0 var(--brutal-ice);
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transform: rotate(1deg);
+  }
+
+  /* Titre / date du live hero */
+  .live-stream-title {
+    font-family: 'Inter', Arial, sans-serif;
+    font-weight: 900;
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    text-transform: uppercase;
+    color: var(--brutal-black);
+    text-shadow: 3px 3px 0 rgba(255,255,255,0.5);
+    transform: rotate(-1deg);
+    display: inline-block;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .live-stream-date {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 1rem;
+    color: var(--brutal-black);
+    margin-top: 0.5rem;
+  }
+
+  /* Embed YouTube */
+  .live-player-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    border: 4px solid var(--brutal-black);
+    box-shadow: 12px 12px 0 var(--brutal-black);
+    transform: rotate(-0.5deg);
+    background: #000;
+    aspect-ratio: 16 / 9;
+    position: relative;
+    overflow: hidden;
+  }
+  .live-player-wrapper iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+
+  /* Miniature upcoming */
+  .live-thumb-wrapper {
+    max-width: 480px;
+    margin: 0 auto 2rem;
+    border: 4px solid var(--brutal-black);
+    box-shadow: 8px 8px 0 var(--brutal-black);
+    transform: rotate(-0.5deg);
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: #111;
+  }
+  .live-thumb-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .live-thumb-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .live-thumb-overlay span {
+    font-size: 4rem;
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    opacity: 0.8;
+  }
+
+  /* Compte à rebours */
+  .live-countdown-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    max-width: 860px;
+    margin: 0 auto 2rem;
+  }
+  .live-countdown-card {
+    border: 4px solid var(--brutal-black);
+    box-shadow: 8px 8px 0 var(--brutal-black);
+    background: var(--brutal-white);
+    padding: 1.5rem 0.75rem;
+    text-align: center;
+  }
+  .live-countdown-value {
+    font-family: 'Inter', Arial, sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    line-height: 1;
+    color: var(--brutal-black);
+    margin-bottom: 0.5rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .live-countdown-label {
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: clamp(0.65rem, 1.5vw, 0.875rem);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--brutal-black);
+  }
+
+  /* Cards grille */
+  .stream-card {
+    border: 4px solid var(--brutal-black);
+    box-shadow: 8px 8px 0 var(--brutal-black);
+    background: var(--brutal-white);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .stream-card--clickable { cursor: pointer; }
+  .stream-card--clickable:hover {
+    transform: translateY(-4px) rotate(0deg) !important;
+    box-shadow: 12px 12px 0 var(--brutal-black);
+  }
+  .stream-card__thumb {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--brutal-black);
+  }
+  .stream-card__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .stream-card__thumb-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.4);
+  }
+  .stream-card__thumb-overlay span { font-size: 3rem; color: #fff; }
+  .stream-card__body { padding: 1.25rem; }
+  .stream-card__badge {
+    display: inline-block;
+    padding: 0.3rem 0.9rem;
+    border: 2px solid var(--brutal-black);
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.75rem;
+  }
+  .stream-card__badge--live     { background: #ff0000; color: #fff; }
+  .stream-card__badge--upcoming { background: var(--brutal-ice); color: var(--brutal-black); }
+  .stream-card__badge--past     { background: var(--brutal-black); color: var(--brutal-ice); border-color: var(--brutal-ice); }
+  .stream-card__title {
+    font-family: 'Inter', Arial, sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    text-transform: uppercase;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+    color: var(--brutal-black);
+  }
+  .stream-card__date {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--brutal-black);
+    opacity: 0.75;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .live-countdown-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      max-width: 400px;
+    }
+    .live-player-wrapper {
+      transform: none;
+      box-shadow: 6px 6px 0 var(--brutal-black);
+    }
+  }
+  @media (max-width: 380px) {
+    .live-countdown-value { font-size: 2rem; }
+  }
+</style>
+
+<script>
+  // ====================================================================
+  // Configuration — définie dans .env.local (non commité, jamais dans le repo)
+  // PUBLIC_LIVE_SHEET_ID=votre_id_google_sheet
+  // PUBLIC_YT_API_KEY=votre_cle_api_youtube (restreindre au domaine du site)
+  // ====================================================================
+  const GVIZ_URL  = `https://docs.google.com/spreadsheets/d/${import.meta.env.PUBLIC_LIVE_SHEET_ID}/gviz/tq?tqx=out:json`;
+  const YT_API_KEY = import.meta.env.PUBLIC_YT_API_KEY;
+  const YT_API_URL = 'https://www.googleapis.com/youtube/v3/videos';
+
+  // ====================================================================
+  // Types
+  // ====================================================================
+  interface Stream {
+    id: string;
+    title: string;
+    thumbnail: string;
+    status: 'live' | 'upcoming' | 'past';
+    scheduledStartTime: Date | null;
+    actualStartTime: Date | null;
+  }
+
+  // ====================================================================
+  // Lecture du Google Sheet — 1 seule colonne : youtube_id
+  // ====================================================================
+  async function fetchVideoIds(): Promise<string[]> {
+    const res  = await fetch(GVIZ_URL);
+    if (!res.ok) throw new Error(`Sheet HTTP ${res.status}`);
+    const text = await res.text();
+    const s = text.indexOf('('), e = text.lastIndexOf(')');
+    if (s === -1 || e === -1) throw new Error('Réponse gviz invalide');
+    const data = JSON.parse(text.slice(s + 1, e));
+    const rows: { c: ({ v: unknown } | null)[] }[] = data?.table?.rows ?? [];
+    return rows
+      .map(row => String(row?.c?.[0]?.v ?? '').trim())
+      .filter(id => id.length > 0);
+  }
+
+  // ====================================================================
+  // Récupération des métadonnées YouTube (statut live, heure, titre, miniature)
+  // ====================================================================
+  async function fetchYouTubeMetadata(ids: string[]): Promise<Stream[]> {
+    if (ids.length === 0) return [];
+
+    const results: Stream[] = [];
+    for (let i = 0; i < ids.length; i += 50) {
+      const batch = ids.slice(i, i + 50).join(',');
+      const url   = `${YT_API_URL}?part=snippet,liveStreamingDetails&id=${batch}&key=${YT_API_KEY}`;
+      const res   = await fetch(url);
+      if (!res.ok) throw new Error(`YouTube API HTTP ${res.status}`);
+      const data  = await res.json();
+      for (const item of (data.items ?? [])) {
+        const s = item.snippet ?? {};
+        const l = item.liveStreamingDetails ?? {};
+        const broadcast: string = s.liveBroadcastContent ?? 'none';
+        results.push({
+          id:                 item.id,
+          title:              s.title ?? 'Sans titre',
+          thumbnail:          s.thumbnails?.high?.url ?? s.thumbnails?.default?.url
+                              ?? `https://img.youtube.com/vi/${item.id}/hqdefault.jpg`,
+          status:             broadcast === 'live'     ? 'live'
+                            : broadcast === 'upcoming' ? 'upcoming'
+                            : 'past',
+          scheduledStartTime: l.scheduledStartTime ? new Date(l.scheduledStartTime) : null,
+          actualStartTime:    l.actualStartTime    ? new Date(l.actualStartTime)    : null,
+        });
+      }
+    }
+    // Conserver l'ordre du Sheet
+    return ids
+      .map(id => results.find(v => v.id === id))
+      .filter((v): v is Stream => v !== undefined);
+  }
+
+  // ====================================================================
+  // Construction de la liste triée
+  // ====================================================================
+  async function buildStreams(ids: string[]): Promise<Stream[]> {
+    const streams = await fetchYouTubeMetadata(ids);
+    const live     = streams.filter(s => s.status === 'live');
+    const upcoming = streams.filter(s => s.status === 'upcoming')
+                            .sort((a, b) => (a.scheduledStartTime?.getTime() ?? 0) - (b.scheduledStartTime?.getTime() ?? 0));
+    const past     = streams.filter(s => s.status === 'past')
+                            .sort((a, b) => (b.actualStartTime?.getTime() ?? 0) - (a.actualStartTime?.getTime() ?? 0));
+    return [...live, ...upcoming, ...past];
+  }
+
+  // ====================================================================
+  // Utilitaires DOM
+  // ====================================================================
+  function esc(s: string) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function fmtDate(d: Date) {
+    return d.toLocaleDateString('fr-FR', {
+      weekday:'long', day:'numeric', month:'long', year:'numeric',
+      hour:'2-digit', minute:'2-digit',
+    });
+  }
+  function show(id: string) { document.getElementById(id)?.removeAttribute('hidden'); }
+  function hide(id: string) { document.getElementById(id)?.setAttribute('hidden', ''); }
+
+  // ====================================================================
+  // Rendu : live en cours
+  // ====================================================================
+  function renderLiveNow(v: Stream) {
+    const dateStr = v.actualStartTime ?? v.scheduledStartTime;
+    document.getElementById('live-now')!.innerHTML = `
+      <div style="text-align:center;margin-bottom:2rem">
+        <span class="live-now-badge">🔴 EN DIRECT</span>
+      </div>
+      <div style="text-align:center;margin-bottom:1.5rem">
+        <h2 class="live-stream-title">${esc(v.title)}</h2>
+        ${dateStr ? `<p class="live-stream-date">${fmtDate(dateStr)}</p>` : ''}
+      </div>
+      <div class="live-player-wrapper">
+        <iframe
+          src="https://www.youtube.com/embed/${esc(v.id)}?autoplay=1&rel=0"
+          title="${esc(v.title)}"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div style="text-align:center;margin-top:2rem">
+        <a href="https://www.youtube.com/watch?v=${esc(v.id)}"
+           class="brutal-btn"
+           target="_blank"
+           rel="noopener noreferrer">
+          ▶ Ouvrir sur YouTube
+        </a>
+      </div>
+    `;
+    show('live-now');
+  }
+
+  // ====================================================================
+  // Rendu : prochain live + compte à rebours
+  // ====================================================================
+  function renderUpcoming(v: Stream) {
+    const target    = v.scheduledStartTime;
+    const rotations = [-1, 2, -2, 1];
+    const labels    = ['JOURS','HEURES','MINUTES','SECONDES'];
+    document.getElementById('live-upcoming')!.innerHTML = `
+      <div style="text-align:center;margin-bottom:2rem">
+        <span class="live-upcoming-badge">⏳ PROCHAIN LIVE</span>
+      </div>
+      <div style="text-align:center;margin-bottom:1.5rem">
+        <h2 class="live-stream-title">${esc(v.title)}</h2>
+        ${target ? `<p class="live-stream-date">${fmtDate(target)}</p>` : ''}
+      </div>
+      <div class="live-thumb-wrapper">
+        <img src="${esc(v.thumbnail)}" alt="${esc(v.title)}"
+             onerror="this.parentElement.style.display='none'" />
+        <div class="live-thumb-overlay"><span>▶</span></div>
+      </div>
+      <div class="live-countdown-grid">
+        ${labels.map((label, i) => `
+          <div class="live-countdown-card" style="transform:rotate(${rotations[i]}deg)">
+            <div class="live-countdown-value" id="lcd-${i}">--</div>
+            <div class="live-countdown-label">${label}</div>
+          </div>
+        `).join('')}
+      </div>
+      <p style="text-align:center;font-weight:700;text-transform:uppercase;font-size:0.8rem;opacity:0.65;margin-top:-0.5rem">
+        Page mise à jour automatiquement
+      </p>
+    `;
+    show('live-upcoming');
+    if (target) startCountdown(target);
+  }
+
+  // ====================================================================
+  // Rendu : grille de tous les lives
+  // ====================================================================
+  function renderGrid(streams: Stream[]) {
+    if (streams.length === 0) { hide('live-grid-section'); return; }
+    const rotations = [-1, 2, -2, 1];
+    document.getElementById('streams-grid')!.innerHTML = streams.map((v, i) => {
+      const rot        = rotations[i % 4];
+      const isLive     = v.status === 'live';
+      const isUpcoming = v.status === 'upcoming';
+      const ytUrl      = `https://www.youtube.com/watch?v=${esc(v.id)}`;
+      const badge      = isLive
+        ? `<span class="stream-card__badge stream-card__badge--live">🔴 En direct</span>`
+        : isUpcoming
+        ? `<span class="stream-card__badge stream-card__badge--upcoming">⏳ À venir</span>`
+        : `<span class="stream-card__badge stream-card__badge--past">▶ Replay</span>`;
+      const overlay    = isUpcoming
+        ? `<div class="stream-card__thumb-overlay" style="background:rgba(0,0,0,0.55)">
+             <span style="font-size:2rem;opacity:0.5">🔒</span>
+           </div>`
+        : `<div class="stream-card__thumb-overlay">
+             <span>${isLive ? '🔴' : '▶'}</span>
+           </div>`;
+      const clickable  = !isUpcoming;
+      return `
+        <div class="stream-card${clickable ? ' stream-card--clickable' : ''}"
+             style="transform:rotate(${rot}deg)"
+             ${clickable ? `onclick="window.open('${ytUrl}','_blank','noopener')"
+                           tabindex="0" role="link" aria-label="${esc(v.title)}"` : ''}>
+          <div class="stream-card__thumb">
+            <img src="${esc(v.thumbnail)}" alt="${esc(v.title)}" loading="lazy"
+                 onerror="this.style.display='none'" />
+            ${overlay}
+          </div>
+          <div class="stream-card__body">
+            ${badge}
+            <h3 class="stream-card__title">${esc(v.title)}</h3>
+            ${(v.scheduledStartTime ?? v.actualStartTime) ? `<p class="stream-card__date">${fmtDate((v.scheduledStartTime ?? v.actualStartTime)!)}</p>` : ''}
+          </div>
+        </div>
+      `;
+    }).join('');
+    show('live-grid-section');
+  }
+
+  // ====================================================================
+  // Compte à rebours
+  // ====================================================================
+  let countdownTimer: ReturnType<typeof setInterval> | undefined;
+
+  function startCountdown(target: Date) {
+    clearInterval(countdownTimer);
+    function tick() {
+      const diff = target.getTime() - Date.now();
+      if (diff <= 0) {
+        clearInterval(countdownTimer);
+        [0,1,2,3].forEach(i => {
+          const el = document.getElementById(`lcd-${i}`);
+          if (el) el.textContent = '00';
+        });
+        refreshLiveData();
+        return;
+      }
+      const parts = [
+        Math.floor(diff / 86400000),
+        Math.floor((diff % 86400000) / 3600000),
+        Math.floor((diff % 3600000) / 60000),
+        Math.floor((diff % 60000) / 1000),
+      ];
+      parts.forEach((val, i) => {
+        const el = document.getElementById(`lcd-${i}`);
+        if (el) el.textContent = String(val).padStart(2, '0');
+      });
+    }
+    tick();
+    countdownTimer = setInterval(tick, 1000);
+  }
+
+  // ====================================================================
+  // Orchestration principale
+  // ====================================================================
+  function renderPage(streams: Stream[]) {
+    hide('live-loading');
+    hide('live-error');
+    hide('live-now');
+    hide('live-upcoming');
+    hide('live-empty');
+    clearInterval(countdownTimer);
+
+    if (streams.length === 0) {
+      show('live-empty');
+      hide('live-grid-section');
+      return;
+    }
+
+    const live     = streams.filter(s => s.status === 'live');
+    const upcoming = streams.filter(s => s.status === 'upcoming');
+    const past     = streams.filter(s => s.status === 'past');
+
+    if (live.length > 0) {
+      renderLiveNow(live[0]);
+    } else if (upcoming.length > 0) {
+      renderUpcoming(upcoming[0]);
+    } else {
+      document.getElementById('live-upcoming')!.innerHTML = `
+        <div style="text-align:center;padding:3rem 0">
+          <p style="font-family:'Inter',Arial,sans-serif;font-weight:900;font-size:1.5rem;
+                    text-transform:uppercase;margin-bottom:0.75rem">
+            Les lives sont terminés
+          </p>
+          <p style="font-weight:600">Retrouvez tous les replays ci-dessous.</p>
+        </div>
+      `;
+      show('live-upcoming');
+    }
+
+    renderGrid([...live, ...upcoming, ...past]);
+  }
+
+  // ====================================================================
+  // Rafraîchissement (toutes les 60 secondes)
+  // ====================================================================
+  async function refreshLiveData() {
+    try {
+      const ids     = await fetchVideoIds();
+      const streams = await buildStreams(ids);
+      renderPage(streams);
+    } catch (err) {
+      console.error('Live refresh error:', err);
+    }
+  }
+
+  // ====================================================================
+  // Initialisation
+  // ====================================================================
+  async function init() {
+    try {
+      const ids     = await fetchVideoIds();
+      const streams = await buildStreams(ids);
+      renderPage(streams);
+      setInterval(refreshLiveData, 60_000);
+    } catch (err) {
+      console.error('Live init error:', err);
+      hide('live-loading');
+      show('live-error');
+      setInterval(refreshLiveData, 60_000);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+</script>
